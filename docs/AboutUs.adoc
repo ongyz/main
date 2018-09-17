@@ -15,7 +15,8 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::andlimey.jpg[width="150", align="left"]
 {empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/andlimey[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer
+Role: Developer +
+Responsibilities: UI
 
 '''
 
@@ -23,7 +24,7 @@ Role: Developer
 image::SusterDrifter.jpeg[width="150", align="left"]
 {empty}[http://github.com/SusterDrifter[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer
+Role: Developer +
 Responsibilities: UI
 
 '''
@@ -32,7 +33,7 @@ Responsibilities: UI
 image::lywjoel.jpeg[width="150", align="left"]
 {empty}[http://github.com/lywjoel[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer 
+Role: Developer +
 Responsibilities: Data
 
 '''
