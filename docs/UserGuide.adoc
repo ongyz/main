@@ -41,6 +41,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
+
+Introduction
+(name of project) is for tutors who have trouble managing their students’ details & progress, time of tuition and their own weekly tuition schedule. This project is an all-in-one scheduler.
+
+
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -61,7 +66,7 @@ Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
+Adds a person to the scheduler +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
