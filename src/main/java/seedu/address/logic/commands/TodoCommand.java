@@ -27,7 +27,6 @@ public class TodoCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX "
             + "[" + PREFIX_SYLLABUS + "SYLLABUS] "
-            + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SYLLABUS + "Integration";
 
     private static final String MESSAGE_SYLLABUS_SUCCESS = "Added syllabus to Person: %1$s";
@@ -48,7 +47,7 @@ public class TodoCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
+        
         Person personTarget = lastShownList.get(index.getZeroBased());
 
         Person personToAddSyllabus = new Person(personTarget.getName(),

@@ -49,7 +49,7 @@ public class SyllabusBook {
         for (int i = 0; i < syllabusContent.size(); i++) {
             numbering = Index.fromZeroBased(i);
             builder.append(numbering.getOneBased() + ". ")
-                    .append(syllabusContent.get(i).toString());
+                    .append(syllabusContent.get(i).toString() + " ");
         }
         return builder.toString();
     }

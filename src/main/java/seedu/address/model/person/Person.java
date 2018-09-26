@@ -131,7 +131,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append("Syllabus: ")
+        builder.append(" Syllabus: ")
                 .append(getSyllabusBook());
         return builder.toString();
     }
