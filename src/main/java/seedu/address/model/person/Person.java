@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.sun.xml.bind.v2.TODO;
+
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,10 +25,9 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final SyllabusBook syllabusBook = new SyllabusBook();
 
-    /**
-     * Every field must be present and not null.
-     */
+    // TODO: 25/9/2018 REPLACE THIS SHIT 
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
@@ -34,6 +35,19 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook) {
+        requireAllNonNull(name, phone, email, address, tags, syllabusBook);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
     }
 
     public Name getName() {
@@ -51,6 +65,8 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+    public SyllabusBook getSyllabusBook() { return syllabusBook; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -93,13 +109,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getSyllabusBook().equals(getSyllabusBook());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, syllabusBook);
     }
 
     @Override
@@ -114,7 +131,8 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append("Syllabus: ")
+                .append(getSyllabusBook());
         return builder.toString();
     }
-
 }
