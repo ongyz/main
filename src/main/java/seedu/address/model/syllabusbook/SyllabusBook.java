@@ -23,9 +23,9 @@ public class SyllabusBook {
      */
     public SyllabusBook() {}
 
-    private SyllabusBook(List<? extends Syllabus> syllabusBook) {
+    public SyllabusBook(SyllabusBook syllabusBook) {
         requireNonNull(syllabusBook);
-        this.syllabusContent.addAll(syllabusBook);
+        this.syllabusContent.addAll(syllabusBook.syllabusContent);
     }
 
     /**
@@ -35,8 +35,8 @@ public class SyllabusBook {
      * @return a new {@code SyllabusBook} containing the newly added syllabus
      */
     public SyllabusBook addToSyllabusBook(Syllabus syllabus) {
-        List<Syllabus> newSyllabusBook = new ArrayList<Syllabus>(syllabusContent);
-        newSyllabusBook.add(syllabus);
+        SyllabusBook newSyllabusBook = new SyllabusBook();
+        newSyllabusBook.syllabusContent.add(syllabus);
         return new SyllabusBook(newSyllabusBook);
     }
 
@@ -53,9 +53,9 @@ public class SyllabusBook {
             throw new CommandException(MESSAGE_RMTODO_FAILED);
         }
 
-        List<Syllabus> newSyllabusBook = new ArrayList<Syllabus>(syllabusContent);
-        newSyllabusBook.remove(index.getZeroBased());
-        return new SyllabusBook(newSyllabusBook);
+        SyllabusBook newSyllabusBook = new SyllabusBook(this);
+        newSyllabusBook.syllabusContent.remove(index.getZeroBased());
+        return newSyllabusBook;
     }
 
     /**
