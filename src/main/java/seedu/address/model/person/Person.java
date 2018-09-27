@@ -66,7 +66,9 @@ public class Person {
         return address;
     }
 
-    public SyllabusBook getSyllabusBook() { return syllabusBook; }
+    public SyllabusBook getSyllabusBook() {
+        return syllabusBook;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -131,7 +133,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Syllabus: ")
+        builder.append(" \nSyllabus: ")
                 .append(getSyllabusBook());
         return builder.toString();
     }

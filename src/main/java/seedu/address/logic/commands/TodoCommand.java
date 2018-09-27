@@ -26,7 +26,7 @@ public class TodoCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX "
-            + "[" + PREFIX_SYLLABUS + "SYLLABUS] "
+            + "[" + PREFIX_SYLLABUS + "SYLLABUS]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SYLLABUS + "Integration";
 
     private static final String MESSAGE_SYLLABUS_SUCCESS = "Added syllabus to Person: %1$s";
@@ -40,14 +40,13 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        
         Person personTarget = lastShownList.get(index.getZeroBased());
 
         Person personToAddSyllabus = new Person(personTarget.getName(),

@@ -26,18 +26,34 @@ public class SyllabusBook {
         this.syllabusContent.addAll(syllabusBook);
     }
 
+    /**
+     * Add a {@code Syllabus} to the current syllabus book and returns
+     * a new {@code SyllabusBook} containing the newly added syllabus.
+     * @param syllabus the {@code Syllabus} to be added
+     * @return a new {@code SyllabusBook} containing the newly added syllabus
+     */
     public SyllabusBook addToSyllabusBook(Syllabus syllabus) {
         List<Syllabus> newSyllabusBook = new ArrayList<Syllabus>(syllabusContent);
         newSyllabusBook.add(syllabus);
         return new SyllabusBook(newSyllabusBook);
     }
 
+    /**
+     * Removes a {@code Syllabus} from the current syllabus book and returns
+     * a new {@code SyllabusBook} with the syllabus at given index removed.
+     * @param index the index of syllabus to be removed
+     * @return a new {@code SyllabusBook} with the syllabus at given index removed.
+     */
     public SyllabusBook removeFromSyllabusBook(Index index) {
         List<Syllabus> newSyllabusBook = new ArrayList<Syllabus>(syllabusContent);
         newSyllabusBook.remove(index.getZeroBased());
         return new SyllabusBook(newSyllabusBook);
     }
 
+    /**
+     * Removes all the {@code Syllabus} from the syllabus book
+     * @return an empty {@code SyllabusBook}
+     */
     public SyllabusBook clearSyllabusBook() {
         return new SyllabusBook();
     }
@@ -48,8 +64,8 @@ public class SyllabusBook {
         Index numbering;
         for (int i = 0; i < syllabusContent.size(); i++) {
             numbering = Index.fromZeroBased(i);
-            builder.append(numbering.getOneBased() + ". ")
-                    .append(syllabusContent.get(i).toString() + " ");
+            builder.append("\n" + numbering.getOneBased() + ". ")
+                    .append(syllabusContent.get(i).toString());
         }
         return builder.toString();
     }
@@ -58,7 +74,7 @@ public class SyllabusBook {
     public boolean equals(Object other) {
         return  other == this // short circuit if same object
                 || (other instanceof SyllabusBook // instanceof handles nulls
-                && contentAreSame((SyllabusBook)other)); // state check
+                && contentAreSame((SyllabusBook) other)); // state check
     }
 
     /**
