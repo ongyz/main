@@ -127,7 +127,7 @@ public class ParserUtil {
      * Parses a {@code String syllabus} into a {@code Syllabus}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException
+     * @throws ParseException if the given {@code syllabus} input is invalid.
      */
     public static Syllabus parseSyllabus(String syllabus) throws ParseException {
         requireNonNull(syllabus);
