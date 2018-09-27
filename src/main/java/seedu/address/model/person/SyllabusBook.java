@@ -1,11 +1,14 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.RmtodoCommand.MESSAGE_RMTODO_FAILED;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.RmtodoCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Person's syllabus book in the address book.
@@ -43,8 +46,14 @@ public class SyllabusBook {
      * a new {@code SyllabusBook} with the syllabus at given index removed.
      * @param index the index of syllabus to be removed
      * @return a new {@code SyllabusBook} with the syllabus at given index removed.
+     *
+     * @throws CommandException if {@code index} is out of bound of the syllabus book.
      */
-    public SyllabusBook removeFromSyllabusBook(Index index) {
+    public SyllabusBook removeFromSyllabusBook(Index index) throws CommandException {
+        if (index.getOneBased() > syllabusContent.size()) {
+            throw new CommandException(MESSAGE_RMTODO_FAILED);
+        }
+
         List<Syllabus> newSyllabusBook = new ArrayList<Syllabus>(syllabusContent);
         newSyllabusBook.remove(index.getZeroBased());
         return new SyllabusBook(newSyllabusBook);
