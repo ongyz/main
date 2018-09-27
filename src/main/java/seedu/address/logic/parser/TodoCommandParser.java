@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Syllabus;
+import seedu.address.model.syllabusbook.Syllabus;
 
 /**
  * Parses input arguments and creates a new FindCommand object

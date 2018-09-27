@@ -11,7 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.SyllabusBook;
+import seedu.address.model.syllabusbook.SyllabusBook;
 
 /**
  * Finds all persons whose name matches the keyword and add the to do element to the data.
