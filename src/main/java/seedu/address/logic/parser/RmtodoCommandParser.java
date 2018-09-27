@@ -49,8 +49,8 @@ public class RmtodoCommandParser implements Parser<RmtodoCommand> {
     }
 
     /**
-     * Parses {@code oneBasedIndexes} into a list of {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndexes} into a list of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     private static List<Index> parseIndexesForRmtodo(String oneBasedIndexes) throws ParseException {
