@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.sun.xml.bind.v2.TODO;
-
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +25,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final SyllabusBook syllabusBook = new SyllabusBook();
 
-    // TODO: 25/9/2018 REPLACE THIS SHIT 
+    //TODO: 25/9/2018 REPLACE THIS SHIT
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;

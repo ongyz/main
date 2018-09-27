@@ -72,7 +72,7 @@ public class SyllabusBook {
 
     @Override
     public boolean equals(Object other) {
-        return  other == this // short circuit if same object
+        return other == this // short circuit if same object
                 || (other instanceof SyllabusBook // instanceof handles nulls
                 && contentAreSame((SyllabusBook) other)); // state check
     }
