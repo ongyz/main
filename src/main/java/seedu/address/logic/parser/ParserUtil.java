@@ -123,14 +123,6 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /**
-     * Parses a {@code String syllabus} into an {@code Syllabus}.
-     * Leading and trailing whitespaces will be trimmed.
-     * @param syllabus input syllabus to be checked
-     * @return a valid {@code Syllabus}
-     *
-     * @throws ParseException if the given {@code String syllabus) is invalid.
-     */
     public static Syllabus parseSyllabus(String syllabus) throws ParseException {
         requireNonNull(syllabus);
         String trimmedSyllabus = syllabus.trim();
