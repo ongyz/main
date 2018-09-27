@@ -1,12 +1,10 @@
 package seedu.address.logic.commands;
 
-    import java.util.List;
+import java.util.List;
 import java.util.logging.Logger;
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,6 +12,7 @@ import seedu.address.model.Payment;
 import seedu.address.model.person.Person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class PayCommand extends Command {
     public static final String COMMAND_WORD = "paid";
@@ -30,52 +29,42 @@ public class PayCommand extends Command {
 
     private final Logger logger = LogsCenter.getLogger(PayCommand.class);
 
+    public static final String MESSAGE_DUPLICATE_PERSON = "Payment has already been updated for this person";
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
 
     private Index targetIndex;
-    private int amount;
-    private int month;
-    private int year;
+    Payment newPayment;
 
     public PayCommand(Payment payment){
         this.targetIndex = payment.getIndex();
-        this.amount = payment.getAmount();
-        this.month = payment.getMonth();
-        this.year = payment.getYear();
+        this.newPayment = payment;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-
-        logger.info("----------------[paid index+++++++][" + targetIndex + "]");
-
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-        List<Person> filteredPersonList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= filteredPersonList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, targetIndex.getOneBased()));
+        Person personToPay = lastShownList.get(targetIndex.getZeroBased());
+        personToPay.updatePayment(newPayment);
 
-      //  return null;
-    }
-
-    /*
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        //(debug) Print out who paid
+        /*
+        ArrayList<Payment> paymentArr = personToPay.getPayments();
+        logger.info("size is " + paymentArr.size());
+        for (int i=0; i<paymentArr.size(); i++){
+            logger.info("Payment made is" + paymentArr.get(i));
         }
+        */
 
-        model.addPerson(toAdd);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
     }
-    */
+
 }

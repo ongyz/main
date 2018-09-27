@@ -91,27 +91,13 @@ public class Payment {
         return test.matches(TAG_VALIDATION_REGEX);
     }
 
-
-/*
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Tag // instanceof handles nulls
-                && .equals(((Tag) other).tagName)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return tagName.hashCode();
-    }
-
     /**
      * Format state as text for viewing.
-     *
+     */
     public String toString() {
-        return '[' + tagName + ']';
+        return  " [Month, Year: " + month + " " + year + " Amount: " + amount+"]";
     }
-*/
+
 
 }
 
