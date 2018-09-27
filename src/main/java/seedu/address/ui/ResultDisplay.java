@@ -1,9 +1,6 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
-
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,6 +10,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+
+import com.google.common.eventbus.Subscribe;
 
 /**
  * A ui for the status bar that is displayed at the header of the application.
@@ -41,9 +40,9 @@ public class ResultDisplay extends UiPart<Region> {
         //Check if the event has error
 
         Platform.runLater(() -> displayed.setValue(event.message));
-        if(event.isSuccessful){
+        if (event.checkSuccessful()) {
             setStyleToIndicateCommandSuccess();
-        }else{
+        } else {
             setStyleToIndicateCommandFailure();
         }
     }

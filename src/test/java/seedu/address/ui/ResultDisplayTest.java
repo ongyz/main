@@ -57,7 +57,7 @@ public class ResultDisplayTest extends GuiUnitTest {
     private void assertResultDisplay(NewResultAvailableEvent event) {
         guiRobot.pauseForHuman();
         postNow(event);
-        List<String> expectedStyleClass = event.isSuccessful ? defaultStyleOfResultDisplay : errorStyleOfResultDisplay;
+        List<String> expectedStyleClass = event.checkSuccessful() ? defaultStyleOfResultDisplay : errorStyleOfResultDisplay;
         assertEquals(event.message, resultDisplayHandle.getText());
         assertEquals(expectedStyleClass, resultDisplayHandle.getStyleClass());
     }

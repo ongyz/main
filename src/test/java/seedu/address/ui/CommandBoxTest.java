@@ -141,7 +141,7 @@ public class CommandBoxTest extends GuiUnitTest {
      */
     private void assertBehaviorForFailedCommand() {
         commandBoxHandle.run(COMMAND_THAT_FAILS);
-        assertFalse(((NewResultAvailableEvent) eventsCollectorRule.eventsCollector.getMostRecent()).isSuccessful);
+        assertFalse(((NewResultAvailableEvent) eventsCollectorRule.eventsCollector.getMostRecent()).checkSuccessful());
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
         eventsCollectorRule.eventsCollector.reset();
         assertEquals(COMMAND_THAT_FAILS, commandBoxHandle.getInput());
@@ -156,7 +156,7 @@ public class CommandBoxTest extends GuiUnitTest {
      */
     private void assertBehaviorForSuccessfulCommand() {
         commandBoxHandle.run(COMMAND_THAT_SUCCEEDS);
-        assertTrue(((NewResultAvailableEvent) eventsCollectorRule.eventsCollector.getMostRecent()).isSuccessful);
+        assertTrue(((NewResultAvailableEvent) eventsCollectorRule.eventsCollector.getMostRecent()).checkSuccessful());
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
         eventsCollectorRule.eventsCollector.reset();
         assertEquals("", commandBoxHandle.getInput());

@@ -8,7 +8,7 @@ import seedu.address.commons.events.BaseEvent;
 public class NewResultAvailableEvent extends BaseEvent {
 
     public final String message;
-    public boolean isSuccessful;
+    private boolean isSuccessful;
 
     public NewResultAvailableEvent(String message, boolean isSuccessful) {
         this.message = message;
@@ -17,6 +17,10 @@ public class NewResultAvailableEvent extends BaseEvent {
     @Override
     public String toString() {
         return getClass().getSimpleName();
+    }
+
+    public boolean checkSuccessful(){
+        return isSuccessful;
     }
 
 }
