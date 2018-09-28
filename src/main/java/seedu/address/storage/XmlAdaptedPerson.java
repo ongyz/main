@@ -1,10 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -36,6 +32,10 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
+    @XmlElement
+    private XmlAdaptedSyllabusBook syllabusBook;
+
+
     /**
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
@@ -43,7 +43,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedPerson} with the given person details. Does not support syllabus
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
@@ -68,6 +68,7 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        syllabusBook = new XmlAdaptedSyllabusBook(source.getSyllabusBook());
     }
 
     /**
@@ -114,10 +115,17 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (syllabusBook == null) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        } else {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    syllabusBook.toModelType());
+        }
     }
 
     @Override
+    // Equals do not compare syllabus for now
     public boolean equals(Object other) {
         if (other == this) {
             return true;
