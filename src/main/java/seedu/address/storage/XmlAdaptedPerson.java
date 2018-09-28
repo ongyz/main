@@ -36,6 +36,10 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
+    @XmlElement
+    private XmlAdaptedSyllabusBook syllabusBook;
+
+
     /**
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
@@ -43,7 +47,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedPerson} with the given person details. Does not support syllabus
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
@@ -68,6 +72,7 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        syllabusBook = new XmlAdaptedSyllabusBook(source.getSyllabusBook());
     }
 
     /**
@@ -114,7 +119,12 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (syllabusBook == null) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        } else {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, syllabusBook.toModelType());
+        }
     }
 
     @Override
@@ -132,6 +142,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && syllabusBook.equals(otherPerson.syllabusBook);
     }
 }
