@@ -11,44 +11,45 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Andy Chan
+image::andlimey.jpg[width="150", align="left"]
+{empty}[https://github.com/andlimey[github]] [<<johndoe#, portfolio>>]
 
-Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
-
-Role: Team Lead +
+Role: Developer +
 Responsibilities: UI
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Anthony Halim
+image::SusterDrifter.jpeg[width="150", align="left"]
+{empty}[http://github.com/SusterDrifter[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: UI
+
+'''
+
+=== Joel Lee
+image::lywjoel.jpeg[width="150", align="left"]
+{empty}[http://github.com/lywjoel[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Ong Yan Zhi
+image::ongyz.jpeg[width="150", align="left"]
+{empty}[http://github.com/ongyz[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Ooi Hui Ying
+image::ooihuiying.jpeg[width="150", align="left"]
+{empty}[http://github.com/ooihuiying[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
