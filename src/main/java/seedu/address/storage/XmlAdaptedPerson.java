@@ -1,12 +1,12 @@
 package seedu.address.storage;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
+
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.core.LogsCenter;
@@ -38,9 +38,12 @@ public class XmlAdaptedPerson {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
-
- //   @XmlElement
- //   private List<XmlAdaptedPay> pay = new ArrayList<>();
+  
+    @XmlElement
+    private XmlAdaptedSyllabusBook syllabusBook;
+  
+    //   @XmlElement
+    //   private List<XmlAdaptedPay> pay = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -49,7 +52,8 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details. Does not support pay
+     * Constructs an {@code XmlAdaptedPerson} with the given person details. Does not support syllabus and
+     * payment
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
@@ -74,6 +78,8 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        syllabusBook = new XmlAdaptedSyllabusBook(source.getSyllabusBook());
+
 
    //     pay = source.getPayments().stream()
    //             .map(source1 -> new XmlAdaptedPay(source1))
@@ -125,6 +131,14 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+    
+      
+        if (syllabusBook == null) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        } else 
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    syllabusBook.toModelType());
+        
 
         /*
         final ArrayList<Payment> modelPayments = new ArrayList<>();
@@ -138,13 +152,13 @@ public class XmlAdaptedPerson {
             newPerson.restorePayments(modelPayments);
             return newPerson;
         }
-        */
+        
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        */
     }
 
     @Override
-
-    //Equals do not compare payment for now
+    // Equals do not compare syllabus and payment for now
     public boolean equals(Object other) {
         if (other == this) {
             return true;

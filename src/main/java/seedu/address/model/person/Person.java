@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import seedu.address.model.Payment;
+import seedu.address.model.syllabusbook.SyllabusBook;
+
 import seedu.address.model.tag.Tag;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -25,10 +27,9 @@ public class Person {
     private final Address address;
     private final ArrayList<Payment> payments = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
+    private final SyllabusBook syllabusBook = new SyllabusBook();
 
-    /**
-     * Every field must be present and not null.
-     */
+    //TODO: 25/9/2018 REPLACE THIS SHIT
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
@@ -36,6 +37,19 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook) {
+        requireAllNonNull(name, phone, email, address, tags, syllabusBook);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
     }
 
     /*
@@ -68,8 +82,12 @@ public class Person {
         return address;
     }
 
+
     public ArrayList<Payment> getPayments() {
         return payments;
+
+    public SyllabusBook getSyllabusBook() {
+        return syllabusBook;
     }
 
     /**
@@ -119,13 +137,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getPayments().equals(getPayments())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getSyllabusBook().equals(getSyllabusBook());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, payments, tags);
+        return Objects.hash(name, phone, email, address, payments, tags, syllabusBook);
     }
 
     @Override
@@ -140,10 +159,13 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+
         builder.append(" Payments: ");
         getPayments().forEach(builder::append);
 
+        builder.append(" \nSyllabus: ")
+                .append(getSyllabusBook());
+
         return builder.toString();
     }
-
 }
