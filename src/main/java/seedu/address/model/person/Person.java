@@ -38,12 +38,18 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-
     /*
-     * Update payment for this person
+     * Update payment for this person.
      */
     public void updatePayment(Payment newPayment){
         this.payments.add(newPayment);
+    }
+
+    /*
+     * Restore payments for this person.
+     */
+    public void restorePayments(ArrayList<Payment> original){
+        this.payments.addAll(original);
     }
 
     public Name getName() {

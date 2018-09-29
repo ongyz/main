@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Objects;
 import seedu.address.commons.core.index.Index;
 
 public class Payment {
@@ -7,13 +8,13 @@ public class Payment {
     public static final String MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS =
             "Amount of payment should only contain numbers";
     public static final String MESSAGE_PAYMENT_MONTH_CONSTRAINTS =
-            "Month of payment should only contain numbers";
+            "Month of payment should only contain numbers between 1 to 12, inclusive";
     public static final String MESSAGE_PAYMENT_YEAR_CONSTRAINTS =
             "Year of payment should only contain numbers";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
 
-    private static Index studentIndex;
+    private final Index studentIndex;
     private final int amount;
     private final int month;
     private final int year;
@@ -34,26 +35,33 @@ public class Payment {
     }
 
     /**
-     * Returns true if a given string is a valid number.
+     * Returns true if a given int is a valid number.
      */
-    public static boolean isValidAmount(String test) {
-        return test.matches(TAG_VALIDATION_REGEX);
+    public static boolean isValidAmount(int test) {
+        return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
     }
 
 
     /**
-     * Returns true if a given string is a valid month.
+     * Returns true if a given int is a valid month.
      */
-    public static boolean isValidMonth(String test) {
+    public static boolean isValidMonth(int test) {
 
         //Check if month is within the correct range of jan - dec
-        if(test.matches(TAG_VALIDATION_REGEX)){
-            int testMonth = Integer.parseInt(test);
+        if(String.valueOf(test).matches(TAG_VALIDATION_REGEX)){
+            int testMonth = test;
             if(testMonth>=1 && testMonth<=12) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if a given int is a valid year.
+     */
+    public static boolean isValidYear(int test) {
+        return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
     }
 
     /**
@@ -84,18 +92,25 @@ public class Payment {
         return this.amount;
     }
 
-    /**
-     * Returns true if a given string is a valid year.
-     */
-    public static boolean isValidYear(String test) {
-        return test.matches(TAG_VALIDATION_REGEX);
-    }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return  " [Month, Year: " + month + " " + year + " Amount: " + amount+"]";
+        return  " [Month: "+ month+" Year: " + year + " Amount: " + amount+"]";
+    }
+
+    public boolean equals(Object other){
+        return other == this ||
+                (other instanceof Payment
+                && this.studentIndex == (((Payment) other).studentIndex)
+                && this.amount == (((Payment) other).amount)
+                && this.month == (((Payment) other).month)
+                && this.year == (((Payment) other).year));
+    }
+
+    public int hashCode(){
+        return  Objects.hash(studentIndex, amount, month, year);
     }
 
 

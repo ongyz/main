@@ -110,10 +110,7 @@ public class ParserUtil {
     public static int parseAmount(String amount) throws ParseException {
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
-
-        //logger.info("----------------[++++++++++++++++++++++++++++++++amount][" + trimmedAmount + "]");
-        if (!Payment.isValidAmount(trimmedAmount)) {
-            logger.info("----------------[++++++++++++++++++++++++++++++++amount][" + trimmedAmount + "]");
+        if (!Payment.isValidAmount(Integer.parseInt(trimmedAmount))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedAmount);
@@ -128,7 +125,7 @@ public class ParserUtil {
     public static int parseMonth(String month) throws ParseException {
         requireNonNull(month);
         String trimmedMonth = month.trim();
-        if (!Payment.isValidMonth(trimmedMonth)) {
+        if (!Payment.isValidMonth(Integer.parseInt(trimmedMonth))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedMonth);
@@ -143,7 +140,7 @@ public class ParserUtil {
     public static int parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
-        if (!Payment.isValidYear(trimmedYear)) {
+        if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedYear);
