@@ -1,14 +1,16 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
+import seedu.address.model.Payment;
 import seedu.address.model.syllabusbook.SyllabusBook;
+
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Person in the address book.
@@ -23,6 +25,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final ArrayList<Payment> payments = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
     private final SyllabusBook syllabusBook = new SyllabusBook();
 
@@ -49,6 +52,20 @@ public class Person {
         this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
     }
 
+    /*
+     * Update payment for this person.
+     */
+    public void updatePayment(Payment newPayment) {
+        this.payments.add(newPayment);
+    }
+
+    /*
+     * Restore payments for this person.
+     */
+    public void restorePayments(ArrayList<Payment> original) {
+        this.payments.addAll(original);
+    }
+
     public Name getName() {
         return name;
     }
@@ -65,7 +82,12 @@ public class Person {
         return address;
     }
 
-    public SyllabusBook getSyllabusBook() {
+
+    public ArrayList<Payment> getPayments() {
+        return payments;
+    }
+
+    public SyllabusBook getSyllabusBook () {
         return syllabusBook;
     }
 
@@ -73,15 +95,16 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
+    public Set<Tag> getTags () {
         return Collections.unmodifiableSet(tags);
     }
+
 
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    public boolean isSamePerson (Person otherPerson){
         if (otherPerson == this) {
             return true;
         }
@@ -96,7 +119,7 @@ public class Person {
      * This defines a stronger notion of equality between two persons.
      */
     @Override
-    public boolean equals(Object other) {
+    public boolean equals (Object other){
         if (other == this) {
             return true;
         }
@@ -110,30 +133,37 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getPayments().equals(getPayments())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getSyllabusBook().equals(getSyllabusBook());
+        }
+
+        @Override
+        public int hashCode () {
+            // use this method for custom fields hashing instead of implementing your own
+            return Objects.hash(name, phone, email, address, payments, tags, syllabusBook);
+        }
+
+        @Override
+        public String toString () {
+            final StringBuilder builder = new StringBuilder();
+            builder.append(getName())
+                    .append(" Phone: ")
+                    .append(getPhone())
+                    .append(" Email: ")
+                    .append(getEmail())
+                    .append(" Address: ")
+                    .append(getAddress())
+                    .append(" Tags: ");
+            getTags().forEach(builder::append);
+
+            builder.append(" Payments: ");
+            getPayments().forEach(builder::append);
+
+            builder.append(" \nSyllabus: ")
+                    .append(getSyllabusBook());
+
+            return builder.toString();
+        }
     }
 
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, syllabusBook);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        builder.append(" \nSyllabus: ")
-                .append(getSyllabusBook());
-        return builder.toString();
-    }
-}
