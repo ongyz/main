@@ -31,6 +31,19 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * Every field must be present and not null. Include paymentList.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Payment> paymentList) {
+        requireAllNonNull(name, phone, email, address, tags, paymentList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.payments.addAll(paymentList);
+    }
+
+    /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email,
@@ -45,11 +58,28 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    /*
-     * Update payment for this person.
+    /**
+     * Every field must be present and not null. A constructor to create a person with payments.
      */
-    public void updatePayment(Payment newPayment) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook,
+                  ArrayList<Payment> paymentList) {
+        requireAllNonNull(name, phone, email, address, tags, syllabusBook, paymentList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
+        this.payments.addAll(paymentList);
+    }
+
+    /**
+     * Update payment for this person and returns a new instance of this person.
+     * @return the same person but updated with payment.
+     */
+    public Person updatePayment(Payment newPayment) {
         this.payments.add(newPayment);
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, this.syllabusBook, this.payments);
     }
 
     /*
