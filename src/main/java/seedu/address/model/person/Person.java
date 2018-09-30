@@ -52,6 +52,21 @@ public class Person {
         this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
     }
 
+    /**
+     * Every field must be present and not null. A constructor to create a person with payments.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook,
+                  ArrayList<Payment> paymentList) {
+        requireAllNonNull(name, phone, email, address, tags, syllabusBook, paymentList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
+        this.payments.addAll(paymentList);
+    }
+
     /*
      * Update payment for this person.
      */
