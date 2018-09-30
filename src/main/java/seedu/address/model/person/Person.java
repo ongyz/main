@@ -24,20 +24,17 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final SyllabusBook syllabusBook = new SyllabusBook();
-
-    //TODO: 25/9/2018 REPLACE THIS SHIT
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-    }
+    private final SyllabusBook syllabusBook;
 
     /**
      * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, phone, email, address, tags, new SyllabusBook());
+    }
+
+    /**
+     * Alternate constructor.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook) {
         requireAllNonNull(name, phone, email, address, tags, syllabusBook);
@@ -46,7 +43,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
+        this.syllabusBook = syllabusBook;
     }
 
     public Name getName() {
