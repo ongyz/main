@@ -40,6 +40,19 @@ public class Person {
     }
 
     /**
+     * Every field must be present and not null. Include paymentList.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Payment> paymentList) {
+        requireAllNonNull(name, phone, email, address, tags, paymentList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.payments.addAll(paymentList);
+    }
+
+    /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook) {
