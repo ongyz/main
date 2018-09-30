@@ -80,11 +80,13 @@ public class Person {
         this.payments.addAll(paymentList);
     }
 
-    /*
-     * Update payment for this person.
+    /**
+     * Update payment for this person and returns a new instance of this person.
+     * @return the same person but updated with payment.
      */
-    public void updatePayment(Payment newPayment) {
+    public Person updatePayment(Payment newPayment) {
         this.payments.add(newPayment);
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, this.syllabusBook, this.payments);
     }
 
     /*
