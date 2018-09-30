@@ -35,7 +35,7 @@ public class SyllabusBook {
      * @return a new {@code SyllabusBook} containing the newly added syllabus
      */
     public SyllabusBook addToSyllabusBook(Syllabus syllabus) {
-        SyllabusBook newSyllabusBook = new SyllabusBook();
+        SyllabusBook newSyllabusBook = new SyllabusBook(this);
         newSyllabusBook.syllabusContent.add(syllabus);
         return new SyllabusBook(newSyllabusBook);
     }
