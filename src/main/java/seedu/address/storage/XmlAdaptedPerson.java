@@ -114,6 +114,7 @@ public class XmlAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
+
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
@@ -121,9 +122,11 @@ public class XmlAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final SyllabusBook modelSyllabusBook = syllabusBook.toModelType();
+        final SyllabusBook modelSyllabusBook = syllabusBook == null ? new SyllabusBook()
+                : new SyllabusBook(syllabusBook.toModelType());
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSyllabusBook);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelSyllabusBook);
     }
 
     @Override
