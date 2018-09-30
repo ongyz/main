@@ -13,7 +13,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.syllabusbook.Syllabus;
+import seedu.address.model.person.Subject;
+import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.tag.Tag;
 
 import static java.util.Objects.requireNonNull;
@@ -148,6 +149,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String subject} into a {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses a {@code String tuitionTiming} into a {@code TuitionTiming}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tuitionTiming} is invalid.
+     */
+    public static TuitionTiming parseTuitionTiming(String tuitionTiming) throws ParseException {
+        requireNonNull(tuitionTiming);
+        String trimmedTuitionTiming = tuitionTiming.trim();
+        if (!TuitionTiming.isValidTiming(trimmedTuitionTiming)) {
+            throw new ParseException(TuitionTiming.MESSAGE_TUITIONTIMING_CONSTRAINTS);
+        }
+        return new TuitionTiming(trimmedTuitionTiming);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -173,20 +204,4 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
-    /**
-     * Parses a {@code String syllabus} into a {@code Syllabus}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code syllabus} input is invalid.
-     */
-    public static Syllabus parseSyllabus(String syllabus) throws ParseException {
-        requireNonNull(syllabus);
-        String trimmedSyllabus = syllabus.trim();
-        if (!Syllabus.isValidSyllabus(trimmedSyllabus)) {
-            throw new ParseException(Syllabus.MESSAGE_SYLLABUS_CONSTRAINTS);
-        }
-        return new Syllabus(trimmedSyllabus);
-    }
-
 }
