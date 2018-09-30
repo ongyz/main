@@ -1,6 +1,10 @@
 package seedu.address.storage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.syllabusbook.SyllabusBook;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -109,6 +114,7 @@ public class XmlAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
+
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
@@ -116,12 +122,11 @@ public class XmlAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (syllabusBook == null) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-        } else {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    syllabusBook.toModelType());
-        }
+        final SyllabusBook modelSyllabusBook = syllabusBook == null ? new SyllabusBook()
+                : new SyllabusBook(syllabusBook.toModelType());
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelSyllabusBook);
     }
 
     @Override
