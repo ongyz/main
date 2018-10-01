@@ -15,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.TuitionTiming;
+import seedu.address.model.person.Payment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -125,6 +126,51 @@ public class ParserUtil {
             throw new ParseException(TuitionTiming.MESSAGE_TUITIONTIMING_CONSTRAINTS);
         }
         return new TuitionTiming(trimmedTuitionTiming);
+    }
+
+    /**
+     * Parses a {@code String amount} into an integer.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code integer} is invalid.
+     */
+    public static int parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        if (!Payment.isValidAmount(Integer.parseInt(trimmedAmount))) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
+        }
+        return Integer.parseInt(trimmedAmount);
+    }
+
+    /**
+     * Parses a {@code String month} into an integer.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code integer} is invalid.
+     */
+    public static int parseMonth(String month) throws ParseException {
+        requireNonNull(month);
+        String trimmedMonth = month.trim();
+        if (!Payment.isValidMonth(Integer.parseInt(trimmedMonth))) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
+        }
+        return Integer.parseInt(trimmedMonth);
+    }
+
+    /**
+     * Parses a {@code String year} into an integer.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code integer} is invalid.
+     */
+    public static int parseYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedYear = year.trim();
+        if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
+        }
+        return Integer.parseInt(trimmedYear);
     }
 
     /**
