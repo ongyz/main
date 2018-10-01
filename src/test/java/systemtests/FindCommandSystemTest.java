@@ -170,7 +170,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        assertCommandBoxAndResultDisplayShowsDefaultStyle();
+        assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchanged();
     }
 
@@ -189,7 +189,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
-        assertCommandBoxAndResultDisplayShowsErrorStyle();
+        assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }
 }
