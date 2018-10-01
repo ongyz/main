@@ -53,14 +53,6 @@ public class PayCommand extends Command {
         Person personTarget = lastShownList.get(targetIndex.getZeroBased());
         Person personToPay = personTarget.updatePayment(newPayment);
 
-        //(debug) Print out who paid
-        /*
-        ArrayList<Payment> paymentArr = personToPay.getPayments();
-        logger.info("size is " + paymentArr.size());
-        for (int i=0; i<paymentArr.size(); i++){
-            logger.info("Payment made is" + paymentArr.get(i));
-        }
-        */
 
         model.updatePerson(personTarget, personToPay);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

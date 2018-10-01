@@ -41,10 +41,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label subject;
-    @FXML
-    private Label tuitionTiming;
-    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
@@ -77,9 +73,6 @@ public class PersonCard extends UiPart<Region> {
             tagLabel.getStyleClass().add(getTagColorStyleFor(tag.tagName));
             tags.getChildren().add(tagLabel);
         });
-        subject.setText(person.getSubject().value);
-        tuitionTiming.setText(person.getTuitionTiming().value);
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

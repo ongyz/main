@@ -34,6 +34,13 @@ public class Payment {
         this.year = year;
     }
 
+    public Payment() {
+        this.studentIndex = null;
+        this.amount = 0;
+        this.month = 0;
+        this.year = 0;
+    }
+
     /**
      * Returns true if a given int is a valid number.
      */

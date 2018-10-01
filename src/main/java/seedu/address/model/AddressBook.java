@@ -125,7 +125,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         //create a new person with specified tag removed
         Person newPerson = new Person(thisPerson.getName(), thisPerson.getPhone(),
-                thisPerson.getEmail(), thisPerson.getAddress(), newTags);
+                thisPerson.getEmail(), thisPerson.getAddress(), newTags, thisPerson.getSyllabusBook()
+        , thisPerson.getPayments());
 
         //call method to update this person
         updatePerson(thisPerson, newPerson);

@@ -26,13 +26,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final ArrayList<Payment> payments = new ArrayList<>();
-    private final Subject subject;
-    private final TuitionTiming tuitionTiming;
     private final Set<Tag> tags = new HashSet<>();
+    private final SyllabusBook syllabusBook = new SyllabusBook();
+
+
+    //TODO: 25/9/2018 REPLACE THIS SHIT
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
 
     /**
      * Every field must be present and not null. Include paymentList.
      */
+
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Payment> paymentList) {
         requireAllNonNull(name, phone, email, address, tags, paymentList);
         this.name = name;
@@ -46,16 +57,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email,
-                  Address address, Subject subject, TuitionTiming tuitionTiming, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook) {
+        requireAllNonNull(name, phone, email, address, tags, syllabusBook);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.subject = subject;
-        this.tuitionTiming = tuitionTiming;
         this.tags.addAll(tags);
+        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
     }
 
     /**
@@ -104,20 +114,14 @@ public class Person {
     public Address getAddress() {
         return address;
     }
-  
+
+
     public ArrayList<Payment> getPayments() {
         return payments;
     }
 
     public SyllabusBook getSyllabusBook () {
         return syllabusBook;
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public TuitionTiming getTuitionTiming() {
-        return tuitionTiming;
     }
 
     /**
@@ -162,41 +166,36 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getSubject().equals(getSubject())
-                && otherPerson.getTuitionTiming().equals(getTuitionTiming())
                 && otherPerson.getPayments().equals(getPayments())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getSyllabusBook().equals(getSyllabusBook());
-        }
+    }
 
-        @Override
-        public int hashCode () {
-            // use this method for custom fields hashing instead of implementing your own
-            return Objects.hash(name, phone, email, address, subject, tuitionTiming, payments, tags, syllabusBook);
-        }
+    @Override
+    public int hashCode () {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, email, address, payments, tags, syllabusBook);
+    }
 
-        @Override
-        public String toString () {
-            final StringBuilder builder = new StringBuilder();
-            builder.append(getName())
-                    .append(" Phone: ")
-                    .append(getPhone())
-                    .append(" Email: ")
-                    .append(getEmail())
-                    .append(" Address: ")
-                    .append(getAddress())
-                    .append(" Subject: ")
-                    .append(getSubject())
-                    .append(" Tuition Timing: ")
-                    .append(getTuitionTiming())
-                    .append(" Tags: ");
-            getTags().forEach(builder::append);
+    @Override
+    public String toString () {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" Phone: ")
+                .append(getPhone())
+                .append(" Email: ")
+                .append(getEmail())
+                .append(" Address: ")
+                .append(getAddress())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
 
-            builder.append(" Payments: ");
-            getPayments().forEach(builder::append);
+        builder.append(" Payments: ");
+        getPayments().forEach(builder::append);
 
-            builder.append(" \nSyllabus: ")
-                    .append(getSyllabusBook());
+        builder.append(" \nSyllabus: ")
+                .append(getSyllabusBook());
 
-            return builder.toString();
-        }
+        return builder.toString();
+    }
+}
