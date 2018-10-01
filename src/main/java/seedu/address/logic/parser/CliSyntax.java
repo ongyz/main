@@ -13,4 +13,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
     public static final Prefix PREFIX_DAYANDTIME = new Prefix("d/");
+    public static final Prefix PREFIX_SYLLABUS = new Prefix("sy/");
+    public static final Prefix PAYMENT_INDEX = new Prefix("idx/");
+    public static final Prefix PAYMENT_AMOUNT = new Prefix("amt/");
+    public static final Prefix PAYMENT_MONTH = new Prefix("mth/");
+    public static final Prefix PAYMENT_YEAR = new Prefix("yr/");
 }
