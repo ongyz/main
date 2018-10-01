@@ -50,8 +50,8 @@ public class PayCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personTarget = lastShownList.get(targetIndex.getZeroBased());
-        Person personToPay = personTarget.updatePayment(newPayment);
+        Person personToPay = lastShownList.get(targetIndex.getZeroBased());
+        personToPay.updatePayment(newPayment);
 
         //(debug) Print out who paid
         /*
@@ -62,7 +62,6 @@ public class PayCommand extends Command {
         }
         */
 
-        model.updatePerson(personTarget, personToPay);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
