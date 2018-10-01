@@ -29,6 +29,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final SyllabusBook syllabusBook = new SyllabusBook();
 
+
     //TODO: 25/9/2018 REPLACE THIS SHIT
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -40,8 +41,23 @@ public class Person {
     }
 
     /**
+     * Every field must be present and not null. Include paymentList.
+     */
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Payment> paymentList) {
+        requireAllNonNull(name, phone, email, address, tags, paymentList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.payments.addAll(paymentList);
+    }
+
+    /**
      * Every field must be present and not null.
      */
+
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook) {
         requireAllNonNull(name, phone, email, address, tags, syllabusBook);
         this.name = name;
@@ -52,11 +68,28 @@ public class Person {
         this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
     }
 
-    /*
-     * Update payment for this person.
+    /**
+     * Every field must be present and not null. A constructor to create a person with payments.
      */
-    public void updatePayment(Payment newPayment) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook,
+                  ArrayList<Payment> paymentList) {
+        requireAllNonNull(name, phone, email, address, tags, syllabusBook, paymentList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
+        this.payments.addAll(paymentList);
+    }
+
+    /**
+     * Update payment for this person and returns a new instance of this person.
+     * @return the same person but updated with payment.
+     */
+    public Person updatePayment(Payment newPayment) {
         this.payments.add(newPayment);
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, this.syllabusBook, this.payments);
     }
 
     /*
@@ -136,34 +169,33 @@ public class Person {
                 && otherPerson.getPayments().equals(getPayments())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getSyllabusBook().equals(getSyllabusBook());
-        }
-
-        @Override
-        public int hashCode () {
-            // use this method for custom fields hashing instead of implementing your own
-            return Objects.hash(name, phone, email, address, payments, tags, syllabusBook);
-        }
-
-        @Override
-        public String toString () {
-            final StringBuilder builder = new StringBuilder();
-            builder.append(getName())
-                    .append(" Phone: ")
-                    .append(getPhone())
-                    .append(" Email: ")
-                    .append(getEmail())
-                    .append(" Address: ")
-                    .append(getAddress())
-                    .append(" Tags: ");
-            getTags().forEach(builder::append);
-
-            builder.append(" Payments: ");
-            getPayments().forEach(builder::append);
-
-            builder.append(" \nSyllabus: ")
-                    .append(getSyllabusBook());
-
-            return builder.toString();
-        }
     }
 
+    @Override
+    public int hashCode () {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, email, address, payments, tags, syllabusBook);
+    }
+
+    @Override
+    public String toString () {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" Phone: ")
+                .append(getPhone())
+                .append(" Email: ")
+                .append(getEmail())
+                .append(" Address: ")
+                .append(getAddress())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+
+        builder.append(" Payments: ");
+        getPayments().forEach(builder::append);
+
+        builder.append(" \nSyllabus: ")
+                .append(getSyllabusBook());
+
+        return builder.toString();
+    }
+}

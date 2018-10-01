@@ -50,18 +50,11 @@ public class PayCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToPay = lastShownList.get(targetIndex.getZeroBased());
-        personToPay.updatePayment(newPayment);
+        Person personTarget = lastShownList.get(targetIndex.getZeroBased());
+        Person personToPay = personTarget.updatePayment(newPayment);
 
-        //(debug) Print out who paid
-        /*
-        ArrayList<Payment> paymentArr = personToPay.getPayments();
-        logger.info("size is " + paymentArr.size());
-        for (int i=0; i<paymentArr.size(); i++){
-            logger.info("Payment made is" + paymentArr.get(i));
-        }
-        */
 
+        model.updatePerson(personTarget, personToPay);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));

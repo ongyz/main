@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
-
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Payment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -38,10 +38,14 @@ public class XmlAdaptedPerson {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
-  
+
+
+    @XmlElement
+    private List<XmlAdaptedPay> payments = new ArrayList<>();
+
     @XmlElement
     private XmlAdaptedSyllabusBook syllabusBook;
-  
+
     //   @XmlElement
     //   private List<XmlAdaptedPay> pay = new ArrayList<>();
 
@@ -78,12 +82,19 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+
+
+        payments = source.getPayments().stream()
+                .map(XmlAdaptedPay::new)
+                .collect(Collectors.toList());
+
+
         syllabusBook = new XmlAdaptedSyllabusBook(source.getSyllabusBook());
 
 
-   //     pay = source.getPayments().stream()
-   //             .map(source1 -> new XmlAdaptedPay(source1))
-   //             .collect(Collectors.toList());
+        //     pay = source.getPayments().stream()
+        //             .map(source1 -> new XmlAdaptedPay(source1))
+        //             .collect(Collectors.toList());
 
     }
 
@@ -97,6 +108,14 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
+
+
+
+        final ArrayList<Payment> paymentList = new ArrayList<>();
+        for (XmlAdaptedPay payment : payments) {
+            paymentList.add(payment.toModelType());
+        }
+
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -131,28 +150,35 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-    
-      
+
+
+        if (syllabusBook == null) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, syllabusBook.toModelType(), paymentList);
+        } else {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    syllabusBook.toModelType(), paymentList);
+        }
+
+/*
         if (syllabusBook == null) {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-        } else 
+        } else {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                     syllabusBook.toModelType());
-        
+        }
+*/
 
         /*
         final ArrayList<Payment> modelPayments = new ArrayList<>();
-
         for (XmlAdaptedPay payment : pay) {
             modelPayments.add(payment.toModelType());
         }
-
        if(modelPayments!=null) {
             Person newPerson =  new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
             newPerson.restorePayments(modelPayments);
             return newPerson;
         }
-        
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         */
     }
@@ -173,7 +199,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-  //              && pay.equals(otherPerson.pay)
+                //              && pay.equals(otherPerson.pay)
                 && tagged.equals(otherPerson.tagged);
     }
 }

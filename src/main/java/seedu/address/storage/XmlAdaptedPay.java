@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import java.util.Objects;
 import java.util.logging.Logger;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -13,16 +13,15 @@ import seedu.address.model.Payment;
  */
 public class XmlAdaptedPay {
 
-    @XmlValue
     private Index studentIndex;
 
-    @XmlValue
+    @XmlElement
     private int amount;
 
-    @XmlValue
+    @XmlElement
     private int year;
 
-    @XmlValue
+    @XmlElement
     private int month;
 
     private static final Logger logger = LogsCenter.getLogger(XmlAdaptedPay.class);
