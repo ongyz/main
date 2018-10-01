@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.syllabusbook.Syllabus;
 
-
 /**
  * JAXB-friendly adapted version of the Syllabus.
  */
