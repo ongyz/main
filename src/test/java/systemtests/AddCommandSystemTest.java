@@ -221,8 +221,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
-        assertCommandBoxAndResultDisplayShowsDefaultStyle();
-        assertStatusBarChangedExceptSaveLocation();
+        assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**
@@ -242,7 +242,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
-        assertCommandBoxAndResultDisplayShowsErrorStyle();
+        assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }
 }
