@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= TutorHelper Level 4 - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -14,12 +14,11 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-W13-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `W13-4`      Since: `September 2018`      Licence: `Damith`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
-
+TutorHelper is for tutors who have trouble managing their students’ details & progress, time of tuition and their own weekly tuition schedule. This project is an all-in-one scheduler.
 
 System finds and deletes the student’s data.
 
@@ -37,13 +36,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the TutorHelper.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
-
-
-Introduction
-(name of project) is for tutors who have trouble managing their students’ details & progress, time of tuition and their own weekly tuition schedule. This project is an all-in-one scheduler.
 
 
 .  Refer to <<Features>> for details of each command.
@@ -266,3 +261,15 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Group* : `group [TIMING]` +
+e.g `group Monday OR group 12pm OR group`
+* *History* : `history` 
+* *Payment* : `payment`
+* *Earnings* : `earnings INDEX AMOUNT MONTH_INDEX YEAR` +
+`earnings 1 200 01 2018`
+* *Mark* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g `mark 1 1 1`
+* *Todo* : `todo STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
+e.g `todo 1 2 sy/Integration`
+* *Rmtodo* : `rmtodo STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g `rmtodo 1 1 1`
