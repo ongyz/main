@@ -37,7 +37,8 @@ public class Person {
     }
 
     /**
-     * Every field must be present and not null. Include paymentList.
+     * Every field must be present and not null. Include paymentList. Without syllabusBook so we create a new
+     * empty syllabusBook.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Payment> paymentList) {
         requireAllNonNull(name, phone, email, address, tags, paymentList);
@@ -47,6 +48,7 @@ public class Person {
         this.tags.addAll(tags);
         this.address = address;
         this.payments.addAll(paymentList);
+        this.syllabusBook = new SyllabusBook();
     }
 
     /**
@@ -73,7 +75,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
+        this.syllabusBook = syllabusBook;
         this.payments.addAll(paymentList);
     }
 

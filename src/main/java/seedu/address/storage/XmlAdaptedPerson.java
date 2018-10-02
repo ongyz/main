@@ -147,10 +147,10 @@ public class XmlAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (syllabusBook == null) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, paymentList);
         } else {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    syllabusBook.toModelType());
+                    syllabusBook.toModelType(), paymentList);
         }
     }
 
