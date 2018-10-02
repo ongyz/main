@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
 import seedu.address.model.Payment;
 import seedu.address.model.syllabusbook.SyllabusBook;
 
@@ -25,7 +27,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final ArrayList<Payment> payments = new ArrayList<>();
+    private final List<Payment> payments = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
     private final SyllabusBook syllabusBook;
 
@@ -68,7 +70,7 @@ public class Person {
      * Every field must be present and not null. A constructor to create a person with payments.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, SyllabusBook syllabusBook,
-                  ArrayList<Payment> paymentList) {
+                  List<Payment> paymentList) {
         requireAllNonNull(name, phone, email, address, tags, syllabusBook, paymentList);
         this.name = name;
         this.phone = phone;
@@ -112,7 +114,7 @@ public class Person {
     }
 
 
-    public ArrayList<Payment> getPayments() {
+    public List<Payment> getPayments() {
         return payments;
     }
 
