@@ -20,7 +20,7 @@ Responsibilities: UI
 '''
 
 === Anthony Halim
-image::SusterDrifter.png[width="150", align="left"]
+image::susterdrifter.png[width="150", align="left"]
 {empty}[http://github.com/SusterDrifter[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
