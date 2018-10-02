@@ -40,9 +40,15 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a person
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ALICE.getName().fullName.replaceAll(" ", "%20"));
+        final StringBuilder builder = new StringBuilder();
+        ALICE.getTags().forEach(builder::append);
+        String expectedPersonUrl = ("name=" + ALICE.getName().fullName
+                + "&phone=" + ALICE.getPhone().value
+                + "&email=" + ALICE.getEmail().value
+                + "&address=" + ALICE.getAddress().value.replace("#", "%23")
+                + "&tags=" + builder.toString()).replaceAll(" ", "%20");
 
         waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
+        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl().getQuery());
     }
 }
