@@ -21,18 +21,16 @@ Current:
 . Tutors use reminder applications to keep track of lessons
 . Tutors use physical diaries or notepads to keep track of current lesson progress
 Value:
-. Tutors have a platform where they can keep track of all their student’s details, 
-  their progress and the syllabus they intend to cover.
+. Tutors have a platform where they can keep track of all their student’s details, their progress and the syllabus they intend to cover.
 
 == User Stories
 . For private tutors to manage individual students’ schedule. 
-  As a tutor, I want to be able to know where my students live, 
-  what time their tuition is, their individual syllabus progress, and my weekly schedule.
+  As a tutor, I want to be able to know where my students live, what time their tuition is, their individual syllabus progress, and my weekly schedule.
 
 == Use Cases
  
   1. MSS: Add Student
-  
+
   Step 1:
   Actor: Tutor
   Action: Type command 'add' or 'a' followed by Student details on the CLI bar
@@ -42,7 +40,7 @@ Value:
   Input is invalid and error message displayed
   
   2. MSS: Edit Student
-  
+
   Step 1:
   Actor: Tutor
   Action: Type command 'edit' or 'e' followed by the index and the fields to edit
