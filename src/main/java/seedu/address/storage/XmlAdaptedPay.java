@@ -13,7 +13,6 @@ import seedu.address.model.Payment;
  */
 public class XmlAdaptedPay {
 
-    @XmlElement
     private Index studentIndex;
 
     @XmlElement
