@@ -120,9 +120,8 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 === Grouping students based on next tuition timing: `group`
 
 Groups the list of students based on tuition date and time. +
-User can choose to group by time or day of the week.
-
-+ Format: `group [TIMING]
+User can choose to group by time or day of the week. + 
+Format: `group [TIMING]`
 
 Examples:
 
@@ -240,7 +239,7 @@ Format: `clear`
 
 === Keeping track of payments: `payment`
 
-Records payment made by the student for that particular month and amount.
+Records payment made by the student for that particular month and amount. +
 Format: `paid STUDENT_INDEX AMOUNT MONTH_INDEX YEAR`
 
 Examples:
@@ -250,7 +249,7 @@ Examples:
 
 === Display tutor earnings for the month: `earnings` 
 
-Display tutor earnings for each month.
+Display tutor earnings for each month. +
 Format: `earnings INDEX_MONTH YEAR`
 
 Examples:
@@ -260,7 +259,7 @@ Examples:
 
 === Mark a part of syllabus(by index) as complete/incomplete: `mark`
 
-Toggle an item completion stage of the selected student’s syllabus.
+Toggle an item completion stage of the selected student’s syllabus. +
 Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 
 Examples:
@@ -270,7 +269,7 @@ Examples:
 
 === Add item to the student’s syllabus: `todo`
 
-Add a item into the selected student’s personal syllabus.
+Add a item into the selected student’s personal syllabus. + 
 Format: `todo STUDENT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
 
 Examples:
@@ -280,7 +279,7 @@ Examples:
 
 === Remove item from the student’s syllabus: `rmtodo`
 
-Remove item, based on index,  from the selected student’s personal syllabus.
+Remove item, based on index,  from the selected student’s personal syllabus. +
 Format: `rmtodo STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 
 Examples:
