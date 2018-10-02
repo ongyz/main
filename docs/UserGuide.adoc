@@ -129,7 +129,7 @@ Examples:
 * `group Monday` +
 Show all the classes on Monday, sorted based on timing.
 * `group 12pm` +
-Show all the classes at that timing for the entire week, sorted based on timing. 
+Show all the classes at that timing for the entire week, sorted based on timing.
 * `group`
 Show all the classes based on the current date/time, sorted based on timing.
 
@@ -245,7 +245,7 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH_INDEX YEAR`
 
 Examples:
 * `paid 1 200 01 2018` +
-`Records $200 payment made on January 2018 
+`Records $200 payment made on January 2018
 
 === Exiting the program : `exit`
 
@@ -288,7 +288,7 @@ e.g.`select 2`
 * *Redo* : `redo`
 * *Group* : `group [TIMING]` +
 e.g `group Monday OR group 12pm OR group`
-* *History* : `history` 
+* *History* : `history`
 * *Payment* : `payment`
 * *Earnings* : `earnings INDEX AMOUNT MONTH_INDEX YEAR` +
 `earnings 1 200 01 2018`
