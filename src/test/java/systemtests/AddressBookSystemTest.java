@@ -27,6 +27,7 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
@@ -213,14 +214,17 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
-        URL expectedUrl;
-        try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
-        } catch (MalformedURLException mue) {
-            throw new AssertionError("URL expected to be valid.", mue);
-        }
-        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
+        PersonCardHandle selectedCard = getPersonListPanel().getHandleToSelectedCard();
+        final StringBuilder builder = new StringBuilder();
+        selectedCard.getTags().forEach(builder::append);
+        String expectedUrl = ("name=" + selectedCard.getName()
+                + "&phone=" + selectedCard.getPhone()
+                + "&email=" + selectedCard.getEmail()
+                + "&address=" + selectedCard.getAddress().replace("#", "%23")
+                + "&tags=" + builder.toString())
+                .replaceAll(" ", "%20");
+
+        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl().getQuery().replaceAll("\\[", "").replaceAll("\\]", ""));
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
