@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String PERSON_PAGE =
+    public static final String SEARCH_PAGE_URL =
             "PersonPage.html";
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -50,7 +50,7 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadPersonPage(Person person) {
         final StringBuilder builder = new StringBuilder();
         person.getTags().forEach(builder::append);
-        URL personPage = MainApp.class.getResource(FXML_FILE_FOLDER + PERSON_PAGE);
+        URL personPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
         String url = personPage.toExternalForm()
                 + "?name=" + person.getName().fullName
                 + "&phone=" + person.getPhone().value
