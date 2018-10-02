@@ -244,8 +244,49 @@ Records payment made by the student for that particular month and amount.
 Format: `paid STUDENT_INDEX AMOUNT MONTH_INDEX YEAR`
 
 Examples:
+
 * `paid 1 200 01 2018` +
 `Records $200 payment made on January 2018
+
+=== Display tutor earnings for the month: `earnings` 
+
+Display tutor earnings for each month.
+Format: `earnings INDEX_MONTH YEAR`
+
+Examples:
+
+* `earnings 01 2018` +
+`Shows earnings made on January 2018.`
+
+=== Mark a part of syllabus(by index) as complete/incomplete: `mark`
+
+Toggle an item completion stage of the selected student’s syllabus.
+Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+
+Examples:
+
+* `mark 1 1 3`
+* `mark 2 1 2`
+
+=== Add item to the student’s syllabus: `todo`
+
+Add a item into the selected student’s personal syllabus.
+Format: `todo STUDENT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
+
+Examples:
+
+* `todo 1 2 sy/Integration`
+* `todo 3 2 sy/Poisson Distribution`
+
+=== Remove item from the student’s syllabus: `rmtodo`
+
+Remove item, based on index,  from the selected student’s personal syllabus.
+Format: `rmtodo STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+
+Examples:
+
+* `rmtodo 1 1 2`
+* `rmtodo 3 1 1`
 
 === Exiting the program : `exit`
 
