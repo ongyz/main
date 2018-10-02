@@ -41,18 +41,24 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads the page with the person's information parsed into the URL.
+     * Also escapes pound sign.
+     *
+     * @param person Person to read information from.
+     */
     private void loadPersonPage(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        person.getTags().forEach(builder::append);
         URL personPage = MainApp.class.getResource(FXML_FILE_FOLDER + PERSON_PAGE);
-        logger.info(personPage.toExternalForm()
+        String url = personPage.toExternalForm()
                 + "?name=" + person.getName().fullName
                 + "&phone=" + person.getPhone().value
                 + "&email=" + person.getEmail().value
-                + "&address=" + person.getAddress().value);
-        loadPage(personPage.toExternalForm()
-                + "?name=" + person.getName().fullName
-                + "&phone=" + person.getPhone().value
-                + "&email=" + person.getEmail().value
-                + "&address=" + person.getAddress().value);
+                + "&address=" + person.getAddress().value
+                + "&tags=" + builder.toString();
+        logger.info(url.replace("#", "%23"));
+        loadPage(url.replace("#", "%23"));
     }
 
     public void loadPage(String url) {
