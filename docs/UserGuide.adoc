@@ -1,4 +1,4 @@
-= TutorHelper Level 4 - User Guide
+= TutorHelper - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -74,7 +74,7 @@ Examples:
 
 === Listing all persons : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all persons in the TutorHelper. +
 Format: `list`
 
 === Editing a person : `edit`
@@ -116,6 +116,22 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+
+=== Grouping students based on next tuition timing: `group`
+
+Groups the list of students based on tuition date and time. +
+User can choose to group by time or day of the week.
+
++ Format: `group [TIMING]
+
+Examples:
+
+* `group Monday` +
+Show all the classes on Monday, sorted based on timing.
+* `group 12pm` +
+Show all the classes at that timing for the entire week, sorted based on timing. 
+* `group`
+Show all the classes based on the current date/time, sorted based on timing.
 
 === Deleting a person : `delete`
 
@@ -221,6 +237,15 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 Clears all entries from the address book. +
 Format: `clear`
+
+=== Keeping track of payments: `payment`
+
+Records payment made by the student for that particular month and amount.
+Format: `paid STUDENT_INDEX AMOUNT MONTH_INDEX YEAR`
+
+Examples:
+* `paid 1 200 01 2018` +
+`Records $200 payment made on January 2018 
 
 === Exiting the program : `exit`
 
