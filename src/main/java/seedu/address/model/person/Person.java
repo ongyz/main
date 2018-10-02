@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,6 +26,7 @@ public class Person {
     private final Subject subject;
     private final TuitionTiming tuitionTiming;
     private final Set<Tag> tags = new HashSet<>();
+    private final ArrayList<Payment> payments;
 
     /**
      * Every field must be present and not null.
@@ -38,7 +40,38 @@ public class Person {
         this.address = address;
         this.subject = subject;
         this.tuitionTiming = tuitionTiming;
+        this.payments= new ArrayList<>();
         this.tags.addAll(tags);
+    }
+
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Subject subject, TuitionTiming tuitionTiming,
+                  ArrayList<Payment> payments, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.subject = subject;
+        this.tuitionTiming = tuitionTiming;
+        this.payments = payments;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Update payment for this person and returns a new instance of this person.
+     * @return the same person but updated with payment.
+     */
+    public Person updatePayment(Payment newPayment) {
+        this.payments.add(newPayment);
+        return new Person(this.name, this.phone, this.email, this.address, this.subject, this.tuitionTiming, this.payments, this.tags);
+    }
+
+    /*
+     * Restore payments for this person.
+     */
+    public void restorePayments(ArrayList<Payment> original) {
+        this.payments.addAll(original);
     }
 
     public Name getName() {
@@ -72,6 +105,12 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+
+    public ArrayList<Payment> getPayments() {
+        return payments;
+    }
+
 
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
@@ -133,6 +172,11 @@ public class Person {
                 .append(getTuitionTiming())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+
+
+        builder.append(" Payments: ");
+        getPayments().forEach(builder::append);
+
         return builder.toString();
     }
 }
