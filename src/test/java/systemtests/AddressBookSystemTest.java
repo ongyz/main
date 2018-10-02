@@ -10,8 +10,6 @@ import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -42,7 +40,6 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
 /**
@@ -224,7 +221,8 @@ public abstract class AddressBookSystemTest {
                 + "&tags=" + builder.toString())
                 .replaceAll(" ", "%20");
 
-        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl().getQuery().replaceAll("\\[", "").replaceAll("\\]", ""));
+        assertEquals(expectedUrl,
+                getBrowserPanel().getLoadedUrl().getQuery().replaceAll("\\[", "").replaceAll("\\]", ""));
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
