@@ -25,6 +25,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.syllabusbook.SyllabusBook;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -100,8 +101,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        SyllabusBook updatedSyllabusBook = editPersonDescriptor.getSyllabusBook().orElse(personToEdit.getSyllabusBook());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSyllabusBook);
     }
 
     @Override
@@ -132,6 +134,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private SyllabusBook syllabusBook;
 
         public EditPersonDescriptor() {}
 
@@ -145,6 +148,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setSyllabus(toCopy.syllabusBook);
         }
 
         /**
@@ -186,6 +190,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setSyllabus(SyllabusBook syllabusBook) { this.syllabusBook = syllabusBook; }
+
+        public Optional<SyllabusBook> getSyllabusBook() { return Optional.ofNullable(syllabusBook); }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -222,7 +230,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getSyllabusBook().equals(e.getSyllabusBook());
         }
     }
 }

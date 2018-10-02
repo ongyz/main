@@ -1,12 +1,11 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.logging.Logger;
-
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.core.LogsCenter;
@@ -17,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.syllabusbook.SyllabusBook;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -138,38 +138,20 @@ public class XmlAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
+
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-    
-      
+
         if (syllabusBook == null) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, paymentList);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         } else {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    syllabusBook.toModelType(), paymentList);
+                    syllabusBook.toModelType());
         }
-
-        
-
-        /*
-        final ArrayList<Payment> modelPayments = new ArrayList<>();
-
-        for (XmlAdaptedPay payment : pay) {
-            modelPayments.add(payment.toModelType());
-        }
-
-       if(modelPayments!=null) {
-            Person newPerson =  new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-            newPerson.restorePayments(modelPayments);
-            return newPerson;
-        }
-        
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-        */
     }
 
     @Override

@@ -27,16 +27,13 @@ public class Person {
     private final Address address;
     private final ArrayList<Payment> payments = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
-    private final SyllabusBook syllabusBook = new SyllabusBook();
+    private final SyllabusBook syllabusBook;
 
-    //TODO: 25/9/2018 REPLACE THIS SHIT
+    /**
+     * Every field must be present and not null.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this(name, phone, email, address, tags, new SyllabusBook());
     }
 
     /**
@@ -45,10 +42,10 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Payment> paymentList) {
         requireAllNonNull(name, phone, email, address, tags, paymentList);
         this.name = name;
-        this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.phone = phone;
         this.tags.addAll(tags);
+        this.address = address;
         this.payments.addAll(paymentList);
     }
 
@@ -62,7 +59,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.syllabusBook.syllabusContent.addAll(syllabusBook.syllabusContent);
+        this.syllabusBook = syllabusBook;
     }
 
     /**
