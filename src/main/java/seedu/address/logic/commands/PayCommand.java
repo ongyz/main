@@ -59,7 +59,7 @@ public class PayCommand extends Command {
         List<Payment> updatedPayments = updatePayment(personTarget.getPayments(), newPayment);
 
         Person personToPay = new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), personTarget.getSubject(),
+                personTarget.getEmail(), personTarget.getAddress(), personTarget.getSubjects(),
                 personTarget.getTuitionTiming(), personTarget.getTags(), updatedPayments);
 
         model.updatePerson(personTarget, personToPay);

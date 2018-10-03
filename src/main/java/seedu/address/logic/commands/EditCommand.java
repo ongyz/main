@@ -29,7 +29,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.tag.Tag;
 
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
             + "[" + PREFIX_DAY_AND_TIME + "TUITION TIMING] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -107,7 +107,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
+        Set<Subject> updatedSubject = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
         TuitionTiming updatedTuitionTiming = editPersonDescriptor.getTuitionTiming()
                 .orElse(personToEdit.getTuitionTiming());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -136,15 +136,15 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field subjectName will replace the
+     * corresponding field subjectName of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
-        private Subject subject;
+        private Set<Subject> subjects;
         private TuitionTiming tuitionTiming;
         private Set<Tag> tags;
         private List<Payment> payments;
@@ -160,7 +160,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setSubject(toCopy.subject);
+            setSubjects(toCopy.subjects);
             setTuitionTiming(toCopy.tuitionTiming);
             setTags(toCopy.tags);
             setPayments(toCopy.payments);
@@ -170,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, subjects);
         }
 
         public void setName(Name name) {
@@ -205,12 +205,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setSubject(Subject subject) {
-            this.subject = subject;
+        public void setSubjects(Set<Subject> subjects) {
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
-        public Optional<Subject> getSubject() {
-            return Optional.ofNullable(subject);
+        public Optional<Set<Subject>> getSubjects() {
+            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 
         public void setTuitionTiming(TuitionTiming tuitionTiming) {
@@ -274,7 +274,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getSubject().equals(e.getSubject())
+                    && getSubjects().equals(e.getSubjects())
                     && getTuitionTiming().equals(e.getTuitionTiming())
                     && getTags().equals(e.getTags())
                     && getPayments().equals(e.getPayments());
