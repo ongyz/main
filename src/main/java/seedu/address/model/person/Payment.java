@@ -24,8 +24,8 @@ public class Payment {
      *
      * @param index A valid index name.
      * @param amount A valid amount.
-     * @param month A valid month value.
-     * @param year A valid year value
+     * @param month A valid month subjectName.
+     * @param year A valid year subjectName
      */
     public Payment(Index index, int amount, int month, int year ) {
         this.studentIndex = index;
@@ -103,10 +103,10 @@ public class Payment {
     public boolean equals(Object other){
         return other == this ||
                 (other instanceof Payment
-                        && this.studentIndex == (((Payment) other).studentIndex)
-                        && this.amount == (((Payment) other).amount)
-                        && this.month == (((Payment) other).month)
-                        && this.year == (((Payment) other).year));
+                && this.studentIndex == (((Payment) other).studentIndex)
+                && this.amount == (((Payment) other).amount)
+                && this.month == (((Payment) other).month)
+                && this.year == (((Payment) other).year));
     }
 
     public int hashCode(){
@@ -115,3 +115,5 @@ public class Payment {
 
 
 }
+
+

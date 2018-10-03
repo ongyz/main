@@ -13,7 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.person.Payment;
 import seedu.address.model.tag.Tag;
@@ -107,10 +107,22 @@ public class ParserUtil {
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
-        if (!Subject.isValidSubject(trimmedSubject)) {
+        if (!Subject.isValidSubjectName(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
         return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
+     */
+    public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+        requireNonNull(subjects);
+        final Set<Subject> subjectSet = new HashSet<>();
+        for (String subjectName : subjects) {
+            subjectSet.add(parseSubject(subjectName));
+        }
+        return subjectSet;
     }
 
     /**
