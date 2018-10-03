@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
@@ -42,6 +43,9 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
+    @XmlElement
+    private List<XmlAdaptedPay> payments = new ArrayList<>();
+
     /**
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
@@ -52,7 +56,8 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String email,
-                            String address, String subject, String tuitionTiming, List<XmlAdaptedTag> tagged) {
+                            String address, String subject, String tuitionTiming,
+                            List<XmlAdaptedTag> tagged, List<XmlAdaptedPay> payments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,6 +66,10 @@ public class XmlAdaptedPerson {
         this.tuitionTiming = tuitionTiming;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+
+        if (payments != null) {
+            this.payments = new ArrayList<>(payments);
         }
     }
 
@@ -79,6 +88,10 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        payments = source.getPayments().stream()
+                .map(XmlAdaptedPay::new)
+                .collect(Collectors.toList());
+
     }
 
     /**
@@ -90,6 +103,11 @@ public class XmlAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Payment> personPayments = new ArrayList<>();
+        for (XmlAdaptedPay payment : payments) {
+            personPayments.add(payment.toModelType());
         }
 
         if (name == null) {
@@ -142,7 +160,10 @@ public class XmlAdaptedPerson {
         final TuitionTiming modelTuitionTiming = new TuitionTiming(tuitionTiming);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSubject, modelTuitionTiming, modelTags);
+        final List<Payment> modelPayments = new ArrayList<>(personPayments);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelSubject, modelTuitionTiming, modelTags, modelPayments);
     }
 
     @Override
@@ -162,6 +183,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(subject, otherPerson.subject)
                 && Objects.equals(tuitionTiming, otherPerson.tuitionTiming)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && payments.equals(otherPerson.payments);
     }
 }

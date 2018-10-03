@@ -103,10 +103,10 @@ public class Payment {
     public boolean equals(Object other){
         return other == this ||
                 (other instanceof Payment
-                        && this.studentIndex == (((Payment) other).studentIndex)
-                        && this.amount == (((Payment) other).amount)
-                        && this.month == (((Payment) other).month)
-                        && this.year == (((Payment) other).year));
+                && this.studentIndex == (((Payment) other).studentIndex)
+                && this.amount == (((Payment) other).amount)
+                && this.month == (((Payment) other).month)
+                && this.year == (((Payment) other).year));
     }
 
     public int hashCode(){
@@ -115,3 +115,5 @@ public class Payment {
 
 
 }
+
+

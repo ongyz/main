@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -22,16 +24,25 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final List<Payment> payments = new ArrayList<>();
     private final Subject subject;
     private final TuitionTiming tuitionTiming;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * Alternate constructor for person with payment being optional.
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Subject subject, TuitionTiming tuitionTiming, Set<Tag> tags) {
+        this(name, phone, email, address, subject, tuitionTiming, tags, new ArrayList<>());
+    }
+
+    /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email,
-                  Address address, Subject subject, TuitionTiming tuitionTiming, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Subject subject, TuitionTiming tuitionTiming, Set<Tag> tags, List<Payment> paymentList) {
+        requireAllNonNull(name, phone, email, address, tags, paymentList);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,6 +50,7 @@ public class Person {
         this.subject = subject;
         this.tuitionTiming = tuitionTiming;
         this.tags.addAll(tags);
+        this.payments.addAll(paymentList);
     }
 
     public Name getName() {
@@ -63,6 +75,10 @@ public class Person {
 
     public TuitionTiming getTuitionTiming() {
         return tuitionTiming;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
     }
 
     /**
@@ -108,7 +124,8 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getSubject().equals(getSubject())
                 && otherPerson.getTuitionTiming().equals(getTuitionTiming())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPayments().equals(getPayments());
     }
 
     @Override
@@ -133,6 +150,9 @@ public class Person {
                 .append(getTuitionTiming())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+
+        builder.append(" Payments: ");
+        getPayments().forEach(builder::append);
 
         return builder.toString();
     }

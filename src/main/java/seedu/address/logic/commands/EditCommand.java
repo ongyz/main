@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
@@ -109,9 +111,10 @@ public class EditCommand extends Command {
         TuitionTiming updatedTuitionTiming = editPersonDescriptor.getTuitionTiming()
                 .orElse(personToEdit.getTuitionTiming());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        List<Payment> updatedPayments = editPersonDescriptor.getPayments().orElse(personToEdit.getPayments());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedSubject, updatedTuitionTiming, updatedTags);
+                updatedAddress, updatedSubject, updatedTuitionTiming, updatedTags, updatedPayments);
     }
 
     @Override
@@ -144,6 +147,7 @@ public class EditCommand extends Command {
         private Subject subject;
         private TuitionTiming tuitionTiming;
         private Set<Tag> tags;
+        private List<Payment> payments;
 
         public EditPersonDescriptor() {}
 
@@ -159,6 +163,7 @@ public class EditCommand extends Command {
             setSubject(toCopy.subject);
             setTuitionTiming(toCopy.tuitionTiming);
             setTags(toCopy.tags);
+            setPayments(toCopy.payments);
         }
 
         /**
@@ -233,6 +238,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code payment} to this object's {@code payments}.
+         * A defensive copy of {@code payments} is used internally.
+         */
+        public void setPayments(List<Payment> payments) {
+            this.payments = (payments != null) ? new ArrayList<>(payments) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<List<Payment>> getPayments() {
+            return (payments != null) ? Optional.of(Collections.unmodifiableList(payments)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -254,7 +276,8 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getSubject().equals(e.getSubject())
                     && getTuitionTiming().equals(e.getTuitionTiming())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getPayments().equals(e.getPayments());
         }
     }
 }
