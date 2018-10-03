@@ -30,7 +30,7 @@ public class TodoCommand extends Command {
             + "by the personIndex number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
-            + "[" + PREFIX_SYLLABUS + "SYLLABUS]\n"
+            + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SYLLABUS + "Integration";
 
     private static final String MESSAGE_SYLLABUS_SUCCESS = "Added syllabus to Person: %1$s";
