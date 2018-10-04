@@ -15,9 +15,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.subject.Subject;
 import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.person.Payment;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
 
@@ -138,7 +138,7 @@ public class ParserUtil {
         requireNonNull(tuitionTiming);
         String trimmedTuitionTiming = tuitionTiming.trim();
         if (!TuitionTiming.isValidTiming(trimmedTuitionTiming)) {
-            throw new ParseException(TuitionTiming.MESSAGE_TUITIONTIMING_CONSTRAINTS);
+            throw new ParseException(TuitionTiming.MESSAGE_TUITION_TIMING_CONSTRAINTS);
         }
         return new TuitionTiming(trimmedTuitionTiming);
     }

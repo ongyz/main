@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.RmtodoCommand.RmtodoFormatChecker.RMT
 import static seedu.address.logic.commands.RmtodoCommand.RmtodoFormatChecker.SUBJECT_INDEX_LOCATION;
 import static seedu.address.logic.commands.RmtodoCommand.RmtodoFormatChecker.SYLLABUS_INDEX_LOCATION;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
