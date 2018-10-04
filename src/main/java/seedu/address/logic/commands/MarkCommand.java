@@ -71,7 +71,7 @@ public class MarkCommand extends Command {
      * @throws CommandException if the index to remove from is invalid
      */
     private Set<Subject> markSubjectContentFrom(Person personTarget)
-        throws CommandException{
+        throws CommandException {
         List<Subject> subjects = personTarget.getSubjects().stream().collect(Collectors.toList());
 
         if (hasExceededNumberOfSubjects(subjects)
@@ -84,8 +84,7 @@ public class MarkCommand extends Command {
         return new HashSet<>(subjects);
     }
 
-    private boolean hasExceededNumberOfSubjects(List<Subject> subjects)
-    {
+    private boolean hasExceededNumberOfSubjects(List<Subject> subjects) {
         return subjectIndex.getOneBased() > subjects.size();
     }
 

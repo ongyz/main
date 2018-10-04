@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -72,7 +71,7 @@ public class RmtodoCommand extends Command {
      * @throws CommandException if the index to remove from is invalid
      */
     private Set<Subject> removeSubjectContentFrom(Person personTarget)
-        throws CommandException{
+        throws CommandException {
         List<Subject> subjects = personTarget.getSubjects().stream().collect(Collectors.toList());
 
         if (hasExceededNumberOfSubjects(subjects)
@@ -85,8 +84,7 @@ public class RmtodoCommand extends Command {
         return new HashSet<>(subjects);
     }
 
-    private boolean hasExceededNumberOfSubjects(List<Subject> subjects)
-    {
+    private boolean hasExceededNumberOfSubjects(List<Subject> subjects) {
         return subjectIndex.getOneBased() > subjects.size();
     }
 
