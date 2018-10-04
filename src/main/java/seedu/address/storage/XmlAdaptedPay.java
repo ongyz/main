@@ -9,10 +9,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Payment;
 
-/*
+/**
  * JAXB-friendly adapted version of Pay
  */
 public class XmlAdaptedPay {
+
+    private static final Logger logger = LogsCenter.getLogger(XmlAdaptedPay.class);
 
     private Index studentIndex;
     @XmlElement(required = true)
@@ -21,8 +23,6 @@ public class XmlAdaptedPay {
     private int year;
     @XmlElement(required = true)
     private int month;
-
-    private static final Logger logger = LogsCenter.getLogger(XmlAdaptedPay.class);
 
     /*
      * Constructs an XmlAdaptedPay.
@@ -58,6 +58,11 @@ public class XmlAdaptedPay {
         this.year = source.getYear();
     }
 
+    /**
+     * Converts this jaxb-friendly adapted payment object into the model's payment object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     */
     public Payment toModelType() throws IllegalValueException {
         if (!Payment.isValidAmount(amount)) {
             throw new IllegalValueException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
@@ -80,9 +85,9 @@ public class XmlAdaptedPay {
         }
 
         return studentIndex.equals(((XmlAdaptedPay) other).studentIndex)
-                &&  amount == (((XmlAdaptedPay) other).amount)
-                &&  month == (((XmlAdaptedPay) other).month)
-                &&  year == (((XmlAdaptedPay) other).year);
+                && amount == (((XmlAdaptedPay) other).amount)
+                && month == (((XmlAdaptedPay) other).month)
+                && year == (((XmlAdaptedPay) other).year);
     }
 
     public int hashCode() {

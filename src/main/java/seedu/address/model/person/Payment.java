@@ -35,7 +35,7 @@ public class Payment {
      * @param month A valid month subjectName.
      * @param year A valid year subjectName
      */
-    public Payment(Index index, int amount, int month, int year ) {
+    public Payment(Index index, int amount, int month, int year) {
         this.studentIndex = index;
         this.amount = amount;
         this.month = month;
@@ -73,28 +73,28 @@ public class Payment {
     /**
      * Returns student index
      */
-    public Index getIndex(){
+    public Index getIndex() {
         return this.studentIndex;
     }
 
     /*
      * Return month of payment
      */
-    public int getMonth(){
+    public int getMonth() {
         return this.month;
     }
 
     /*
      * Returns year of payment
      */
-    public int getYear(){
+    public int getYear() {
         return this.year;
     }
 
     /*
      * Return amount of payment
      */
-    public int getAmount(){
+    public int getAmount() {
         return this.amount;
     }
 
@@ -107,9 +107,9 @@ public class Payment {
     }
 
     @Override
-    public boolean equals(Object other){
-        return other == this ||
-                (other instanceof Payment
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Payment
                 && this.studentIndex == (((Payment) other).studentIndex)
                 && this.amount == (((Payment) other).amount)
                 && this.month == (((Payment) other).month)
@@ -117,7 +117,7 @@ public class Payment {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(studentIndex, amount, month, year);
     }
 }
