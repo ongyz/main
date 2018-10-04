@@ -1,8 +1,16 @@
 package seedu.address.model.person;
 
 import java.util.Objects;
+
 import seedu.address.commons.core.index.Index;
 
+/**
+ * Represents a payment in the TutorHelper.
+ * Guarantees: immutable;
+ * amount is valid as declared in {@link #isValidAmount(int)}
+ * month is valid as declared in {@link #isValidMonth(int)}
+ * year is valid as declared in {@link #isValidYear(int)}
+ */
 public class Payment {
 
     public static final String MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS =
@@ -41,16 +49,14 @@ public class Payment {
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
     }
 
-
     /**
      * Returns true if a given int is a valid month.
      */
     public static boolean isValidMonth(int test) {
-
         //Check if month is within the correct range of jan - dec
-        if(String.valueOf(test).matches(TAG_VALIDATION_REGEX)){
+        if (String.valueOf(test).matches(TAG_VALIDATION_REGEX)) {
             int testMonth = test;
-            if(testMonth>=1 && testMonth<=12) {
+            if (testMonth >= 1 && testMonth <= 12) {
                 return true;
             }
         }
@@ -97,9 +103,10 @@ public class Payment {
      * Format state as text for viewing.
      */
     public String toString() {
-        return  " [Month: "+ month+" Year: " + year + " Amount: " + amount+"]";
+        return " [Month: " + month + " Year: " + year + " Amount: " + amount + "]";
     }
 
+    @Override
     public boolean equals(Object other){
         return other == this ||
                 (other instanceof Payment
@@ -109,11 +116,10 @@ public class Payment {
                 && this.year == (((Payment) other).year));
     }
 
+    @Override
     public int hashCode(){
-        return  Objects.hash(studentIndex, amount, month, year);
+        return Objects.hash(studentIndex, amount, month, year);
     }
-
-
 }
 
 

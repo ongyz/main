@@ -10,6 +10,10 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+/**
+ * Represents a Subject in the TutorHelper.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
+ */
 public class Subject {
 
     public static final String MESSAGE_SUBJECT_CONSTRAINTS =
