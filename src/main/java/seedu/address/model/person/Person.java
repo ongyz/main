@@ -148,12 +148,15 @@ public class Person {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("\nSubjects: ");
+
         getSubjects().forEach(builder::append);
 
-        builder.append(" Tuition Timing: ")
+        builder.append("\nTuition Timing: ")
                 .append(getTuitionTiming())
                 .append(" Tags: ");
+
         getTags().forEach(builder::append);
 
         builder.append(" Payments: ");

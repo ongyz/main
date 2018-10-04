@@ -52,7 +52,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         tuitionTiming.setText(person.getTuitionTiming().value);
-        person.getSubjects().forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
+        person.getSubjects().forEach(subject -> subjects.getChildren().add(new Label(subject.getSubjectName())));
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

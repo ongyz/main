@@ -32,7 +32,7 @@ public class XmlAdaptedSubject {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedSubject(Subject source) {
-        subjectName = source.subjectName;
+        subjectName = source.getSubjectName();
     }
 
     /**

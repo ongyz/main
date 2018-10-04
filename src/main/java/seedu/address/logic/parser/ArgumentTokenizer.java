@@ -110,8 +110,9 @@ public class ArgumentTokenizer {
     }
 
     /**
-     * Returns the trimmed subjectName of the argument in the arguments string specified by {@code currentPrefixPosition}.
-     * The end position of the subjectName is determined by {@code nextPrefixPosition}.
+     * Returns the trimmed subjectName of the argument in the arguments string specified
+     * by {@code currentPrefixPosition}. The end position of the subjectName is determined
+     * by {@code nextPrefixPosition}.
      */
     private static String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
