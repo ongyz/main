@@ -18,17 +18,19 @@ public class Syllabus {
      */
     public static final String SYLLABUS_VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    public final String syllabus;
+    public final boolean state;
 
     /**
      * Constructs an {@code Syllabus}.
      *
      * @param syllabus A valid syllabus.
      */
-    public Syllabus(String syllabus) {
+    public Syllabus(String syllabus, boolean state) {
         requireNonNull(syllabus);
         checkArgument(isValidSyllabus(syllabus), MESSAGE_SYLLABUS_CONSTRAINTS);
-        value = syllabus;
+        this.syllabus = syllabus;
+        this.state = state;
     }
 
     /**
@@ -40,19 +42,20 @@ public class Syllabus {
 
     @Override
     public String toString() {
-        return value;
+        String marked = state ? "X" : " ";
+        return syllabus + "   [" + marked + "]";
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Syllabus // instanceof handles nulls
-                && value.equals(((Syllabus) other).value)); // state check
+                && syllabus.equals(((Syllabus) other).syllabus)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return syllabus.hashCode();
     }
 
 }

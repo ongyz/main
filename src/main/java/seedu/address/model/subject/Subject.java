@@ -107,7 +107,7 @@ public class Subject {
      * @param index the index of syllabus to be removed
      * @return a new {@code Subject} with the syllabus at given index removed.
      *
-     * @throws CommandException if {@code index} is out of bound of the syllabus book.
+     * @throws CommandException if {@code index} is out of bound of the subjectContent.
      */
     public Subject removeFromSubjectContent(Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
@@ -116,6 +116,26 @@ public class Subject {
 
         Subject newSubject = new Subject(this);
         newSubject.getSubjectContent().remove(index.getZeroBased());
+        return newSubject;
+    }
+
+    /**
+     * Return a new {@code Subject} with the state of the syllabus
+     * identified by the {@code Index index} flipped.
+     * @param index the index of syllabus
+     * @return new {@code Subject} with the changed syllabus
+     * @throws CommandException if index is out of bound of the subjectContent list
+     */
+    public Subject toggleSubjectContentState(Index index) throws CommandException {
+        if (index.getOneBased() > getSubjectContent().size()) {
+            throw new CommandException(MESSAGE_RMTODO_FAILED);
+        }
+
+        Subject newSubject = new Subject(this);
+        Syllabus oldSyllabus = newSubject.getSubjectContent().get(index.getZeroBased());
+        Syllabus newSyllabus = new Syllabus(oldSyllabus.syllabus, !oldSyllabus.state);
+        newSubject.getSubjectContent().set(index.getZeroBased(), newSyllabus);
+
         return newSubject;
     }
 

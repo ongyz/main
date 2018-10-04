@@ -32,7 +32,7 @@ public class XmlAdaptedSyllabus {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedSyllabus(Syllabus source) {
-        value = source.value;
+        value = source.syllabus;
     }
 
     /**
@@ -44,7 +44,7 @@ public class XmlAdaptedSyllabus {
         if (!Syllabus.isValidSyllabus(value)) {
             throw new IllegalValueException(Syllabus.MESSAGE_SYLLABUS_CONSTRAINTS);
         }
-        return new Syllabus(value);
+        return new Syllabus(value, false);
     }
 
     @Override

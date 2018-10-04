@@ -244,6 +244,6 @@ public class ParserUtil {
         if (!Syllabus.isValidSyllabus(trimmedSyllabus)) {
             throw new ParseException(Syllabus.MESSAGE_SYLLABUS_CONSTRAINTS);
         }
-        return new Syllabus(trimmedSyllabus);
+        return new Syllabus(trimmedSyllabus, false);
     }
 }

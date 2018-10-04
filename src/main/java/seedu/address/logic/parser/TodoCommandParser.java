@@ -15,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.subject.Syllabus;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new TodoCommand object
  */
 public class TodoCommandParser implements Parser<TodoCommand> {
 
