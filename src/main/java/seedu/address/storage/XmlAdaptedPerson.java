@@ -157,7 +157,7 @@ public class XmlAdaptedPerson {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TuitionTiming.class.getSimpleName()));
         }
         if (!TuitionTiming.isValidTiming(tuitionTiming)) {
-            throw new IllegalValueException(TuitionTiming.MESSAGE_TUITIONTIMING_CONSTRAINTS);
+            throw new IllegalValueException(TuitionTiming.MESSAGE_TUITION_TIMING_CONSTRAINTS);
         }
         final TuitionTiming modelTuitionTiming = new TuitionTiming(tuitionTiming);
 
