@@ -4,15 +4,14 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
+TutorHelper was developed by the https://github.com/CS2103-AY1819S1-W13-4[CS2103-AY1819S1-W13-4] team. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
 === Andy Chan
-image::andlimey.jpg[width="150", align="left"]
+image::andlimey.png[width="150", align="left"]
 {empty}[https://github.com/andlimey[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -21,7 +20,7 @@ Responsibilities: UI
 '''
 
 === Anthony Halim
-image::SusterDrifter.jpeg[width="150", align="left"]
+image::susterdrifter.png[width="150", align="left"]
 {empty}[http://github.com/SusterDrifter[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -30,7 +29,7 @@ Responsibilities: UI
 '''
 
 === Joel Lee
-image::lywjoel.jpeg[width="150", align="left"]
+image::lywjoel.png[width="150", align="left"]
 {empty}[http://github.com/lywjoel[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -39,7 +38,7 @@ Responsibilities: Data
 '''
 
 === Ong Yan Zhi
-image::ongyz.jpeg[width="150", align="left"]
+image::ongyz.png[width="150", align="left"]
 {empty}[http://github.com/ongyz[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -48,7 +47,7 @@ Responsibilities: Dev Ops + Threading
 '''
 
 === Ooi Hui Ying
-image::ooihuiying.jpeg[width="150", align="left"]
+image::ooihuiying.png[width="150", align="left"]
 {empty}[http://github.com/ooihuiying[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +

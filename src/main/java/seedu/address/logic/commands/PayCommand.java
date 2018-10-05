@@ -1,41 +1,48 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.Payment;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
+/**
+ * Add payment details of an existing person in the TutorHelper.
+ */
 public class PayCommand extends Command {
     public static final String COMMAND_WORD = "paid";
     public static final String COMMAND_ALIAS = "p";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates if a person has paid.\n"
-            + "Parameters: \n"
-            + "INDEX(must be a positive integer)\n"
-            + "AMOUNT(must be a positive integer)\n"
-            + "MONTH(must be a valid month)\n"
-            + "YEAR(must be a valid year)\n"
-            + "Example: " + COMMAND_WORD + " idx/1 amt/200 mth/08 yr/2018";
-
-    private final Logger logger = LogsCenter.getLogger(PayCommand.class);
-
-    public static final String MESSAGE_DUPLICATE_PERSON = "Payment has already been updated for this person";
+            + "Parameters: "
+            + "INDEX AMOUNT MONTH YEAR \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PAYMENT + "1 "
+            + PREFIX_PAYMENT_AMOUNT + "200 "
+            + PREFIX_PAYMENT_MONTH + "08 "
+            + PREFIX_PAYMENT_YEAR + "2018";
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
 
+    private final Logger logger = LogsCenter.getLogger(PayCommand.class);
     private Index targetIndex;
-    Payment newPayment;
+    private Payment newPayment;
 
-    public PayCommand(Payment payment){
+    public PayCommand(Payment payment) {
         this.targetIndex = payment.getIndex();
         this.newPayment = payment;
     }
@@ -50,21 +57,26 @@ public class PayCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToPay = lastShownList.get(targetIndex.getZeroBased());
-        personToPay.updatePayment(newPayment);
+        Person personTarget = lastShownList.get(targetIndex.getZeroBased());
+        List<Payment> updatedPayments = updatePayment(personTarget.getPayments(), newPayment);
 
-        //(debug) Print out who paid
-        /*
-        ArrayList<Payment> paymentArr = personToPay.getPayments();
-        logger.info("size is " + paymentArr.size());
-        for (int i=0; i<paymentArr.size(); i++){
-            logger.info("Payment made is" + paymentArr.get(i));
-        }
-        */
+        Person personToPay = new Person(personTarget.getName(), personTarget.getPhone(),
+                personTarget.getEmail(), personTarget.getAddress(), personTarget.getSubjects(),
+                personTarget.getTuitionTiming(), personTarget.getTags(), updatedPayments);
 
+        model.updatePerson(personTarget, personToPay);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
     }
 
+    /**
+     * Update payment for this person and returns a new instance of this person.
+     * @return the same person but updated with payment.
+     */
+    public List<Payment> updatePayment(List<Payment> oldPayments, Payment newPayment) {
+        List<Payment> updatedPayment = new ArrayList<>(oldPayments);
+        updatedPayment.add(newPayment);
+        return updatedPayment;
+    }
 }

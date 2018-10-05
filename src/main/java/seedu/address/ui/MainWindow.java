@@ -87,7 +87,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination subjectName of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -128,8 +128,7 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath(),
-                logic.getFilteredPersonList().size());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);

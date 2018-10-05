@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-import java.util.List;
 import javafx.scene.control.TextArea;
 
 /**
@@ -20,12 +19,4 @@ public class ResultDisplayHandle extends NodeHandle<TextArea> {
     public String getText() {
         return getRootNode().getText();
     }
-
-    /**
-     * Returns the list of style classes present in the result display.
-     */
-    public List<String> getStyleClass() {
-        return getRootNode().getStyleClass();
-    }
 }
-

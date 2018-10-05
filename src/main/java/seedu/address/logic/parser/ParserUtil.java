@@ -1,21 +1,25 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
-import seedu.address.commons.core.LogsCenter;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Payment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TuitionTiming;
+import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -23,9 +27,6 @@ import static java.util.Objects.requireNonNull;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
-
-    private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -100,6 +101,47 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String subject} into a {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubjectName(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
+     */
+    public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+        requireNonNull(subjects);
+        final Set<Subject> subjectSet = new HashSet<>();
+        for (String subjectName : subjects) {
+            subjectSet.add(parseSubject(subjectName));
+        }
+        return subjectSet;
+    }
+
+    /**
+     * Parses a {@code String tuitionTiming} into a {@code TuitionTiming}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tuitionTiming} is invalid.
+     */
+    public static TuitionTiming parseTuitionTiming(String tuitionTiming) throws ParseException {
+        requireNonNull(tuitionTiming);
+        String trimmedTuitionTiming = tuitionTiming.trim();
+        if (!TuitionTiming.isValidTiming(trimmedTuitionTiming)) {
+            throw new ParseException(TuitionTiming.MESSAGE_TUITION_TIMING_CONSTRAINTS);
+        }
+        return new TuitionTiming(trimmedTuitionTiming);
+    }
 
     /**
      * Parses a {@code String amount} into an integer.
@@ -110,10 +152,7 @@ public class ParserUtil {
     public static int parseAmount(String amount) throws ParseException {
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
-
-        //logger.info("----------------[++++++++++++++++++++++++++++++++amount][" + trimmedAmount + "]");
-        if (!Payment.isValidAmount(trimmedAmount)) {
-            logger.info("----------------[++++++++++++++++++++++++++++++++amount][" + trimmedAmount + "]");
+        if (!Payment.isValidAmount(Integer.parseInt(trimmedAmount))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedAmount);
@@ -128,7 +167,7 @@ public class ParserUtil {
     public static int parseMonth(String month) throws ParseException {
         requireNonNull(month);
         String trimmedMonth = month.trim();
-        if (!Payment.isValidMonth(trimmedMonth)) {
+        if (!Payment.isValidMonth(Integer.parseInt(trimmedMonth))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedMonth);
@@ -143,7 +182,7 @@ public class ParserUtil {
     public static int parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
-        if (!Payment.isValidYear(trimmedYear)) {
+        if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedYear);
@@ -174,5 +213,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a list of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
+        String trimmedIndexes = oneBasedIndexes.trim();
+        String[] separatedIndexes = trimmedIndexes.split("\\s");
+        List<Index> listIndexes = new ArrayList<Index>();
+
+        for (String indexCandidate : separatedIndexes) {
+            listIndexes.add(ParserUtil.parseIndex(indexCandidate));
+        }
+
+        return listIndexes;
+    }
+
+    /**
+     * Parses a {@code String syllabus} into a {@code Syllabus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code syllabus} input is invalid.
+     */
+    public static Syllabus parseSyllabus(String syllabus) throws ParseException {
+        requireNonNull(syllabus);
+        String trimmedSyllabus = syllabus.trim();
+        if (!Syllabus.isValidSyllabus(trimmedSyllabus)) {
+            throw new ParseException(Syllabus.MESSAGE_SYLLABUS_CONSTRAINTS);
+        }
+        return new Syllabus(trimmedSyllabus, false);
     }
 }

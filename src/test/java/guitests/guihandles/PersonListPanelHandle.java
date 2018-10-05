@@ -136,7 +136,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Person>> {
     }
 
     /**
-     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
+     * Returns true if the selected {@code PersonCard} is different from the subjectName remembered by the most recent
      * {@code rememberSelectedPersonCard()} call.
      */
     public boolean isSelectedPersonCardChanged() {
