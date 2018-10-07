@@ -105,7 +105,7 @@ public class ListElementPointerTest {
     }
 
     /**
-     * Asserts that {@code pointer#hasNext()} returns true and the return value
+     * Asserts that {@code pointer#hasNext()} returns true and the return subjectName
      * of {@code pointer#next()} equals to {@code element}.
      */
     private void assertNextSuccess(String element) {
@@ -114,7 +114,7 @@ public class ListElementPointerTest {
     }
 
     /**
-     * Asserts that {@code pointer#hasPrevious()} returns true and the return value
+     * Asserts that {@code pointer#hasPrevious()} returns true and the return subjectName
      * of {@code pointer#previous()} equals to {@code element}.
      */
     private void assertPreviousSuccess(String element) {
@@ -123,7 +123,7 @@ public class ListElementPointerTest {
     }
 
     /**
-     * Asserts that {@code pointer#hasCurrent()} returns true and the return value
+     * Asserts that {@code pointer#hasCurrent()} returns true and the return subjectName
      * of {@code pointer#current()} equals to {@code element}.
      */
     private void assertCurrentSuccess(String element) {

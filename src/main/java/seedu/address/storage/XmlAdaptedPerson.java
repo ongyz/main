@@ -13,10 +13,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
 import seedu.address.model.person.TuitionTiming;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,12 +36,16 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String address;
     @XmlElement(required = true)
-    private String subject;
-    @XmlElement(required = true)
     private String tuitionTiming;
 
     @XmlElement
+    private List<XmlAdaptedSubject> subjects = new ArrayList<>();
+
+    @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    @XmlElement
+    private List<XmlAdaptedPay> payments = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -52,15 +57,22 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String email,
-                            String address, String subject, String tuitionTiming, List<XmlAdaptedTag> tagged) {
+                            String address, List<XmlAdaptedSubject> subjects, String tuitionTiming,
+                            List<XmlAdaptedTag> tagged, List<XmlAdaptedPay> payments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.subject = subject;
+        if (subjects != null) {
+            this.subjects = new ArrayList<>(subjects);
+        }
         this.tuitionTiming = tuitionTiming;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+
+        if (payments != null) {
+            this.payments = new ArrayList<>(payments);
         }
     }
 
@@ -74,11 +86,17 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        subject = source.getSubject().value;
+        subjects = source.getSubjects().stream()
+                .map(XmlAdaptedSubject::new)
+                .collect(Collectors.toList());;
         tuitionTiming = source.getTuitionTiming().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        payments = source.getPayments().stream()
+                .map(XmlAdaptedPay::new)
+                .collect(Collectors.toList());
+
     }
 
     /**
@@ -90,6 +108,16 @@ public class XmlAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Subject> personSubjects = new ArrayList<>();
+        for (XmlAdaptedSubject subject : subjects) {
+            personSubjects.add(subject.toModelType());
+        }
+
+        final List<Payment> personPayments = new ArrayList<>();
+        for (XmlAdaptedPay payment : payments) {
+            personPayments.add(payment.toModelType());
         }
 
         if (name == null) {
@@ -124,25 +152,21 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (subject == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
-        }
-        if (!Subject.isValidSubject(subject)) {
-            throw new IllegalValueException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
-        }
-        final Subject modelSubject = new Subject(subject);
-
         if (tuitionTiming == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TuitionTiming.class.getSimpleName()));
         }
         if (!TuitionTiming.isValidTiming(tuitionTiming)) {
-            throw new IllegalValueException(TuitionTiming.MESSAGE_TUITIONTIMING_CONSTRAINTS);
+            throw new IllegalValueException(TuitionTiming.MESSAGE_TUITION_TIMING_CONSTRAINTS);
         }
         final TuitionTiming modelTuitionTiming = new TuitionTiming(tuitionTiming);
 
+        final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSubject, modelTuitionTiming, modelTags);
+        final List<Payment> modelPayments = new ArrayList<>(personPayments);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelSubjects, modelTuitionTiming, modelTags, modelPayments);
     }
 
     @Override
@@ -160,8 +184,9 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && Objects.equals(subject, otherPerson.subject)
+                && subjects.equals(otherPerson.subjects)
                 && Objects.equals(tuitionTiming, otherPerson.tuitionTiming)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && payments.equals(otherPerson.payments);
     }
 }

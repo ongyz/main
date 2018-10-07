@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYANDTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_AND_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_SUBJECT + "SUBJECT "
-            + PREFIX_DAYANDTIME + "TUITION TIMING "
+            + PREFIX_DAY_AND_TIME + "TUITION TIMING "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SUBJECT + "Mathematics "
-            + PREFIX_DAYANDTIME + "Monday 6pm"
+            + PREFIX_DAY_AND_TIME + "Monday 6pm "
             + PREFIX_TAG + "weak in algebra";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
