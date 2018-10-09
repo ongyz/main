@@ -118,7 +118,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 === Grouping students by tuition timing : `group`
 
 Lists all students with the specified tuition timing. +
-User can choose to group by time or day of the week. + 
+User can choose to group by time or day of the week. +
 Format: `group TIMING`
 
 ****

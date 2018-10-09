@@ -22,7 +22,7 @@ Current: +
 * `Tutors use reminder applications to keep track of lessons`
 * `Tutors use physical diaries or notepads to keep track of current lesson progress`
 
-Value: 
+Value:
 
 * `Tutors have a platform where they can keep track of all their students' details, their progress and the syllabus they intend to cover.`
 
@@ -46,7 +46,7 @@ Value:
   Extensions:
     2a. Index is out of bounds
       2a1. System displays error message.
-  
+
   2. Edit Student
 
   System: TutorHelper
