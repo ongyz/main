@@ -28,27 +28,28 @@ public class Subject {
 
     private final String subjectName;
     private final List<Syllabus> subjectContent = new ArrayList<>();
+    private final float completionRate;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a new {@code Subject}.
      *
-     * @param subject Subjects that the student is taking.
+     * @param subjectName Subjects that the student is taking.
      */
-    public Subject(String subject) {
-        requireNonNull(subject);
-        checkArgument(isValidSubjectName(subject), MESSAGE_SUBJECT_CONSTRAINTS);
-        subjectName = subject;
+    public Subject(String subjectName) {
+        requireNonNull(subjectName);
+        checkArgument(isValidSubjectName(subjectName), MESSAGE_SUBJECT_CONSTRAINTS);
+        this.subjectName = subjectName;
+        completionRate = 0;
     }
 
     /**
-     * Constructs a copy of the {@code Subject subject}
-     *
-     * @param subject the subject to be copied from.
+     * Alternative constructor to guarantee immutability.
      */
-    private Subject(Subject subject) {
-        requireNonNull(subject);
-        subjectName = subject.getSubjectName();
-        subjectContent.addAll(subject.getSubjectContent());
+    private Subject(String subjectName, List<Syllabus> subjectContent, float completionRate) {
+        requireNonNull(subjectName);
+        this.subjectName = subjectName;
+        this.subjectContent.addAll(subjectContent);
+        this.completionRate = completionRate;
     }
 
     public String getSubjectName() {
@@ -57,6 +58,10 @@ public class Subject {
 
     public List<Syllabus> getSubjectContent() {
         return subjectContent;
+    }
+
+    public float getCompletionRate() {
+        return completionRate;
     }
 
     /**
@@ -100,9 +105,9 @@ public class Subject {
      * @return a new {@code Subject} containing the newly added syllabus
      */
     public Subject addToSubjectContent(Syllabus syllabus) {
-        Subject newSubject = new Subject(this);
-        newSubject.getSubjectContent().add(syllabus);
-        return new Subject(newSubject);
+        List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
+        newSubjectContent.add(syllabus);
+        return new Subject(getSubjectName(), newSubjectContent, getCompletionRate()).updateCompletionRate();
     }
 
     /**
@@ -118,9 +123,9 @@ public class Subject {
             throw new CommandException(MESSAGE_RMTODO_FAILED);
         }
 
-        Subject newSubject = new Subject(this);
-        newSubject.getSubjectContent().remove(index.getZeroBased());
-        return newSubject;
+        List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
+        newSubjectContent.remove(index.getZeroBased());
+        return new Subject(getSubjectName(), newSubjectContent, getCompletionRate()).updateCompletionRate();
     }
 
     /**
@@ -135,12 +140,29 @@ public class Subject {
             throw new CommandException(MESSAGE_RMTODO_FAILED);
         }
 
-        Subject newSubject = new Subject(this);
-        Syllabus oldSyllabus = newSubject.getSubjectContent().get(index.getZeroBased());
+        List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
+        Syllabus oldSyllabus = newSubjectContent.get(index.getZeroBased());
         Syllabus newSyllabus = new Syllabus(oldSyllabus.syllabus, !oldSyllabus.state);
-        newSubject.getSubjectContent().set(index.getZeroBased(), newSyllabus);
+        newSubjectContent.set(index.getZeroBased(), newSyllabus);
 
-        return newSubject;
+        return new Subject(getSubjectName(), newSubjectContent, getCompletionRate()).updateCompletionRate();
+    }
+
+    /**
+     * Recalculate the completion rate of the subject.
+     * @return a new {@code Subject} with updated completion rate.
+     */
+    public Subject updateCompletionRate() {
+        int subjectContentLength = getSubjectContent().size();
+        int numOfSyllabusCompleted = 0;
+
+        for (Syllabus syllabus: getSubjectContent()) {
+            if (syllabus.state) {
+                numOfSyllabusCompleted++;
+            }
+        }
+        float completionRate = (float) numOfSyllabusCompleted / subjectContentLength;
+        return new Subject(getSubjectName(), getSubjectContent(), completionRate);
     }
 
     /**
