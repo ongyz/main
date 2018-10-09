@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -12,8 +14,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
-
-import com.google.common.eventbus.Subscribe;
 
 /**
  * The Browser Panel of the App.
