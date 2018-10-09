@@ -1,16 +1,8 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -20,12 +12,18 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 /**
  * Add payment details of an existing person in the TutorHelper.
  */
 public class PayCommand extends Command {
     public static final String COMMAND_WORD = "paid";
-    public static final String COMMAND_ALIAS = "p";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates if a person has paid.\n"
@@ -58,6 +56,15 @@ public class PayCommand extends Command {
         }
 
         Person personTarget = lastShownList.get(targetIndex.getZeroBased());
+
+        List<Payment> pay = personTarget.getPayments();
+
+        for (int i = 0; i < pay.size(); i++) {
+            if (pay.get(i).toString().equals(newPayment.toString())) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_ENTRY);
+            }
+        }
+
         List<Payment> updatedPayments = updatePayment(personTarget.getPayments(), newPayment);
 
         Person personToPay = new Person(personTarget.getName(), personTarget.getPhone(),
@@ -69,6 +76,8 @@ public class PayCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
     }
+
+
 
     /**
      * Update payment for this person and returns a new instance of this person.
