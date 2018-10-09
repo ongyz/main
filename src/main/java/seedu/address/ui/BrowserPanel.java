@@ -2,9 +2,6 @@ package seedu.address.ui;
 
 import java.net.URL;
 import java.util.logging.Logger;
-
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -14,6 +11,8 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
+
+import com.google.common.eventbus.Subscribe;
 
 /**
  * The Browser Panel of the App.
@@ -50,13 +49,21 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadPersonPage(Person person) {
         final StringBuilder builder = new StringBuilder();
         person.getTags().forEach(builder::append);
+
+        final StringBuilder builder1 = new StringBuilder();
+        person.getPayments().forEach(builder1::append);
+
         URL personPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
+
         String url = personPage.toExternalForm()
                 + "?name=" + person.getName().fullName
                 + "&phone=" + person.getPhone().value
                 + "&email=" + person.getEmail().value
                 + "&address=" + person.getAddress().value
+                + "&payments=" + builder1.toString()
                 + "&tags=" + builder.toString();
+
+        logger.info("ListPayments" + builder1.toString());
         logger.info(url.replace("#", "%23"));
         loadPage(url.replace("#", "%23"));
     }

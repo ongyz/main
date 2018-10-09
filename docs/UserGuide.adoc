@@ -247,6 +247,7 @@ Examples:
 * `paid 1 200 01 2018` +
 `Records $200 payment made on January 2018
 
+
 === Display tutor earnings for the month: `earnings` 
 
 Display tutor earnings for each month. +
