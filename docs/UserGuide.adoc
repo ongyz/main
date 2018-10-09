@@ -330,9 +330,10 @@ e.g.`select 2`
 * *Group* : `group [TIMING]` +
 e.g `group Monday OR group 12pm OR group`
 * *History* : `history`
-* *Payment* : `payment`
-* *Earnings* : `earnings INDEX AMOUNT MONTH_INDEX YEAR` +
-`earnings 1 200 01 2018`
+* *Payment* : `paid STUDENT_INDEX AMOUNT MONTH_INDEX YEAR` +
+    eg `paid 1 200 08 2018`
+* *Earnings* : `earnings MONTH_INDEX YEAR` +
+  `eg earnings 01 2018`
 * *Mark* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
 e.g `mark 1 1 1`
 * *Todo* : `todo STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
