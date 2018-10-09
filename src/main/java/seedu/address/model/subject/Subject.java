@@ -161,7 +161,7 @@ public class Subject {
                 numOfSyllabusCompleted++;
             }
         }
-        float completionRate = (float)numOfSyllabusCompleted / subjectContentLength;
+        float completionRate = (float) numOfSyllabusCompleted / subjectContentLength;
         return new Subject(getSubjectName(), getSubjectContent(), completionRate);
     }
 

@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
+
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
