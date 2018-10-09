@@ -63,7 +63,6 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&payments=" + builder1.toString()
                 + "&tags=" + builder.toString();
 
-        logger.info("ListPayments" + builder1.toString());
         logger.info(url.replace("#", "%23"));
         loadPage(url.replace("#", "%23"));
     }
