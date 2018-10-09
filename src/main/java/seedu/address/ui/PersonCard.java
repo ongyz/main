@@ -37,7 +37,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label subject;
+    private FlowPane subjects;
     @FXML
     private Label tuitionTiming;
     @FXML
@@ -51,8 +51,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        subject.setText(person.getSubject().value);
         tuitionTiming.setText(person.getTuitionTiming().value);
+        person.getSubjects().forEach(subject -> subjects.getChildren().add(new Label(subject.getSubjectName())));
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAYANDTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_AND_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,10 +26,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
 import seedu.address.model.person.TuitionTiming;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,8 +48,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT] "
-            + "[" + PREFIX_DAYANDTIME + "TUITION TIMING] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
+            + "[" + PREFIX_DAY_AND_TIME + "TUITION TIMING] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -105,13 +107,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
+        Set<Subject> updatedSubject = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
         TuitionTiming updatedTuitionTiming = editPersonDescriptor.getTuitionTiming()
                 .orElse(personToEdit.getTuitionTiming());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        List<Payment> updatedPayments = editPersonDescriptor.getPayments().orElse(personToEdit.getPayments());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedSubject, updatedTuitionTiming, updatedTags);
+                updatedAddress, updatedSubject, updatedTuitionTiming, updatedTags, updatedPayments);
     }
 
     @Override
@@ -133,17 +136,18 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field subjectName will replace the
+     * corresponding field subjectName of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
-        private Subject subject;
+        private Set<Subject> subjects;
         private TuitionTiming tuitionTiming;
         private Set<Tag> tags;
+        private List<Payment> payments;
 
         public EditPersonDescriptor() {}
 
@@ -156,16 +160,17 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setSubject(toCopy.subject);
+            setSubjects(toCopy.subjects);
             setTuitionTiming(toCopy.tuitionTiming);
             setTags(toCopy.tags);
+            setPayments(toCopy.payments);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, subjects);
         }
 
         public void setName(Name name) {
@@ -200,12 +205,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setSubject(Subject subject) {
-            this.subject = subject;
+        public void setSubjects(Set<Subject> subjects) {
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
-        public Optional<Subject> getSubject() {
-            return Optional.ofNullable(subject);
+        public Optional<Set<Subject>> getSubjects() {
+            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 
         public void setTuitionTiming(TuitionTiming tuitionTiming) {
@@ -233,6 +238,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code payment} to this object's {@code payments}.
+         * A defensive copy of {@code payments} is used internally.
+         */
+        public void setPayments(List<Payment> payments) {
+            this.payments = (payments != null) ? new ArrayList<>(payments) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<List<Payment>> getPayments() {
+            return (payments != null) ? Optional.of(Collections.unmodifiableList(payments)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -252,9 +274,10 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getSubject().equals(e.getSubject())
+                    && getSubjects().equals(e.getSubjects())
                     && getTuitionTiming().equals(e.getTuitionTiming())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getPayments().equals(e.getPayments());
         }
     }
 }

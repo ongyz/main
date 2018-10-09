@@ -20,13 +20,11 @@ By: `W13-4`      Since: `September 2018`      Licence: `Damith`
 
 TutorHelper is for tutors who have trouble managing their students’ details & progress, time of tuition and their own weekly tuition schedule. This project is an all-in-one scheduler.
 
-System finds and deletes the student’s data.
-
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest version of `TutorHelper` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your TutorHelper.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -36,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the TutorHelper.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Mathematics d/Monday, 12:00pm` : adds a person named `John Doe` to the TutorHelper.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -79,8 +77,8 @@ Format: `list`
 
 === Editing a person : `edit`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing person in the TutorHelper. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [d/TUITIONTIMING] [t/TAG]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
@@ -247,6 +245,7 @@ Examples:
 * `paid 1 200 01 2018` +
 `Records $200 payment made on January 2018
 
+
 === Display tutor earnings for the month: `earnings` 
 
 Display tutor earnings for each month. +
@@ -329,9 +328,10 @@ e.g.`select 2`
 * *Group* : `group [TIMING]` +
 e.g `group Monday OR group 12pm OR group`
 * *History* : `history`
-* *Payment* : `payment`
-* *Earnings* : `earnings INDEX AMOUNT MONTH_INDEX YEAR` +
-`earnings 1 200 01 2018`
+* *Payment* : `paid STUDENT_INDEX AMOUNT MONTH_INDEX YEAR` +
+    eg `paid 1 200 08 2018`
+* *Earnings* : `earnings MONTH_INDEX YEAR` +
+  `eg earnings 01 2018`
 * *Mark* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
 e.g `mark 1 1 1`
 * *Todo* : `todo STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +

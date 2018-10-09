@@ -1,8 +1,16 @@
 package seedu.address.model.person;
 
 import java.util.Objects;
+
 import seedu.address.commons.core.index.Index;
 
+/**
+ * Represents a payment in the TutorHelper.
+ * Guarantees: immutable;
+ * amount is valid as declared in {@link #isValidAmount(int)}
+ * month is valid as declared in {@link #isValidMonth(int)}
+ * year is valid as declared in {@link #isValidYear(int)}
+ */
 public class Payment {
 
     public static final String MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS =
@@ -24,10 +32,10 @@ public class Payment {
      *
      * @param index A valid index name.
      * @param amount A valid amount.
-     * @param month A valid month value.
-     * @param year A valid year value
+     * @param month A valid month subjectName.
+     * @param year A valid year subjectName
      */
-    public Payment(Index index, int amount, int month, int year ) {
+    public Payment(Index index, int amount, int month, int year) {
         this.studentIndex = index;
         this.amount = amount;
         this.month = month;
@@ -41,16 +49,14 @@ public class Payment {
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
     }
 
-
     /**
      * Returns true if a given int is a valid month.
      */
     public static boolean isValidMonth(int test) {
-
         //Check if month is within the correct range of jan - dec
-        if(String.valueOf(test).matches(TAG_VALIDATION_REGEX)){
+        if (String.valueOf(test).matches(TAG_VALIDATION_REGEX)) {
             int testMonth = test;
-            if(testMonth>=1 && testMonth<=12) {
+            if (testMonth >= 1 && testMonth <= 12) {
                 return true;
             }
         }
@@ -67,28 +73,28 @@ public class Payment {
     /**
      * Returns student index
      */
-    public Index getIndex(){
+    public Index getIndex() {
         return this.studentIndex;
     }
 
     /*
      * Return month of payment
      */
-    public int getMonth(){
+    public int getMonth() {
         return this.month;
     }
 
     /*
      * Returns year of payment
      */
-    public int getYear(){
+    public int getYear() {
         return this.year;
     }
 
     /*
      * Return amount of payment
      */
-    public int getAmount(){
+    public int getAmount() {
         return this.amount;
     }
 
@@ -97,21 +103,23 @@ public class Payment {
      * Format state as text for viewing.
      */
     public String toString() {
-        return  " [Month: "+ month+" Year: " + year + " Amount: " + amount+"]";
+        return " [Month: " + month + " Year: " + year + " Amount: " + amount + "]";
     }
 
-    public boolean equals(Object other){
-        return other == this ||
-                (other instanceof Payment
-                        && this.studentIndex == (((Payment) other).studentIndex)
-                        && this.amount == (((Payment) other).amount)
-                        && this.month == (((Payment) other).month)
-                        && this.year == (((Payment) other).year));
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Payment
+                && this.studentIndex == (((Payment) other).studentIndex)
+                && this.amount == (((Payment) other).amount)
+                && this.month == (((Payment) other).month)
+                && this.year == (((Payment) other).year));
     }
 
-    public int hashCode(){
-        return  Objects.hash(studentIndex, amount, month, year);
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentIndex, amount, month, year);
     }
-
-
 }
+
+
