@@ -20,8 +20,6 @@ By: `W13-4`      Since: `September 2018`      Licence: `Damith`
 
 TutorHelper is for tutors who have trouble managing their students’ details & progress, time of tuition and their own weekly tuition schedule. This project is an all-in-one scheduler.
 
-System finds and deletes the student’s data.
-
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
