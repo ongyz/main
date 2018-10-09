@@ -11,8 +11,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
 import seedu.address.model.person.TuitionTiming;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,23 +22,23 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), new Subject("Mathematics"),
-                new TuitionTiming("Monday, 6pm"), getTagSet("friends")),
+                new Address("Blk 30 Geylang Street 29, #06-40"), getSubjectSet("Mathematics"),
+                new TuitionTiming("Monday, 6:00pm"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Subject("Economics"),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getSubjectSet("Economics"),
                 new TuitionTiming("Friday, 5.30pm"), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Subject("Chemistry"),
-                new TuitionTiming("Tuesday, 6pm"), getTagSet("neighbours")),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getSubjectSet("Chemistry", "Mathematics"),
+                new TuitionTiming("Tuesday, 6:00pm"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Subject("Additional Mathematics"),
-                new TuitionTiming("Wednesday, 7pm"), getTagSet("family")),
+                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getSubjectSet("Additional Mathematics"),
+                new TuitionTiming("Wednesday, 7:00pm"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), new Subject("Physics"),
-                new TuitionTiming("Thursday 3pm"), getTagSet("classmates")),
+                new Address("Blk 47 Tampines Street 20, #17-35"), getSubjectSet("Physics", "Biology"),
+                new TuitionTiming("Thursday 3:00pm"), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), new Subject("Chemistry"),
-                new TuitionTiming("Saturday, 10am"), getTagSet("colleagues"))
+                new Address("Blk 45 Aljunied Street 85, #11-31"), getSubjectSet("Chemistry"),
+                new TuitionTiming("Saturday, 10:00am"), getTagSet("colleagues"))
         };
     }
 
@@ -56,6 +56,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a subject set containing the list of strings given.
+     */
+    public static Set<Subject> getSubjectSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Subject::new)
                 .collect(Collectors.toSet());
     }
 

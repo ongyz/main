@@ -3,17 +3,28 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents tuition timing in TutorHelper.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTiming(String)}
+ */
 public class TuitionTiming {
 
-    public static final String MESSAGE_TUITIONTIMING_CONSTRAINTS =
-            "Tuition Time and Day should contain the specific time and day, and it should not be blank";
+    private static final String DAY_REGEX = "^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
+    private static final String TIME_REGEX = "\\d{1,2}[:.]\\d{2}(am|pm|AM|PM)$";
+    public static final String MESSAGE_TUITION_TIMING_CONSTRAINTS =
+            "Tuition Day and Time should not be blank and should be in the format:\n"
+            + "1) Day, Time\n"
+            + "2) Day Time.\n"
+            + "Examples of Valid Input:\n"
+            + "Monday, 1.00pm\n"
+            + "Tuesday, 1:15AM\n"
+            + "Wednesday 12:30pm\n";
 
     /*
      * The first character of the tuition time and day must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    //Need to refine this further
-    public static final String TUITIONTIMING_VALIDATION_REGEX = "[^\\s].*";
+    public static final String TUITION_TIMING_VALIDATION_REGEX = DAY_REGEX + ".{1,2}" + TIME_REGEX;
 
     public final String value;
 
@@ -24,7 +35,7 @@ public class TuitionTiming {
      */
     public TuitionTiming(String tuitionTiming) {
         requireNonNull(tuitionTiming);
-        checkArgument(isValidTiming(tuitionTiming), MESSAGE_TUITIONTIMING_CONSTRAINTS);
+        checkArgument(isValidTiming(tuitionTiming), MESSAGE_TUITION_TIMING_CONSTRAINTS);
         value = tuitionTiming;
     }
 
@@ -32,7 +43,7 @@ public class TuitionTiming {
      * Returns true if a given string is a valid time and day
      */
     public static boolean isValidTiming(String test) {
-        return test.matches(TUITIONTIMING_VALIDATION_REGEX);
+        return test.matches(TUITION_TIMING_VALIDATION_REGEX);
     }
 
     @Override
