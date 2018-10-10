@@ -45,7 +45,7 @@ public class Subject {
     /**
      * Alternative constructor to guarantee immutability.
      */
-    private Subject(String subjectName, List<Syllabus> subjectContent, float completionRate) {
+    public Subject(String subjectName, List<Syllabus> subjectContent, float completionRate) {
         requireNonNull(subjectName);
         this.subjectName = subjectName;
         this.subjectContent.addAll(subjectContent);
