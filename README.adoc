@@ -15,10 +15,9 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 * This is a desktop TutorHelper application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as the main programming language.
-* It is *written in OOP fashion*. It provides a *reasonably well-written* code example that is *significantly bigger* (around 6 KLoC) than what students usually write in beginner-level SE modules.
+* It is a Java sample application intended for Tutors who would like to organise their students' information.
 * This application contains:
-** A GUI that includes a list  panel and an in-built Browser.
+** A GUI that includes a list panel and a details panel.
 ** Test cases, including automated GUI testing.
 ** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
 
