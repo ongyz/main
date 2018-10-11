@@ -19,8 +19,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Set<Subject> DEFAULT_SUBJECTS = subjectBuilder();
-    public static final TuitionTiming DEFAULT_TUITION_TIMING = new TuitionTiming("Friday, 4:00pm");
+    public static final String DEFAULT_TUITION_TIMING = "Friday, 4:00pm";
 
     private Name name;
     private Phone phone;
@@ -37,8 +36,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        subjects = DEFAULT_SUBJECTS;
-        tuitionTiming = DEFAULT_TUITION_TIMING;
+        subjects = subjectBuilder();
+        tuitionTiming = new TuitionTiming(DEFAULT_TUITION_TIMING);
         payments = new ArrayList<>();
     }
 
@@ -96,6 +95,34 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code TuitionTiming} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTuitionTiming(String tuitionTiming) {
+        this.tuitionTiming = new TuitionTiming(tuitionTiming);
+        return this;
+    }
+
+    /**
+     * Sets the {@code payments} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPayments(Payment ... paymentArray) {
+        for (Payment payment: paymentArray) {
+            this.payments.add(payment);
+        }
+        return this;
+    }
+
+    /**
+     * Sets the {@code Subject} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSubjects(String ... subjectArray) {
+        for (String subject: subjectArray) {
+            this.subjects.add(new Subject(subject));
+        }
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, subjects, tuitionTiming, tags);
     }
@@ -106,7 +133,7 @@ public class PersonBuilder {
      */
     private static Set<Subject> subjectBuilder() {
         Set<Subject> subjectSet = new HashSet<>();
-        subjectSet.add(new Subject("Software Engineering"));
+        subjectSet.add(new Subject("Mathematics"));
         return subjectSet;
     }
 
