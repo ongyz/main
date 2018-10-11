@@ -18,6 +18,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Static fields
+    public static final int PAYMENT_LIST_LIMIT = 10;
+
     // Identity fields
     private final Name name;
     private final Phone phone;
