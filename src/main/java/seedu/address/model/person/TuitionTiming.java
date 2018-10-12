@@ -17,8 +17,8 @@ public class TuitionTiming {
                     + "Monday, 1:00pm\n"
                     + "Tuesday 1:15AM\n"
                     + "Wednesday, 12:30pm\n";
-    private static final String DAY_REGEX = "^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
-    private static final String TIME_REGEX = "\\d{1,2}[:{1}]\\d{2}(am|pm|AM|PM)$";
+    public static final String DAY_REGEX = "^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
+    public static final String TIME_REGEX = "\\d{1,2}[:{1}]\\d{2}(am|pm|AM|PM)$";
 
     /*
      * The first character of the tuition time and day must not be a whitespace,

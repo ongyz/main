@@ -4,15 +4,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.person.TuitionTimingContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new GroupCommand object
  */
 public class GroupCommandParser implements Parser<GroupCommand> {
-
-    private static final String DAY_REGEX = "^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
-    private static final String TIME_REGEX = "\\d{1,2}[:{1}]\\d{2}(am|pm|AM|PM)$";
 
     /**
      * Parses the given {@code String} of arguments in the context of the GroupCommand
@@ -28,7 +26,8 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         String[] nameKeywords = trimmedArgs.split("\\s+");
         String keyword = nameKeywords[0];
 
-        if (!(keyword.matches(DAY_REGEX) || keyword.matches(TIME_REGEX)) || nameKeywords.length > 1) {
+        if (!(keyword.matches(TuitionTiming.DAY_REGEX) || keyword.matches(TuitionTiming.TIME_REGEX))
+                || nameKeywords.length > 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }

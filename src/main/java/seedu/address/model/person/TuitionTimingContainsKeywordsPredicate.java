@@ -9,9 +9,6 @@ import seedu.address.commons.util.StringUtil;
  */
 public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person> {
 
-    private static final String DAY_REGEX = "^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
-    private static final String TIME_REGEX = "\\d{1,2}[:{1}]\\d{2}(am|pm|AM|PM)$";
-
     private final String keyword;
 
     public TuitionTimingContainsKeywordsPredicate(String keyword) {
@@ -29,9 +26,9 @@ public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person>
             day = day.substring(0, day.length() - 1);
         }
 
-        if (keyword.matches(DAY_REGEX)) {
+        if (keyword.matches(TuitionTiming.DAY_REGEX)) {
             return StringUtil.containsWordIgnoreCase(day, keyword);
-        } else if (keyword.matches(TIME_REGEX)) {
+        } else if (keyword.matches(TuitionTiming.TIME_REGEX)) {
             return StringUtil.containsWordIgnoreCase(time, keyword);
         }
         return false;
