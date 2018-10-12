@@ -1,17 +1,8 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -20,6 +11,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 
 /**
@@ -86,8 +84,6 @@ public class PayCommand extends Command {
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
     }
 
-
-
     /**
      * Update payment for this person and returns a new instance of this person.
      * @return the same person but updated with payment.
@@ -96,5 +92,23 @@ public class PayCommand extends Command {
         List<Payment> updatedPayment = new ArrayList<>(oldPayments);
         updatedPayment.add(newPayment);
         return updatedPayment;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PayCommand)) {
+            return false;
+        }
+
+        // state check
+        PayCommand e = (PayCommand) other;
+        return targetIndex.equals(e.targetIndex)
+                && newPayment.equals(e.newPayment);
     }
 }
