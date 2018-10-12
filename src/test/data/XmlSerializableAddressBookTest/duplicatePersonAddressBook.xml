@@ -6,6 +6,8 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
+        <tuitionTiming>Monday, 5:00pm</tuitionTiming>
+        <subjects subjectName="Mathematics" completionRate="0.0"/>
         <tagged>friends</tagged>
     </persons>
 
@@ -14,6 +16,8 @@
         <name>Alice Pauline</name>
         <phone>94351253</phone>
         <email>pauline@example.com</email>
+        <tuitionTiming>Monday, 6:00pm</tuitionTiming>
+        <subjects subjectName="Mathematics" completionRate="0.0"/>
         <address>4th street</address>
     </persons>
 

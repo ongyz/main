@@ -33,6 +33,13 @@ public class XmlAdaptedSubject {
     public XmlAdaptedSubject() {}
 
     /**
+     * Constructs a {@code XmlAdaptedTag} with the given {@code tagName}.
+     */
+    public XmlAdaptedSubject(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    /**
      * Converts a given Subject into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedSyllabusBook
