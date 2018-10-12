@@ -31,7 +31,7 @@ public class TodoCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SYLLABUS + "Integration";
+            + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     private static final String MESSAGE_SYLLABUS_SUCCESS = "Added syllabus to Person: %1$s";
 
@@ -56,16 +56,27 @@ public class TodoCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> addedSubjectContent = addSubjectContentTo(personTarget, subjectIndex, syllabus);
-
-        Person personSubjUpdated = new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), addedSubjectContent,
-                personTarget.getTuitionTiming(), personTarget.getTags());
+        Person personSubjUpdated = createUpdatedPersonForTodo(personTarget, addedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SYLLABUS_SUCCESS, personSubjUpdated));
     }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personTarget}
+     * with the updated {@code Set<Subject> newSubject}.
+     * @param personTarget the person to be updated
+     * @param newSubject the updated subjects
+     * @return a new {@code Person} with updated subjects
+     */
+    private Person createUpdatedPersonForTodo(Person personTarget, Set<Subject> newSubject) {
+        return new Person(personTarget.getName(), personTarget.getPhone(),
+                personTarget.getEmail(), personTarget.getAddress(), newSubject,
+                personTarget.getTuitionTiming(), personTarget.getTags());
+    }
+
     /**
      * Add syllabus to the person specified
      * @param personTarget the person to add to
