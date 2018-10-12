@@ -1,7 +1,6 @@
 package seedu.address.model.subject;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.StringUtil;
@@ -33,7 +32,13 @@ public enum SubjectType {
     }
 
     public static SubjectType convertStringToSubjectName(String subjectName) {
-        return SubjectType.valueOf(subjectName);
+        SubjectType result = null;
+        for (SubjectType subjectEnum : values()) {
+            if (StringUtil.containsSubstringIgnoreCase(subjectEnum.toString(), subjectName)) {
+                result = subjectEnum;
+            }
+        }
+        return result;
     }
 
     /**
@@ -41,7 +46,7 @@ public enum SubjectType {
      */
     public static boolean isValidSubjectName(String test) {
         return SubjectType.stream()
-                .anyMatch(subjectEnum -> StringUtil.containsWordIgnoreCase(subjectEnum.toString(), test));
+                .anyMatch(subjectEnum -> StringUtil.containsSubstringIgnoreCase(subjectEnum.toString(), test));
     }
 
     @Override
