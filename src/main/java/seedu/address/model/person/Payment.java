@@ -23,7 +23,7 @@ public class Payment {
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
 
     private final Index studentIndex;
-    private final int amount;
+    private int amount;
     private final int month;
     private final int year;
 
@@ -71,6 +71,14 @@ public class Payment {
     }
 
     /**
+     * Updates the current {@code Payment} amount to new payment amount
+     * @param toUpdate the {@code Payment}amount to add to current amount
+     */
+    public void update(Payment toUpdate) {
+        this.amount += toUpdate.getAmount();
+    }
+
+    /**
      * Returns student index
      */
     public Index getIndex() {
@@ -110,8 +118,6 @@ public class Payment {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Payment
-                && this.studentIndex == (((Payment) other).studentIndex)
-                && this.amount == (((Payment) other).amount)
                 && this.month == (((Payment) other).month)
                 && this.year == (((Payment) other).year));
     }

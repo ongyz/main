@@ -63,8 +63,16 @@ public class PayCommand extends Command {
         List<Payment> pay = personTarget.getPayments();
 
         for (int i = 0; i < pay.size(); i++) {
-            if (pay.get(i).toString().equals(newPayment.toString())) {
-                throw new CommandException(Messages.MESSAGE_DUPLICATE_ENTRY);
+            if (pay.get(i).equals(newPayment)) {
+                pay.get(i).update(newPayment);
+                Person personToUpdate = new Person(personTarget.getName(), personTarget.getPhone(),
+                        personTarget.getEmail(), personTarget.getAddress(), personTarget.getSubjects(),
+                        personTarget.getTuitionTiming(), personTarget.getTags(), pay);
+
+                model.updatePerson(personTarget, personToUpdate);
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                model.commitAddressBook();
+                return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToUpdate));
             }
         }
 
@@ -85,8 +93,6 @@ public class PayCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
     }
-
-
 
     /**
      * Update payment for this person and returns a new instance of this person.
