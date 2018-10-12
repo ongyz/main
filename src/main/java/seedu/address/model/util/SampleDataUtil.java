@@ -26,7 +26,7 @@ public class SampleDataUtil {
                 new TuitionTiming("Monday, 6:00pm"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getSubjectSet("Economics"),
-                new TuitionTiming("Friday, 5.30pm"), getTagSet("colleagues", "friends")),
+                new TuitionTiming("Friday, 5:30pm"), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getSubjectSet("Chemistry", "Mathematics"),
                 new TuitionTiming("Tuesday, 6:00pm"), getTagSet("neighbours")),
