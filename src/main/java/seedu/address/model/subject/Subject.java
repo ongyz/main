@@ -2,7 +2,7 @@ package seedu.address.model.subject;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.commands.RmtodoCommand.MESSAGE_RMTODO_FAILED;
+import static seedu.address.logic.commands.EraseSyllCommand.MESSAGE_ERASESYLL_FAILED;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +120,7 @@ public class Subject {
      */
     public Subject removeFromSubjectContent(Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
-            throw new CommandException(MESSAGE_RMTODO_FAILED);
+            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
         }
 
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
@@ -137,7 +137,7 @@ public class Subject {
      */
     public Subject toggleSubjectContentState(Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
-            throw new CommandException(MESSAGE_RMTODO_FAILED);
+            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
         }
 
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
