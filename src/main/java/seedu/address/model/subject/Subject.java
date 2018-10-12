@@ -47,13 +47,20 @@ public class Subject {
         this.completionRate = completionRate;
     }
 
+    /**
+     * Returns subjectType as {@code SubjectType}.
+     */
     public SubjectType getSubjectType() {
         return subjectType;
     }
 
+    /**
+     * Returns subjectType in string in {@code String}.
+     */
     public String getSubjectName() {
         return subjectType.stringRepresentation;
     }
+
 
     public List<Syllabus> getSubjectContent() {
         return subjectContent;
@@ -78,6 +85,9 @@ public class Subject {
         return builder.toString();
     }
 
+    /**
+     * Returns true if both subjects have the same {@code SubjectType}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
