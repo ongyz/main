@@ -3,6 +3,8 @@ package seedu.address.model.subject;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.commands.EraseSyllCommand.MESSAGE_ERASESYLL_FAILED;
+import static seedu.address.model.subject.SubjectType.convertStringToSubjectName;
+import static seedu.address.model.subject.SubjectType.isValidSubjectName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,48 +14,45 @@ import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Subject in the TutorHelper.
- * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
+ * Guarantees: immutable; name is valid as declared in SubjectType.isValidSubjectName(String)
  */
 public class Subject {
 
     public static final String MESSAGE_SUBJECT_CONSTRAINTS =
-            "Subject name should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Subject name should match one of the following: " + SubjectType.listRepresentation();
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String SUBJECT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-
-    private final String subjectName;
+    private final SubjectType subjectType;
     private final List<Syllabus> subjectContent = new ArrayList<>();
     private final float completionRate;
 
     /**
-     * Constructs a new {@code Subject}.
+     * Constructs a new {@code Subject} from {@code String subjectName}.
      *
      * @param subjectName Subjects that the student is taking.
      */
     public Subject(String subjectName) {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_SUBJECT_CONSTRAINTS);
-        this.subjectName = subjectName;
+        this.subjectType = convertStringToSubjectName(subjectName);
         completionRate = 0;
     }
 
     /**
      * Alternative constructor to guarantee immutability.
      */
-    public Subject(String subjectName, List<Syllabus> subjectContent, float completionRate) {
-        requireNonNull(subjectName);
-        this.subjectName = subjectName;
+    public Subject(SubjectType subjectType, List<Syllabus> subjectContent, float completionRate) {
+        requireNonNull(subjectType);
+        this.subjectType = subjectType;
         this.subjectContent.addAll(subjectContent);
         this.completionRate = completionRate;
     }
 
+    public SubjectType getSubjectType() {
+        return subjectType;
+    }
+
     public String getSubjectName() {
-        return subjectName;
+        return subjectType.stringRepresentation;
     }
 
     public List<Syllabus> getSubjectContent() {
@@ -62,13 +61,6 @@ public class Subject {
 
     public float getCompletionRate() {
         return completionRate;
-    }
-
-    /**
-     * Returns true if a given string is a valid subject.
-     */
-    public static boolean isValidSubjectName(String test) {
-        return test.matches(SUBJECT_VALIDATION_REGEX);
     }
 
     @Override
@@ -90,12 +82,12 @@ public class Subject {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Subject // instanceof handles nulls
-                && subjectName.equals(((Subject) other).subjectName)); // state check
+                && subjectType.equals(((Subject) other).subjectType)); // state check
     }
 
     @Override
     public int hashCode() {
-        return subjectName.hashCode();
+        return subjectType.hashCode();
     }
 
     /**
@@ -107,7 +99,7 @@ public class Subject {
     public Subject addToSubjectContent(Syllabus syllabus) {
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
         newSubjectContent.add(syllabus);
-        return new Subject(getSubjectName(), newSubjectContent, getCompletionRate()).updateCompletionRate();
+        return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
     }
 
     /**
@@ -125,7 +117,7 @@ public class Subject {
 
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
         newSubjectContent.remove(index.getZeroBased());
-        return new Subject(getSubjectName(), newSubjectContent, getCompletionRate()).updateCompletionRate();
+        return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
     }
 
     /**
@@ -145,7 +137,7 @@ public class Subject {
         Syllabus newSyllabus = new Syllabus(oldSyllabus.syllabus, !oldSyllabus.state);
         newSubjectContent.set(index.getZeroBased(), newSyllabus);
 
-        return new Subject(getSubjectName(), newSubjectContent, getCompletionRate()).updateCompletionRate();
+        return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
     }
 
     /**
@@ -162,7 +154,7 @@ public class Subject {
             }
         }
         float completionRate = (float) numOfSyllabusCompleted / subjectContentLength;
-        return new Subject(getSubjectName(), getSubjectContent(), completionRate);
+        return new Subject(getSubjectType(), getSubjectContent(), completionRate);
     }
 
     /**

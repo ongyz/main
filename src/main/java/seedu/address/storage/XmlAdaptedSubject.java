@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.SubjectType;
 import seedu.address.model.subject.Syllabus;
 
 /**
@@ -51,7 +52,7 @@ public class XmlAdaptedSubject {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Subject toModelType() throws IllegalValueException {
-        if (!Subject.isValidSubjectName(subjectName)) {
+        if (!SubjectType.isValidSubjectName(subjectName)) {
             throw new IllegalValueException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
 
@@ -59,7 +60,7 @@ public class XmlAdaptedSubject {
         for (XmlAdaptedSyllabus syllabus : subjectContent) {
             modelSyllabus.add(syllabus.toModelType());
         }
-        return new Subject(subjectName, modelSyllabus, completionRate);
+        return new Subject(SubjectType.convertStringToSubjectName(subjectName), modelSyllabus, completionRate);
     }
 
     @Override
