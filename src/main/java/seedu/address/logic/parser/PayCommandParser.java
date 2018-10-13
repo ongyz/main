@@ -39,7 +39,6 @@ public class PayCommandParser implements Parser<PayCommand> {
         int amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
         int month = ParserUtil.parseMonth(argMultimap.getValue(PREFIX_PAYMENT_MONTH).get());
         int year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_PAYMENT_YEAR).get());
-        
         Payment payment = new Payment(index, amount, month, year);
         return new PayCommand(payment);
     }

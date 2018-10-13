@@ -156,13 +156,13 @@ public class ParserUtil {
         boolean doesNotContainAllDigits = false;
 
         for (int i = 0; i < trimmedAmount.length(); i++) {
-            if ( !Character.isDigit(trimmedAmount.charAt(i)) ) {
+            if (!Character.isDigit(trimmedAmount.charAt(i))) {
                 doesNotContainAllDigits = true;
                 break;
             }
         }
 
-        if( doesNotContainAllDigits == true ) {
+        if (doesNotContainAllDigits == true) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
 
