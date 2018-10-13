@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,10 +15,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.TuitionTiming;
-import seedu.address.storage.*;
+import seedu.address.storage.XmlAdaptedPay;
+import seedu.address.storage.XmlAdaptedPerson;
+import seedu.address.storage.XmlAdaptedSubject;
+import seedu.address.storage.XmlAdaptedTag;
+import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestUtil;

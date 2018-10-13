@@ -1,8 +1,14 @@
 package seedu.address.logic.commands;
 
-import java.util.logging.Logger;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.Test;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -12,17 +18,8 @@ import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 public class PayCommandTest {
 
-    private final Logger logger = LogsCenter.getLogger(PayCommand.class);
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -47,7 +44,7 @@ public class PayCommandTest {
         PayCommand PayCommand = new PayCommand(payment);
 
         Person personOriginal = model.getFilteredPersonList().get(index.getZeroBased());
-        Person personOriginalClone= new PersonBuilder(personOriginal).build();
+        Person personOriginalClone = new PersonBuilder(personOriginal).build();
         Person expectedPerson = new PersonBuilder(personOriginalClone).withPayments(payment).build();
 
         String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS, expectedPerson);
