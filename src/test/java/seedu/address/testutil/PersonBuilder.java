@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -30,6 +31,9 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Subject> subjects;
+    private TuitionTiming tuitionTiming;
+    private List<Payment> payments;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -87,6 +91,34 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TuitionTiming} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTuitionTiming(String tuitionTiming) {
+        this.tuitionTiming = new TuitionTiming(tuitionTiming);
+        return this;
+    }
+
+    /**
+     * Sets the {@code payments} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPayments(Payment ... paymentArray) {
+        for (Payment payment: paymentArray) {
+            this.payments.add(payment);
+        }
+        return this;
+    }
+
+    /**
+     * Sets the {@code Subject} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSubjects(String ... subjectArray) {
+        for (String subject: subjectArray) {
+            this.subjects.add(new Subject(subject));
+        }
         return this;
     }
 
