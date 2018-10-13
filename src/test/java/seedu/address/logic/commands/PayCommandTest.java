@@ -1,15 +1,20 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -36,6 +41,30 @@ public class PayCommandTest {
         assertExecutionSuccess(lastPersonIndex);
     }
 
+    @Test
+    public void execute_invalidIndexUnfilteredList_failure() {
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_UpdatePaymentMethod(){
+        Payment originalPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 1998);
+        PayCommand originalPayCommand = new PayCommand(originalPayment);
+
+        List<Payment> oldPaymentList = new ArrayList<>();
+        oldPaymentList.add(originalPayment);
+
+        Payment newPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 2018);
+        List<Payment> actualReturnedPayment = originalPayCommand.updatePayment(oldPaymentList, newPayment);
+
+        List<Payment> expectedReturnedPaymentList = new ArrayList<>();
+        expectedReturnedPaymentList.add(originalPayment);
+        expectedReturnedPaymentList.add(newPayment);
+
+        assertEquals(actualReturnedPayment, expectedReturnedPaymentList);
+
+    }
     /**
      * Executes a {@code PayCommand} with the given {@code index}
      * is raised with the correct index.
@@ -43,7 +72,7 @@ public class PayCommandTest {
     private void assertExecutionSuccess(Index index) {
 
         Payment payment = new Payment(index, 200, 9, 2020);
-        PayCommand PayCommand = new PayCommand(payment);
+        PayCommand payCommand = new PayCommand(payment);
 
         Person personOriginal = model.getFilteredPersonList().get(index.getZeroBased());
         Person personOriginalClone = new PersonBuilder(personOriginal).build();
@@ -53,16 +82,18 @@ public class PayCommandTest {
         expectedModel.updatePerson(personOriginal, expectedPerson);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(PayCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(payCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-    /*
-    @Test
-    public void execute_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    /**
+     * Executes a {@code PayCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * is thrown with the {@code expectedMessage}.
+     */
+    private void assertExecutionFailure(Index index, String expectedMessage) {
+        Payment payment = new Payment(index, 200, 9, 2020);
+        PayCommand PayCommand = new PayCommand(payment);
+        assertCommandFailure(PayCommand, model, commandHistory, expectedMessage);
     }
-    */
 
     @Test
     public void equals() {
