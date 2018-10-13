@@ -99,6 +99,35 @@ Value:
       2b2. System filters out students with tuition before current date.
       2b3. Resume from step 3.
 
+  6. Record students' payments
+    System: TutorHelper
+    Actor: Tutor
+    Precondition: student index entered must be valid.
+    MSS:
+      1. Tutor request to add in payment for a student.
+      2. System searches for that student according to index entered.
+      3. System adds Payment amount, month and year to student's record.
+      4. System displays payment record in browser panel.
+      5. System displays successful recording of payment under command box.
+     Extensions:
+      2a. Tutor does not enter all the required entries correctly
+        2a1. System displays error message
+        2a2. System gives tutor an example of a correct entry.
+      2b. Tutor does not enter a valid student index
+        2b1. System displays error message telling tutor that index is invalid
+  7. Displays tutor's earnings for that month and year
+     System: TutorHelper
+     Actor: Tutor
+     Precondition: Tutor has recorded payment from students before.
+     MSS:
+        1. Tutor request for earnings for a specific month and year.
+        2. System searches for all the payment records made from all the students for that particular month and year.
+        3. System adds up all the payment.
+        4. System displays total earnings under the command box.
+     Extensions:
+        2a. System does not find any payment recorded for that month and year.
+            2a1. System displays $0 as result.
+
 == Non-Functional Requirements
 
 . The system should respond in two seconds.
