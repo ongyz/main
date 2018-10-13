@@ -7,11 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AppendSyllCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EarningsCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EraseSyllCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GroupCommand;
@@ -21,9 +23,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RmtodoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -97,11 +97,11 @@ public class AddressBookParser {
         case EarningsCommand.COMMAND_WORD:
             return new EarningsCommandParser().parse(arguments);
 
-        case TodoCommand.COMMAND_WORD:
-            return new TodoCommandParser().parse(arguments);
+        case AppendSyllCommand.COMMAND_WORD:
+            return new AppendSyllCommandParser().parse(arguments);
 
-        case RmtodoCommand.COMMAND_WORD:
-            return new RmtodoCommandParser().parse(arguments);
+        case EraseSyllCommand.COMMAND_WORD:
+            return new EraseSyllCommandParser().parse(arguments);
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
