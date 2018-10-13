@@ -46,7 +46,8 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedSubject> VALID_SUBJECTS =
             Collections.singletonList(new XmlAdaptedSubject("Mathematics"));
-    private static final List<XmlAdaptedPay> VALID_PAYMENT = Collections.singletonList(new XmlAdaptedPay()); // Figuring out how to do index class
+    private static final List<XmlAdaptedPay> VALID_PAYMENT = Collections.singletonList(new XmlAdaptedPay());
+    // Figuring out how to do index class
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

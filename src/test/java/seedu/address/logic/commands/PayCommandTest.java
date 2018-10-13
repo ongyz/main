@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -36,10 +37,11 @@ public class PayCommandTest {
     }
 
     /**
-     * Executes a {@code PayCommand} with the given {@code index}, and checks that {@code JumpToListRequestEvent}
+     * Executes a {@code PayCommand} with the given {@code index}
      * is raised with the correct index.
      */
     private void assertExecutionSuccess(Index index) {
+
         Payment payment = new Payment(index, 200, 9, 2020);
         PayCommand PayCommand = new PayCommand(payment);
 
