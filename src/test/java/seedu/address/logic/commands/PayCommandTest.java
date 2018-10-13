@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -48,7 +49,7 @@ public class PayCommandTest {
     }
 
     @Test
-    public void execute_UpdatePaymentMethod(){
+    public void execute_updatePaymentMethod_success() {
         Payment originalPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 1998);
         PayCommand originalPayCommand = new PayCommand(originalPayment);
 
@@ -91,8 +92,8 @@ public class PayCommandTest {
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
         Payment payment = new Payment(index, 200, 9, 2020);
-        PayCommand PayCommand = new PayCommand(payment);
-        assertCommandFailure(PayCommand, model, commandHistory, expectedMessage);
+        PayCommand payCommand = new PayCommand(payment);
+        assertCommandFailure(payCommand, model, commandHistory, expectedMessage);
     }
 
     @Test
