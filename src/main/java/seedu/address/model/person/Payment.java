@@ -116,6 +116,7 @@ public class Payment {
 
     @Override
     public boolean equals(Object other) {
+
         return other == this
                 || (other instanceof Payment
                 && this.month == (((Payment) other).month)

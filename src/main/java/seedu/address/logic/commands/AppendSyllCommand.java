@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -22,24 +22,24 @@ import seedu.address.model.subject.Syllabus;
  * Finds all persons whose name matches the keyword and add the to do element to the data.
  * Find is case-insensitive.
  */
-public class TodoCommand extends Command {
+public class AppendSyllCommand extends Command {
 
-    public static final String COMMAND_WORD = "todo";
+    public static final String COMMAND_WORD = "appendsyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the person identified "
             + "by the personIndex number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
-            + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SYLLABUS + "Integration";
 
-    private static final String MESSAGE_SYLLABUS_SUCCESS = "Added syllabus to Person: %1$s";
+    private static final String MESSAGE_APPENDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
 
     private final Index personIndex;
     private final Index subjectIndex;
     private final Syllabus syllabus;
 
-    public TodoCommand(Index personIndex, Index subjectIndex, Syllabus syllabus) {
+    public AppendSyllCommand(Index personIndex, Index subjectIndex, Syllabus syllabus) {
         this.personIndex = personIndex;
         this.subjectIndex = subjectIndex;
         this.syllabus = syllabus;
@@ -61,7 +61,7 @@ public class TodoCommand extends Command {
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SYLLABUS_SUCCESS, personSubjUpdated));
+        return new CommandResult(String.format(MESSAGE_APPENDSYLL_SUCCESS, personSubjUpdated));
     }
 
     /**
@@ -85,7 +85,7 @@ public class TodoCommand extends Command {
      * @return a new {@code Set<Subject>} with the specified syllabus added
      */
     private Set<Subject> addSubjectContentTo(Person personTarget, Index subjectIndex, Syllabus syllabus) {
-        List<Subject> subjects = personTarget.getSubjects().stream().collect(Collectors.toList());
+        List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
         Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).addToSubjectContent(syllabus);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
@@ -94,15 +94,15 @@ public class TodoCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TodoCommand // instanceof handles nulls
-                && personIndex.equals(((TodoCommand) other).personIndex))
-                && syllabus.equals(((TodoCommand) other).syllabus); // state check
+                || (other instanceof AppendSyllCommand // instanceof handles nulls
+                && personIndex.equals(((AppendSyllCommand) other).personIndex))
+                && syllabus.equals(((AppendSyllCommand) other).syllabus); // state check
     }
 
     /**
      * Stores the details of todo command format.
      */
-    public static class TodoFormatChecker {
+    public static class AppendSyllFormatChecker {
         public static final int PERSON_INDEX_LOCATION = 0;
         public static final int SUBJECT_INDEX_LOCATION = 1;
         public static final int TODO_NUMBER_OF_ARGS = 2;
