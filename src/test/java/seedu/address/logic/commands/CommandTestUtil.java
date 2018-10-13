@@ -64,15 +64,6 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String INVALID_PAYMENT_AMOUNT_NONDIGITS_DESC = " "
-             + PREFIX_PAYMENT_AMOUNT + "ac*%"; // Non-digits characters not allowed for amount
-    public static final String INVALID_PAYMENT_MONTH_OUTOFRANGE_DESC = " "
-             + PREFIX_PAYMENT_MONTH+"15"; //Any digit >=13 or <=0 not allowed
-    public static final String INVALID_PAYMENT_MONTH_NONDIGITS_DESC = " "
-             + PREFIX_PAYMENT_MONTH+"&&**jj"; //Non-digits characters not allowed for month
-    public static final String INVALID_PAYMENT_YEAR_NONDIGITS_DESC = " "
-             + PREFIX_PAYMENT_YEAR+"&&**jj"; //Non-digits characters not allowed for year
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

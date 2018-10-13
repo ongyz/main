@@ -29,7 +29,6 @@ public class EarningsCommand extends Command {
             + PREFIX_PAYMENT_MONTH + "08 "
             + PREFIX_PAYMENT_YEAR + "2018";
 
-    private final Logger logger = LogsCenter.getLogger(PayCommand.class);
     private int month;
     private int year;
     private int earnings = 0;

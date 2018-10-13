@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import seedu.address.logic.commands.PayCommand;
@@ -18,7 +17,7 @@ import seedu.address.model.person.Payment;
 public class PayCommandParserTest {
 
     @Test
-    public void parse_AllFieldPresent_success(){
+    public void parse_allFieldPresent_success() {
 
         String input = " " + PREFIX_PAYMENT + String.valueOf(1)
                 + " " + PREFIX_PAYMENT_AMOUNT + String.valueOf(200)
@@ -31,7 +30,7 @@ public class PayCommandParserTest {
     }
 
     @Test
-    public void parse_compulsoryFieldAbsent_failure(){
+    public void parse_compulsoryFieldAbsent_failure() {
 
         PayCommandParser pay = new PayCommandParser();
 
