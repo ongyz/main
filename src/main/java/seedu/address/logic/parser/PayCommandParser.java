@@ -6,10 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
 
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,9 +39,7 @@ public class PayCommandParser implements Parser<PayCommand> {
         int amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
         int month = ParserUtil.parseMonth(argMultimap.getValue(PREFIX_PAYMENT_MONTH).get());
         int year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_PAYMENT_YEAR).get());
-
-
-        System.out.println("index is "+index);
+        
         Payment payment = new Payment(index, amount, month, year);
         return new PayCommand(payment);
     }

@@ -40,7 +40,7 @@ public class PayCommandParserTest {
 
     @Test
     public void parse_CompulsoryFieldAbsent_failure(){
-        
+
     }
 
     @Test

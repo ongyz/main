@@ -21,8 +21,6 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
 
-import com.google.common.primitives.Chars;
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -153,26 +151,26 @@ public class ParserUtil {
      */
     public static int parseAmount(String amount) throws ParseException {
 
-            requireNonNull(amount);
-            String trimmedAmount = amount.trim();
-            boolean doesNotContainAllDigits = false;
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        boolean doesNotContainAllDigits = false;
 
-            for (int i=0; i<trimmedAmount.length(); i++){
-                if (!Character.isDigit(trimmedAmount.charAt(i))) {
-                    doesNotContainAllDigits=true;
-                    break;
-                }
+        for (int i = 0; i < trimmedAmount.length(); i++) {
+            if ( !Character.isDigit(trimmedAmount.charAt(i)) ) {
+                doesNotContainAllDigits = true;
+                break;
             }
+        }
 
-            if(doesNotContainAllDigits == true){
-                throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
-            }
+        if( doesNotContainAllDigits == true ) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
+        }
 
-            int integerAmount = Integer.parseInt(trimmedAmount);
-            if (!Payment.isValidAmount(integerAmount)) {
-                throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
-            }
-            return integerAmount;
+        int integerAmount = Integer.parseInt(trimmedAmount);
+        if (!Payment.isValidAmount(integerAmount)) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
+        }
+        return integerAmount;
     }
 
     /**
