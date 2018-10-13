@@ -5,7 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -19,26 +26,27 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_TUITION_TIMING = "Friday, 4:00pm";
+    public static final String DEFAULT_SUBJECT = "Chemistry";
+    public static final String DEFAULT_TUITIONTIMING = "Monday 5:00pm";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
-    private Set<Subject> subjects;
+    private Set<Subject> subject = new HashSet<>();
     private TuitionTiming tuitionTiming;
     private List<Payment> payments;
+    private Set<Tag> tags;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
-        subjects = subjectBuilder();
-        tuitionTiming = new TuitionTiming(DEFAULT_TUITION_TIMING);
+        subject.add(new Subject(DEFAULT_SUBJECT));
+        tuitionTiming = new TuitionTiming(DEFAULT_TUITIONTIMING);
         payments = new ArrayList<>();
+        tags = new HashSet<>();
     }
 
     /**
@@ -49,10 +57,10 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
-        subjects = personToCopy.getSubjects();
+        subject = personToCopy.getSubjects();
         tuitionTiming = personToCopy.getTuitionTiming();
-        payments = personToCopy.getPayments();
+        payments = new ArrayList<>(personToCopy.getPayments());
+        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -96,45 +104,23 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Subject} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSubject(String subject) {
+        this.subject.add(new Subject(subject));
+        return this;
+    }
+
+    /**
      * Sets the {@code TuitionTiming} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTuitionTiming(String tuitionTiming) {
+    public PersonBuilder withTuitionTIming(String tuitionTiming) {
         this.tuitionTiming = new TuitionTiming(tuitionTiming);
         return this;
     }
 
-    /**
-     * Sets the {@code payments} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withPayments(Payment ... paymentArray) {
-        for (Payment payment: paymentArray) {
-            this.payments.add(payment);
-        }
-        return this;
-    }
-
-    /**
-     * Sets the {@code Subject} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withSubjects(String ... subjectArray) {
-        for (String subject: subjectArray) {
-            this.subjects.add(new Subject(subject));
-        }
-        return this;
-    }
-
     public Person build() {
-        return new Person(name, phone, email, address, subjects, tuitionTiming, tags);
-    }
-
-    /**
-     * Builds a default subject set.
-     * @return the set of subject.
-     */
-    private static Set<Subject> subjectBuilder() {
-        Set<Subject> subjectSet = new HashSet<>();
-        subjectSet.add(new Subject("Mathematics"));
-        return subjectSet;
+        return new Person(name, phone, email, address, subject, tuitionTiming, tags);
     }
 
 }

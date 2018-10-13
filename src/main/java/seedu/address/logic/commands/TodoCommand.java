@@ -31,7 +31,7 @@ public class TodoCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
-            + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SYLLABUS + "Integration";
 
     private static final String MESSAGE_SYLLABUS_SUCCESS = "Added syllabus to Person: %1$s";
 
