@@ -80,6 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         versionedAddressBook.updatePerson(target, editedPerson);
+
         indicateAddressBookChanged();
     }
 
