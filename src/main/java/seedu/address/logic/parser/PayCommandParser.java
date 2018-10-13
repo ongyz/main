@@ -20,14 +20,13 @@ import seedu.address.model.person.Payment;
  */
 public class PayCommandParser implements Parser<PayCommand> {
 
-    private final Logger logger = LogsCenter.getLogger(PayCommandParser.class);
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public PayCommand parse(String args) throws ParseException {
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT, PREFIX_PAYMENT_AMOUNT,
                         PREFIX_PAYMENT_MONTH, PREFIX_PAYMENT_YEAR);
@@ -43,6 +42,8 @@ public class PayCommandParser implements Parser<PayCommand> {
         int month = ParserUtil.parseMonth(argMultimap.getValue(PREFIX_PAYMENT_MONTH).get());
         int year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_PAYMENT_YEAR).get());
 
+
+        System.out.println("index is "+index);
         Payment payment = new Payment(index, amount, month, year);
         return new PayCommand(payment);
     }

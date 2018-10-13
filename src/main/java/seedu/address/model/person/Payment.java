@@ -108,9 +108,10 @@ public class Payment {
 
     @Override
     public boolean equals(Object other) {
+
         return other == this
                 || (other instanceof Payment
-                && this.studentIndex == (((Payment) other).studentIndex)
+                && this.studentIndex.equals(((Payment) other).studentIndex)
                 && this.amount == (((Payment) other).amount)
                 && this.month == (((Payment) other).month)
                 && this.year == (((Payment) other).year));

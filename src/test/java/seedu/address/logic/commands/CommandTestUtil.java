@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_AND_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -60,6 +63,15 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String INVALID_PAYMENT_AMOUNT_NONDIGITS_DESC = " "
+            + PREFIX_PAYMENT_AMOUNT + "ac*%"; // Non-digits characters not allowed for amount
+    public static final String INVALID_PAYMENT_MONTH_OUTOFRANGE_DESC = " "
+            + PREFIX_PAYMENT_MONTH+"15"; //Any digit >=13 or <=0 not allowed
+    public static final String INVALID_PAYMENT_MONTH_NONDIGITS_DESC = " "
+            + PREFIX_PAYMENT_MONTH+"&&**jj"; //Non-digits characters not allowed for month
+    public static final String INVALID_PAYMENT_YEAR_NONDIGITS_DESC = " "
+            + PREFIX_PAYMENT_YEAR+"&&**jj"; //Non-digits characters not allowed for year
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
