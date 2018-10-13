@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -18,7 +19,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 
 /**
  * Add payment details of an existing person in the TutorHelper.
