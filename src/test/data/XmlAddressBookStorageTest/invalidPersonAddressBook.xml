@@ -6,7 +6,5 @@
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-        <tuitionTiming>Monday, 6:00pm</tuitionTiming>
-        <subjects subjectName="Mathematics" completionRate="0.0"/>
     </persons>
 </addressbook>

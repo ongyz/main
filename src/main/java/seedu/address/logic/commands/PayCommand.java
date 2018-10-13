@@ -67,12 +67,6 @@ public class PayCommand extends Command {
             }
         }
 
-        // The person to input new pay entry has already 10 recorded payments
-        if (pay.size() >= personTarget.PAYMENT_LIST_LIMIT) {
-            // Remove the earliest entry
-            pay.remove(0);
-        }
-
         List<Payment> updatedPayments = updatePayment(personTarget.getPayments(), newPayment);
 
         Person personToPay = new Person(personTarget.getName(), personTarget.getPhone(),

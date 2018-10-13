@@ -136,5 +136,25 @@ Value:
 . The system should respond in two seconds.
 . The system should be understandable to a novice in working with computers.
 
+== Implementation
+
+This section describes some noteworthy details on how certain features are implemented.
+
+// tag::group[]
+=== Group Students feature
+
+Given below is an example usage scenario and how the group mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. Assuming that the application isn't empty, the user executes 'group Monday' command to group all students with a class on Monday. The group command will be called by `GroupCommandParser.parse()`, parsing the argument to check against. The application will check the list and display all students with classes on Monday, sorted based on the earliest timing.
+
+[NOTE]
+The user can execute `list` to re-display the full list of students again.
+
+The following sequence diagram shows how the group operation works:
+
+image::GroupSequenceDiagram.png[width="650"]
+
 == Glossary
 . Syllabus: the topics of a particular subject in a course of study or teaching.
