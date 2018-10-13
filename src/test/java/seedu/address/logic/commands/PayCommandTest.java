@@ -121,5 +121,4 @@ public class PayCommandTest {
         // different payment -> returns false
         assertFalse(payAliceCommand.equals(payBobCommand));
     }
-
 }
