@@ -42,7 +42,7 @@ public class XmlAdaptedPersonTest {
     private static final List<XmlAdaptedPay> VALID_PAYMENT = BENSON.getPayments().stream()
             .map(XmlAdaptedPay::new)
             .collect(Collectors.toList());
-  
+
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         XmlAdaptedPerson person = new XmlAdaptedPerson(BENSON);
