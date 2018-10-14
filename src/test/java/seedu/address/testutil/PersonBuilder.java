@@ -1,9 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -24,12 +26,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "94351253";
     public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SUBJECT = "Chemistry";
     public static final String DEFAULT_TUITION_TIMING = "Monday, 6:00pm";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Set<Subject> subject = new HashSet<>();
+    private TuitionTiming tuitionTiming;
+    private List<Payment> payments;
     private Set<Tag> tags;
     private Set<Subject> subjects;
     private TuitionTiming tuitionTiming;
@@ -40,6 +46,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        subject.add(new Subject(DEFAULT_SUBJECT));
+        tuitionTiming = new TuitionTiming(DEFAULT_TUITIONTIMING);
+        payments = new ArrayList<>();
         tags = new HashSet<>();
     }
 
@@ -51,6 +60,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        subject = personToCopy.getSubjects();
+        tuitionTiming = personToCopy.getTuitionTiming();
+        payments = new ArrayList<>(personToCopy.getPayments());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -93,8 +105,17 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+  
+      /**
+     * Sets the {@code Subject} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSubjects(String ... subjectArray) {
+        for (String subject: subjectArray) {
+            this.subjects.add(new Subject(subject));
+        }
+        return this;
+    }
 
-    /**
      * Sets the {@code TuitionTiming} of the {@code Person} that we are building.
      */
     public PersonBuilder withTuitionTiming(String tuitionTiming) {
@@ -102,22 +123,11 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
      * Sets the {@code payments} of the {@code Person} that we are building.
      */
     public PersonBuilder withPayments(Payment ... paymentArray) {
         for (Payment payment: paymentArray) {
             this.payments.add(payment);
-        }
-        return this;
-    }
-
-    /**
-     * Sets the {@code Subject} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withSubjects(String ... subjectArray) {
-        for (String subject: subjectArray) {
-            this.subjects.add(new Subject(subject));
         }
         return this;
     }
@@ -134,7 +144,6 @@ public class PersonBuilder {
         Set<Subject> subjectSet = new HashSet<>();
         subjectSet.add(new Subject("Mathematics"));
         return subjectSet;
-
     }
 
 }
