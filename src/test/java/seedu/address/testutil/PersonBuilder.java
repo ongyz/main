@@ -23,11 +23,11 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_PHONE = "94351253";
+    public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Chemistry";
-    public static final String DEFAULT_TUITIONTIMING = "Monday 5:00pm";
+    public static final String DEFAULT_TUITION_TIMING = "Monday, 6:00pm";
 
     private Name name;
     private Phone phone;
@@ -37,6 +37,9 @@ public class PersonBuilder {
     private TuitionTiming tuitionTiming;
     private List<Payment> payments;
     private Set<Tag> tags;
+    private Set<Subject> subjects;
+    private TuitionTiming tuitionTiming;
+    private List<Payment> payments;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -102,25 +105,45 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
-
-    /**
+  
+      /**
      * Sets the {@code Subject} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSubject(String subject) {
-        this.subject.add(new Subject(subject));
+    public PersonBuilder withSubjects(String ... subjectArray) {
+        for (String subject: subjectArray) {
+            this.subjects.add(new Subject(subject));
+        }
         return this;
     }
 
-    /**
      * Sets the {@code TuitionTiming} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTuitionTIming(String tuitionTiming) {
+    public PersonBuilder withTuitionTiming(String tuitionTiming) {
         this.tuitionTiming = new TuitionTiming(tuitionTiming);
         return this;
     }
 
+     * Sets the {@code payments} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPayments(Payment ... paymentArray) {
+        for (Payment payment: paymentArray) {
+            this.payments.add(payment);
+        }
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, subject, tuitionTiming, tags);
+        return new Person(name, phone, email, address, subjects, tuitionTiming, tags, payments);
+    }
+
+    /**
+     * Builds a default subject set.
+     * @return the set of subject.
+     */
+    private static Set<Subject> subjectBuilder() {
+        Set<Subject> subjectSet = new HashSet<>();
+        subjectSet.add(new Subject("Mathematics"));
+        return subjectSet;
     }
 
 }
