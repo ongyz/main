@@ -24,9 +24,6 @@ public class XmlAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_SUBJECT = " ";
-    private static final String INVALID_TUITIONTIMING = "monday 1200";
-    private static final String INVALID_PAYMENT = "250 dollars";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SUBJECT = "chinese";
     private static final String INVALID_TUITION_TIMING = "Friday, 10:00pm";
@@ -123,17 +120,17 @@ public class XmlAdaptedPersonTest {
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_SUBJECT, VALID_TUITION_TIMING, invalidTags, VALID_PAYMENTS);
+                        VALID_SUBJECTS, VALID_TUITION_TIMING, invalidTags, VALID_PAYMENT);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidSubject_throwsIllegalValueException() {
-        List<XmlAdaptedSubject> invalidSubject = new ArrayList<>(VALID_SUBJECT);
+        List<XmlAdaptedSubject> invalidSubject = new ArrayList<>(VALID_SUBJECTS);
         invalidSubject.add(new XmlAdaptedSubject(new Subject(INVALID_SUBJECT)));
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        invalidSubject, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENTS);
+                        invalidSubject, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
         String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -141,7 +138,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_nullSubject_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                null, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENTS);
+                null, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -150,7 +147,7 @@ public class XmlAdaptedPersonTest {
     public void toModelType_invalidTuitionTiming_throwsIllegalValueException() {
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_SUBJECT, INVALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENTS);
+                        VALID_SUBJECTS, INVALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
         String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

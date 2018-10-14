@@ -33,21 +33,18 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Subject> subject = new HashSet<>();
+    private Set<Subject> subjects = new HashSet<>();
     private TuitionTiming tuitionTiming;
     private List<Payment> payments;
     private Set<Tag> tags;
-    private Set<Subject> subjects;
-    private TuitionTiming tuitionTiming;
-    private List<Payment> payments;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        subject.add(new Subject(DEFAULT_SUBJECT));
-        tuitionTiming = new TuitionTiming(DEFAULT_TUITIONTIMING);
+        subjects.add(new Subject(DEFAULT_SUBJECT));
+        tuitionTiming = new TuitionTiming(DEFAULT_TUITION_TIMING);
         payments = new ArrayList<>();
         tags = new HashSet<>();
     }
@@ -60,7 +57,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        subject = personToCopy.getSubjects();
+        subjects = personToCopy.getSubjects();
         tuitionTiming = personToCopy.getTuitionTiming();
         payments = new ArrayList<>(personToCopy.getPayments());
         tags = new HashSet<>(personToCopy.getTags());
@@ -116,6 +113,7 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
      * Sets the {@code TuitionTiming} of the {@code Person} that we are building.
      */
     public PersonBuilder withTuitionTiming(String tuitionTiming) {
@@ -123,7 +121,8 @@ public class PersonBuilder {
         return this;
     }
 
-     * Sets the {@code payments} of the {@code Person} that we are building.
+    /**
+     * Sets the {@code Payment} of the {@code Person} that we are building.
      */
     public PersonBuilder withPayments(Payment ... paymentArray) {
         for (Payment payment: paymentArray) {
