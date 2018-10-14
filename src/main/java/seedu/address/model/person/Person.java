@@ -99,13 +99,21 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
+
         if (otherPerson == this) {
             return true;
         }
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getSubjects().equals(getSubjects())
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getTuitionTiming().equals(getTuitionTiming())
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPayments().equals(getPayments());
+
     }
 
     /**
@@ -155,11 +163,11 @@ public class Person {
 
         builder.append("\nTuition Timing: ")
                 .append(getTuitionTiming())
-                .append(" Tags: ");
+                .append("\nTags: ");
 
         getTags().forEach(builder::append);
 
-        builder.append(" Payments: ");
+        builder.append("\nPayments: ");
         getPayments().forEach(builder::append);
 
         return builder.toString();

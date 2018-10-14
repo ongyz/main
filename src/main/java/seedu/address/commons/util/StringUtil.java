@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
@@ -36,6 +37,28 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code word} contains the substring {@code toSearch}.
+     *   Ignores case, only a partial word match is required.
+     *   <br>examples:<pre>
+     *       containsSubWordIgnoreCase("ABcDef", "cd") == true
+     *       containsSubWordIgnoreCase("ABcdEf", "DEF") == true
+     *       containsSubWordIgnoreCase("Abd", "AB") == true
+     *       </pre>
+     * @param word cannot be null
+     * @param toSearch cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsSubstringIgnoreCase(String word, String toSearch) {
+        requireNonNull(word);
+        requireNonNull(toSearch);
+
+        String preppedToSearch = toSearch.trim();
+        checkArgument(!preppedToSearch.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedToSearch.split("\\s+").length == 1, "Word parameter should be a single word");
+
+        return Pattern.compile(Pattern.quote(toSearch), Pattern.CASE_INSENSITIVE).matcher(word).find();
     }
 
     /**
