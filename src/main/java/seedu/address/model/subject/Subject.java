@@ -79,7 +79,7 @@ public class Subject {
         for (int i = 0; i < getSubjectContent().size(); i++) {
             numbering = Index.fromZeroBased(i);
             builder.append("\n" + numbering.getOneBased() + ". ")
-                    .append(getSubjectContent().get(i).toString());
+                    .append(getSubjectContent().get(i).toString()).append(" ");
         }
 
         builder.append("]");
