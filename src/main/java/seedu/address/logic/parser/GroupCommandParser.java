@@ -4,8 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TuitionTiming;
-import seedu.address.model.person.TuitionTimingContainsKeywordsPredicate;
+import seedu.address.model.tuitionTiming.TuitionTiming;
+import seedu.address.model.tuitionTiming.TuitionTimingContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new GroupCommand object
@@ -20,7 +20,9 @@ public class GroupCommandParser implements Parser<GroupCommand> {
     public GroupCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            //use date()
+            //TODO: Also need to group by Date() if no input entered
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
@@ -35,7 +37,3 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         return new GroupCommand(new TuitionTimingContainsKeywordsPredicate(keyword));
     }
 }
-
-/*
-TODO: Also need to group by Date() if no input entered
- */
