@@ -33,7 +33,7 @@ public class AppendSyllCommand extends Command {
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SYLLABUS + "Integration";
 
-    private static final String MESSAGE_APPENDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
+    public static final String MESSAGE_APPENDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
 
     private final Index personIndex;
     private final Index subjectIndex;
@@ -56,7 +56,7 @@ public class AppendSyllCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> addedSubjectContent = addSubjectContentTo(personTarget, subjectIndex, syllabus);
-        Person personSubjUpdated = createUpdatedPersonForTodo(personTarget, addedSubjectContent);
+        Person personSubjUpdated = createUpdatedPersonForAppendSyll(personTarget, addedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -71,7 +71,7 @@ public class AppendSyllCommand extends Command {
      * @param newSubject the updated subjects
      * @return a new {@code Person} with updated subjects
      */
-    private Person createUpdatedPersonForTodo(Person personTarget, Set<Subject> newSubject) {
+    private Person createUpdatedPersonForAppendSyll(Person personTarget, Set<Subject> newSubject) {
         return new Person(personTarget.getName(), personTarget.getPhone(),
                 personTarget.getEmail(), personTarget.getAddress(), newSubject,
                 personTarget.getTuitionTiming(), personTarget.getTags());
@@ -103,8 +103,8 @@ public class AppendSyllCommand extends Command {
      * Stores the details of todo command format.
      */
     public static class AppendSyllFormatChecker {
-        public static final int PERSON_INDEX_LOCATION = 0;
-        public static final int SUBJECT_INDEX_LOCATION = 1;
-        public static final int TODO_NUMBER_OF_ARGS = 2;
+        public static final int PERSON_INDEX = 0;
+        public static final int SUBJECT_INDEX = 1;
+        public static final int NUMBER_OF_ARGS = 2;
     }
 }

@@ -114,9 +114,9 @@ public class EraseSyllCommand extends Command {
      * Stores the details of rmtodo command format.
      */
     public static class EraseSyllFormatChecker {
-        public static final int PERSON_INDEX_LOCATION = 0;
-        public static final int SUBJECT_INDEX_LOCATION = 1;
-        public static final int SYLLABUS_INDEX_LOCATION = 2;
-        public static final int RMTODO_NUMBER_OF_ARGS = 3;
+        public static final int PERSON_INDEX = 0;
+        public static final int SUBJECT_INDEX = 1;
+        public static final int SYLLABUS_INDEX = 2;
+        public static final int NUMBER_OF_ARGS = 3;
     }
 }
