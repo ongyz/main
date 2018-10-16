@@ -254,6 +254,52 @@ Step 5. The system will locate the _fourth_ student from the student list, and m
 * Step 5a. If the same subject as _second_ subject in Step 4, system will append the content of subject of _second_ subject into the _fourth_ student.
 * Step 5b. If there is no subject same as _second_ subject in Step 4, system will add the _second_ subject as a new subject under the _fourth_ student.
 
+=== Add / Delete Subject (Upcoming in v1.3)
+
+==== Planned Implementation
+
+The add / delete subject mechanism is facilitated with `AddressBookParser`.
+Classes related to the functionality of the mechanism are listed below:
+
+* `AddressBookParser` -- Creates a `AddSubCommandParser` / `DeleteSubCommandParser` object and parses the user's input.
+* `AddSubCommandParser` / `DeleteSubCommandParser` -- Analyses user input to create a corresponding `Command` object.
+* `AddSubCommand` / `DeleteSubCommand` -- Execution results in addition / deletion of a subject for a specified student index.
+
+Given below is an example usage scenario of how the add / delete subject mechanism behaves at each step.
+
+===== Add Subject
+
+Step 1. The user launches the application.
+
+Step 2. The tutor executes a command of the format `addsub STUDENT_INDEX s/SUBJECT` on the CLI.
+
+Step 3. The arguments are parsed by `AddSubCommandParser`, which produces an instance of `AddSubCommand`.
+
+Step 4. `AddSubCommand.execute()` is called, and the supplied subject is added for the student at the specified student index by TutorHelper.
+
+===== Delete Subject
+
+Step 1. The user launches the application.
+
+Step 2. The tutor executes a command of the format `deletesub STUDENT_INDEX SUBJECT_INDEX` on the CLI.
+
+Step 3. The arguments are parsed by `DeleteSubCommandParser`, which produces an instance of `DeleteSubCommand`.
+
+Step 4. `DeleteSubCommand.execute()` is called, and the subject at the specified subject index of the student at the specified student index is deleted by TutorHelper.
+
+[TIP]
+The TutorHelper has to have at least 1 student as a precondition for both `addsub` and `deletesub`.
+[TIP]
+`deletesub` requires the student at the specified student index to have at least two subjects. After deletion, a student cannot have 0 subjects.
+
+The following sequence diagram shows how the `addsub` operation works:
+
+image::AddSubSequenceDiagram.png[width="650"]
+
+The following sequence diagram shows how the `deletesub` operation works:
+
+image::DeleteSubSequenceDiagram.png[width="650"]
+
 == Glossary
 . Subject : a branch of knowledge studied by the student
 . Syllabus: the required topics to be covered under the subject
