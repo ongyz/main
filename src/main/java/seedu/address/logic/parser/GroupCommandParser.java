@@ -4,6 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tuitionTiming.TuitionTiming;
+import seedu.address.model.tuitionTiming.TuitionTimingContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new GroupCommand object
