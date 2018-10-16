@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,7 +10,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -264,38 +262,4 @@ public class ParserUtil {
         }
         return new Syllabus(trimmedSyllabus, false);
     }
-
-    /**
-     * Parses a {@code String day} into a {@code day}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code day} input is invalid.
-     */
-    public static DayOfWeek parseDay(String day) throws ParseException {
-        requireNonNull(day);
-        String trimmedDay = day.trim();
-        if (!trimmedDay.matches(TuitionTiming.DAY_REGEX)) {
-            throw new ParseException(GroupCommand.MESSAGE_USAGE);
-        }
-        return DayOfWeek.valueOf(trimmedDay.toUpperCase());
-
-    }
-
-    /**
-     * Parses a {@code String time} into a {@code time}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code time} input is invalid.
-     */
-    public static String parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-
-        if (!trimmedTime.matches(TuitionTiming.TIME_REGEX)) {
-            throw new ParseException(GroupCommand.MESSAGE_USAGE);
-        }
-        return trimmedTime;
-
-    }
-
 }
