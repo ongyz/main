@@ -27,7 +27,7 @@ public class AppendSyllCommand extends Command {
     public static final String COMMAND_WORD = "appendsyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the person identified "
-            + "by the personIndex number used in the displayed person list. "
+            + "by the student index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
@@ -86,7 +86,7 @@ public class AppendSyllCommand extends Command {
      */
     private Set<Subject> addSubjectContentTo(Person personTarget, Index subjectIndex, Syllabus syllabus) {
         List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
-        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).addToSubjectContent(syllabus);
+        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).add(syllabus);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
     }

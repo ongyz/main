@@ -25,7 +25,7 @@ public class EraseSyllCommand extends Command {
     public static final String COMMAND_WORD = "erasesyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the selected syllabus of the "
-            + "person identified by the index number used in the displayed person list. \n"
+            + "person identified by the syllabus index number in the selected student's subject.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
@@ -88,7 +88,7 @@ public class EraseSyllCommand extends Command {
             throw new CommandException(MESSAGE_ERASESYLL_FAILED);
         }
 
-        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).removeFromSubjectContent(syllabusIndex);
+        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).remove(syllabusIndex);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
     }
