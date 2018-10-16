@@ -30,11 +30,11 @@ public class TuitionTiming {
      */
     public static final String TUITION_TIMING_VALIDATION_REGEX = DAY_REGEX + ".{1,2}" + TIME_REGEX;
 
-    private String dayString;
-    private String timeString;
     public final DayOfWeek day;
     public final String time;
     public final String value;
+    private String dayString;
+    private String timeString;
 
     /**
      * Constructs an {@code TuitionTiming}.
