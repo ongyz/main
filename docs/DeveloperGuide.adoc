@@ -142,6 +142,13 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::group[]
 === Group Students feature
+==== Current Implementation
+
+Classes related to Group and its functionality is listed below:
+
+* `AddressBookParser` -- Creates a GroupCommandParser object and parses the user's input.
+* `GroupCommandParser` -- Analyses the input, creates a predicate based on the input and returns a GroupCommand object with the predicate as the argument.
+* `GroupCommand` -- Filters the list based on the predicate and displays it to the user.
 
 Given below is an example usage scenario and how the group mechanism behaves at each step.
 
@@ -151,6 +158,8 @@ Step 2. Assuming that the application isn't empty, the user executes 'group Mond
 
 [NOTE]
 The user can execute `list` to re-display the full list of students again.
+[NOTE]
+The group command is CASE-SENSITIVE. E.g. Passing MONDAY as an input instead of Monday will throw an error.
 
 The following sequence diagram shows how the group operation works:
 
