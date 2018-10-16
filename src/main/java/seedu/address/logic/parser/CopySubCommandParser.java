@@ -2,9 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.SOURCE_PERSON_INDEX;
 import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.SUBJECT_INDEX;
 import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.NUMBER_OF_ARGS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.TARGET_PERSON_INDEX;
 
 import java.util.List;
 
@@ -24,38 +25,37 @@ public class CopySubCommandParser implements Parser<CopySubCommand> {
      */
     public CopySubCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-
+        List<Index> indexList;
+        Index sourcePersonIndex;
         Index subjectIndex;
+        Index targetPersonIndex;
 
         try {
-            indexList = ParserUtil.parseIndexes(argMultimap.getPreamble());
+            indexList = ParserUtil.parseIndexes(args);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE), pe);
         }
 
         if (indexList.size() != NUMBER_OF_ARGS) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE));
         }
 
-        personIndex = getPersonIndex(indexList);
+        sourcePersonIndex = getSourcePersonIndex(indexList);
         subjectIndex = getSubjectIndex(indexList);
+        targetPersonIndex = getTargetPersonIndex(indexList);
 
-        if (!argMultimap.getValue(PREFIX_SYLLABUS).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE));
-        }
-
-        return new AppendSyllCommand(personIndex, subjectIndex, syllabus);
+        return new CopySubCommand(sourcePersonIndex, subjectIndex, targetPersonIndex);
     }
 
-    private static Index getPersonIndex(List<Index> indexList) {
-        return indexList.get(PERSON_INDEX);
+    private static Index getSourcePersonIndex(List<Index> indexList) {
+        return indexList.get(SOURCE_PERSON_INDEX);
     }
-
     private static Index getSubjectIndex(List<Index> indexList) {
         return indexList.get(SUBJECT_INDEX);
     }
-
+    private static Index getTargetPersonIndex(List<Index> indexList) {
+        return indexList.get(TARGET_PERSON_INDEX);
+    }
 }
