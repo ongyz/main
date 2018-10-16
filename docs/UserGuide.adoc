@@ -326,19 +326,13 @@ Examples:
 
 === Copy a subject from a student to other student(s) : `copysub`
 
-Duplicate a subject from chosen student and add it to other students. +
-Format: `copysub STUDENT_INDEX SUBJECT_INDEX STUDENT_NAME [MORE STUDENT_NAME]`
+Duplicate a subject from chosen student and add it to the target student. +
+Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
 
 ****
-* The student index refers to the index number shown in the displayed student list.
+* The source and target student index refers to the index number shown in the displayed student list.
 * The subject index refers to the index number shown in the student's subject list.
-* The Student name will be used for search keyword to find the students for the subject to be added.
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The student index and subject index *must be positive integers* 1, 2, 3, ...
+* The source, target student index and subject index *must be positive integers* 1, 2, 3, ...
 ****
 
 Examples:
