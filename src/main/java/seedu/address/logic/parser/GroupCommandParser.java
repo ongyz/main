@@ -25,15 +25,11 @@ public class GroupCommandParser implements Parser<GroupCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-        String keyword = nameKeywords[0];
-
-        if (!(keyword.matches(TuitionTiming.DAY_REGEX) || keyword.matches(TuitionTiming.TIME_REGEX))
-                || nameKeywords.length > 1) {
+        if (!(trimmedArgs.matches(TuitionTiming.DAY_REGEX) || trimmedArgs.matches(TuitionTiming.TIME_REGEX))) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
 
-        return new GroupCommand(new TuitionTimingContainsKeywordsPredicate(keyword));
+        return new GroupCommand(new TuitionTimingContainsKeywordsPredicate(trimmedArgs));
     }
 }
