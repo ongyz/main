@@ -48,11 +48,14 @@ public class BrowserPanel extends UiPart<Region> {
      * @param person Person to read information from.
      */
     private void loadPersonPage(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        person.getTags().forEach(builder::append);
+        final StringBuilder subjectsBuilder = new StringBuilder();
+        person.getSubjects().forEach(subjectsBuilder::append);
 
-        final StringBuilder builder1 = new StringBuilder();
-        person.getPayments().forEach(builder1::append);
+        final StringBuilder paymentsBuilder = new StringBuilder();
+        person.getPayments().forEach(paymentsBuilder::append);
+
+        final StringBuilder tagsBuilder = new StringBuilder();
+        person.getTags().forEach(tagsBuilder::append);
 
         URL personPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
 
@@ -61,8 +64,9 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&phone=" + person.getPhone().value
                 + "&email=" + person.getEmail().value
                 + "&address=" + person.getAddress().value
-                + "&payments=" + builder1.toString()
-                + "&tags=" + builder.toString();
+                + "&subjects=" + subjectsBuilder.toString()
+                + "&payments=" + paymentsBuilder.toString()
+                + "&tags=" + tagsBuilder.toString();
 
         logger.info(url.replace("#", "%23"));
         loadPage(url.replace("#", "%23"));
