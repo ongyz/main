@@ -1,4 +1,4 @@
-package seedu.address.model.tuitionTiming;
+package seedu.address.model.tuitiontiming;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
