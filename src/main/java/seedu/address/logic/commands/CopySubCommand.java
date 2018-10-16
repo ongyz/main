@@ -64,6 +64,13 @@ public class CopySubCommand extends Command {
         return new CommandResult(String.format(MESSAGE_COPYSUB_SUCCESS, personUpdated));
     }
 
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personTarget}
+     * with the updated {@code Set<Subject> newSubject}.
+     * @param personTarget the person to be updated
+     * @param newSubject the updated subjects
+     * @return a new {@code Person} with updated subjects
+     */
     private Person createUpdatedPersonForCopySyll(Person personTarget, Subject newSubject) {
         List<Subject> targetSubjects = new ArrayList<>(personTarget.getSubjects());
 
