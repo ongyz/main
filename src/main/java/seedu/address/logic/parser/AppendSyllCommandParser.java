@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.AppendSyllCommand.AppendSyllFormatChecker.PERSON_INDEX_LOCATION;
-import static seedu.address.logic.commands.AppendSyllCommand.AppendSyllFormatChecker.SUBJECT_INDEX_LOCATION;
-import static seedu.address.logic.commands.AppendSyllCommand.AppendSyllFormatChecker.TODO_NUMBER_OF_ARGS;
+import static seedu.address.logic.commands.AppendSyllCommand.AppendSyllFormatChecker.NUMBER_OF_ARGS;
+import static seedu.address.logic.commands.AppendSyllCommand.AppendSyllFormatChecker.PERSON_INDEX;
+import static seedu.address.logic.commands.AppendSyllCommand.AppendSyllFormatChecker.SUBJECT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class AppendSyllCommandParser implements Parser<AppendSyllCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE), pe);
         }
 
-        if (indexList.size() != TODO_NUMBER_OF_ARGS) {
+        if (indexList.size() != NUMBER_OF_ARGS) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE));
         }
@@ -56,11 +56,11 @@ public class AppendSyllCommandParser implements Parser<AppendSyllCommand> {
     }
 
     private static Index getPersonIndex(List<Index> indexList) {
-        return indexList.get(PERSON_INDEX_LOCATION);
+        return indexList.get(PERSON_INDEX);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {
-        return indexList.get(SUBJECT_INDEX_LOCATION);
+        return indexList.get(SUBJECT_INDEX);
     }
 
 }
