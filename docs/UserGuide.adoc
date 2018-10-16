@@ -67,7 +67,7 @@ A student can have any number of tags (including 0), and must have at least 1 su
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/Monday 6:00pm`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/ Monday 6:00pm`
 
 === Listing all students : `list`
 
@@ -323,22 +323,6 @@ Examples:
 
 * `erasesyll 1 1 2`
 * `erasesyll 3 1 1`
-
-=== Copy a subject from a student to other student(s) : `copysub`
-
-Duplicate a subject from chosen student and add it to the target student. +
-Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
-
-****
-* The source and target student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The source, target student index and subject index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `copysub 1 1 n/John Doe n/Betsy`
-* `copysub 1 2 n/Alex`
 
 === Exiting the program : `exit`
 

@@ -1,6 +1,5 @@
 package seedu.address.model.tuitionTiming;
 
-import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.function.Predicate;
@@ -13,7 +12,7 @@ import seedu.address.model.person.Person;
  */
 public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person> {
 
-    private final String keyword; //note that keyword is capitalised for day.
+    private final String keyword;
 
     public TuitionTimingContainsKeywordsPredicate(String keyword) {
         this.keyword = keyword;
@@ -24,9 +23,9 @@ public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person>
         DayOfWeek day = person.getTuitionTiming().day;
         String time = person.getTuitionTiming().time;
 
-        if((keyword.toLowerCase()).matches((TuitionTiming.DAY_REGEX).toLowerCase())){
+        if (keyword.matches(TuitionTiming.DAY_REGEX)) {
             return day.equals(DayOfWeek.valueOf(keyword.toUpperCase()));
-        }else if ((keyword.toLowerCase()).matches((TuitionTiming.TIME_REGEX).toLowerCase())) {
+        } else if (keyword.matches(TuitionTiming.TIME_REGEX)) {
             return StringUtil.containsWordIgnoreCase(time, keyword);
         }
         return false;
