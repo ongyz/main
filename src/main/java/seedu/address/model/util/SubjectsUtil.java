@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
@@ -48,5 +49,18 @@ public class SubjectsUtil {
             }
         }
         return index;
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code Person source}
+     * with the updated {@code Set<Subject> subjects}.
+     * @param source the person to be updated
+     * @param subjects the updated subjects
+     * @return a new {@code Person} with updated subjects
+     */
+    public static Person createPersonWithNewSubject(Person source, Set<Subject> subjects) {
+        return new Person(source.getName(), source.getPhone(),
+                source.getEmail(), source.getAddress(), subjects,
+                source.getTuitionTiming(), source.getTags());
     }
 }

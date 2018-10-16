@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Finds all persons whose name matches the keyword and add the to do element to the data.
@@ -53,25 +54,12 @@ public class EraseSyllCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> removedSubjectContent = removeSubjectContentFrom(personTarget);
-        Person personSubjUpdated = createUpdatedPersonForRmtodo(personTarget, removedSubjectContent);
+        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubject(personTarget, removedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_ERASESYLL_SUCCESS, personSubjUpdated));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personTarget}
-     * with the updated {@code Set<Subject> newSubject}.
-     * @param personTarget the person to be updated
-     * @param newSubject the updated subjects
-     * @return a new {@code Person} with updated subjects
-     */
-    private Person createUpdatedPersonForRmtodo(Person personTarget, Set<Subject> newSubject) {
-        return new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), newSubject,
-                personTarget.getTuitionTiming(), personTarget.getTags());
     }
 
     /**

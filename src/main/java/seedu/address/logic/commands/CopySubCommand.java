@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -56,7 +57,8 @@ public class CopySubCommand extends Command {
         Person personTarget = lastShownList.get(targetPersonIndex.getZeroBased());
 
         Subject selectedSubject = SubjectsUtil.copySubjectFrom(personSource, subjectIndex);
-        Person personUpdated = createUpdatedPersonForCopySyll(personTarget, selectedSubject);
+        Set<Subject> updatedSubjects = updateSubjectsFor(personTarget, selectedSubject);
+        Person personUpdated = SubjectsUtil.createPersonWithNewSubject(personTarget, updatedSubjects);
 
         model.updatePerson(personTarget, personUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -65,27 +67,26 @@ public class CopySubCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personTarget}
-     * with the updated {@code Set<Subject> newSubject}.
+     * Add subject into personTarget. If personTarget already has the same subject, append the content
+     * instead.
      * @param personTarget the person to be updated
-     * @param newSubject the updated subjects
-     * @return a new {@code Person} with updated subjects
+     * @param newSubject the subject to be added
+     * @return a new {@code Set<Subject>} with updated subjects
      */
-    private Person createUpdatedPersonForCopySyll(Person personTarget, Subject newSubject) {
+    private Set<Subject> updateSubjectsFor(Person personTarget, Subject newSubject) {
         List<Subject> targetSubjects = new ArrayList<>(personTarget.getSubjects());
 
         if (SubjectsUtil.hasSubject(personTarget, newSubject.getSubjectType())) {
             Index index = SubjectsUtil.findSubjectIndex(personTarget, newSubject.getSubjectType()).get();
 
-            Subject updatedSubject = targetSubjects.get(index.getZeroBased()).append(newSubject.getSubjectContent());
+            Subject updatedSubject = targetSubjects.get(index.getZeroBased())
+                                                   .append(newSubject.getSubjectContent());
             targetSubjects.set(index.getZeroBased(), updatedSubject);
         } else {
             targetSubjects.add(newSubject);
         }
 
-        return new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), new HashSet<>(targetSubjects),
-                personTarget.getTuitionTiming(), personTarget.getTags());
+        return new HashSet<>(targetSubjects);
     }
 
     @Override

@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
+import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Finds all persons whose name matches the keyword and add the to do element to the data.
@@ -56,7 +57,7 @@ public class AppendSyllCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> addedSubjectContent = addSubjectContentTo(personTarget, subjectIndex, syllabus);
-        Person personSubjUpdated = createUpdatedPersonForAppendSyll(personTarget, addedSubjectContent);
+        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubject(personTarget, addedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -65,20 +66,7 @@ public class AppendSyllCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personTarget}
-     * with the updated {@code Set<Subject> newSubject}.
-     * @param personTarget the person to be updated
-     * @param newSubject the updated subjects
-     * @return a new {@code Person} with updated subjects
-     */
-    private Person createUpdatedPersonForAppendSyll(Person personTarget, Set<Subject> newSubject) {
-        return new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), newSubject,
-                personTarget.getTuitionTiming(), personTarget.getTags());
-    }
-
-    /**
-     * Add syllabus to the person specified
+     * Add syllabus to the person
      * @param personTarget the person to add to
      * @param subjectIndex the index of subject to add to
      * @param syllabus the index of syllabus to add
