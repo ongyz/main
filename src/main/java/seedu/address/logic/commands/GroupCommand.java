@@ -5,10 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.DayOfWeek;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.tuitionTiming.TuitionTiming;
 import seedu.address.model.tuitionTiming.TuitionTimingContainsKeywordsPredicate;
 
 /**
@@ -21,9 +21,9 @@ public class GroupCommand extends Command {
             + "or TIME and displays them as a list.\n"
             + "The input can also be null and the students will be grouped according to the current day and time.\n"
             + "Parameters: KEYWORD\n"
-            + "Examples: " + COMMAND_WORD + " " + PREFIX_DATE+ "Monday\n"
-            + COMMAND_WORD + " "+ PREFIX_TIME+"12:00pm\n"
-            + COMMAND_WORD + " " + PREFIX_DATE+ "Monday" + " "+ PREFIX_TIME+"12:00pm\n";
+            + "Examples: " + COMMAND_WORD + " " + PREFIX_DATE + "Monday\n"
+            + COMMAND_WORD + " " + PREFIX_TIME + "12:00pm\n"
+            + COMMAND_WORD + " " + PREFIX_DATE + "Monday" + " " + PREFIX_TIME + "12:00pm\n";
 
     public static final String MESSAGE_SUCCESS = "Grouped all students";
 
@@ -32,7 +32,7 @@ public class GroupCommand extends Command {
     private boolean dayPresent;
     private boolean timePresent;
 
-    public GroupCommand(DayOfWeek day, String time, boolean dayPresent, boolean timePresent){
+    public GroupCommand(DayOfWeek day, String time, boolean dayPresent, boolean timePresent) {
 
         this.dayPresent = dayPresent;
         this.timePresent = timePresent;
@@ -46,7 +46,7 @@ public class GroupCommand extends Command {
             this.dayPredicate = new TuitionTimingContainsKeywordsPredicate(day.toString());
             this.timePredicate = null;
 
-        }else if (dayPresent == false && timePresent == true) {
+        } else if (dayPresent == false && timePresent == true) {
             this.timePredicate = new TuitionTimingContainsKeywordsPredicate(time);
             this.dayPredicate = null;
         }
@@ -58,10 +58,9 @@ public class GroupCommand extends Command {
 
         if (this.dayPresent == true && this.timePresent == true) {
             model.updateFilteredPersonList(dayPredicate);
-        }
-        else if (this.dayPresent == true) {
+        } else if (this.dayPresent == true) {
             model.updateFilteredPersonList(dayPredicate);
-        }else if (this.timePresent == true) {
+        } else if (this.timePresent == true) {
             model.updateFilteredPersonList(timePredicate);
         }
         return new CommandResult(
