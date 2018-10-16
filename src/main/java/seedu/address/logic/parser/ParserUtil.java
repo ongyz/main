@@ -22,7 +22,7 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.SubjectType;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tuitionTiming.TuitionTiming;
+import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
