@@ -154,7 +154,7 @@ The user can execute `list` to re-display the full list of students again.
 
 The following sequence diagram shows how the group operation works:
 
-image::http://http://GroupSequenceDiagram[GroupSequenceDiagram][GroupSequenceDiagram].png[width="650"]
+image::GroupSequenceDiagram.png[width="650"]
 
 === Students payment feature
 
@@ -195,11 +195,9 @@ image::http://http://GroupSequenceDiagram[GroupSequenceDiagram][GroupSequenceDia
         2e. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
     3. Other details
+
         a. Payment list will keep up to 10 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
-
     4. The diagram below illustrates the sequence diagram.
-
-.Architecture Diagram
 image:PaymentSequenceDiagram.png[width="800"]
 
 
@@ -216,6 +214,7 @@ image:PaymentSequenceDiagram.png[width="800"]
             -In Execute() method, it performs the checking of all recorded payments and returns the total payments received for that specified month and year.
 
     2. Example usage scenario
+
         2a. The tutor launches the application and wants to view his/her earnings for the month of November 2018.
         2b. He/she enters input in the format of: earnings m/11 y/2018
             2B1. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, earnings) and creates the EarningsCommandParser object, followed by calling parse method, with the arguments passed in.
@@ -227,7 +226,6 @@ image:PaymentSequenceDiagram.png[width="800"]
         2c. The tutor will then see a message below the command text box, showing the earnings for the requested month and year.
 
     3. The diagram below illustrates the sequence diagram.
-.Architecture Diagram
 image:EarningsSequenceDiagram.png[width="800"]
 
 
