@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.PERSON_INDEX;
 import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.NUMBER_OF_ARGS;
+import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.PERSON_INDEX;
 import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.SUBJECT_INDEX;
 import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.SYLLABUS_INDEX;
 
