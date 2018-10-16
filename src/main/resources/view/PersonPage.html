@@ -27,6 +27,9 @@
             document.getElementById("address").innerHTML = getJsonFromUrl().address;
         });
         document.addEventListener("DOMContentLoaded", function (event) {
+            document.getElementById("tuitionTiming").innerHTML = getJsonFromUrl().tuitionTiming;
+        });
+        document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById("subjects").innerHTML = getJsonFromUrl().subjects;
         });
         document.addEventListener("DOMContentLoaded", function (event) {
@@ -66,6 +69,10 @@
     <tr>
         <th>Address</th>
         <td><span id="address"></span></td>
+    </tr>
+    <tr>
+        <th>Tuition Timing</th>
+        <td><span id="tuitionTiming"></span></td>
     </tr>
     <tr>
         <th>Subjects</th>

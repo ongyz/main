@@ -64,6 +64,7 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&phone=" + person.getPhone().value
                 + "&email=" + person.getEmail().value
                 + "&address=" + person.getAddress().value
+                + "&tuitionTiming=" + person.getTuitionTiming().value
                 + "&subjects=" + subjectsBuilder.toString()
                 + "&payments=" + paymentsBuilder.toString()
                 + "&tags=" + tagsBuilder.toString();

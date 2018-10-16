@@ -79,7 +79,7 @@ public class MarkCommand extends Command {
             throw new CommandException(MESSAGE_MARK_FAILED);
         }
 
-        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).toggleSubjectContentState(syllabusIndex);
+        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).toggleState(syllabusIndex);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
     }
