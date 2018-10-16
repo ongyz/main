@@ -6,10 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.DayOfWeek;
 import java.util.stream.Stream;
+
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tuitionTiming.TuitionTiming;
-import seedu.address.model.tuitionTiming.TuitionTimingContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new GroupCommand object
@@ -27,20 +26,18 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_TIME);
 
-        //if only contain date
         if (arePrefixesPresent(argMultimap, PREFIX_DATE) && !arePrefixesPresent(argMultimap, PREFIX_TIME)) {
+            // if only contains date
             this.date = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DATE).get());
             return new GroupCommand(date, time, true, false);
-            //true indicates presence of date. false indicates absence of time.
-        }
-        //if only contain time
-        else if (arePrefixesPresent(argMultimap, PREFIX_TIME) && !arePrefixesPresent(argMultimap, PREFIX_DATE)){
+            // true indicates presence of date. false indicates absence of time.
+        } else if (arePrefixesPresent(argMultimap, PREFIX_TIME) && !arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+            // if only contains time
             this.time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
             return new GroupCommand(date, time, false, true);
-        }
-        //if both date and time are not present
-        else if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME)
+        } else if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
+            // if both date and time are not present
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
@@ -55,7 +52,7 @@ public class GroupCommandParser implements Parser<GroupCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent (ArgumentMultimap argumentMultimap, Prefix...prefixes){
+    private static boolean arePrefixesPresent (ArgumentMultimap argumentMultimap, Prefix...prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
