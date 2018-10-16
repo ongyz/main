@@ -18,6 +18,7 @@ import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.SubjectType;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
 
@@ -110,7 +111,7 @@ public class ParserUtil {
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
-        if (!Subject.isValidSubjectName(trimmedSubject)) {
+        if (!SubjectType.isValidSubjectName(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
         return new Subject(trimmedSubject);

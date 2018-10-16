@@ -20,23 +20,23 @@ import seedu.address.model.subject.Subject;
  * Finds all persons whose name matches the keyword and add the to do element to the data.
  * Find is case-insensitive.
  */
-public class RmtodoCommand extends Command {
+public class EraseSyllCommand extends Command {
 
-    public static final String COMMAND_WORD = "rmtodo";
+    public static final String COMMAND_WORD = "erasesyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the selected syllabus of the "
             + "person identified by the index number used in the displayed person list. \n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
-    public static final String MESSAGE_RMTODO_SUCCESS = "Removed selected syllabus from Person: %1$s";
-    public static final String MESSAGE_RMTODO_FAILED = "Syllabus does not exist.";
+    public static final String MESSAGE_ERASESYLL_SUCCESS = "Removed selected syllabus from Person: %1$s";
+    public static final String MESSAGE_ERASESYLL_FAILED = "Syllabus does not exist.";
 
     private final Index personIndex;
     private final Index subjectIndex;
     private final Index syllabusIndex;
 
-    public RmtodoCommand(Index personIndex, Index subjectIndex, Index syllabusIndex) {
+    public EraseSyllCommand(Index personIndex, Index subjectIndex, Index syllabusIndex) {
         this.personIndex = personIndex;
         this.subjectIndex = subjectIndex;
         this.syllabusIndex = syllabusIndex;
@@ -58,7 +58,7 @@ public class RmtodoCommand extends Command {
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_RMTODO_SUCCESS, personSubjUpdated));
+        return new CommandResult(String.format(MESSAGE_ERASESYLL_SUCCESS, personSubjUpdated));
     }
 
     /**
@@ -85,7 +85,7 @@ public class RmtodoCommand extends Command {
 
         if (hasExceededNumberOfSubjects(subjects)
                 || hasExceededNumberOfSyllabus(subjects.get(subjectIndex.getZeroBased()))) {
-            throw new CommandException(MESSAGE_RMTODO_FAILED);
+            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
         }
 
         Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).removeFromSubjectContent(syllabusIndex);
@@ -104,16 +104,16 @@ public class RmtodoCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof RmtodoCommand // instanceof handles nulls
-                && personIndex.equals(((RmtodoCommand) other).personIndex))
-                && syllabusIndex.equals(((RmtodoCommand) other).subjectIndex)
-                && syllabusIndex.equals(((RmtodoCommand) other).syllabusIndex); // state check
+                || (other instanceof EraseSyllCommand // instanceof handles nulls
+                && personIndex.equals(((EraseSyllCommand) other).personIndex))
+                && syllabusIndex.equals(((EraseSyllCommand) other).subjectIndex)
+                && syllabusIndex.equals(((EraseSyllCommand) other).syllabusIndex); // state check
     }
 
     /**
      * Stores the details of rmtodo command format.
      */
-    public static class RmtodoFormatChecker {
+    public static class EraseSyllFormatChecker {
         public static final int PERSON_INDEX_LOCATION = 0;
         public static final int SUBJECT_INDEX_LOCATION = 1;
         public static final int SYLLABUS_INDEX_LOCATION = 2;

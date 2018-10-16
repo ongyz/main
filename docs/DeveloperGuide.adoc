@@ -118,7 +118,7 @@ Value:
         2b1. System displays error message telling tutor that index is invalid
 
   7. Display tutor's earnings for that month and year
-  
+
      System: TutorHelper
      Actor: Tutor
      Precondition: Tutor has recorded payment from students before.
@@ -231,4 +231,5 @@ image:EarningsSequenceDiagram.png[width="800"]
 
 
 == Glossary
-. Syllabus: the topics of a particular subject in a course of study or teaching.
+. Subject : a branch of knowledge studied by the student
+. Syllabus: the required topics to be covered under the subject
