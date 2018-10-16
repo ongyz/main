@@ -5,14 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.TuitionTiming;
+import seedu.address.model.tuitionTiming.TuitionTiming;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -102,8 +101,8 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
-  
-      /**
+
+    /**
      * Sets the {@code Subject} of the {@code Person} that we are building.
      */
     public PersonBuilder withSubjects(String ... subjectArray) {
