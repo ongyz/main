@@ -5,10 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.subject.Subject;
 import seedu.address.storage.XmlAdaptedPay;
@@ -50,7 +47,7 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedSubject> VALID_SUBJECTS =
             Collections.singletonList(new XmlAdaptedSubject(new Subject("Mathematics")));
-    private static final List<XmlAdaptedPay> VALID_PAYMENT = Collections.singletonList(new XmlAdaptedPay()); // Figuring out how to do index class
+    private static final List<XmlAdaptedPay> VALID_PAYMENT = Collections.singletonList(new XmlAdaptedPay());
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -70,7 +70,9 @@ public class PayCommand extends Command {
         }
 
         if (newEntry) {
-            if (pay.size() > 10) { pay.remove(0); }
+            if (pay.size() > 10) {
+                pay.remove(0);
+            }
             pay = updatePayment(personTarget.getPayments(), newPayment);
         }
 

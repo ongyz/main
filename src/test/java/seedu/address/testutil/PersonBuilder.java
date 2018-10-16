@@ -101,8 +101,8 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
-  
-      /**
+
+    /**
      * Sets the {@code Subject} of the {@code Person} that we are building.
      */
     public PersonBuilder withSubjects(String ... subjectArray) {
