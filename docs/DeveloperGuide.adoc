@@ -157,4 +157,5 @@ The following sequence diagram shows how the group operation works:
 image::GroupSequenceDiagram.png[width="650"]
 
 == Glossary
-. Syllabus: the topics of a particular subject in a course of study or teaching.
+. Subject : a branch of knowledge studied by the student
+. Syllabus: the required topics to be covered under the subject
