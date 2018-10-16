@@ -34,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Mathematics d/Monday, 12:00pm` : adds a person named `John Doe` to the TutorHelper.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Mathematics d/Monday, 12:00pm` : adds a student named `John Doe` to the TutorHelper.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -60,15 +60,14 @@ Format: `help`
 === Adding a student: `add`
 
 Adds a student to the TutorHelper +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMING [t/TAG]...`
 
 [TIP]
-A person can have any number of tags (including 0)
+A student can have any number of tags (including 0), and must have at least 1 subject.
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/ Monday 6:00pm`
 
 === Listing all students : `list`
 
@@ -85,15 +84,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [d/TIMI
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* You can remove all the student's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 === Locating students by name: `find`
 
@@ -113,7 +112,7 @@ Examples:
 * `find John` +
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+Returns any student having names `Betsy`, `Tim`, or `John`
 
 === Grouping students by tuition timing : `group`
 
@@ -240,7 +239,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all student records from the TutorHelper. +
 Format: `clear`
 
-=== Keeping track of payments : `payment`
+=== Keeping track of payments : `paid`
 
 Records a payment of a specified amount made by a specified student for a specified month and year. +
 Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
@@ -290,10 +289,10 @@ Examples:
 * `mark 1 1 3`
 * `mark 2 1 2`
 
-=== Add a syllabus topic to the student’s list of syllabus topics : `todo`
+=== Add a syllabus topic to the student’s list of syllabus topics : `appendsyll`
 
 Add a new syllabus topic for a specified student and subject. +
-Format: `todo STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
+Format: `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
 
 ****
 * Adds a new syllabus topic `SYLLABUS` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
@@ -304,13 +303,13 @@ Format: `todo STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
 
 Examples:
 
-* `todo 1 2 sy/Integration`
-* `todo 3 2 sy/Poisson Distribution`
+* `appendsyll 1 2 sy/Integration`
+* `appendsyll 3 2 sy/Poisson Distribution`
 
-=== Remove a syllabus topic from the student’s list of syllabus topics : `rmtodo`
+=== Remove a syllabus topic from the student’s list of syllabus topics : `erasesyll`
 
 Remove a syllabus topic for a specified student and subject. +
-Format: `rmtodo STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 
 ****
 * Removes a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
@@ -322,8 +321,8 @@ Format: `rmtodo STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 
 Examples:
 
-* `rmtodo 1 1 2`
-* `rmtodo 3 1 1`
+* `erasesyll 1 1 2`
+* `erasesyll 3 1 1`
 
 === Exiting the program : `exit`
 
@@ -367,7 +366,7 @@ e.g `group Monday OR group 12pm OR group`
   `eg earnings 01 2018`
 * *Mark* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
 e.g `mark 1 1 1`
-* *Todo* : `todo STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
-e.g `todo 1 2 sy/Integration`
-* *Rmtodo* : `rmtodo STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
-e.g `rmtodo 1 1 1`
+* *Add Syllabus Topic* : `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
+e.g `appendsyll 1 2 sy/Integration`
+* *Remove Syllabus Topic* : `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g `erasesyll 1 1 1`
