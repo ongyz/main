@@ -33,7 +33,6 @@ public class GroupCommand extends Command {
     private boolean timePresent;
 
     public GroupCommand(DayOfWeek day, String time, boolean dayPresent, boolean timePresent) {
-
         this.dayPresent = dayPresent;
         this.timePresent = timePresent;
 
