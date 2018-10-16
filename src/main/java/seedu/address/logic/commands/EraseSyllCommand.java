@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Finds all persons whose name matches the keyword and add the to do element to the data.
@@ -25,7 +26,7 @@ public class EraseSyllCommand extends Command {
     public static final String COMMAND_WORD = "erasesyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the selected syllabus of the "
-            + "person identified by the index number used in the displayed person list. \n"
+            + "person identified by the syllabus index number in the selected student's subject.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
@@ -53,25 +54,12 @@ public class EraseSyllCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> removedSubjectContent = removeSubjectContentFrom(personTarget);
-        Person personSubjUpdated = createUpdatedPersonForRmtodo(personTarget, removedSubjectContent);
+        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, removedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_ERASESYLL_SUCCESS, personSubjUpdated));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personTarget}
-     * with the updated {@code Set<Subject> newSubject}.
-     * @param personTarget the person to be updated
-     * @param newSubject the updated subjects
-     * @return a new {@code Person} with updated subjects
-     */
-    private Person createUpdatedPersonForRmtodo(Person personTarget, Set<Subject> newSubject) {
-        return new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), newSubject,
-                personTarget.getTuitionTiming(), personTarget.getTags());
     }
 
     /**
@@ -88,7 +76,7 @@ public class EraseSyllCommand extends Command {
             throw new CommandException(MESSAGE_ERASESYLL_FAILED);
         }
 
-        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).removeFromSubjectContent(syllabusIndex);
+        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).remove(syllabusIndex);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
     }
@@ -114,9 +102,9 @@ public class EraseSyllCommand extends Command {
      * Stores the details of rmtodo command format.
      */
     public static class EraseSyllFormatChecker {
-        public static final int PERSON_INDEX_LOCATION = 0;
-        public static final int SUBJECT_INDEX_LOCATION = 1;
-        public static final int SYLLABUS_INDEX_LOCATION = 2;
-        public static final int RMTODO_NUMBER_OF_ARGS = 3;
+        public static final int PERSON_INDEX = 0;
+        public static final int SUBJECT_INDEX = 1;
+        public static final int SYLLABUS_INDEX = 2;
+        public static final int NUMBER_OF_ARGS = 3;
     }
 }

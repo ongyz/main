@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AppendSyllCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CopySubCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EarningsCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -105,6 +106,9 @@ public class AddressBookParser {
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
+
+        case CopySubCommand.COMMAND_WORD:
+            return new CopySubCommandParser().parse(arguments);
 
         case GroupCommand.COMMAND_WORD:
             return new GroupCommandParser().parse(arguments);

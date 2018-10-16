@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
+import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Finds all persons whose name matches the keyword and add the to do element to the data.
@@ -27,13 +28,13 @@ public class AppendSyllCommand extends Command {
     public static final String COMMAND_WORD = "appendsyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the person identified "
-            + "by the personIndex number used in the displayed person list. "
+            + "by the student index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
-    private static final String MESSAGE_APPENDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
+    public static final String MESSAGE_APPENDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
 
     private final Index personIndex;
     private final Index subjectIndex;
@@ -56,7 +57,7 @@ public class AppendSyllCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> addedSubjectContent = addSubjectContentTo(personTarget, subjectIndex, syllabus);
-        Person personSubjUpdated = createUpdatedPersonForTodo(personTarget, addedSubjectContent);
+        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, addedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -65,20 +66,7 @@ public class AppendSyllCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personTarget}
-     * with the updated {@code Set<Subject> newSubject}.
-     * @param personTarget the person to be updated
-     * @param newSubject the updated subjects
-     * @return a new {@code Person} with updated subjects
-     */
-    private Person createUpdatedPersonForTodo(Person personTarget, Set<Subject> newSubject) {
-        return new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), newSubject,
-                personTarget.getTuitionTiming(), personTarget.getTags());
-    }
-
-    /**
-     * Add syllabus to the person specified
+     * Add syllabus to the person
      * @param personTarget the person to add to
      * @param subjectIndex the index of subject to add to
      * @param syllabus the index of syllabus to add
@@ -86,7 +74,7 @@ public class AppendSyllCommand extends Command {
      */
     private Set<Subject> addSubjectContentTo(Person personTarget, Index subjectIndex, Syllabus syllabus) {
         List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
-        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).addToSubjectContent(syllabus);
+        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).add(syllabus);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
     }
@@ -103,8 +91,8 @@ public class AppendSyllCommand extends Command {
      * Stores the details of todo command format.
      */
     public static class AppendSyllFormatChecker {
-        public static final int PERSON_INDEX_LOCATION = 0;
-        public static final int SUBJECT_INDEX_LOCATION = 1;
-        public static final int TODO_NUMBER_OF_ARGS = 2;
+        public static final int PERSON_INDEX = 0;
+        public static final int SUBJECT_INDEX = 1;
+        public static final int NUMBER_OF_ARGS = 2;
     }
 }
