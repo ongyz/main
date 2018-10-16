@@ -158,6 +158,19 @@ image::GroupSequenceDiagram.png[width="650"]
 
 // tag::copysub[]
 === Copy Subject feature
+==== Current Implementation
+
+The copy subject command operates by making a duplicate of the selected subject of the student and adds it the other student.
+
+[NOTE]
+If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied.
+
+Classes related to copy command and its functionality are listed below:
+
+* `AddressBookParser` -- Creates CopySubCommandParser which parses the input from user.
+* `CopySubCommandParser` -- Parses user's input into proper argument and creates CopySubCommand
+* `CopySubCommand` -- Updates the target person based on the argument
+* `SubjectsUtil` -- Manage the finding and copying aspect of copysub command.
 
 Given below is an example usage scenario with 2 possible outcomes and how to copy function addresses each case.
 
@@ -173,6 +186,8 @@ Step 5. The system will locate the _fourth_ student from the student list, and m
 
 * Step 5a. If the same subject as _second_ subject in Step 4, system will append the content of subject of _second_ subject into the _fourth_ student.
 * Step 5b. If there is no subject same as _second_ subject in Step 4, system will add the _second_ subject as a new subject under the _fourth_ student.
+
+The process is described with sequence diagram below:
 
 == Glossary
 . Subject : a branch of knowledge studied by the student
