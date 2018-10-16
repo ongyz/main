@@ -58,7 +58,7 @@ public class CopySubCommand extends Command {
 
         Subject selectedSubject = SubjectsUtil.copySubjectFrom(personSource, subjectIndex);
         Set<Subject> updatedSubjects = updateSubjectsFor(personTarget, selectedSubject);
-        Person personUpdated = SubjectsUtil.createPersonWithNewSubject(personTarget, updatedSubjects);
+        Person personUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, updatedSubjects);
 
         model.updatePerson(personTarget, personUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

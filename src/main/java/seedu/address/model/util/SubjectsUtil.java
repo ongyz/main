@@ -11,7 +11,7 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.SubjectType;
 
 /**
- * Contains utility methods for managing list of subjects under {@code Person}
+ * Contains utility methods for managing list of subjects of a {@code Person}
  */
 public class SubjectsUtil {
 
@@ -58,7 +58,7 @@ public class SubjectsUtil {
      * @param subjects the updated subjects
      * @return a new {@code Person} with updated subjects
      */
-    public static Person createPersonWithNewSubject(Person source, Set<Subject> subjects) {
+    public static Person createPersonWithNewSubjects(Person source, Set<Subject> subjects) {
         return new Person(source.getName(), source.getPhone(),
                 source.getEmail(), source.getAddress(), subjects,
                 source.getTuitionTiming(), source.getTags());

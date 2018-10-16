@@ -54,7 +54,7 @@ public class EraseSyllCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> removedSubjectContent = removeSubjectContentFrom(personTarget);
-        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubject(personTarget, removedSubjectContent);
+        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, removedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

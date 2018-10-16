@@ -57,7 +57,7 @@ public class AppendSyllCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> addedSubjectContent = addSubjectContentTo(personTarget, subjectIndex, syllabus);
-        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubject(personTarget, addedSubjectContent);
+        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, addedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
