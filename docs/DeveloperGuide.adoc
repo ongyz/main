@@ -189,6 +189,8 @@ Step 5. The system will locate the _fourth_ student from the student list, and m
 
 The process is described with sequence diagram below:
 
+image::CopySubSequenceDiagrams.png[width="650"]
+
 == Glossary
 . Subject : a branch of knowledge studied by the student
 . Syllabus: the required topics to be covered under the subject
