@@ -152,20 +152,7 @@ public class Person {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress())
-                .append("\nSubjects: ");
-
-        getSubjects().forEach(builder::append);
-
-        builder.append("\nTuition Timing: ")
-                .append(getTuitionTiming())
-                .append("\nTags: ");
-
-        getTags().forEach(builder::append);
-
-        builder.append("\nPayments: ");
-        getPayments().forEach(builder::append);
-
+                .append(getAddress());
         return builder.toString();
     }
 }

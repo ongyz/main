@@ -145,6 +145,10 @@ header.tags {
     float: left;
 }
 
+header.tags .label .label-text {
+    background-color: mediumslateblue;
+}
+
 table.subject-table, th, td {
     border: 1px solid antiquewhite;
     border-collapse: collapse;
