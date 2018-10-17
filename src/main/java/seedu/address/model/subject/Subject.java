@@ -139,7 +139,9 @@ public class Subject {
     public Subject append(List<Syllabus> syllabusList) {
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
         for (Syllabus newSyllabus: syllabusList) {
-            newSubjectContent.add(newSyllabus);
+            if (!newSubjectContent.contains(newSyllabus)) {
+                newSubjectContent.add(newSyllabus);
+            }
         }
         return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
 
