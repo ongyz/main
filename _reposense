@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "andlimey",
+      "displayName": "Andy Chan",
+      "authorNames": ["andlimey"]
+    },
+    {
+      "githubId": "SusterDrifter",
+      "displayName": "Anthony Halim",
+      "authorNames": ["SusterDrifter"]
+    },
+    {
+      "githubId": "lywjoel",
+      "displayName": "Joel Lee",
+      "authorNames": ["lywjoel"]
+    },
+    {
+      "githubId": "ongyz",
+      "displayName": "Ong Yan Zhi",
+      "authorNames": ["ongyz"]
+    },
+    {
+      "githubId": "ooihuiying",
+      "displayName": "Ooi Hui Ying",
+      "authorNames": ["ooihuiying"]
+    }
+  ]
+}
