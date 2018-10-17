@@ -22,7 +22,7 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.SubjectType;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tuitionTiming.TuitionTiming;
+import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -241,7 +241,7 @@ public class ParserUtil {
     public static List<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
         String trimmedIndexes = oneBasedIndexes.trim();
         String[] separatedIndexes = trimmedIndexes.split("\\s");
-        List<Index> listIndexes = new ArrayList<Index>();
+        List<Index> listIndexes = new ArrayList<>();
 
         for (String indexCandidate : separatedIndexes) {
             listIndexes.add(ParserUtil.parseIndex(indexCandidate));
