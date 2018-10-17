@@ -284,7 +284,7 @@ image:EarningsSequenceDiagram.png[width="800"]
 The copy subject command operates by making a duplicate of the selected subject of the student and adds it the other student.
 
 [NOTE]
-If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied.
+If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied. Duplicate syllabus will not be added.
 
 Classes related to copy command and its functionality are listed below:
 

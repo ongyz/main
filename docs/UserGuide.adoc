@@ -192,7 +192,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit`, `clear`, `appendsyll`, `erasesyll`, and `copysub`).
 ====
 
 Examples:
@@ -294,6 +294,11 @@ Examples:
 Add a new syllabus topic for a specified student and subject. +
 Format: `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
 
+[NOTE]
+====
+Adding syllabus that already exist under subject will throw an error.
+====
+
 ****
 * Adds a new syllabus topic `SYLLABUS` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
 * The student index refers to the index number shown in the displayed student list.
@@ -326,7 +331,7 @@ Examples:
 
 === Copy a subject from a student to other student(s) : `copysub`
 
-Duplicate a subject from chosen student and add it to the target student. +
+Duplicate a subject from chosen student and add it to the target student. Duplicate syllabus will not be added. +
 Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
 
 ****
@@ -386,3 +391,5 @@ e.g `mark 1 1 1`
 e.g `appendsyll 1 2 sy/Integration`
 * *Remove Syllabus Topic* : `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
 e.g `erasesyll 1 1 1`
+* *Copy Subject* : `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX` +
+e.g `copysub 1 1 2`
