@@ -49,16 +49,7 @@
         });
     </script>
     <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 5px;
-        }
-        th, td {
-            text-align: center;
-        }
+
     </style>
 </head>
 <body>
@@ -77,7 +68,7 @@
                     </div>
                 </div>
                 <div class="contact-detail">
-                    <div class="subjects-label">
+                    <div class="label">
                         <div class="label-text">
                             <span id="subjectNames"></span>
                         </div>
@@ -100,17 +91,27 @@
         </div>
     </header>
 
-    <div class="detail-subject-division"></div>
+    <div class="detail-subject-division">
+        <hr class="horizontal-divider"/>
+    </div>
 
-    <table style="width:100%">
+    <!--Tags-->
+    <header class="tags">
+        <div class="label" style="display: inline-block">
+            <a>Tags: </a>
+            <div class="label-text">
+                <span id="tags"></span>
+            </div>
+        </div>
+    </header>
+
+    <!--Subjects-->
+    <table class="subject-table" style="width:100%">
         <tr>
             <th>Subjects</th>
-            <td><!--<span id="subjects"></span>--></td>
-        </tr>
-        <tr>
-            <th>Tags</th>
-            <td><span id="tags"></span></td>
+            <td><span id="subjects"></span></td>
         </tr>
     </table>
+
     </body>
 </html>

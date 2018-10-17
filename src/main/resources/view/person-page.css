@@ -86,14 +86,14 @@ header.main-detail .contact-detail .text-italic {
     clear:both;
 }
 
-header.main-detail .subjects-label {
+.label {
     resize: both;
     color: white;
     display: inline-block;
     margin-bottom: 5px;
 }
 
-header.main-detail .subjects-label .label-text {
+.label .label-text {
     padding: 1px 3px;
     resize: both;
     background-color: #3e96;
@@ -125,8 +125,41 @@ header.payment-detail .payment-numbers-panel {
 }
 
 header.payment-detail .payment-numbers {
-    font-size: 15px;
+    font-size: 13px;
     line-height: 20px;
     font-family: "Open Sans";
     white-space: pre-wrap;
+}
+
+header.detail-subject-division .horizontal-divider {
+    width: 100%;
+    clear: both;
+}
+
+header.tags {
+    font-size: 15px;
+    line-height: 20px;
+    font-family: "Open Sans";
+    padding-top: 2px;
+    padding-bottom: 10px;
+    float: left;
+}
+
+table.subject-table, th, td {
+    border: 1px solid antiquewhite;
+    border-collapse: collapse;
+}
+
+th, td {
+    font-size: 15px;
+    line-height: 20px;
+    font-family: "Open Sans";
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+th {
+    background-color: indianred;
+    width: 20%;
 }

@@ -18,6 +18,7 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.tag.Tag;
 
 /**
  * The Browser Panel of the App.
@@ -70,12 +71,18 @@ public class BrowserPanel extends UiPart<Region> {
         List<Payment> payments = new ArrayList<>(person.getPayments());
         for (int i = 0; i < payments.size(); i++) {
             Payment selected = payments.get(i);
-            paymentsBuilder.append(String.format("Month: %5d Year: %10d Amount: %10d     ",
-                    i + 1, selected.getMonth(), selected.getYear(), selected.getAmount()));
+            paymentsBuilder.append(String.format("Month: %5d     Year: %10d     Amount: %10d         ",
+                    selected.getMonth(), selected.getYear(), selected.getAmount()));
         }
 
         final StringBuilder tagsBuilder = new StringBuilder();
-        person.getTags().forEach(tagsBuilder::append);
+        List<Tag> tags = new ArrayList<>(person.getTags());
+        for (int i = 0; i < tags.size(); i++) {
+            tagsBuilder.append(tags.get(i).toString());
+            if (i != tags.size() - 1) {
+                tagsBuilder.append(" | ");
+            }
+        }
 
         URL personPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
 
