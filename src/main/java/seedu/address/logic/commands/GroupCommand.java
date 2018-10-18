@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.tuitionTiming.TuitionTimingContainsKeywordsPredicate;
+import seedu.address.model.tuitiontiming.TuitionTimingContainsKeywordsPredicate;
 
 /**
  * Groups the students in TutorHelper based on their tuition timings.

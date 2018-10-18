@@ -101,6 +101,11 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Updates the filtered persons with 2 predicates.
+     * @param predicate1 The first predicate.
+     * @param predicate2 The second predicate.
+     */
     public void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2) {
         requireNonNull(predicate1);
         requireNonNull(predicate2);

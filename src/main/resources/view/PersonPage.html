@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>Person Page</title>
+    <link href="PersonPage.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700" rel="stylesheet" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <script type="text/javascript">
         function getJsonFromUrl() {
             var query = location.search.substr(1);
@@ -27,7 +30,13 @@
             document.getElementById("address").innerHTML = getJsonFromUrl().address;
         });
         document.addEventListener("DOMContentLoaded", function (event) {
-            document.getElementById("tuitionTiming").innerHTML = getJsonFromUrl().tuitionTiming;
+            document.getElementById("tuitionTimingDay").innerHTML = getJsonFromUrl().tuitionTimingDay;
+        });
+        document.addEventListener("DOMContentLoaded", function (event) {
+            document.getElementById("tuitionTimingTime").innerHTML = getJsonFromUrl().tuitionTimingTime;
+        });
+        document.addEventListener("DOMContentLoaded", function (event) {
+            document.getElementById("subjectNames").innerHTML = (getJsonFromUrl().subjectNames);
         });
         document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById("subjects").innerHTML = getJsonFromUrl().subjects;
@@ -40,53 +49,69 @@
         });
     </script>
     <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 5px;
-        }
-        th, td {
-            text-align: center;
-        }
+
     </style>
 </head>
 <body>
-<h1>
-    <span id="name"></span>
-</h1>
-<hr>
-<table style="width:100%">
-    <tr>
-        <th>Phone</th>
-        <td><span id="phone"></span></td>
-    </tr>
-    <tr>
-        <th>Email</th>
-        <td><span id="email"></span></td>
-    </tr>
-    <tr>
-        <th>Address</th>
-        <td><span id="address"></span></td>
-    </tr>
-    <tr>
-        <th>Tuition Timing</th>
-        <td><span id="tuitionTiming"></span></td>
-    </tr>
-    <tr>
-        <th>Subjects</th>
-        <td><span id="subjects"></span></td>
-    </tr>
-    <tr>
-        <th>Payments</th>
-        <td><span id="payments"></span></td>
-    </tr>
-    <tr>
-        <th>Tags</th>
-        <td><span id="tags"></span></td>
-    </tr>
-</table>
-</table>
-</body>
+
+    <!--Main Detail-->
+    <header class="main-detail">
+        <div class="container">
+            <div class="personal-name">
+                <div class="text-lead"><span id="name"></span></div>
+            </div>
+            <div class="personal-detail">
+                <div class="timing-detail">
+                    <div class="timing-text">
+                    <span id="tuitionTimingDay" class="timing-day text-uppercase"></span>
+                    <span id="tuitionTimingTime"></span>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="label">
+                        <div class="label-text">
+                            <span id="subjectNames"></span>
+                        </div>
+                    </div>
+                    <div class="text-detail"><span id="address"></span></div>
+                    <div class="text-detail"><span id="email"></span></div>
+                    <div class="text-italic"><span id="phone"></span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Payment Panel-->
+    <header class="payment-detail">
+        <div class="payment-label">
+            <h3 class="payment-title" align="center">payment history</h3>
+        </div>
+        <div class="payment-numbers-panel">
+            <span class="payment-numbers" id="payments"></span>
+        </div>
+    </header>
+
+    <div class="detail-subject-division">
+        <hr class="horizontal-divider"/>
+    </div>
+
+    <!--Tags-->
+    <header class="tags">
+        <div class="label" style="display: inline-block">
+            <a>Tags: </a>
+            <div class="label-text">
+                <span id="tags"></span>
+            </div>
+        </div>
+    </header>
+
+    <!--Subjects-->
+    <table class="subject-table" style="width:100%">
+        <tr>
+            <th>Subjects</th>
+            <td><span id="subjects"></span></td>
+        </tr>
+    </table>
+
+    </body>
 </html>

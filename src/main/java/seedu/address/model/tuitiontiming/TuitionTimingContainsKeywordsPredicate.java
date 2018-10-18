@@ -1,4 +1,4 @@
-package seedu.address.model.tuitionTiming;
+package seedu.address.model.tuitiontiming;
 
 import java.time.DayOfWeek;
 import java.util.function.Predicate;
