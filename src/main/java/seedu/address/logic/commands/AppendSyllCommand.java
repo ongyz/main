@@ -35,6 +35,7 @@ public class AppendSyllCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_APPENDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS = "Syllabus is already in Person: %1$s";
 
     private final Index personIndex;
     private final Index subjectIndex;
@@ -72,9 +73,16 @@ public class AppendSyllCommand extends Command {
      * @param syllabus the index of syllabus to add
      * @return a new {@code Set<Subject>} with the specified syllabus added
      */
-    private Set<Subject> addSubjectContentTo(Person personTarget, Index subjectIndex, Syllabus syllabus) {
+    private Set<Subject> addSubjectContentTo(Person personTarget, Index subjectIndex, Syllabus syllabus)
+        throws CommandException {
         List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
-        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).add(syllabus);
+        Subject selectedSubject = subjects.get(subjectIndex.getZeroBased());
+
+        if (selectedSubject.contains(syllabus)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS, personTarget));
+        }
+
+        Subject updatedSubject = selectedSubject.add(syllabus);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
     }
