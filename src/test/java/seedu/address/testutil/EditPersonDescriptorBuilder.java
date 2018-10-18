@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -8,9 +11,12 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -36,6 +42,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setSubjects(person.getSubjects());
+        descriptor.setTuitionTiming(person.getTuitionTiming());
+        descriptor.setPayments(person.getPayments());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +77,30 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Subject} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSubject(Set<Subject> subjects) {
+        descriptor.setSubjects((subjects != null) ? new HashSet<>(subjects) : null);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TuitionTiming} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withTuitionTiming(String tuitionTiming) {
+        descriptor.setTuitionTiming(new TuitionTiming(tuitionTiming));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPayments(List<Payment> payments) {
+        descriptor.setPayments((payments != null) ? new ArrayList<>(payments) : null);
         return this;
     }
 
