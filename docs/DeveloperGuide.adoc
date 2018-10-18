@@ -247,7 +247,7 @@ image:PaymentSequenceDiagram.png[width="800"]
             2D1. XmlAdaptedPay is responsible for converting the data type to the appropriate data type for display through the toModelType method.
         2e. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
-    3. The diagram below illustrates the sequence diagram.
+    3. The sequence diagram below illustrates the payment edit feature
 image:EditPaymentSequenceDiagram.png[width="800"]
 
 === Tutor's Earnings feature
