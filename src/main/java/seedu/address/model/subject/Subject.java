@@ -109,7 +109,6 @@ public class Subject {
      */
     public Subject add(Syllabus syllabus) {
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
-        newSubjectContent.add(syllabus);
         return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
     }
 
@@ -140,10 +139,16 @@ public class Subject {
     public Subject append(List<Syllabus> syllabusList) {
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
         for (Syllabus newSyllabus: syllabusList) {
-            newSubjectContent.add(newSyllabus);
+            if (!newSubjectContent.contains(newSyllabus)) {
+                newSubjectContent.add(newSyllabus);
+            }
         }
         return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
 
+    }
+
+    public boolean contains(Syllabus syllabus) {
+        return getSubjectContent().contains(syllabus);
     }
 
     /**
