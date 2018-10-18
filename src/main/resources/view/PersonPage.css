@@ -1,0 +1,169 @@
+body {
+    background-color: #383838;
+}
+
+header.main-detail {
+    width: 55%;
+    height: 180px;
+    text-align: left;
+    margin-left: 10px;
+    float: left;
+}
+
+header.payment-detail {
+    width: 40%;
+    height: 180px;
+    background-color: #3E3E3E;
+    text-align: center;
+    float: right;
+    color: white;
+}
+
+header.main-detail .personal-name {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+}
+
+header.main-detail .text-lead {
+    font-size: 30px;
+    line-height: 40px;
+    font-family: "Open Sans";
+}
+
+header.main-detail .personal-detail {
+    margin-top: 10px;
+    color: lightgrey;
+}
+
+header.main-detail .timing-detail {
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+    float: left;
+}
+
+header.main-detail .timing-detail .timing-text {
+    text-align: right;
+    margin-top: 35%;
+    margin-right: 5px;
+    font-size: 15px;
+    line-height: 20px;
+    font-family: "Droid Sans";
+    text-transform: uppercase;
+    color: lightslategrey;
+}
+
+header.main-detail .timing-detail .timing-text .timing-day {
+    font-size: 25px;
+    color: darkgrey;
+}
+
+header.main-detail .contact-detail {
+    width: 280px;
+    height: 60px;
+    text-align: left;
+    margin-left: 10px;
+    float: left;
+}
+
+header.main-detail .contact-detail .text-detail {
+    font-size: 13px;
+    line-height: 20px;
+    font-family: "Open Sans";
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+header.main-detail .contact-detail .text-italic {
+    font-size: 13px;
+    font-style: italic;
+    line-height: 20px;
+    font-family: "Open Sans";
+}
+
+.detail-subject-division {
+    clear:both;
+}
+
+.label {
+    resize: both;
+    color: white;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.label .label-text {
+    padding: 1px 3px;
+    resize: both;
+    background-color: #3e96;
+    border-radius: 5px;
+    font-size: 11px;
+    font-family: "Open Sans";
+    font-weight: bold;
+}
+
+header.payment-detail .payment-label {
+    resize: both;
+    display: inline-block;
+    margin-bottom: 3px;
+    text-anchor: middle;
+}
+
+header.payment-detail .payment-title {
+    padding: 3px 5px;
+    resize: both;
+    background-color: darkslateblue;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: "Open Sans";
+    font-weight: bold;
+}
+
+header.payment-detail .payment-numbers-panel {
+    width: 100%;
+}
+
+header.payment-detail .payment-numbers {
+    font-size: 13px;
+    line-height: 20px;
+    font-family: "Open Sans";
+    white-space: pre-wrap;
+}
+
+header.detail-subject-division .horizontal-divider {
+    width: 100%;
+    clear: both;
+}
+
+header.tags {
+    font-size: 15px;
+    line-height: 20px;
+    font-family: "Open Sans";
+    padding-top: 2px;
+    padding-bottom: 10px;
+    float: left;
+}
+
+header.tags .label .label-text {
+    background-color: mediumslateblue;
+}
+
+table.subject-table, th, td {
+    border: 1px solid antiquewhite;
+    border-collapse: collapse;
+}
+
+th, td {
+    font-size: 15px;
+    line-height: 20px;
+    font-family: "Open Sans";
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+th {
+    background-color: indianred;
+    width: 20%;
+}
