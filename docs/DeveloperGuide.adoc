@@ -242,7 +242,7 @@ image:PaymentSequenceDiagram.png[width="800"]
             2C4. The PayCommandParser method then returns a PayCommand object with payment object.
             2C5. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
             2C6. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
-            2C7. Alice person class contains payment class. The PayCommand execute method proceeds to loop through Alice's list of Payments to find the existing, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
+            2C7. Alice person class contains payment class. The PayCommand execute method proceeds to call editPaymentField to loop through Alice's list of Payments to find the existing payment and update with a new updated list of payments.
         2d. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
             2D1. XmlAdaptedPay is responsible for converting the data type to the appropriate data type for display through the toModelType method.
         2e. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
