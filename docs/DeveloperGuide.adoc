@@ -247,7 +247,7 @@ image:PaymentSequenceDiagram.png[width="800"]
             2D1. XmlAdaptedPay is responsible for converting the data type to the appropriate data type for display through the toModelType method.
         2e. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
-    3. The diagram below illustrates the sequence diagram.
+    3. The sequence diagram below illustrates the payment edit feature
 image:EditPaymentSequenceDiagram.png[width="800"]
 
 === Tutor's Earnings feature
@@ -284,7 +284,7 @@ image:EarningsSequenceDiagram.png[width="800"]
 The copy subject command operates by making a duplicate of the selected subject of the student and adds it the other student.
 
 [NOTE]
-If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied.
+If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied. Duplicate syllabus will not be added.
 
 Classes related to copy command and its functionality are listed below:
 

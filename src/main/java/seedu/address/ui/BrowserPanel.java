@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -13,7 +15,10 @@ import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
+import seedu.address.model.subject.Subject;
+import seedu.address.model.tag.Tag;
 
 /**
  * The Browser Panel of the App.
@@ -51,11 +56,33 @@ public class BrowserPanel extends UiPart<Region> {
         final StringBuilder subjectsBuilder = new StringBuilder();
         person.getSubjects().forEach(subjectsBuilder::append);
 
+        final StringBuilder subjectNamesBuilder = new StringBuilder();
+
+        List<Subject> subjectNames = new ArrayList<>(person.getSubjects());
+        for (int i = 0; i < subjectNames.size(); i++) {
+            subjectNamesBuilder.append(subjectNames.get(i).getSubjectName());
+            if (i != subjectNames.size() - 1) {
+                subjectNamesBuilder.append(" | ");
+            }
+        }
+
         final StringBuilder paymentsBuilder = new StringBuilder();
-        person.getPayments().forEach(paymentsBuilder::append);
+
+        List<Payment> payments = new ArrayList<>(person.getPayments());
+        for (int i = 0; i < payments.size(); i++) {
+            Payment selected = payments.get(i);
+            paymentsBuilder.append(String.format("Month: %5d     Year: %10d     Amount: %10d         ",
+                    selected.getMonth(), selected.getYear(), selected.getAmount()));
+        }
 
         final StringBuilder tagsBuilder = new StringBuilder();
-        person.getTags().forEach(tagsBuilder::append);
+        List<Tag> tags = new ArrayList<>(person.getTags());
+        for (int i = 0; i < tags.size(); i++) {
+            tagsBuilder.append(tags.get(i).toString());
+            if (i != tags.size() - 1) {
+                tagsBuilder.append(" | ");
+            }
+        }
 
         URL personPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
 
@@ -64,7 +91,9 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&phone=" + person.getPhone().value
                 + "&email=" + person.getEmail().value
                 + "&address=" + person.getAddress().value
-                + "&tuitionTiming=" + person.getTuitionTiming().value
+                + "&tuitionTimingDay=" + person.getTuitionTiming().day.toString().substring(0, 3)
+                + "&tuitionTimingTime=" + person.getTuitionTiming().time
+                + "&subjectNames=" + subjectNamesBuilder.toString()
                 + "&subjects=" + subjectsBuilder.toString()
                 + "&payments=" + paymentsBuilder.toString()
                 + "&tags=" + tagsBuilder.toString();
