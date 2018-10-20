@@ -185,6 +185,19 @@ public class ParserUtil {
     public static int parseMonth(String month) throws ParseException {
         requireNonNull(month);
         String trimmedMonth = month.trim();
+        boolean doesNotContainAllDigits = false;
+
+        for (int i = 0; i < trimmedMonth.length(); i++) {
+            if (!Character.isDigit(trimmedMonth.charAt(i))) {
+                doesNotContainAllDigits = true;
+                break;
+            }
+        }
+
+        if (doesNotContainAllDigits == true) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
+        }
+
         if (!Payment.isValidMonth(Integer.parseInt(trimmedMonth))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
         }
@@ -200,6 +213,20 @@ public class ParserUtil {
     public static int parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
+
+        boolean doesNotContainAllDigits = false;
+
+        for (int i = 0; i < trimmedYear.length(); i++) {
+            if (!Character.isDigit(trimmedYear.charAt(i))) {
+                doesNotContainAllDigits = true;
+                break;
+            }
+        }
+
+        if (doesNotContainAllDigits == true) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
+        }
+
         if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
@@ -263,39 +290,6 @@ public class ParserUtil {
             throw new ParseException(Syllabus.MESSAGE_SYLLABUS_CONSTRAINTS);
         }
         return new Syllabus(trimmedSyllabus, false);
-    }
-
-    /**
-     * Parses a {@code String day} into a {@code day}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code day} input is invalid.
-     */
-    public static DayOfWeek parseDay(String day) throws ParseException {
-        requireNonNull(day);
-        String trimmedDay = day.trim();
-        if (!trimmedDay.matches(TuitionTiming.DAY_REGEX)) {
-            throw new ParseException(GroupCommand.MESSAGE_USAGE);
-        }
-        return DayOfWeek.valueOf(trimmedDay.toUpperCase());
-
-    }
-
-    /**
-     * Parses a {@code String time} into a {@code time}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code time} input is invalid.
-     */
-    public static String parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-
-        if (!trimmedTime.matches(TuitionTiming.TIME_REGEX)) {
-            throw new ParseException(GroupCommand.MESSAGE_USAGE);
-        }
-        return trimmedTime;
-
     }
 
 }

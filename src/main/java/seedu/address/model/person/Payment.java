@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a payment in the TutorHelper.
@@ -54,7 +56,6 @@ public class Payment {
         this.year = payment.getYear();
         this.amount = payment.getAmount() + toAdd;
     }
-
 
     /**
      * Returns true if a given int is a valid number.

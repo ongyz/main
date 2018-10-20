@@ -1,12 +1,11 @@
 package seedu.address.storage;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.PayCommand;
 import seedu.address.model.person.Payment;
 
 /**
@@ -14,15 +13,13 @@ import seedu.address.model.person.Payment;
  */
 public class XmlAdaptedPay {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAdaptedPay.class);
-
     private Index studentIndex;
     @XmlElement(required = true)
-    private int amount;
+    private String amount;
     @XmlElement(required = true)
-    private int year;
+    private String year;
     @XmlElement(required = true)
-    private int month;
+    private String month;
 
     /*
      * Constructs an XmlAdaptedPay.
@@ -40,11 +37,11 @@ public class XmlAdaptedPay {
      * @param month month in which payment is made
      * @param year year in which payment is made
      */
-    public XmlAdaptedPay(Index index, int amount, int month, int year) {
+    public XmlAdaptedPay(Index index, String amount, String month, String year) {
         this.studentIndex = index;
-        this.amount = amount;
-        this.month = month;
-        this.year = year;
+        this.amount = String.valueOf(amount);
+        this.month = String.valueOf(month);
+        this.year = String.valueOf(year);
     }
 
     /**
@@ -53,9 +50,9 @@ public class XmlAdaptedPay {
      */
     public XmlAdaptedPay(Payment source) {
         this.studentIndex = source.getIndex();
-        this.amount = source.getAmount();
-        this.month = source.getMonth();
-        this.year = source.getYear();
+        this.amount = String.valueOf(source.getAmount());
+        this.month = String.valueOf(source.getMonth());
+        this.year = String.valueOf(source.getYear());
     }
 
     /**
@@ -64,14 +61,31 @@ public class XmlAdaptedPay {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Payment toModelType() throws IllegalValueException {
-        if (!Payment.isValidAmount(amount)) {
+
+        int integerAmount;
+        int integerMonth;
+        int integerYear;
+
+        //check if can convert string to integer
+        try{
+            integerAmount = Integer.valueOf(amount);
+            integerMonth = Integer.valueOf(month);
+            integerYear = Integer.valueOf(year);
+        } catch ( NumberFormatException e ){
+            throw new NumberFormatException(PayCommand.MESSAGE_USAGE);
+        }
+
+        //check if the integer value is of a valid form
+        if (!Payment.isValidAmount(integerAmount)) {
             throw new IllegalValueException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
-        } else if (!Payment.isValidMonth(month)) {
+        } else if (!Payment.isValidMonth(integerMonth)) {
             throw new IllegalValueException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
-        } else if (!Payment.isValidYear(year)) {
+        } else if (!Payment.isValidYear(integerYear)) {
             throw new IllegalValueException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
-        return new Payment(studentIndex, amount, month, year);
+
+        return new Payment(studentIndex, Integer.valueOf(amount),
+                Integer.valueOf(month), Integer.valueOf(year));
     }
 
     @Override

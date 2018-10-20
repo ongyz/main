@@ -53,4 +53,36 @@ public class PayCommandParserTest {
         assertParseFailure(pay, yearInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
 
     }
+
+    @Test
+    public void parse_WrongFieldInput_failure() {
+
+        PayCommandParser pay = new PayCommandParser();
+
+        String wrongIndexInput = " " + String.valueOf(-1)
+                + " " + String.valueOf(200)
+                + " " + String.valueOf(8)
+                + " " + String.valueOf(2018);
+        assertParseFailure(pay, wrongIndexInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+
+        String wrongAmountInput = " " + String.valueOf(1)
+                + " " + "$200"
+                + " " + String.valueOf(8)
+                + " " + String.valueOf(2018);
+        assertParseFailure(pay, wrongAmountInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+
+        String wrongMonthInput = String.valueOf(1)
+                + " " + String.valueOf(200)
+                + " " + String.valueOf(16)
+                + " " + String.valueOf(2018);
+
+        assertParseFailure(pay, wrongMonthInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+
+        String wrongYearInput = " " + String.valueOf(1)
+                + " " + String.valueOf(200)
+                + " " + String.valueOf(8)
+                + " " + "#2018";
+        assertParseFailure(pay, wrongYearInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+
+    }
 }
