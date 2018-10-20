@@ -189,11 +189,11 @@ Step 1. The tutor launches the application and wants to record a payment for his
 
 Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
 
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid idx/2 amt/400 m/11 y/2018
+Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid 2 400 11 2018
 
 Step 2b. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
 
-Step 2c. From the prefixes, PayCommandParser makes use of ArgumentMultimap to check if the inputs are of the correct format and it initialises a Payment object with the inputs.
+Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
 
 Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
 
@@ -232,11 +232,11 @@ Step 1. The tutor launches the application and wants to record a payment for his
 
 Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
 
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid idx/2 amt/400 m/11 y/2018
+Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid 2 400 11 2018
 
 Step 2b. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
 
-Step 2c. From the prefixes, PayCommandParser makes use of ArgumentMultimap to check if the inputs are of the correct format and it initialises a Payment object with the inputs.
+Step 2c. PayCommandParser check if the inputs are of the correct format and it initialises a Payment object with the inputs.
 
 Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
 
@@ -269,11 +269,11 @@ Given below is an example usage scenario and how the earning mechanism behaves a
 
 Step 1. The tutor launches the application and wants to view his/her earnings for the month of November 2018.
 
-Step 2. He/she enters input in the format of: earnings m/11 y/2018
+Step 2. He/she enters input in the format of: earnings 11 2018
 
 Step 2a. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, earnings) and creates the EarningsCommandParser object, followed by calling parse method, with the arguments passed in.
 
-Step 2b. From the prefixes, EarningCommandParser makes use of ArgumentMultimap to check if the inputs are of the correct format.
+Step 2b. EarningCommandParser checks if the inputs are of the correct format.
 
 Step 2b. The PayCommandParser method then returns a EarningCommand object with month and year passed in.
 

@@ -1,17 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -31,11 +25,8 @@ public class PayCommand extends Command {
             + ": Updates if a person has paid.\n"
             + "Parameters: "
             + "INDEX AMOUNT MONTH YEAR \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PAYMENT + "1 "
-            + PREFIX_PAYMENT_AMOUNT + "200 "
-            + PREFIX_PAYMENT_MONTH + "08 "
-            + PREFIX_PAYMENT_YEAR + "2018";
+            + "Example: " + COMMAND_WORD + " 1 200 08 2018 ";
+
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
 
     private Index targetIndex;
