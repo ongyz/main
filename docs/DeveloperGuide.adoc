@@ -142,6 +142,13 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::group[]
 === Group Students feature
+==== Current Implementation
+
+Classes related to Group and its functionality is listed below:
+
+* `AddressBookParser` -- Creates a GroupCommandParser object and parses the user's input.
+* `GroupCommandParser` -- Analyses the input, creates a predicate based on the input and returns a GroupCommand object with the predicate as the argument.
+* `GroupCommand` -- Filters the list based on the predicate and displays it to the user.
 
 Given below is an example usage scenario and how the group mechanism behaves at each step.
 
@@ -151,6 +158,8 @@ Step 2. Assuming that the application isn't empty, the user executes 'group Mond
 
 [NOTE]
 The user can execute `list` to re-display the full list of students again.
+[NOTE]
+The group command is CASE-SENSITIVE. E.g. Passing MONDAY as an input instead of Monday will throw an error.
 
 The following sequence diagram shows how the group operation works:
 
@@ -200,6 +209,46 @@ image::GroupSequenceDiagram.png[width="650"]
     4. The diagram below illustrates the sequence diagram.
 image:PaymentSequenceDiagram.png[width="800"]
 
+=== Students edit payment feature
+
+    1. Current implementation
+
+        The edit Payment mechanism is facilitated by VersionedAddressBook and FilteredList<Person>. VersionedAddressBook extends from AddressBook and classes related to Payment calls methods from VersionedAddressBook to retrieve students' data, update the Payment entry and display accordingly.
+
+        To be clearer, classes that are related to Payment and their functionality are as listed below:
+        a. AddressBookParser:
+            -Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
+        c. PayCommandParser
+            -Analyses the user's input and checks for any violation of syntax.
+            -Creates a Payment object with users' input.
+            -Returns a PayCommand object with Payment object being fed in.
+        b. PayCommand:
+            -Takes in a Payment object in its constructor to edit an existing Payment object
+            -Calls on methods in VersionedAddressBook to update edit on existing Payments made.
+        d. Payment:
+            -Contains fields to store student id, amount paid, month of payment and year of payment to compare if it is to be edited
+        e. XmlAdaptedPay
+            -Responsible for converting the format of data so that it can be displayed below the command text box and stored.
+        f. BrowserPanel
+            -Responsible for displaying payment details in browser panel.
+
+    2. Example usage scenario
+
+        2a. The tutor launches the application and wants to edit an existing payment for his/her student called Alice by updating the amount by another 200.
+        2b. He/she makes a mental note of Alice's student index as listed in the left side of the application as well as the month and year of the existing payment.
+        2c. Lets say, Alice has student id 2. The existing payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid idx/2 amt/200 m/11 y/2018
+            2C1. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+            2C3. From the prefixes, PayCommandParser makes use of ArgumentMultimap to check if the inputs are of the correct format and it initialises a Payment object with the inputs.
+            2C4. The PayCommandParser method then returns a PayCommand object with payment object.
+            2C5. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
+            2C6. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
+            2C7. Alice person class contains payment class. The PayCommand execute method proceeds to loop through Alice's list of Payments to find the existing, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
+        2d. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
+            2D1. XmlAdaptedPay is responsible for converting the data type to the appropriate data type for display through the toModelType method.
+        2e. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
+
+    3. The sequence diagram below illustrates the payment edit feature
+image:EditPaymentSequenceDiagram.png[width="800"]
 
 === Tutor's Earnings feature
     1. Current implementation
@@ -228,7 +277,86 @@ image:PaymentSequenceDiagram.png[width="800"]
     3. The diagram below illustrates the sequence diagram.
 image:EarningsSequenceDiagram.png[width="800"]
 
+// tag::copysub[]
+=== Copy Subject feature
+==== Current Implementation
 
+The copy subject command operates by making a duplicate of the selected subject of the student and adds it the other student.
+
+[NOTE]
+If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied. Duplicate syllabus will not be added.
+
+Classes related to copy command and its functionality are listed below:
+
+* `AddressBookParser` -- Creates CopySubCommandParser which parses the input from user.
+* `CopySubCommandParser` -- Parses user's input into proper argument and creates CopySubCommand
+* `CopySubCommand` -- Updates the target person based on the argument
+* `SubjectsUtil` -- Manage the finding and copying aspect of copysub command.
+
+Given below is an example usage scenario with 2 possible outcomes and how to copy function addresses each case.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. Assuming that the application isn't empty, the user executes `copysub 1 2 4`.
+
+Step 3. Assuming that each argument given is a valid input, the system will perform the copysub command.
+
+Step 4. The system will locate the _first_ student from the student list, and make a separate copy of the _second_ subject stored under the student data.
+
+Step 5. The system will locate the _fourth_ student from the student list, and make a decision.
+
+* Step 5a. If the same subject as _second_ subject in Step 4, system will append the content of subject of _second_ subject into the _fourth_ student.
+* Step 5b. If there is no subject same as _second_ subject in Step 4, system will add the _second_ subject as a new subject under the _fourth_ student.
+
+The process is described with sequence diagram below:
+
+image::CopySubSequenceDiagrams.png[width="650"]
+
+=== Add / Delete Subject (Upcoming in v1.3)
+
+==== Planned Implementation
+
+The add / delete subject mechanism is facilitated with `AddressBookParser`.
+Classes related to the functionality of the mechanism are listed below:
+
+* `AddressBookParser` -- Creates a `AddSubCommandParser` / `DeleteSubCommandParser` object and parses the user's input.
+* `AddSubCommandParser` / `DeleteSubCommandParser` -- Analyses user input to create a corresponding `Command` object.
+* `AddSubCommand` / `DeleteSubCommand` -- Execution results in addition / deletion of a subject for a specified student index.
+
+Given below is an example usage scenario of how the add / delete subject mechanism behaves at each step.
+
+===== Add Subject
+
+Step 1. The user launches the application.
+
+Step 2. The tutor executes a command of the format `addsub STUDENT_INDEX s/SUBJECT` on the CLI.
+
+Step 3. The arguments are parsed by `AddSubCommandParser`, which produces an instance of `AddSubCommand`.
+
+Step 4. `AddSubCommand.execute()` is called, and the supplied subject is added for the student at the specified student index by TutorHelper.
+
+===== Delete Subject
+
+Step 1. The user launches the application.
+
+Step 2. The tutor executes a command of the format `deletesub STUDENT_INDEX SUBJECT_INDEX` on the CLI.
+
+Step 3. The arguments are parsed by `DeleteSubCommandParser`, which produces an instance of `DeleteSubCommand`.
+
+Step 4. `DeleteSubCommand.execute()` is called, and the subject at the specified subject index of the student at the specified student index is deleted by TutorHelper.
+
+[TIP]
+The TutorHelper has to have at least 1 student as a precondition for both `addsub` and `deletesub`.
+[TIP]
+`deletesub` requires the student at the specified student index to have at least two subjects. After deletion, a student cannot have 0 subjects.
+
+The following sequence diagram shows how the `addsub` operation works:
+
+image::AddSubSequenceDiagram.png[width="650"]
+
+The following sequence diagram shows how the `deletesub` operation works:
+
+image::DeleteSubSequenceDiagram.png[width="650"]
 
 == Glossary
 . Subject : a branch of knowledge studied by the student

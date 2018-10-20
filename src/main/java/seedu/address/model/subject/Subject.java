@@ -61,7 +61,6 @@ public class Subject {
         return subjectType.stringRepresentation;
     }
 
-
     public List<Syllabus> getSubjectContent() {
         return subjectContent;
     }
@@ -108,7 +107,7 @@ public class Subject {
      * @param syllabus the {@code Syllabus} to be added
      * @return a new {@code Subject} containing the newly added syllabus
      */
-    public Subject addToSubjectContent(Syllabus syllabus) {
+    public Subject add(Syllabus syllabus) {
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
         newSubjectContent.add(syllabus);
         return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
@@ -122,7 +121,7 @@ public class Subject {
      *
      * @throws CommandException if {@code index} is out of bound of the subjectContent.
      */
-    public Subject removeFromSubjectContent(Index index) throws CommandException {
+    public Subject remove(Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
             throw new CommandException(MESSAGE_ERASESYLL_FAILED);
         }
@@ -133,13 +132,34 @@ public class Subject {
     }
 
     /**
+     * Append a {@code List<Syllabus>} to the current subject and returns
+     * a new {@code Subject} containing the newly added syllabus list.
+     * @param syllabusList the {@code List<Syllabus>} to be added
+     * @return a new {@code Subject} containing the newly added syllabus list.
+     */
+    public Subject append(List<Syllabus> syllabusList) {
+        List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
+        for (Syllabus newSyllabus: syllabusList) {
+            if (!newSubjectContent.contains(newSyllabus)) {
+                newSubjectContent.add(newSyllabus);
+            }
+        }
+        return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
+
+    }
+
+    public boolean contains(Syllabus syllabus) {
+        return getSubjectContent().contains(syllabus);
+    }
+
+    /**
      * Return a new {@code Subject} with the state of the syllabus
      * identified by the {@code Index index} flipped.
      * @param index the index of syllabus
      * @return new {@code Subject} with the changed syllabus
      * @throws CommandException if index is out of bound of the subjectContent list
      */
-    public Subject toggleSubjectContentState(Index index) throws CommandException {
+    public Subject toggleState(Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
             throw new CommandException(MESSAGE_ERASESYLL_FAILED);
         }

@@ -125,7 +125,7 @@ public class Payment {
      * Format state as text for viewing.
      */
     public String toString() {
-        return " [Month: " + month + " Year: " + year + " Amount: " + amount + "]";
+        return " Month: " + month + " Year: " + year + " Amount: " + amount;
     }
 
     @Override

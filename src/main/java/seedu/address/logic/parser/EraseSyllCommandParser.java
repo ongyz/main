@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.PERSON_INDEX_LOCATION;
-import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.RMTODO_NUMBER_OF_ARGS;
-import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.SUBJECT_INDEX_LOCATION;
-import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.SYLLABUS_INDEX_LOCATION;
+import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.NUMBER_OF_ARGS;
+import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.PERSON_INDEX;
+import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.SUBJECT_INDEX;
+import static seedu.address.logic.commands.EraseSyllCommand.EraseSyllFormatChecker.SYLLABUS_INDEX;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class EraseSyllCommandParser implements Parser<EraseSyllCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EraseSyllCommand.MESSAGE_USAGE), pe);
         }
 
-        if (indexList.size() != RMTODO_NUMBER_OF_ARGS) {
+        if (indexList.size() != NUMBER_OF_ARGS) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EraseSyllCommand.MESSAGE_USAGE));
         }
@@ -51,14 +51,14 @@ public class EraseSyllCommandParser implements Parser<EraseSyllCommand> {
     }
 
     private static Index getPersonIndex(List<Index> indexList) {
-        return indexList.get(PERSON_INDEX_LOCATION);
+        return indexList.get(PERSON_INDEX);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {
-        return indexList.get(SUBJECT_INDEX_LOCATION);
+        return indexList.get(SUBJECT_INDEX);
     }
 
     private static Index getSyllabusIndex(List<Index> indexList) {
-        return indexList.get(SYLLABUS_INDEX_LOCATION);
+        return indexList.get(SYLLABUS_INDEX);
     }
 }

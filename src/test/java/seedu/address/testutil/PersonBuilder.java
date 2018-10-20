@@ -11,9 +11,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.TuitionTiming;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuitiontiming.TuitionTiming;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -21,7 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_NAME = "Alex Tan";
     public static final String DEFAULT_PHONE = "94351253";
     public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";

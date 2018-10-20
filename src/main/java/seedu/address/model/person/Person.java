@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
  * Represents a Person in the address book.
@@ -108,12 +109,7 @@ public class Person {
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getSubjects().equals(getSubjects())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTuitionTiming().equals(getTuitionTiming())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getPayments().equals(getPayments());
-
+                && otherPerson.getAddress().equals(getAddress());
     }
 
     /**
@@ -156,20 +152,7 @@ public class Person {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress())
-                .append("\nSubjects: ");
-
-        getSubjects().forEach(builder::append);
-
-        builder.append("\nTuition Timing: ")
-                .append(getTuitionTiming())
-                .append("\nTags: ");
-
-        getTags().forEach(builder::append);
-
-        builder.append("\nPayments: ");
-        getPayments().forEach(builder::append);
-
+                .append(getAddress());
         return builder.toString();
     }
 }
