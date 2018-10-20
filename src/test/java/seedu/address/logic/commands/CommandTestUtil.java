@@ -38,8 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_SUBJECT_AMY = "Mathematics";
     public static final String VALID_SUBJECT_BOB = "Economics";
-    public static final String VALID_TUITIONTIMING_AMY = "Monday 4:00pm";
-    public static final String VALID_TUITIONTIMING_BOB = "Tuesday 6:30pm";
+    public static final String VALID_TUITION_TIMING_AMY = "Monday 4:00pm";
+    public static final String VALID_TUITION_TIMING_BOB = "Tuesday 6:30pm";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_SUBJECT = "Math";
@@ -55,19 +55,17 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
-    public static final String TUITIONTIMING_DESC_AMY = " " + PREFIX_DAY_AND_TIME + VALID_TUITIONTIMING_AMY;
-    public static final String TUITIONTIMING_DESC_BOB = " " + PREFIX_DAY_AND_TIME + VALID_TUITIONTIMING_BOB;
+    public static final String TUITION_TIMING_DESC_AMY = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_AMY;
+    public static final String TUITION_TIMING_DESC_BOB = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
-    public static final String TUITION_TIME_DESC = " " + PREFIX_DAY_AND_TIME + VALID_DAY_TIME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_SUJBECT_DESC = " " + PREFIX_SUBJECT; //empty string not allowed for subjects
-    public static final String INVALID_TUITIONTIMING_DESC = " "
+    public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT; //empty string not allowed for subjects
+    public static final String INVALID_TUITION_TIMING_DESC = " "
             + PREFIX_DAY_AND_TIME + "Monday 12pm"; // time needs to be in standard 12hr timing
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
