@@ -38,7 +38,6 @@ public class PayCommand extends Command {
             + PREFIX_PAYMENT_YEAR + "2018";
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
 
-    private final Logger logger = LogsCenter.getLogger(PayCommand.class);
     private Index targetIndex;
     private Payment newPayment;
 
