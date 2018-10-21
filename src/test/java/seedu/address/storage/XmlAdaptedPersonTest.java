@@ -155,7 +155,7 @@ public class XmlAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidPayment_throwsIllegalValueException(){
+    public void toModelType_invalidPayment_throwsIllegalValueException() {
         List<XmlAdaptedPay> invalidPayment = new ArrayList<>(VALID_PAYMENT);
         invalidPayment.add(new XmlAdaptedPay(Index.fromOneBased(2), INVALID_AMOUNT, INVALID_MONTH, INVALID_YEAR));
         XmlAdaptedPerson person =

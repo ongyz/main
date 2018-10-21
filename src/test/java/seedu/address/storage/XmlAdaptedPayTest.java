@@ -1,13 +1,13 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.model.person.Payment;
 import seedu.address.testutil.Assert;
-
-import static org.junit.Assert.assertEquals;
 
 public class XmlAdaptedPayTest {
 
@@ -31,7 +31,7 @@ public class XmlAdaptedPayTest {
     @Test
     public void toModelType_invalidAmount_throwsIllegalValueException() {
 
-        XmlAdaptedPay pay= new XmlAdaptedPay(VALID_INDEX, INVALID_AMOUNT, VALID_MONTH, VALID_YEAR);
+        XmlAdaptedPay pay = new XmlAdaptedPay(VALID_INDEX, INVALID_AMOUNT, VALID_MONTH, VALID_YEAR);
         String expectedMessage = PayCommand.MESSAGE_USAGE;
         Assert.assertThrows(NumberFormatException.class, expectedMessage, pay::toModelType);
 
@@ -40,7 +40,7 @@ public class XmlAdaptedPayTest {
     @Test
     public void toModelType_nullAmount_throwsIllegalValueException() {
 
-        XmlAdaptedPay pay= new XmlAdaptedPay(VALID_INDEX, null, VALID_MONTH, VALID_YEAR);
+        XmlAdaptedPay pay = new XmlAdaptedPay(VALID_INDEX, null, VALID_MONTH, VALID_YEAR);
         String expectedMessage = PayCommand.MESSAGE_USAGE;
         Assert.assertThrows(NumberFormatException.class, expectedMessage, pay::toModelType);
 
@@ -49,11 +49,11 @@ public class XmlAdaptedPayTest {
     @Test
     public void toModelType_invalidMonth_throwsIllegalValueException() {
 
-        XmlAdaptedPay pay= new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, INVALID_MONTH_NOT_INTEGER, VALID_YEAR);
+        XmlAdaptedPay pay = new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, INVALID_MONTH_NOT_INTEGER, VALID_YEAR);
         String expectedMessage = PayCommand.MESSAGE_USAGE;
         Assert.assertThrows(NumberFormatException.class, expectedMessage, pay::toModelType);
 
-        XmlAdaptedPay pay2= new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, INVALID_MONTH_WRONG_RANGE, VALID_YEAR);
+        XmlAdaptedPay pay2 = new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, INVALID_MONTH_WRONG_RANGE, VALID_YEAR);
         String expectedMessage2 = Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage2, pay2::toModelType);
 
@@ -62,7 +62,7 @@ public class XmlAdaptedPayTest {
     @Test
     public void toModelType_nullMonth_throwsIllegalValueException() {
 
-        XmlAdaptedPay pay= new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, null, VALID_YEAR);
+        XmlAdaptedPay pay = new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, null, VALID_YEAR);
         String expectedMessage = PayCommand.MESSAGE_USAGE;
         Assert.assertThrows(NumberFormatException.class, expectedMessage, pay::toModelType);
 
@@ -71,7 +71,7 @@ public class XmlAdaptedPayTest {
     @Test
     public void toModelType_invalidYear_throwsIllegalValueException() {
 
-        XmlAdaptedPay pay= new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, VALID_MONTH, INVALID_YEAR);
+        XmlAdaptedPay pay = new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, VALID_MONTH, INVALID_YEAR);
         String expectedMessage = PayCommand.MESSAGE_USAGE;
         Assert.assertThrows(NumberFormatException.class, expectedMessage, pay::toModelType);
 
@@ -80,7 +80,7 @@ public class XmlAdaptedPayTest {
     @Test
     public void toModelType_nullYear_throwsIllegalValueException() {
 
-        XmlAdaptedPay pay= new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, VALID_MONTH, INVALID_YEAR);
+        XmlAdaptedPay pay = new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, VALID_MONTH, INVALID_YEAR);
         String expectedMessage = PayCommand.MESSAGE_USAGE;
         Assert.assertThrows(NumberFormatException.class, expectedMessage, pay::toModelType);
 

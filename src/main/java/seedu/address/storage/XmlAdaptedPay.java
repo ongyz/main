@@ -71,7 +71,7 @@ public class XmlAdaptedPay {
             integerAmount = Integer.valueOf(amount);
             integerMonth = Integer.valueOf(month);
             integerYear = Integer.valueOf(year);
-        } catch ( NumberFormatException e ) {
+        } catch (NumberFormatException e) {
             throw new NumberFormatException(PayCommand.MESSAGE_USAGE);
         }
 
