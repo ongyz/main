@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EarningsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -25,7 +23,7 @@ public class EarningsCommandParser implements Parser<EarningsCommand> {
             String trimmedEarnings = args.trim();
             String[] separatedEarnings = trimmedEarnings.split("\\s");
 
-            if(separatedEarnings.length != 2){ //invalid number of fields
+            if (separatedEarnings.length != 2) { //invalid number of fields
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
             }
             String inputMonth = separatedEarnings[0];
@@ -36,7 +34,7 @@ public class EarningsCommandParser implements Parser<EarningsCommand> {
             this.year = ParserUtil.parseYear(inputYear);
             return new EarningsCommand(month, year);
 
-        }catch(ParseException pe){
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
         }
     }

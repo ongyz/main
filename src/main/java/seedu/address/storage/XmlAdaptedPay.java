@@ -67,11 +67,11 @@ public class XmlAdaptedPay {
         int integerYear;
 
         //check if can convert string to integer
-        try{
+        try {
             integerAmount = Integer.valueOf(amount);
             integerMonth = Integer.valueOf(month);
             integerYear = Integer.valueOf(year);
-        } catch ( NumberFormatException e ){
+        } catch ( NumberFormatException e ) {
             throw new NumberFormatException(PayCommand.MESSAGE_USAGE);
         }
 

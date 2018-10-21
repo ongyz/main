@@ -30,7 +30,7 @@ public class PayCommandParser implements Parser<PayCommand> {
             String trimmedPayment = args.trim();
             String[] separatedPayment = trimmedPayment.split("\\s");
 
-            if(separatedPayment.length != 4){ //invalid number of arguments
+            if (separatedPayment.length != 4) { //invalid number of arguments
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
             }
