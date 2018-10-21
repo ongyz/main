@@ -109,6 +109,7 @@ public class Subject {
      */
     public Subject add(Syllabus syllabus) {
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
+        newSubjectContent.add(syllabus);
         return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
     }
 
