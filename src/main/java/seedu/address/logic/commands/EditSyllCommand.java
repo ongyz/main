@@ -28,13 +28,13 @@ public class EditSyllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the syllabus of the person identified "
             + "by the student index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX"
+            + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX "
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_EDITSYLL_SUCCESS = "Edited syllabus to Person: %1$s";
     public static final String MESSAGE_SUBJECT_NOT_FOUND = "Subject index not found in Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_SYLLABUS = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS = "This syllabus already exists in the address book.";
 
     private final Index personIndex;
     private final Index subjectIndex;
@@ -60,7 +60,7 @@ public class EditSyllCommand extends Command {
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
 
-        if (subjects.size() < subjectIndex.getZeroBased()) {
+        if (subjects.size() < subjectIndex.getOneBased()) {
             throw new CommandException(String.format(MESSAGE_SUBJECT_NOT_FOUND, personTarget));
         }
 
