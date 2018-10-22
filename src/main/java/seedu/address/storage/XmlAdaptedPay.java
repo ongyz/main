@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -25,9 +27,7 @@ public class XmlAdaptedPay {
      * Constructs an XmlAdaptedPay.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPay(){
-
-    }
+    public XmlAdaptedPay(){}
 
     /**
      * Constructs a {@code XmlAdaptedPay} with the given {@code index},
@@ -88,6 +88,15 @@ public class XmlAdaptedPay {
                 Integer.valueOf(month), Integer.valueOf(year));
     }
 
+    /**
+     * Creates a list of {@code XmlAdaptedPay} for testing.
+     * @return list of {@code XmlAdaptedPay}.
+     */
+    public static List<XmlAdaptedPay> setUpTestPaymentValid() {
+        XmlAdaptedPay validPayment = new XmlAdaptedPay(Index.fromZeroBased(1), 200, 2 , 2018);
+        return Collections.singletonList(validPayment);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -98,8 +107,7 @@ public class XmlAdaptedPay {
             return false;
         }
 
-        return studentIndex.equals(((XmlAdaptedPay) other).studentIndex)
-                && amount == (((XmlAdaptedPay) other).amount)
+        return amount == (((XmlAdaptedPay) other).amount)
                 && month == (((XmlAdaptedPay) other).month)
                 && year == (((XmlAdaptedPay) other).year);
     }
