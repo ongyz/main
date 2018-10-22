@@ -96,7 +96,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * Returns true if both persons of the same name have similar identity field that is the same. Two person are the
+     * if they have the same name field, phone number, email as well as address field.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
