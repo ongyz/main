@@ -2,9 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_MONTH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_YEAR;
-
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
@@ -23,9 +20,7 @@ public class EarningsCommand extends Command {
             + ": Shows earnings of the month\n"
             + "Parameters: "
             + "MONTH YEAR \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PAYMENT_MONTH + "08 "
-            + PREFIX_PAYMENT_YEAR + "2018";
+            + "Example: " + COMMAND_WORD + " 08 2018 ";
 
     private int month;
     private int year;

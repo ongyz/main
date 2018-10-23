@@ -84,6 +84,18 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void sortByDay() {
+        versionedAddressBook.sortByDay();
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void sortByTime() {
+        versionedAddressBook.sortByTime();
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
