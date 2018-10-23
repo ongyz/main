@@ -116,7 +116,7 @@ public class ParserUtil {
         if (!SubjectType.isValidSubjectName(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
-        return new Subject(trimmedSubject);
+        return Subject.makeSubject(trimmedSubject);
     }
 
     /**

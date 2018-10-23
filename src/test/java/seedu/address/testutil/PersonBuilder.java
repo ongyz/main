@@ -42,7 +42,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        subjects.add(new Subject(DEFAULT_SUBJECT));
+        subjects.add(Subject.makeSubject(DEFAULT_SUBJECT));
         tuitionTiming = new TuitionTiming(DEFAULT_TUITION_TIMING);
         payments = new ArrayList<>();
         tags = new HashSet<>();
@@ -107,7 +107,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withSubjects(String ... subjectArray) {
         for (String subject: subjectArray) {
-            this.subjects.add(new Subject(subject));
+            this.subjects.add(Subject.makeSubject(subject));
         }
         return this;
     }
@@ -140,7 +140,7 @@ public class PersonBuilder {
      */
     private static Set<Subject> subjectBuilder() {
         Set<Subject> subjectSet = new HashSet<>();
-        subjectSet.add(new Subject("Mathematics"));
+        subjectSet.add(Subject.makeSubject("Mathematics"));
         return subjectSet;
     }
 

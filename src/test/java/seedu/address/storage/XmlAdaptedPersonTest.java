@@ -126,7 +126,7 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidSubject_throwsIllegalValueException() {
         List<XmlAdaptedSubject> invalidSubject = new ArrayList<>(VALID_SUBJECTS);
-        invalidSubject.add(new XmlAdaptedSubject(new Subject(INVALID_SUBJECT)));
+        invalidSubject.add(new XmlAdaptedSubject(Subject.makeSubject(INVALID_SUBJECT)));
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         invalidSubject, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
