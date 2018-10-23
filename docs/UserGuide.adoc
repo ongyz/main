@@ -345,6 +345,50 @@ Examples:
 * `copysub 1 1 n/John Doe n/Betsy`
 * `copysub 1 2 n/Alex`
 
+=== Add a subject to a student : `addsub`
+
+Add a new subject to a specified student. +
+Format: `addsub STUDENT_INDEX s/SUBJECT`
+
+[NOTE]
+====
+Adding a subject that already exists for the student will throw an error.
+====
+
+****
+* Adds a new subject `SUBJECT` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The student index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `addsub 1 s/Physics
+* `addsub 2 s/Mathematics
+
+=== Delete a subject from a student : `deletesub`
+
+Deletes a subject from a specified student. +
+Format: `deletesub STUDENT_INDEX SUBJECT_INDEX`
+
+[NOTE]
+====
+Attempting to delete the only subject left for a student will throw an error.
+A student must have at least one subject.
+====
+
+****
+* Deletes a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The student index and subject index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `deletesub 1 2`
+* `deletesub 3 1`
+
 === Exiting the program : `exit`
 
 Exits the program. +
