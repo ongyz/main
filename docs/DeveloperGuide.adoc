@@ -362,9 +362,9 @@ The process is described with sequence diagram below:
 
 image::CopySubSequenceDiagrams.png[width="650"]
 
-=== Add / Delete Subject (Upcoming in v1.3)
+=== Add / Delete Subject
 
-==== Planned Implementation
+==== Implementation
 
 The add / delete subject mechanism is facilitated with `AddressBookParser`.
 Classes related to the functionality of the mechanism are listed below:
