@@ -107,9 +107,7 @@ public class PersonBuilder {
      * Sets the {@code Subject} of the {@code Person} that we are building.
      */
     public PersonBuilder withSubjects(String ... subjectArray) {
-        for (String subject: subjectArray) {
-            this.subjects.add(new Subject(subject));
-        }
+        this.subjects = SampleDataUtil.getSubjectSet(subjectArray);
         return this;
     }
 

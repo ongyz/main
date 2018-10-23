@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITIONTIMING_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITIONTIMING_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,11 +65,11 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withSubjects(VALID_SUBJECT_AMY).withTuitionTiming(VALID_TUITIONTIMING_AMY)
+            .withSubjects(VALID_SUBJECT_AMY).withTuitionTiming(VALID_TUITION_TIMING_AMY)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withSubjects(VALID_SUBJECT_BOB).withTuitionTiming(VALID_TUITIONTIMING_BOB)
+            .withSubjects(VALID_SUBJECT_BOB).withTuitionTiming(VALID_TUITION_TIMING_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
