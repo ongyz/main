@@ -96,7 +96,7 @@ public class AppendSyllCommand extends Command {
     }
 
     /**
-     * Stores the details of todo command format.
+     * Stores the details of the AppendSyll command format.
      */
     public static class AppendSyllFormatChecker {
         public static final int PERSON_INDEX = 0;
