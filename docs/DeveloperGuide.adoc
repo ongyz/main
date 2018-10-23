@@ -218,8 +218,6 @@ image:PaymentSequenceDiagram.png[width="800"]
 
 === Students edit payment feature
 
-<<<<<<< HEAD
-
 ==== Current implementation
 
 Classes that are related to Payment and their functionality are as listed below:
@@ -292,7 +290,7 @@ The sequence diagram below illustrates the payment edit feature
         2e. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
     3. The sequence diagram below illustrates the payment edit feature
->>>>>>> pr/108
+
 image:EditPaymentSequenceDiagram.png[width="800"]
 
 === Tutor's Earnings feature
