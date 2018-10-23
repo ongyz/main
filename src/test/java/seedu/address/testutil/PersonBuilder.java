@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -106,9 +107,7 @@ public class PersonBuilder {
      * Sets the {@code Subject} of the {@code Person} that we are building.
      */
     public PersonBuilder withSubjects(String ... subjectArray) {
-        for (String subject: subjectArray) {
-            this.subjects.add(new Subject(subject));
-        }
+        this.subjects = SampleDataUtil.getSubjectSet(subjectArray);
         return this;
     }
 
@@ -117,6 +116,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withTuitionTiming(String tuitionTiming) {
         this.tuitionTiming = new TuitionTiming(tuitionTiming);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Payment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPayments(String ... paymentArray) {
+        for (String payment: paymentArray) {
+            String[] separatedPayment = payment.split("\\s");
+            this.payments.add(new Payment(
+                    Index.fromOneBased(Integer.valueOf(separatedPayment[0])),
+                    Integer.valueOf(separatedPayment[1]),
+                    Integer.valueOf(separatedPayment[2]),
+                    Integer.valueOf(separatedPayment[3])
+                    ));
+        }
         return this;
     }
 

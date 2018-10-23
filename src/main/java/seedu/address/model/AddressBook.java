@@ -2,11 +2,16 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
  * Wraps all data at the address-book level
@@ -91,6 +96,44 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Sorts the list based on day.
+     */
+    public void sortByDay() {
+        ObservableList<Person> personList = persons.asModifiableObservableList();
+        personList.sort(((p1, p2) -> {
+            int p1Day = p1.getTuitionTiming().day.getValue();
+            int p2Day = p2.getTuitionTiming().day.getValue();
+
+            if (p1Day - p2Day < 0) {
+                return -1;
+            } else if (p2Day - p1Day < 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }));
+    }
+
+    /**
+     * Sorts the list based on time.
+     */
+    public void sortByTime() {
+        ObservableList<Person> personList = persons.asModifiableObservableList();
+        personList.sort((p1, p2) -> {
+            String time1 = TuitionTiming.convertTwelveHourToTwentyFourHour(p1.getTuitionTiming().time);
+            String time2 = TuitionTiming.convertTwelveHourToTwentyFourHour(p2.getTuitionTiming().time);
+
+            if (time1.compareTo(time2) < 1) {
+                return -1;
+            } else if (time2.compareTo(time1) < 1) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
     }
 
     //// util methods
