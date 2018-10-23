@@ -19,9 +19,9 @@ import seedu.address.model.subject.Subject;
 public class AddSubCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AppendSyllCommand
-     * and returns an AppendSyllCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the AddSubCommand
+     * and returns an AddSubCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AddSubCommand parse(String args) throws ParseException {
         requireNonNull(args);

@@ -20,8 +20,7 @@ import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Finds all persons whose name matches the keyword and add the to do element to the data.
- * Find is case-insensitive.
+ * Appends a syllabus topic to a specified subject for a specified student in the TutorHelper.
  */
 public class AppendSyllCommand extends Command {
 
@@ -67,10 +66,10 @@ public class AppendSyllCommand extends Command {
     }
 
     /**
-     * Add syllabus to the person
-     * @param personTarget the person to add to
-     * @param subjectIndex the index of subject to add to
-     * @param syllabus the index of syllabus to add
+     * Add syllabus to the student.
+     * @param personTarget The student to add to.
+     * @param subjectIndex The index of subject to add to.
+     * @param syllabus The syllabus to add.
      * @return a new {@code Set<Subject>} with the specified syllabus added
      */
     private Set<Subject> addSubjectContentTo(Person personTarget, Index subjectIndex, Syllabus syllabus)
