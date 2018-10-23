@@ -55,7 +55,6 @@ public class Payment {
         this.amount = payment.getAmount() + toAdd;
     }
 
-
     /**
      * Returns true if a given int is a valid number.
      */
