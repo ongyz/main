@@ -93,7 +93,7 @@ public class XmlAdaptedPay {
      * @return list of {@code XmlAdaptedPay}.
      */
     public static List<XmlAdaptedPay> setUpTestPaymentValid() {
-        XmlAdaptedPay validPayment = new XmlAdaptedPay(Index.fromZeroBased(1), 200, 2 , 2018);
+        XmlAdaptedPay validPayment = new XmlAdaptedPay(Index.fromZeroBased(1), "200", "2" , "2018");
         return Collections.singletonList(validPayment);
     }
 
@@ -107,9 +107,9 @@ public class XmlAdaptedPay {
             return false;
         }
 
-        return amount == (((XmlAdaptedPay) other).amount)
-                && month == (((XmlAdaptedPay) other).month)
-                && year == (((XmlAdaptedPay) other).year);
+        return amount.equals(((XmlAdaptedPay) other).amount)
+                && month.equals(((XmlAdaptedPay) other).month)
+                && year.equals(((XmlAdaptedPay) other).year);
     }
 
     public int hashCode() {
