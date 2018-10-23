@@ -97,14 +97,18 @@ public class Subject {
         return other == this // short circuit if same object
                 || (other instanceof Subject // instanceof handles nulls
                 && subjectType.equals(((Subject) other).subjectType)
-                && contentAreSame((Subject) other)); // type check
+                && contentAreSame((Subject) other)); // content check
     }
 
     /**
      * Returns true if both subjects have the same content
      */
     public boolean contentAreSame(Subject other) {
-        for( int i = 0; i < getSubjectContent().size(); i++) {
+        if (getSubjectContent().size() != other.getSubjectContent().size()) {
+            return false;
+        }
+
+        for(int i = 0; i < getSubjectContent().size(); i++) {
             if (!getSubjectContent().get(i).equals(other.getSubjectContent().get(i))) {
                 return false;
             }
@@ -116,9 +120,10 @@ public class Subject {
      * Returns true if both subjects have the same {@code SubjectType}.
      * Defines a weaker notion of equal for class {@code Subject}.
      */
-    public boolean hasSameType(SubjectType other) {
-        return getSubjectContent().equals(other);
+    public boolean hasTypeOf(SubjectType other) {
+        return getSubjectType().equals(other);
     }
+
 
     @Override
     public int hashCode() {

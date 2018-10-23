@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import seedu.address.testutil.Assert;
+
 public class SubjectTypeTest {
 
     @Test
@@ -32,7 +34,6 @@ public class SubjectTypeTest {
 
         // unregistered subject names
         assertFalse(SubjectType.isValidSubjectName("Animal"));
-        assertFalse(SubjectType.isValidSubjectName(" "));
         assertFalse(SubjectType.isValidSubjectName("-"));
 
         assertTrue(SubjectType.isValidSubjectName("Math"));
@@ -40,5 +41,7 @@ public class SubjectTypeTest {
         assertTrue(SubjectType.isValidSubjectName("maTHematics"));
         assertTrue(SubjectType.isValidSubjectName("math"));
         assertTrue(SubjectType.isValidSubjectName("mATH"));
+
+        Assert.assertThrows(NullPointerException.class, () -> Syllabus.isValidSyllabus(null));
     }
 }

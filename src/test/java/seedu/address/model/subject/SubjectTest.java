@@ -50,14 +50,11 @@ public class SubjectTest {
         syllabuses.add(syllabusTwo);
         syllabuses.add(syllabusThree);
 
-        subject.add(syllabusOne);
+        Subject updatedSubject = subject.add(syllabusOne).append(syllabuses);
 
-        assertTrue(subject.contains(syllabusOne));
-
-        subject.append(syllabuses);
-
-        assertTrue(subject.contains(syllabusTwo));
-        assertTrue(subject.contains(syllabusThree));
+        assertTrue(updatedSubject.contains(syllabusOne));
+        assertTrue(updatedSubject.contains(syllabusTwo));
+        assertTrue(updatedSubject.contains(syllabusThree));
     }
 
     @Test
@@ -82,9 +79,11 @@ public class SubjectTest {
         // null subject name
         Assert.assertThrows(NullPointerException.class, () -> SubjectType.isValidSubjectName(null));
 
+        // empty subject name
+        Assert.assertThrows(IllegalArgumentException.class, () -> SubjectType.isValidSubjectName(""));
+        Assert.assertThrows(IllegalArgumentException.class, () -> SubjectType.isValidSubjectName(" "));
+
         // invalid subject
-        assertFalse(SubjectType.isValidSubjectName("")); // empty string
-        assertFalse(SubjectType.isValidSubjectName(" ")); // spaces only
         assertFalse(SubjectType.isValidSubjectName("-")); // one character
         assertFalse(SubjectType.isValidSubjectName("Book")); // non valid Subject name
 
@@ -106,17 +105,15 @@ public class SubjectTest {
         Subject mathematicsUppercase = Subject.makeSubject("MATHEMATICS");
 
         Subject physics = new Subject(SubjectType.Physics, new ArrayList<>(), 0);
-        Subject physicsFilled = new Subject(SubjectType.Physics, new ArrayList<>(), 0);
-
-        physicsFilled.add(Syllabus.makeSyllabus("Quantum Physics"));
+        Subject physicsFilled = physics.add(Syllabus.makeSyllabus("Quantum Physics"));
 
         // Identity check
         assertTrue(biology.equals(biology));
         assertTrue(biology.equals(biologyPartial));
         assertTrue(mathematics.equals(mathematicsUppercase));
 
-        // True by name
-        assertTrue(physics.getSubjectName().equals(physicsFilled));
+        // True by type
+        assertTrue(physics.hasTypeOf(physicsFilled.getSubjectType()));
 
         // False due to different content
         assertFalse(physics.equals(physicsFilled));
@@ -129,16 +126,16 @@ public class SubjectTest {
     @Test
     public void isCompletionRateUpdating() throws CommandException {
         Subject subject = Subject.makeSubject("Chemistry");
-        subject.add(Syllabus.makeSyllabus("Kinetics"));
-        subject.add(Syllabus.makeSyllabus("Organic Chemistry"));
+        Subject updatedSubject = subject.add(Syllabus.makeSyllabus("Kinetics"))
+                                        .add(Syllabus.makeSyllabus("Organic Chemistry"))
+                                        .toggleState(Index.fromOneBased(1));
 
-        subject.toggleState(Index.fromOneBased(1));
-        assertEquals(0.5f, subject.getCompletionRate(), 0.001);
+        assertEquals(0.5f, updatedSubject.getCompletionRate(), 0.001);
 
-        subject.toggleState(Index.fromOneBased(2));
-        assertEquals(1.0f, subject.getCompletionRate(), 0.001);
+        Subject markedSubject = updatedSubject.toggleState(Index.fromOneBased(2));
+        assertEquals(1.0f, markedSubject.getCompletionRate(), 0.001);
 
-        subject.toggleState(Index.fromOneBased(1));
-        assertEquals(0.5f, subject.getCompletionRate(), 0.001);
+        Subject unmarkedSubject = markedSubject.toggleState(Index.fromOneBased(1));
+        assertEquals(0.5f, unmarkedSubject.getCompletionRate(), 0.001);
     }
 }
