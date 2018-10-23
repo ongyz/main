@@ -252,7 +252,7 @@ Step 4. XmlAdaptedPay is responsible for converting the data type to the appropr
 Step 5. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
 The sequence diagram below illustrates the payment edit feature
-=======
+
     1. Current implementation
 
         The edit Payment mechanism is facilitated by VersionedAddressBook and FilteredList<Person>. VersionedAddressBook extends from AddressBook and classes related to Payment calls methods from VersionedAddressBook to retrieve students' data, update the Payment entry and display accordingly.
@@ -294,6 +294,7 @@ The sequence diagram below illustrates the payment edit feature
 image:EditPaymentSequenceDiagram.png[width="800"]
 
 === Tutor's Earnings feature
+
 ==== Current implementation
 
 The Earnings mechanism is mainly facilitated by the filteredPersonList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
