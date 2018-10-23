@@ -9,7 +9,7 @@ class SubjectTypeTest {
 
 
     @Test
-    public void testisSameType() {
+    public void isSameType() {
         SubjectType subjectTypeOne = SubjectType.convertStringToSubjectName("Math");
         SubjectType subjectTypeTwo = SubjectType.convertStringToSubjectName("Mathematics");
         SubjectType subjectTypeThree = SubjectType.convertStringToSubjectName("maTHemAtics");
