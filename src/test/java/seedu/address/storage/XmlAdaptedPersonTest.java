@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -26,7 +27,9 @@ public class XmlAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SUBJECT = "chinese";
     private static final String INVALID_TUITION_TIMING = "Friday, 10:00pm";
-    private static final String INVALID_PAYMENT = "$200";
+    private static final String INVALID_MONTH = "16";
+    private static final String INVALID_AMOUNT = "$200";
+    private static final String INVALID_YEAR = "$$22";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -151,6 +154,15 @@ public class XmlAdaptedPersonTest {
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-    //null
+    @Test
+    public void toModelType_invalidPayment_throwsIllegalValueException() {
+        List<XmlAdaptedPay> invalidPayment = new ArrayList<>(VALID_PAYMENT);
+        invalidPayment.add(new XmlAdaptedPay(Index.fromOneBased(2), INVALID_AMOUNT, INVALID_MONTH, INVALID_YEAR));
+        XmlAdaptedPerson person =
+                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SUBJECTS, VALID_TUITION_TIMING, VALID_TAGS, invalidPayment);
+        Assert.assertThrows(NumberFormatException.class, person::toModelType);
+
+    }
 
 }

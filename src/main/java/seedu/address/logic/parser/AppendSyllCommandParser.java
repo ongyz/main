@@ -15,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.subject.Syllabus;
 
 /**
- * Parses input arguments and creates a new Appemark ndSyllCommand object
+ * Parses input arguments and creates a new AppendSyllCommand object
  */
 public class AppendSyllCommandParser implements Parser<AppendSyllCommand> {
 

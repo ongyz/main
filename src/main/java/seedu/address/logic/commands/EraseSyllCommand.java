@@ -18,8 +18,7 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Finds all persons whose name matches the keyword and add the to do element to the data.
- * Find is case-insensitive.
+ * Removes a syllabus topic from a specified subject for a specified student.
  */
 public class EraseSyllCommand extends Command {
 
@@ -63,8 +62,8 @@ public class EraseSyllCommand extends Command {
     }
 
     /**
-     * Removes syllabus from the person specified
-     * @param personTarget the person to remove from
+     * Removes syllabus topic from the specified student.
+     * @param personTarget The student to remove from.
      * @return a new {@code Set<Subject>} with the specified syllabus removed
      * @throws CommandException if the index to remove from is invalid
      */
