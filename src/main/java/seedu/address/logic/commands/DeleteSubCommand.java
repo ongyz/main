@@ -33,8 +33,8 @@ public class DeleteSubCommand extends Command {
             + "2";
 
     public static final String MESSAGE_DELETESUB_SUCCESS = "Deleted subject from student: %1$s";
-    public static final String MESSAGE_DELETESUB_FAIL = "At least one subject must be studied by student: %1$s";
-    public static final String MESSAGE_SUBJECTINDEX_OUT_OF_BOUNDS = "Subject does not exist.";
+    public static final String MESSAGE_DELETE_ONLY_SUBJECT = "At least one subject must be studied by student: %1$s";
+    public static final String MESSAGE_SUBJECT_INDEX_OUT_OF_BOUNDS = "Subject does not exist.";
 
     private final Index studentIndex;
     private final Index subjectIndex;
@@ -73,11 +73,11 @@ public class DeleteSubCommand extends Command {
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
 
         if (isSubjectIndexOutOfBounds(subjects)) {
-            throw new CommandException(MESSAGE_SUBJECTINDEX_OUT_OF_BOUNDS);
+            throw new CommandException(MESSAGE_SUBJECT_INDEX_OUT_OF_BOUNDS);
         }
 
         if (hasOneSubject(subjects)) {
-            throw new CommandException(String.format(MESSAGE_DELETESUB_FAIL, studentTarget));
+            throw new CommandException(String.format(MESSAGE_DELETE_ONLY_SUBJECT, studentTarget));
         }
 
         List<Subject> updatedSubjects = subjects;
