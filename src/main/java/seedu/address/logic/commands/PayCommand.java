@@ -51,19 +51,15 @@ public class PayCommand extends Command {
 
         List<Payment> pay = personTarget.getPayments();
 
-        for (int i = 0; i < pay.size(); i++) {
-            if (pay.get(i).getMonth() == newPayment.getMonth() && pay.get(i).getYear() == newPayment.getYear()) {
-                pay.set(i, new Payment(pay.get(i), newPayment.getAmount()));
-                newEntry = false;
-                break;
-            }
-        }
+        newEntry = findPaymentToUpdate(pay, newPayment);
 
-        if (newEntry) {
+        if (!newEntry) {
             if (pay.size() > 10) {
                 pay.remove(0);
             }
             pay = updatePayment(personTarget.getPayments(), newPayment);
+        } else {
+            pay = editPaymentField(pay, newPayment);
         }
 
         Person personToPay = new Person(personTarget.getName(), personTarget.getPhone(),
@@ -84,6 +80,37 @@ public class PayCommand extends Command {
         List<Payment> updatedPayment = new ArrayList<>(oldPayments);
         updatedPayment.add(newPayment);
         return updatedPayment;
+    }
+
+    /**
+     * Checks if person to edit has the payment field.
+     * @param payments the list of payment to check for entry with same details.
+     * @param toFind the payment entry to edit.
+     * @return true if payment field has already existed; false otherwise.
+     */
+    private boolean findPaymentToUpdate(List<Payment> payments, Payment toFind) {
+        for (int i = 0; i < payments.size(); i++) {
+            if (payments.get(i).getMonth() == toFind.getMonth() && payments.get(i).getYear() == toFind.getYear()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Updates payment field in list of payments.
+     * @param payments the list of payment to check for entry with same details.
+     * @param toFind the payment entry to edit.
+     * @return the edited list of payments.
+     */
+    private List<Payment> editPaymentField(List<Payment> payments, Payment toFind) {
+        for (int i = 0; i < payments.size(); i++) {
+            if (payments.get(i).getMonth() == toFind.getMonth() && payments.get(i).getYear() == toFind.getYear()) {
+                payments.set(i, new Payment(payments.get(i), toFind.getAmount()));
+                break;
+            }
+        }
+        return payments;
     }
 
     @Override
