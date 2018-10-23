@@ -21,7 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_NAME = "Alex Tan";
     public static final String DEFAULT_PHONE = "94351253";
     public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
@@ -106,9 +106,7 @@ public class PersonBuilder {
      * Sets the {@code Subject} of the {@code Person} that we are building.
      */
     public PersonBuilder withSubjects(String ... subjectArray) {
-        for (String subject: subjectArray) {
-            this.subjects.add(new Subject(subject));
-        }
+        this.subjects = SampleDataUtil.getSubjectSet(subjectArray);
         return this;
     }
 
