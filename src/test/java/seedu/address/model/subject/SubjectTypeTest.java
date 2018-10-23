@@ -1,12 +1,11 @@
 package seedu.address.model.subject;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-class SubjectTypeTest {
-
+public class SubjectTypeTest {
 
     @Test
     public void isSameType() {

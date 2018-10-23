@@ -1,13 +1,13 @@
 package seedu.address.model.subject;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
-class SyllabusTest {
+public class SyllabusTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {

@@ -1,8 +1,8 @@
 package seedu.address.model.subject;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.testutil.Assert;
 
-class SubjectTest {
+public class SubjectTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
