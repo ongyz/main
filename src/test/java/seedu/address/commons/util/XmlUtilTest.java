@@ -46,7 +46,7 @@ public class XmlUtilTest {
     private static final String VALID_TUITION_TIMING = "Monday, 6:00pm";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedSubject> VALID_SUBJECTS =
-            Collections.singletonList(new XmlAdaptedSubject(new Subject("Mathematics")));
+            Collections.singletonList(new XmlAdaptedSubject(Subject.makeSubject("Mathematics")));
     private static final List<XmlAdaptedPay> VALID_PAYMENT = Collections.singletonList(new XmlAdaptedPay());
 
     @Rule
@@ -88,7 +88,6 @@ public class XmlUtilTest {
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(null, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_SUBJECTS, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        System.out.println(actualPerson);
         assertEquals(expectedPerson, actualPerson);
     }
 

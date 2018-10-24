@@ -152,10 +152,21 @@ public class AddCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortByTime() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByDay() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stu
+     * b that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
