@@ -96,10 +96,19 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code psayment} into a {@code List<Payment>} and set it to the {@code EditPersonDescriptor} that we
+     * are building.
      */
     public EditPersonDescriptorBuilder withPayments(List<Payment> payments) {
         descriptor.setPayments((payments != null) ? new ArrayList<>(payments) : null);
+        return this;
+    }
+
+    /**
+     * Sets an empty {@code List<Payment>} and set it to the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmptyPayments() {
+        descriptor.setPayments(null);
         return this;
     }
 

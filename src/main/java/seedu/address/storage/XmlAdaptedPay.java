@@ -107,10 +107,10 @@ public class XmlAdaptedPay {
             return false;
         }
 
-        return studentIndex.equals(((XmlAdaptedPay) other).studentIndex)
-                && amount == (((XmlAdaptedPay) other).amount)
-                && month == (((XmlAdaptedPay) other).month)
-                && year == (((XmlAdaptedPay) other).year);
+
+        return amount.equals(((XmlAdaptedPay) other).amount)
+                && month.equals(((XmlAdaptedPay) other).month)
+                && year.equals(((XmlAdaptedPay) other).year);
     }
 
     public int hashCode() {
