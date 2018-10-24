@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -34,9 +33,9 @@ import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code MarkCommand}.
+ * {@code EraseSyllCommand}.
  */
-public class MarkCommandTest {
+public class EraseSyllCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -45,48 +44,44 @@ public class MarkCommandTest {
     @Test
     public void execute_validIndexesUnfilteredList_success() throws CommandException {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand
+                (INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, personTarget);
+        String expectedMessage = String.format(EraseSyllCommand.MESSAGE_ERASESYLL_SUCCESS, personTarget);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        Person newPerson = simulateMarkCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        Person newPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(markCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(eraseSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidIndexSubjectUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand EraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(EraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
     }
 
     @Test
     public void execute_invalidIndexSyllabusUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget
-                .getSubjects()
-                .stream()
-                .collect(Collectors.toList())
-                .get(INDEX_FIRST_PERSON.getZeroBased())
-                .getSubjectContent().size() + 1);
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex);
+        Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
     }
 
     @Test
@@ -94,14 +89,14 @@ public class MarkCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, personTarget);
-        Person updatedPerson = simulateMarkCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        String expectedMessage = String.format(EraseSyllCommand.MESSAGE_ERASESYLL_SUCCESS, personTarget);
+        Person updatedPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         expectedModel.updatePerson(personTarget, updatedPerson);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(markCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(eraseSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
@@ -111,9 +106,9 @@ public class MarkCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
 
@@ -121,32 +116,37 @@ public class MarkCommandTest {
     public void execute_invalidIndexSubjectFilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
     }
 
     @Test
     public void execute_invalidIndexSyllabusFilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
-
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        Index outOfBoundIndex = Index.fromOneBased(personTarget
+                .getSubjects()
+                .stream()
+                .collect(Collectors.toList())
+                .get(INDEX_FIRST_PERSON.getZeroBased())
+                .getSubjectContent().size() + 1);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_SUBJECT, outOfBoundIndex);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        Person newPerson = simulateMarkCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        Person newPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.commitAddressBook();
 
-        // mark -> first person marked
-        markCommand.execute(model, commandHistory);
+        // EraseSyll -> first person syllabus is erased
+        eraseSyllCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoAddressBook();
@@ -160,10 +160,10 @@ public class MarkCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MarkCommand markCommand = new MarkCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -172,47 +172,39 @@ public class MarkCommandTest {
 
     @Test
     public void equals() {
-        MarkCommand markFirstCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        MarkCommand markSecondCommand = new MarkCommand(INDEX_SECOND_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllFirstCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllSecondCommand = new EraseSyllCommand(INDEX_SECOND_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         // same object -> returns true
-        assertEquals(markFirstCommand, markFirstCommand);
+        assertEquals(eraseSyllFirstCommand, eraseSyllFirstCommand);
 
         // same values -> returns true
-        MarkCommand markFirstCommandCopy = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        assertEquals(markFirstCommand, markFirstCommandCopy);
+        EraseSyllCommand EraseSyllFirstCommandCopy = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        assertEquals(eraseSyllFirstCommand, EraseSyllFirstCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(markFirstCommand, 1);
+        assertNotEquals(eraseSyllFirstCommand, 1);
 
         // null -> returns false
-        assertNotEquals(markFirstCommand, null);
+        assertNotEquals(eraseSyllFirstCommand, null);
 
-        // different person -> returns false
-        assertNotEquals(markFirstCommand, markSecondCommand);
+        // different command -> returns false
+        assertNotEquals(eraseSyllFirstCommand, eraseSyllSecondCommand);
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Simulates and returns a new {@code Person} created by EraseSyllCommand.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
-    }
-
-    /**
-     * Simulates and returns a new {@code Person} created by MarkCommand.
-     */
-    private Person simulateMarkCommand(Person personTarget, Index subjectIndex, Index syllabusIndex)
+    private Person simulateEraseSyllCommand(Person personTarget, Index subjectIndex, Index syllabusIndex)
             throws CommandException {
         List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
 
-        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).toggleState(syllabusIndex);
+        Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).remove(syllabusIndex);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
 
         return SubjectsUtil.createPersonWithNewSubjects(personTarget, newSubjects);
     }
+
 }
