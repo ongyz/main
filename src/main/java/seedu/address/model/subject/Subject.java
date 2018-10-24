@@ -26,25 +26,28 @@ public class Subject {
     private final float completionRate;
 
     /**
-     * Constructs a new {@code Subject} from {@code String subjectName}.
-     *
-     * @param subjectName Subjects that the student is taking.
-     */
-    public Subject(String subjectName) {
-        requireNonNull(subjectName);
-        checkArgument(isValidSubjectName(subjectName), MESSAGE_SUBJECT_CONSTRAINTS);
-        this.subjectType = convertStringToSubjectName(subjectName);
-        completionRate = 0;
-    }
-
-    /**
-     * Alternative constructor to guarantee immutability.
+     * Constructor to guarantee immutability.
+     * @param subjectType the subject type
+     * @param subjectContent the content of the subject
+     * @param completionRate the completion rate of subject
      */
     public Subject(SubjectType subjectType, List<Syllabus> subjectContent, float completionRate) {
         requireNonNull(subjectType);
         this.subjectType = subjectType;
         this.subjectContent.addAll(subjectContent);
         this.completionRate = completionRate;
+    }
+
+    /**
+     * Constructs a new {@code Subject} from {@code String subjectName}.
+     *
+     * @param subjectName Subjects that the student is taking.
+     */
+    public static Subject makeSubject(String subjectName) {
+        requireNonNull(subjectName);
+        checkArgument(isValidSubjectName(subjectName), MESSAGE_SUBJECT_CONSTRAINTS);
+        Subject subject = new Subject(convertStringToSubjectName(subjectName), new ArrayList<>(), 0);
+        return subject;
     }
 
     /**
@@ -87,14 +90,40 @@ public class Subject {
     }
 
     /**
-     * Returns true if both subjects have the same {@code SubjectType}
+     * Returns true if both subjects have the same {@code SubjectType} and content
      */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Subject // instanceof handles nulls
-                && subjectType.equals(((Subject) other).subjectType)); // state check
+                && subjectType.equals(((Subject) other).subjectType)
+                && contentAreSame((Subject) other)); // content check
     }
+
+    /**
+     * Returns true if both subjects have the same content
+     */
+    public boolean contentAreSame(Subject other) {
+        if (getSubjectContent().size() != other.getSubjectContent().size()) {
+            return false;
+        }
+
+        for(int i = 0; i < getSubjectContent().size(); i++) {
+            if (!getSubjectContent().get(i).equals(other.getSubjectContent().get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if both subjects have the same {@code SubjectType}.
+     * Defines a weaker notion of equal for class {@code Subject}.
+     */
+    public boolean hasTypeOf(SubjectType other) {
+        return getSubjectType().equals(other);
+    }
+
 
     @Override
     public int hashCode() {
@@ -204,13 +233,5 @@ public class Subject {
         }
         float completionRate = (float) numOfSyllabusCompleted / subjectContentLength;
         return new Subject(getSubjectType(), getSubjectContent(), completionRate);
-    }
-
-    /**
-     * Removes all the {@code Syllabus} from the syllabus book
-     * @return an empty {@code SyllabusBook}
-     */
-    public Subject clearSubjectContent() {
-        return new Subject(getSubjectName());
     }
 }

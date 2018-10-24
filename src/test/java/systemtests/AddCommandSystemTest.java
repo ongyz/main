@@ -91,7 +91,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
          */
         toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
-        assertCommandSuccess(command, toAdd);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add to empty address book -> added */
         deleteAllPersons();

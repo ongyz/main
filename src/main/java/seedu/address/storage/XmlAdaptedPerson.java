@@ -63,9 +63,7 @@ public class XmlAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (subjects != null) {
-            this.subjects = new ArrayList<>(subjects);
-        }
+        this.subjects = subjects;
         this.tuitionTiming = tuitionTiming;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -110,6 +108,9 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        if (subjects == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
+        }
         final List<Subject> personSubjects = new ArrayList<>();
         for (XmlAdaptedSubject subject : subjects) {
             personSubjects.add(subject.toModelType());

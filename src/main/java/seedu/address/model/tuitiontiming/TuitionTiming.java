@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
+import java.util.Date;
 
 /**
  * Represents tuition timing in TutorHelper.
@@ -64,18 +65,19 @@ public class TuitionTiming {
     /**
      * Converts the 12hours time into 24hours time.
      * @param time Time in hh:mm format. E.g. 12:00pm.
-     * @return a 24hour version of {@code time} as an int. E.g. 1:00pm converts to 1300.
+     * @return a 24hour version of {@code time}. E.g. 1:00pm converts to 13:00.
      */
-    public static SimpleDateFormat convertTwelveHourToTwentyFourHour(String time) {
+    public static String convertTwelveHourToTwentyFourHour(String time) {
         requireNonNull(time);
+        String newTime = null;
         SimpleDateFormat timeIn12Hour = new SimpleDateFormat("hh:mmaa");
         SimpleDateFormat timeIn24Hour = new SimpleDateFormat("HH:mm");
         try {
-            timeIn24Hour.format(timeIn12Hour.parse(time));
+            newTime = timeIn24Hour.format(timeIn12Hour.parse(time));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return timeIn24Hour;
+        return newTime;
     }
 
     /**

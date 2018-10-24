@@ -35,7 +35,7 @@ public enum SubjectType {
      */
     public static String listRepresentation() {
         StringBuilder builder = new StringBuilder();
-        Arrays.stream(values()).forEach(subjectEnum -> builder.append(subjectEnum.stringRepresentation));
+        Arrays.stream(values()).forEach(subjectEnum -> builder.append(subjectEnum.stringRepresentation + " "));
         return builder.toString();
     }
 
