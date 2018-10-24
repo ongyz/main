@@ -33,7 +33,7 @@ public class SubjectsUtil {
      * Returns true if {@code Person} has the same subject type as {@code SubjectType}
      */
     public static boolean hasSubject(Person person, SubjectType type) {
-        return person.getSubjects().stream().anyMatch(subject -> subject.getSubjectType().equals(type));
+        return person.getSubjects().stream().anyMatch(subject -> subject.hasTypeOf(type));
     }
 
     /**
@@ -44,7 +44,7 @@ public class SubjectsUtil {
         List<Subject> subjectList = new ArrayList<>(person.getSubjects());
         for (int i = 0; i < subjectList.size(); i++) {
             Subject subject = subjectList.get(i);
-            if (subject.getSubjectType().equals(type)) {
+            if (subject.hasTypeOf(type)) {
                 index = Optional.of(Index.fromZeroBased(i));
             }
         }
