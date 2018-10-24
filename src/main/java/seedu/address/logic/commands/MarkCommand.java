@@ -97,7 +97,7 @@ public class MarkCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof MarkCommand // instanceof handles nulls
                 && personIndex.equals(((MarkCommand) other).personIndex))
-                && syllabusIndex.equals(((MarkCommand) other).subjectIndex)
+                && subjectIndex.equals(((MarkCommand) other).subjectIndex)
                 && syllabusIndex.equals(((MarkCommand) other).syllabusIndex); // state check
     }
 

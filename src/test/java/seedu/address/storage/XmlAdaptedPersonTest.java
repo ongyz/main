@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.tuitiontiming.TuitionTiming;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedPersonTest {
@@ -26,7 +27,7 @@ public class XmlAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SUBJECT = "chinese";
-    private static final String INVALID_TUITION_TIMING = "Friday, 10:00pm";
+    private static final String INVALID_TUITION_TIMING = "Frida, 10.00pm";
     private static final String INVALID_MONTH = "16";
     private static final String INVALID_AMOUNT = "$200";
     private static final String INVALID_YEAR = "$$22";
@@ -129,11 +130,11 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidSubject_throwsIllegalValueException() {
         List<XmlAdaptedSubject> invalidSubject = new ArrayList<>(VALID_SUBJECTS);
-        invalidSubject.add(new XmlAdaptedSubject(new Subject(INVALID_SUBJECT)));
+        invalidSubject.add(new XmlAdaptedSubject(Subject.makeSubject(INVALID_SUBJECT)));
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         invalidSubject, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
+        String expectedMessage = Subject.MESSAGE_SUBJECT_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -141,7 +142,7 @@ public class XmlAdaptedPersonTest {
     public void toModelType_nullSubject_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 null, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -150,7 +151,7 @@ public class XmlAdaptedPersonTest {
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_SUBJECTS, INVALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
+        String expectedMessage = TuitionTiming.MESSAGE_TUITION_TIMING_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
