@@ -25,7 +25,8 @@ public class AppendSyllCommandParserTest {
         assertParseSuccess(parser, "2 3 sy/Kinetics",
                 new AppendSyllCommand(INDEX_SECOND_PERSON, INDEX_THIRD_SUBJECT, Syllabus.makeSyllabus("Kinetics")));
         assertParseSuccess(parser, "1 2 sy/Molecular Biology",
-                new AppendSyllCommand(INDEX_FIRST_PERSON, INDEX_SECOND_SUBJECT, Syllabus.makeSyllabus("Molecular Biology")));
+                new AppendSyllCommand(INDEX_FIRST_PERSON, INDEX_SECOND_SUBJECT,
+                        Syllabus.makeSyllabus("Molecular Biology")));
     }
 
     @Test

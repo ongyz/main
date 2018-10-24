@@ -48,7 +48,7 @@ public class XmlUtilTest {
     private static final String VALID_TUITION_TIMING = "Monday, 6:00pm";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedSubject> VALID_SUBJECTS =
-            Collections.singletonList(new XmlAdaptedSubject(new Subject("Mathematics")));
+            Collections.singletonList(new XmlAdaptedSubject(Subject.makeSubject("Mathematics")));
     private static final List<XmlAdaptedPay> VALID_PAYMENT = setUpTestPaymentValid();
 
     @Rule
