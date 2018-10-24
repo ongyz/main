@@ -7,4 +7,9 @@
     <tuitionTiming>Monday, 6:00pm</tuitionTiming>
     <subjects subjectName="Mathematics" completionRate="0.0"/>
     <tagged>friends</tagged>
+    <payments>
+        <amount>200</amount>
+        <year>2018</year>
+        <month>2</month>
+    </payments>
 </person>
