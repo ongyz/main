@@ -93,7 +93,7 @@ public class EraseSyllCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof EraseSyllCommand // instanceof handles nulls
                 && personIndex.equals(((EraseSyllCommand) other).personIndex))
-                && syllabusIndex.equals(((EraseSyllCommand) other).subjectIndex)
+                && subjectIndex.equals(((EraseSyllCommand) other).subjectIndex)
                 && syllabusIndex.equals(((EraseSyllCommand) other).syllabusIndex); // state check
     }
 

@@ -177,6 +177,23 @@ public class Subject {
 
     }
 
+    /**
+     * Finda {@code List<Syllabus>} to the current subject and returns
+     * a new {@code Subject} containing the newly added syllabus list.
+     * @param syllabus the {@code List<Syllabus>} to be added.
+     * @param index the index to replace old syllabus.
+     * @return a new {@code Subject} containing the newly added syllabus list.
+     */
+    public Subject edit(Syllabus syllabus, Index index) throws CommandException {
+        if (index.getOneBased() > getSubjectContent().size()) {
+            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
+        }
+        List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
+        newSubjectContent.set(index.getZeroBased(), syllabus);
+        return new Subject(getSubjectType(), newSubjectContent, getCompletionRate()).updateCompletionRate();
+
+    }
+
     public boolean contains(Syllabus syllabus) {
         return getSubjectContent().contains(syllabus);
     }
