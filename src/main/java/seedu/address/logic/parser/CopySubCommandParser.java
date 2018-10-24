@@ -14,7 +14,7 @@ import seedu.address.logic.commands.CopySubCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new Appemark ndSyllCommand object
+ * Parses input arguments and creates a new CopySubCommand object
  */
 public class CopySubCommandParser implements Parser<CopySubCommand> {
 
