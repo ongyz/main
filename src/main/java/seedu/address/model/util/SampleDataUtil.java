@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuitiontiming.TuitionTiming;
 
@@ -66,6 +68,15 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Subject::makeSubject)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a list of syllabus containing the list of strings given.
+     */
+    public static List<Syllabus> getSyllabusList(String... strings) {
+        return Arrays.stream(strings)
+                .map(Syllabus::makeSyllabus)
+                .collect(Collectors.toList());
     }
 
 }
