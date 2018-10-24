@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,9 +56,10 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
 
         thrown.expect(DuplicatePersonException.class);
+        AddressBookStub newData = new AddressBookStub(newPersons);
+
         addressBook.resetData(newData);
     }
 
@@ -80,7 +83,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withSubjects(VALID_SUBJECT_AMY)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -97,13 +100,34 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons) throws DuplicatePersonException {
+            if (hasDuplicatePersons(persons)) {
+                throw new DuplicatePersonException();
+            }
             this.persons.setAll(persons);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        /**
+         * Returns true if there is multiple person in the given collection.
+         */
+        private boolean hasDuplicatePersons (Collection<Person> persons) {
+            List<Person> personsList = persons.stream().collect(Collectors.toList());
+            if (personsList.size() <= 1) {
+                return false;
+            }
+            for (int i = 0; i < personsList.size(); i++) {
+                for (int j = i + 1; j < personsList.size(); j++) {
+                    if (personsList.get(i).isSamePerson(personsList.get(j))) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 

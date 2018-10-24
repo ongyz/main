@@ -64,7 +64,7 @@ public class SampleDataUtil {
      */
     public static Set<Subject> getSubjectSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Subject::new)
+                .map(Subject::makeSubject)
                 .collect(Collectors.toSet());
     }
 

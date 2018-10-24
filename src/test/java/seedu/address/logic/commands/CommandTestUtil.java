@@ -42,8 +42,6 @@ public class CommandTestUtil {
     public static final String VALID_TUITION_TIMING_BOB = "Tuesday 6:30pm";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_SUBJECT = "Math";
-    public static final String VALID_DAY_TIME = "Monday, 6:00pm";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
