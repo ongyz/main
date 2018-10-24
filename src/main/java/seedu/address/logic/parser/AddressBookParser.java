@@ -116,6 +116,7 @@ public class AddressBookParser {
         case GroupCommand.COMMAND_WORD:
             return new GroupCommandParser().parse(arguments);
 
+<<<<<<< HEAD
         case EditSyllCommand.COMMAND_WORD:
             return new EditSyllCommandParser().parse(arguments);
 =======
@@ -124,6 +125,7 @@ public class AddressBookParser {
 
         case DeleteSubCommand.COMMAND_WORD:
             return new DeleteSubCommandParser().parse(arguments);
+>>>>>>> pr/14
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
