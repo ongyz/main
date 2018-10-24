@@ -118,6 +118,7 @@ public class AddressBookParser {
 
         case EditSyllCommand.COMMAND_WORD:
             return new EditSyllCommandParser().parse(arguments);
+=======
         case AddSubCommand.COMMAND_WORD:
             return new AddSubCommandParser().parse(arguments);
 
