@@ -99,6 +99,13 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
             builder.append("<address>a</address>\n");
+            builder.append("<tuitionTiming>Monday, 6:00pm</tuitionTiming>\n");
+            builder.append("<subjects subjectName=\"Biology\" completionRate=\"0.0\"/>\n");
+            builder.append("<payments>\n");
+            builder.append("<amount>400</amount>\n");
+            builder.append("<year>2018</year>\n");
+            builder.append("<month>8</month>\n");
+            builder.append("</payments>\n");
             builder.append("</persons>\n");
         }
         builder.append("</addressbook>\n");
