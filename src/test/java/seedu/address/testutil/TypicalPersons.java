@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
@@ -29,30 +30,41 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withSubjects("Mathematics").withTuitionTiming("Tuesday 8:00pm")
-            .withTags("friends").build();
+            .withPhone("94351253").withSubjects("Mathematics")
+            .withSyllabus(Index.fromOneBased(1), "Integration")
+            .withTuitionTiming("Tuesday 8:00pm").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
-            .withSubjects("Chemistry").withTuitionTiming("Monday 5:00pm")
+            .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
+            .withPhone("98765432").withSubjects("Chemistry")
+            .withSyllabus(Index.fromOneBased(1), "Kinetics", "Organic Chemistry")
+            .withTuitionTiming("Monday 5:00pm")
             .withTags("owesMoney", "friends").withPayments("2 200 11 2018", "2 300 12 2018").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street")
-            .withSubjects("Physics").withTuitionTiming("Saturday 1:00pm").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street")
-            .withSubjects("Mathematics").withTuitionTiming("Saturday 3:00pm")
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
+            .withPhone("95352563").withEmail("heinz@example.com")
+            .withAddress("Wall street").withSubjects("Physics")
+            .withSyllabus(Index.fromOneBased(1), "Kinematics", "Forces")
+            .withTuitionTiming("Saturday 1:00pm").build();
+    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
+            .withPhone("87652533").withEmail("cornelia@example.com")
+            .withAddress("10th street").withSubjects("Mathematics")
+            .withSyllabus(Index.fromOneBased(1), "Calculus II", "Statistics I")
+            .withTuitionTiming("Saturday 3:00pm")
             .withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave")
-            .withSubjects("Economics").withTuitionTiming("Sunday 11:00am").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withSubjects("Chemistry").withTuitionTiming("Thursday 3:30pm").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street")
-            .withSubjects("Economics").withTuitionTiming("Friday 5:00pm").build();
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
+            .withPhone("9482224").withEmail("werner@example.com")
+            .withAddress("Michegan ave").withSubjects("Economics")
+            .withSyllabus(Index.fromOneBased(1), "Demand and Supply")
+            .withTuitionTiming("Sunday 11:00am").build();
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
+            .withPhone("9482427").withEmail("lydia@example.com")
+            .withAddress("little tokyo").withSubjects("Chemistry")
+            .withSyllabus(Index.fromOneBased(1), "Organic Chemistry", "Acids and Bases")
+            .withTuitionTiming("Thursday 3:30pm").build();
+    public static final Person GEORGE = new PersonBuilder().withName("George Best")
+            .withPhone("9482442").withEmail("anna@example.com")
+            .withAddress("4th street").withSubjects("Economics")
+            .withSyllabus(Index.fromOneBased(1), "Macroeconomics")
+            .withTuitionTiming("Friday 5:00pm").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
