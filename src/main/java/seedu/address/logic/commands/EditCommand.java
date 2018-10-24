@@ -243,7 +243,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code payments} is used internally.
          */
         public void setPayments(List<Payment> payments) {
-            this.payments = (payments != null) ? new ArrayList<>(payments) : null;
+            this.payments = (payments != null) ? new ArrayList<>(payments) : new ArrayList<>();
         }
 
         /**
