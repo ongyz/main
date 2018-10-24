@@ -44,7 +44,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setSubjects(person.getSubjects());
         descriptor.setTuitionTiming(person.getTuitionTiming());
-        descriptor.setPayments(person.getPayments());
         descriptor.setTags(person.getTags());
     }
 

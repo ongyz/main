@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Syllabus {
 
     public static final String MESSAGE_SYLLABUS_CONSTRAINTS =
-            "Syllabus can take any values, and it should not be blank";
+            "Syllabus can take any values, and it should not be blank or preceded by white space.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -23,7 +23,7 @@ public class Syllabus {
     public final boolean state;
 
     /**
-     * Constructs an {@code Syllabus}.
+     * Constructor to facilitate immutability.
      *
      * @param syllabus A valid syllabus.
      */
@@ -32,6 +32,17 @@ public class Syllabus {
         checkArgument(isValidSyllabus(syllabus), MESSAGE_SYLLABUS_CONSTRAINTS);
         this.syllabus = syllabus;
         this.state = state;
+    }
+
+    /**
+     * Construct a {@code Syllabus} from the {@code String syllabusName}
+     * @param syllabusName
+     * @return a new {@code Syllabus}
+     */
+    public static Syllabus makeSyllabus(String syllabusName) {
+        checkArgument(isValidSyllabus(syllabusName), MESSAGE_SYLLABUS_CONSTRAINTS);
+        Syllabus syllabus = new Syllabus(syllabusName, false);
+        return syllabus;
     }
 
     /**
