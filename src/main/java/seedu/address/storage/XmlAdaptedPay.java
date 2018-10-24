@@ -93,7 +93,7 @@ public class XmlAdaptedPay {
      * @return list of {@code XmlAdaptedPay}.
      */
     public static List<XmlAdaptedPay> setUpTestPaymentValid() {
-        XmlAdaptedPay validPayment = new XmlAdaptedPay(Index.fromZeroBased(1), "200", "2" , "2018");
+        XmlAdaptedPay validPayment = new XmlAdaptedPay(Index.fromZeroBased(1), "200", "2", "2018");
         return Collections.singletonList(validPayment);
     }
 
