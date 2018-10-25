@@ -150,6 +150,17 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(personIndex, subjectIndex, syllabusIndex, null);
     }
 
+    /**
+     * Executes {@code command} and in addition,
+     * 1. Asserts that the command box displays an empty string.
+     * 2. Asserts that the result display box displays {@code expectedResultMessage}.
+     * 3. Asserts that the browser url and selected card remains unchanged.
+     * 4. Asserts that the status bar's sync status changes.
+     * 5. Asserts that the command box has the default style class.
+     * Verifications 1 and 2 are performed by
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     */
     private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex, String filter)
             throws CommandException {
         Model expectedModel = getModel();

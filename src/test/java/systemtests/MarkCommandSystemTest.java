@@ -139,6 +139,16 @@ public class MarkCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(personIndex, subjectIndex, syllabusIndex, null);
     }
 
+    /**
+     * Executes {@code command} and in addition,
+     * 1. Asserts that the command box displays {@code command}.
+     * 2. Asserts that result display box displays {@code expectedResultMessage}.
+     * 3. Asserts that the browser url, selected card and status bar remain unchanged.
+     * 4. Asserts that the command box has the error style.
+     * Verifications 1 and 2 are performed by
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     */
     private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex, String filter)
             throws CommandException {
         Model expectedModel = getModel();
@@ -170,13 +180,13 @@ public class MarkCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Executes {@code command} and in addition,<br>
-     * 1. Asserts that the command box displays {@code command}.<br>
-     * 2. Asserts that result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
-     * 4. Asserts that the command box has the error style.<br>
+     * Executes {@code command} and in addition,
+     * 1. Asserts that the command box displays {@code command}.
+     * 2. Asserts that result display box displays {@code expectedResultMessage}.
+     * 3. Asserts that the browser url, selected card and status bar remain unchanged.
+     * 4. Asserts that the command box has the error style.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
