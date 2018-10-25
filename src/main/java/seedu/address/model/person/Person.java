@@ -124,7 +124,7 @@ public class Person {
 
         //check if this person differs from the other person by just one field
         // (except for name). If so, then raise error.
-        boolean checkDifferOne =  checkDifferOneFunc(phoneSame, emailSame, addressSame,
+        boolean checkDifferOne = checkDifferOneFunc(phoneSame, emailSame, addressSame,
                 subjectSame, tuitionTimingSame, tagSame, paymentSame);
         return (checkSameField || checkDifferOne);
     }
@@ -136,9 +136,9 @@ public class Person {
     public boolean checkDifferOneFunc(boolean... vars) {
         int count = 0;
         for (boolean var: vars) {
-            count += ((!var)? 1 : 0);
+            count += ((!var) ? 1 : 0);
         }
-        if (count == 1 ) {
+        if (count == 1) {
             return true;
         }
         return false;

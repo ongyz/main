@@ -43,7 +43,7 @@ public class Subject {
      *
      * @param subjectName Subjects that the student is taking.
      */
-    public static Subject makeSubject(String subjectName)  {
+    public static Subject makeSubject (String subjectName)  {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_SUBJECT_CONSTRAINTS);
         Subject subject = new Subject(convertStringToSubjectName(subjectName), new ArrayList<>(), 0);
