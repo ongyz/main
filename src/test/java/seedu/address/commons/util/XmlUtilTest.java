@@ -16,7 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.subject.Subject;
 import seedu.address.storage.XmlAdaptedPay;
@@ -49,8 +48,7 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedSubject> VALID_SUBJECTS =
             Collections.singletonList(new XmlAdaptedSubject(Subject.makeSubject("Mathematics")));
-    private static final List<XmlAdaptedPay> VALID_PAYMENT
-            = setUpTestPaymentValid();
+    private static final List<XmlAdaptedPay> VALID_PAYMENT = setUpTestPaymentValid();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
