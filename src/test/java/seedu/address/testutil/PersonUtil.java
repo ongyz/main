@@ -8,17 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -44,10 +40,11 @@ public class PersonUtil {
         person.getSubjects().stream().forEach(
             s -> sb.append(PREFIX_SUBJECT + s.getSubjectName() + " ")
         );
-        sb.append(PREFIX_DAY_AND_TIME + person.getTuitionTiming().toString());
+        sb.append(PREFIX_DAY_AND_TIME + person.getTuitionTiming().toString() + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+
         return sb.toString();
     }
 

@@ -156,6 +156,7 @@ public abstract class AddressBookSystemTest {
      * Selects the person at {@code index} of the displayed list.
      */
     protected void selectPerson(Index index) {
+        System.out.println("inside select person");
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
@@ -218,8 +219,9 @@ public abstract class AddressBookSystemTest {
                 + "&phone=" + selectedCard.getPhone()
                 + "&email=" + selectedCard.getEmail()
                 + "&address=" + selectedCard.getAddress().replace("#", "%23")
-                + "&tags=" + builder.toString())
-                .replaceAll(" ", "%20");
+                + "&tags=" + builder.toString()
+
+                .replaceAll(" ", "%20"));
 
         assertEquals(expectedUrl,
                 getBrowserPanel().getLoadedUrl().getQuery().replaceAll("\\[", "").replaceAll("\\]", ""));

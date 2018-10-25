@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Finds all persons whose name matches the keyword and add the to do element to the data.
@@ -53,10 +54,7 @@ public class MarkCommand extends Command {
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
         Set<Subject> updatedSubjectContent = markSubjectContentFrom(personTarget);
-
-        Person personSubjUpdated = new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), updatedSubjectContent,
-                personTarget.getTuitionTiming(), personTarget.getTags());
+        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, updatedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
