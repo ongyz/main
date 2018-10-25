@@ -68,7 +68,6 @@ public class XmlAdaptedPerson {
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
-
         if (payments != null) {
             this.payments = new ArrayList<>(payments);
         }

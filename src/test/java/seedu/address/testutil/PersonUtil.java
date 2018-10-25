@@ -40,10 +40,11 @@ public class PersonUtil {
         person.getSubjects().stream().forEach(
             s -> sb.append(PREFIX_SUBJECT + s.getSubjectName() + " ")
         );
-        sb.append(PREFIX_DAY_AND_TIME + person.getTuitionTiming().toString());
+        sb.append(PREFIX_DAY_AND_TIME + person.getTuitionTiming().toString() + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+
         return sb.toString();
     }
 

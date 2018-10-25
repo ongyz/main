@@ -46,6 +46,12 @@ public class XmlAdaptedSubject {
         this.completionRate = source.getCompletionRate();
     }
 
+    public XmlAdaptedSubject(String subjectName, List<XmlAdaptedSyllabus> subjectContent, float completionRate) {
+        this.subjectName = subjectName;
+        this.subjectContent = subjectContent;
+        this.completionRate = completionRate;
+    }
+
     /**
      * Converts this jaxb-friendly adapted tag object into the model's Tag object.
      *
