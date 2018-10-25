@@ -32,7 +32,8 @@ public class CopySubCommand extends Command {
             + "Example: " + COMMAND_WORD + "1 2 4";
 
     public static final String MESSAGE_COPYSUB_SUCCESS = "Copied syllabus to Person: %1$s";
-    public static final String MESSAGE_COPYSUB_FAILED_SAME_PERSON = "Copying subject to the same person is not allowed: %1$s";
+    public static final String MESSAGE_COPYSUB_FAILED_SAME_PERSON =
+            "Copying subject to the same person is not allowed: %1$s";
 
     private final Index sourcePersonIndex;
     private final Index subjectIndex;
