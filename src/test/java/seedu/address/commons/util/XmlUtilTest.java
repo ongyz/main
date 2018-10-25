@@ -16,7 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.subject.Subject;
 import seedu.address.storage.XmlAdaptedPay;

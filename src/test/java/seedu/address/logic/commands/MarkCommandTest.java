@@ -179,7 +179,8 @@ public class MarkCommandTest {
         assertEquals(markFirstCommand, markFirstCommand);
 
         // same values -> returns true
-        MarkCommand markFirstCommandCopy = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        MarkCommand markFirstCommandCopy = new MarkCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         assertEquals(markFirstCommand, markFirstCommandCopy);
 
         // different types -> returns false

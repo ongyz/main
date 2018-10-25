@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -44,8 +45,8 @@ public class EraseSyllCommandTest {
     @Test
     public void execute_validIndexesUnfilteredList_success() throws CommandException {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand
-                (INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         String expectedMessage = String.format(EraseSyllCommand.MESSAGE_ERASESYLL_SUCCESS, personTarget);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -61,7 +62,8 @@ public class EraseSyllCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(outOfBoundIndex,
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -70,16 +72,18 @@ public class EraseSyllCommandTest {
     public void execute_invalidIndexSubjectUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        EraseSyllCommand EraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(EraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
     }
 
     @Test
     public void execute_invalidIndexSyllabusUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
 
         assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
     }
@@ -89,7 +93,8 @@ public class EraseSyllCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         String expectedMessage = String.format(EraseSyllCommand.MESSAGE_ERASESYLL_SUCCESS, personTarget);
         Person updatedPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
@@ -106,7 +111,8 @@ public class EraseSyllCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -116,7 +122,8 @@ public class EraseSyllCommandTest {
     public void execute_invalidIndexSubjectFilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
         assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
     }
@@ -138,7 +145,8 @@ public class EraseSyllCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         Person newPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
@@ -160,7 +168,8 @@ public class EraseSyllCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         // execution failed -> address book state not added into model
         assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -172,15 +181,18 @@ public class EraseSyllCommandTest {
 
     @Test
     public void equals() {
-        EraseSyllCommand eraseSyllFirstCommand = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        EraseSyllCommand eraseSyllSecondCommand = new EraseSyllCommand(INDEX_SECOND_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllFirstCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        EraseSyllCommand eraseSyllSecondCommand = new EraseSyllCommand(
+                INDEX_SECOND_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         // same object -> returns true
         assertEquals(eraseSyllFirstCommand, eraseSyllFirstCommand);
 
         // same values -> returns true
-        EraseSyllCommand EraseSyllFirstCommandCopy = new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        assertEquals(eraseSyllFirstCommand, EraseSyllFirstCommandCopy);
+        EraseSyllCommand eraseSyllFirstCommandCopy = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        assertEquals(eraseSyllFirstCommand, eraseSyllFirstCommandCopy);
 
         // different types -> returns false
         assertNotEquals(eraseSyllFirstCommand, 1);
