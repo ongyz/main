@@ -13,8 +13,6 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.SubjectType;
 import seedu.address.model.subject.Syllabus;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * JAXB-friendly adapted version of the Subject.
  */

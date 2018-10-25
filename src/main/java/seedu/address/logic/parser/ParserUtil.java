@@ -52,7 +52,6 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            System.out.println("not valid");
             throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -111,7 +110,7 @@ public class ParserUtil {
      */
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
-        if(subject.isEmpty()){
+        if (subject.isEmpty()) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
         String trimmedSubject = subject.trim();

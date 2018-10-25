@@ -47,7 +47,6 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
 
-        System.out.println(sb.toString());
         return sb.toString();
     }
 

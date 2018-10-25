@@ -96,7 +96,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons of the same name have similar identity field that is the same. Two person are the same
+     * Returns true if both persons of the same name have similar identity field that is the same.
+     * Two person are the same
      * if they have the same name field, phone number, email as well as address field.
      * This defines a weaker notion of equality between two persons.
      */
@@ -106,7 +107,7 @@ public class Person {
             return true;
         }
 
-        if(otherPerson == null) {
+        if (otherPerson == null) {
             return false;
         }
 
@@ -115,26 +116,27 @@ public class Person {
         boolean emailSame = otherPerson.getEmail().equals(getEmail());
         boolean addressSame = otherPerson.getAddress().equals(getAddress());
         boolean subjectSame = otherPerson.getSubjects().equals(getSubjects());
-        boolean tuitionTimingSame =  otherPerson.getTuitionTiming().equals(getTuitionTiming());
+        boolean tuitionTimingSame = otherPerson.getTuitionTiming().equals(getTuitionTiming());
         boolean tagSame = otherPerson.getTags().equals(getTags());
         boolean paymentSame = otherPerson.getPayments().equals(getPayments());
 
         boolean checkSameField = nameSame && phoneSame && emailSame && addressSame;
 
-        //check if this person differs from the other person by just one field(except for name). If so, then raise error.
+        //check if this person differs from the other person by just one field
+        // (except for name). If so, then raise error.
         boolean checkDifferOne =  checkDifferOneFunc(phoneSame, emailSame, addressSame,
                 subjectSame, tuitionTimingSame, tagSame, paymentSame);
         return (checkSameField || checkDifferOne);
     }
 
-    /*
-     *This function returns true if there is one true boolean
+    /**
+     * This function returns true if there is one true boolean
      * Otherwise, returns false.
      */
     public boolean checkDifferOneFunc(boolean... vars) {
         int count = 0;
-        for(boolean var: vars) {
-            count += ((!var) ? 1 : 0);
+        for (boolean var: vars) {
+            count += ((!var)? 1 : 0);
         }
         if (count == 1 ) {
             return true;
