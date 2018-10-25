@@ -13,6 +13,8 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.SubjectType;
 import seedu.address.model.subject.Syllabus;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * JAXB-friendly adapted version of the Subject.
  */
@@ -44,6 +46,12 @@ public class XmlAdaptedSubject {
             .map(XmlAdaptedSyllabus::new)
             .collect(Collectors.toList());
         this.completionRate = source.getCompletionRate();
+    }
+
+    public XmlAdaptedSubject(String subjectName, List<XmlAdaptedSyllabus> subjectContent, float completionRate) {
+        this.subjectName = subjectName;
+        this.subjectContent = subjectContent;
+        this.completionRate = completionRate;
     }
 
     /**

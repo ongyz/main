@@ -36,7 +36,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withSubjects("Chemistry").withTuitionTiming("Monday 5:00pm")
-            .withTags("owesMoney", "friends").withPayments("2 200 11 2018", "2 300 12 2018").build();
+            .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withSubjects("Physics").withTuitionTiming("Saturday 1:00pm").build();
