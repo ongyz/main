@@ -47,7 +47,7 @@ public class CopySubCommandTest {
         CopySubCommand copySubCommand = new CopySubCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_SECOND_PERSON);
 
-        String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personSource);
+        String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personTarget);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         Person newPerson = simulateCopySubCommand(personSource, INDEX_FIRST_SUBJECT, personTarget);
@@ -117,7 +117,7 @@ public class CopySubCommandTest {
         CopySubCommand copySubCommand = new CopySubCommand(
                 firstIndex, INDEX_FIRST_SUBJECT, secondIndex);
 
-        String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personSource);
+        String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personTarget);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         Person newPerson = simulateCopySubCommand(personSource, INDEX_FIRST_SUBJECT, personTarget);
@@ -143,7 +143,7 @@ public class CopySubCommandTest {
         CopySubCommand copySubCommand = new CopySubCommand(
                 firstIndex, INDEX_FIRST_SUBJECT, secondIndex);
 
-        String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personSource);
+        String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personTarget);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         Person newPerson = simulateCopySubCommand(personSource, INDEX_FIRST_SUBJECT, personTarget);
