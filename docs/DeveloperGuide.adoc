@@ -146,18 +146,44 @@ Value:
 
   8. Display tutor's earnings for that month and year
 
-     System: TutorHelper
-     Actor: Tutor
-     Precondition: Tutor has recorded payment from students before.
-     MSS:
-        1. Tutor request for earnings for a specific month and year.
-        2. System searches for all the payment records made from all the students for that particular month and year.
-        3. System adds up all the payment.
-        4. System displays total earnings under the command box.
-        Use case end.
+    System: TutorHelper
+    Actor: Tutor
+    Precondition: Tutor has recorded payment from students before.
+    MSS:
+      1. Tutor request for earnings for a specific month and year.
+      2. System searches for all the payment records made from all the students for that particular month and year.
+      3. System adds up all the payment.
+      4. System displays total earnings under the command box.
+      Use case end.
      Extensions:
-        2a. System does not find any payment recorded for that month and year.
-            2a1. System displays $0 as result.
+      2a. System does not find any payment recorded for that month and year.
+        2a1. System displays $0 as result.
+
+  9. Edit students' syllabus for that subject
+
+    System: TutorHelper
+    Actor: Tutor
+    Precondition: Tutor has an existing syllabus entry at the index.
+    MSS:
+      1. Tutor request to edit syllabus for a specific student, subject and syllabus
+      2. System searches for the student and the respective subject and syllabus at specified index.
+      3. System edits the syllabus at the specified index with new syllabus
+      4. System displays edited syllabus list in browser panel
+      5. System displays successful editing of syllabus under command box.
+      Use case end.
+     Extensions:
+      2a. System does not find any student entry at specified index.
+        2a1. System displays error message telling tutor that index is invalid
+        2a2. Repeat step 1.
+      2b. System does not find any subject entry at specified index.
+        2b1. System displays error message telling tutor that index is invalid
+        2b2. Repeat step 1.
+      2c. System does not find any syllabus entry at specified index.
+        2c1. System displays error message telling tutor that index is invalid.
+        2c2. Repeat step 1.
+      2d. System find same syllabus entry already exists in subject.
+        2d1. System displays error message telling tutor that syllabus already exist.
+        2d2. Repeat step 1.
 
 == Non-Functional Requirements
 
