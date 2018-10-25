@@ -57,7 +57,9 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
         return new EditSyllCommand(personIndex, subjectIndex, syllabusIndex, syllabus);
     }
 
-    private static Index getPersonIndex(List<Index> indexList) { return indexList.get(PERSON_INDEX); }
+    private static Index getPersonIndex(List<Index> indexList) {
+        return indexList.get(PERSON_INDEX);
+    }
 
     private static Index getSubjectIndex(List<Index> indexList) {
         return indexList.get(SUBJECT_INDEX);
