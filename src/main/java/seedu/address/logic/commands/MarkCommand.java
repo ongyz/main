@@ -53,6 +53,7 @@ public class MarkCommand extends Command {
         }
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
+
         Set<Subject> updatedSubjectContent = markSubjectContentFrom(personTarget);
         Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, updatedSubjectContent);
 
@@ -72,9 +73,12 @@ public class MarkCommand extends Command {
         throws CommandException {
         List<Subject> subjects = personTarget.getSubjects().stream().collect(Collectors.toList());
 
-        if (hasExceededNumberOfSubjects(subjects)
-                || hasExceededNumberOfSyllabus(subjects.get(subjectIndex.getZeroBased()))) {
-            throw new CommandException(MESSAGE_MARK_FAILED);
+        if (hasExceededNumberOfSubjects(subjects)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        }
+
+        if (hasExceededNumberOfSyllabus(subjects.get(subjectIndex.getZeroBased()))) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
         }
 
         Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).toggleState(syllabusIndex);
