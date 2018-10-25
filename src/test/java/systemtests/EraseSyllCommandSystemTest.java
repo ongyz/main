@@ -39,16 +39,19 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void erasesyll() throws CommandException {
-        /* ----------------- Performing erase operation while an unfiltered list is being shown ---------------------- */
+        /* ----------------- Performing erase operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: erase the syllabus of first subject of the first person in the list, command with leading spaces and trailing spaces -> success */
+        /* Case: erase the syllabus of first subject of the first person in the list,
+         * command with leading spaces and trailing spaces -> success
+         */
         Model expectedModel = getModel();
         String command = "     " + EraseSyllCommand.COMMAND_WORD + "      "
                 + INDEX_FIRST_PERSON.getOneBased() + " "
                 + INDEX_FIRST_SUBJECT.getOneBased() + " "
                 + INDEX_FIRST_SYLLABUS.getOneBased() + "       ";
 
-        Person erasedSyllPerson = eraseSyllPerson(expectedModel, INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        Person erasedSyllPerson = eraseSyllPerson(
+                expectedModel, INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         String expectedResultMessage = String.format(MESSAGE_ERASESYLL_SUCCESS, erasedSyllPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -72,7 +75,7 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
         Index middlePersonIndex = getMidIndex(getModel());
         assertCommandSuccess(middlePersonIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        /* ------------------ Performing erasesyll operation while a filtered list is being shown ---------------------- */
+        /* ----------------- Performing erasesyll operation while a filtered list is being shown ------------------  */
 
         /* Case: filtered person list, person index within bounds of address book and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -100,7 +103,7 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
                 + " " + INDEX_THIRD_SYLLABUS.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* --------------------------------- Performing invalid delete operation ------------------------------------ */
+        /* ------------------------------- Performing invalid erasesyll operation ---------------------------------- */
 
         /* Case: invalid index (0) -> rejected */
         command = EraseSyllCommand.COMMAND_WORD + " 0 0 0";
@@ -117,10 +120,12 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
-        assertCommandFailure(EraseSyllCommand.COMMAND_WORD + " a b c", MESSAGE_INVALID_ERASESYLL_COMMAND_FORMAT);
+        assertCommandFailure(
+                EraseSyllCommand.COMMAND_WORD + " a b c", MESSAGE_INVALID_ERASESYLL_COMMAND_FORMAT);
 
         /* Case: invalid arguments (extra argument) -> rejected */
-        assertCommandFailure(EraseSyllCommand.COMMAND_WORD + " 1 a b c", MESSAGE_INVALID_ERASESYLL_COMMAND_FORMAT);
+        assertCommandFailure(
+                EraseSyllCommand.COMMAND_WORD + " 1 a b c", MESSAGE_INVALID_ERASESYLL_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("ERasESYll 1 1 1", MESSAGE_UNKNOWN_COMMAND);
