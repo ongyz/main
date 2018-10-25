@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tuitiontiming.TuitionTiming;
 import seedu.address.testutil.Assert;
 
@@ -130,11 +131,17 @@ public class XmlAdaptedPersonTest {
     @Test
     public void toModelType_invalidSubject_throwsIllegalValueException() {
         List<XmlAdaptedSubject> invalidSubject = new ArrayList<>(VALID_SUBJECTS);
-        invalidSubject.add(new XmlAdaptedSubject(Subject.makeSubject(INVALID_SUBJECT)));
+        XmlAdaptedSyllabus syllabus = new XmlAdaptedSyllabus(new Syllabus("Integration", true));
+        List<XmlAdaptedSyllabus> s = new ArrayList<XmlAdaptedSyllabus>();
+        s.add(syllabus);
+        invalidSubject.add(new XmlAdaptedSubject(INVALID_SUBJECT, s, (float) 0.7));
+
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         invalidSubject, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
+
         String expectedMessage = Subject.MESSAGE_SUBJECT_CONSTRAINTS;
+
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
