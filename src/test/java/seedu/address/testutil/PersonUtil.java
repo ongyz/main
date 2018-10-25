@@ -16,8 +16,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.logic.parser.CliSyntax.*;
-
 /**
  * A utility class for Person.
  */

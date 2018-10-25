@@ -7,10 +7,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

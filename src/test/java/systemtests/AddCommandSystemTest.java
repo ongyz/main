@@ -26,8 +26,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -95,7 +93,6 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
          */
         toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
-       // assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
