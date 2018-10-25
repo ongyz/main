@@ -108,7 +108,7 @@ public class Subject {
             return false;
         }
 
-        for(int i = 0; i < getSubjectContent().size(); i++) {
+        for (int i = 0; i < getSubjectContent().size(); i++) {
             if (!getSubjectContent().get(i).equals(other.getSubjectContent().get(i))) {
                 return false;
             }

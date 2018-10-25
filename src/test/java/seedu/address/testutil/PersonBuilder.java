@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.util.SampleDataUtil.getSyllabusList;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -108,6 +110,19 @@ public class PersonBuilder {
      */
     public PersonBuilder withSubjects(String ... subjectArray) {
         this.subjects = SampleDataUtil.getSubjectSet(subjectArray);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Syllabus} of the {@code Subject} for the {@code Person} that we are building.
+     */
+    public PersonBuilder withSyllabus(Index subjectIndex, String ... syllabusArray) {
+        Subject selectedSubject = new ArrayList<>(subjects)
+                .get(subjectIndex.getZeroBased())
+                .append(getSyllabusList(syllabusArray));
+        List<Subject> newSubjectsList = new ArrayList<>(subjects);
+        newSubjectsList.set(subjectIndex.getZeroBased(), selectedSubject);
+        this.subjects = new HashSet<>(newSubjectsList);
         return this;
     }
 
