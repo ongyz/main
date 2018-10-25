@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -72,21 +71,17 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
     public void execute_invalidIndexSyllabusUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget
-                .getSubjects()
-                .stream()
-                .collect(Collectors.toList())
-                .get(INDEX_FIRST_PERSON.getZeroBased())
-                .getSubjectContent().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -123,16 +118,17 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
     public void execute_invalidIndexSyllabusFilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test

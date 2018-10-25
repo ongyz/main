@@ -31,7 +31,6 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
     public static final String MESSAGE_MARK_SUCCESS = "Changed selected syllabus from Person: %1$s";
-    public static final String MESSAGE_MARK_FAILED = "Syllabus does not exist.";
 
     private final Index personIndex;
     private final Index subjectIndex;

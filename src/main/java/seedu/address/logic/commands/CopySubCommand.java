@@ -87,7 +87,6 @@ public class CopySubCommand extends Command {
 
         if (SubjectsUtil.hasSubject(personTarget, newSubject.getSubjectType())) {
             Index index = SubjectsUtil.findSubjectIndex(personTarget, newSubject.getSubjectType()).get();
-
             Subject updatedSubject = targetSubjects.get(index.getZeroBased())
                                                    .append(newSubject.getSubjectContent());
             targetSubjects.set(index.getZeroBased(), updatedSubject);

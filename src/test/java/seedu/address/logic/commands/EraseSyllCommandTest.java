@@ -75,17 +75,18 @@ public class EraseSyllCommandTest {
         EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
                 INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
     public void execute_invalidIndexSyllabusUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
-                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -125,21 +126,17 @@ public class EraseSyllCommandTest {
         EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
                 INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
     public void execute_invalidIndexSyllabusFilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget
-                .getSubjects()
-                .stream()
-                .collect(Collectors.toList())
-                .get(INDEX_FIRST_PERSON.getZeroBased())
-                .getSubjectContent().size() + 1);
-        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(INDEX_FIRST_PERSON,
-                INDEX_FIRST_SUBJECT, outOfBoundIndex);
-        assertCommandFailure(eraseSyllCommand, model, commandHistory, EraseSyllCommand.MESSAGE_ERASESYLL_FAILED);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
+        EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex);
+        assertCommandFailure(eraseSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -156,7 +153,7 @@ public class EraseSyllCommandTest {
         // EraseSyll -> first person syllabus is erased
         eraseSyllCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
