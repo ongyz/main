@@ -48,4 +48,22 @@ public class EarningsCommand extends Command {
         }
         return new CommandResult("Earnings: $" + String.valueOf(earnings));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EarningsCommand)) {
+            return false;
+        }
+
+        // state check
+        EarningsCommand e = (EarningsCommand) other;
+        return month==((EarningsCommand) other).month
+                && year == ((EarningsCommand) other).year;
+    }
 }
