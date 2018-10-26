@@ -20,10 +20,10 @@ import seedu.address.model.subject.Syllabus;
 
 public class EditSyllCommandParserTest {
 
-    private EditSyllCommandParser parser = new EditSyllCommandParser();
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE);
+
+    private EditSyllCommandParser parser = new EditSyllCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -58,7 +58,7 @@ public class EditSyllCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Syllabus syllabus = new Syllabus(VALID_SYLLABUS, true)  ;
+        Syllabus syllabus = new Syllabus(VALID_SYLLABUS, true);
 
         assertParseSuccess(parser, "1 1 2 sy/Differentiation",
                 new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_SECOND_SYLLABUS, syllabus));
@@ -67,5 +67,4 @@ public class EditSyllCommandParserTest {
         assertParseSuccess(parser, "1 2 3 sy/Differentiation",
                 new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_SECOND_SUBJECT, INDEX_THIRD_SYLLABUS, syllabus));
     }
-
 }
