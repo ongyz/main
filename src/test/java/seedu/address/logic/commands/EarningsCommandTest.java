@@ -27,5 +27,4 @@ public class EarningsCommandTest {
         assertCommandSuccess(earnings2, model, commandHistory, expectedMessage2, model);
 
     }
-
 }
