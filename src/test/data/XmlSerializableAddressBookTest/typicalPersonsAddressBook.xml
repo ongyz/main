@@ -8,7 +8,7 @@
         <address>123, Jurong West Ave 6, #08-111</address>
         <tuitionTiming>Tuesday 8:00pm</tuitionTiming>
         <subjects subjectName="Mathematics" completionRate="0.0">
-        <subjectContent state="false">Integration</subjectContent>
+            <subjectContent state="false">Integration</subjectContent>
         </subjects>
         <tagged>friends</tagged>
     </persons>
