@@ -63,7 +63,7 @@ public class EarningsCommand extends Command {
 
         // state check
         EarningsCommand e = (EarningsCommand) other;
-        return month==((EarningsCommand) other).month
+        return month == ((EarningsCommand) other).month
                 && year == ((EarningsCommand) other).year;
     }
 }

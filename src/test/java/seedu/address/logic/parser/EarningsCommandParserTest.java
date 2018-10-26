@@ -52,7 +52,7 @@ public class EarningsCommandParserTest {
         String wrongMonthSymbolInput = " * 2018";
         assertParseFailure(earnings, wrongMonthSymbolInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EarningsCommand.MESSAGE_USAGE));
-        
+
         String wrongYearNegativeInput = " 8 -2018";
         assertParseFailure(earnings, wrongMonthNegativeInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EarningsCommand.MESSAGE_USAGE));
@@ -60,8 +60,6 @@ public class EarningsCommandParserTest {
         String wrongYearSymbolInput = " 8 &018";
         assertParseFailure(earnings, wrongMonthSymbolInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EarningsCommand.MESSAGE_USAGE));
-
-
 
     }
 
