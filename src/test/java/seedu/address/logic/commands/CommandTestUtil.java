@@ -70,6 +70,7 @@ public class CommandTestUtil {
     public static final String VALID_TUITION_TIMING_BILLY = "Saturday 7:30pm";
     public static final String VALID_TUITION_TIMING_CABBAGE = "Sunday 7:30pm";
     public static final String VALID_TUITION_TIMING_DAISY = "Thursday 7:30pm";
+
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String DUPLICATE_SYLLABUS = "Integration";
