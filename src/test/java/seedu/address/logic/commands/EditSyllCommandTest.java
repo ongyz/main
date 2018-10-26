@@ -36,8 +36,8 @@ import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
- * and unit tests for EditSyllCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * EditSyllCommand.
  */
 public class EditSyllCommandTest {
 

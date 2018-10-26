@@ -18,7 +18,6 @@ import org.junit.Test;
 import seedu.address.logic.commands.EditSyllCommand;
 import seedu.address.model.subject.Syllabus;
 
-
 public class EditSyllCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
