@@ -21,10 +21,10 @@ import seedu.address.model.subject.Syllabus;
 
 public class EditSyllCommandParserTest {
 
-    private EditSyllCommandParser parser = new EditSyllCommandParser();
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE);
+
+    private EditSyllCommandParser parser = new EditSyllCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

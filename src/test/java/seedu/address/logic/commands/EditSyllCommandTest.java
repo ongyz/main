@@ -36,7 +36,8 @@ import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditSyllCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
+ * and unit tests for EditSyllCommand.
  */
 public class EditSyllCommandTest {
 
@@ -200,19 +201,19 @@ public class EditSyllCommandTest {
 
     @Test
     public void equals() {
-        EditSyllCommand editSyllFirstCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        EditSyllCommand editSyllSecondCommand = new EditSyllCommand(
-                INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        EditSyllCommand editSyllThirdCommand = new EditSyllCommand(
-                INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
+        EditSyllCommand editSyllFirstCommand = new EditSyllCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllSecondCommand = new EditSyllCommand(INDEX_SECOND_PERSON,
+                INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllThirdCommand = new EditSyllCommand(INDEX_SECOND_PERSON,
+                INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
 
         // same object -> returns true
         assertEquals(editSyllFirstCommand, editSyllFirstCommand);
 
         // same values -> returns true
-        EditSyllCommand editSyllFirstCommandCopy = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllFirstCommandCopy = new EditSyllCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
         assertEquals(editSyllFirstCommand, editSyllFirstCommandCopy);
 
         // different types -> returns false
