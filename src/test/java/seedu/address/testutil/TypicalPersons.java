@@ -2,18 +2,24 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CATHY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CATHY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CATHY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CATHY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CATHY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_CATHY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +34,8 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+    public static final Person
+            ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withSubjects("Mathematics")
             .withSyllabus(Index.fromOneBased(1), "Integration")
@@ -41,8 +48,8 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").withPayments("2 200 11 2018", "2 300 12 2018").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com")
-            .withAddress("Wall street").withSubjects("Physics")
-            .withSyllabus(Index.fromOneBased(1), "Kinematics", "Forces")
+            .withAddress("Wall street").withSubjects("Mathematics")
+            .withSyllabus(Index.fromOneBased(1), "Normal Distribution", "Vector")
             .withTuitionTiming("Saturday 1:00pm").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com")
@@ -84,6 +91,11 @@ public class TypicalPersons {
             .withSubjects(VALID_SUBJECT_BOB).withTuitionTiming(VALID_TUITION_TIMING_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+    public static final Person CATHY = new PersonBuilder().withName(VALID_NAME_CATHY).withPhone(VALID_PHONE_CATHY)
+            .withEmail(VALID_EMAIL_CATHY).withAddress(VALID_ADDRESS_CATHY)
+            .withSubjects(VALID_SUBJECT_CATHY).withTuitionTiming(VALID_TUITION_TIMING_CATHY)
+            .withTags(VALID_TAG_FRIEND)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -102,5 +114,13 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Index> getSameSubjectPersonsIndexes() {
+        return new ArrayList<>(Arrays.asList(Index.fromOneBased(1), Index.fromOneBased(3), Index.fromOneBased(4)));
+    }
+
+    public static List<Index> getDifferentSubjectPersonIndexes() {
+        return new ArrayList<>(Arrays.asList(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(5)));
     }
 }
