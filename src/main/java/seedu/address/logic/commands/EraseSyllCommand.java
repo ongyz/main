@@ -30,7 +30,6 @@ public class EraseSyllCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
     public static final String MESSAGE_ERASESYLL_SUCCESS = "Removed selected syllabus from Person: %1$s";
-    public static final String MESSAGE_ERASESYLL_FAILED = "Syllabus does not exist.";
 
     private final Index personIndex;
     private final Index subjectIndex;
@@ -52,6 +51,7 @@ public class EraseSyllCommand extends Command {
         }
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
+
         Set<Subject> removedSubjectContent = removeSubjectContentFrom(personTarget);
         Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, removedSubjectContent);
 
@@ -70,9 +70,12 @@ public class EraseSyllCommand extends Command {
     private Set<Subject> removeSubjectContentFrom(Person personTarget) throws CommandException {
         List<Subject> subjects = personTarget.getSubjects().stream().collect(Collectors.toList());
 
-        if (hasExceededNumberOfSubjects(subjects)
-                || hasExceededNumberOfSyllabus(subjects.get(subjectIndex.getZeroBased()))) {
-            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
+        if (hasExceededNumberOfSubjects(subjects)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        }
+
+        if (hasExceededNumberOfSyllabus(subjects.get(subjectIndex.getZeroBased()))) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
         }
 
         Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).remove(syllabusIndex);

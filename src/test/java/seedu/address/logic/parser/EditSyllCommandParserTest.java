@@ -67,4 +67,5 @@ public class EditSyllCommandParserTest {
         assertParseSuccess(parser, "1 2 3 sy/Differentiation",
                 new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_SECOND_SUBJECT, INDEX_THIRD_SYLLABUS, syllabus));
     }
+
 }
