@@ -1,8 +1,20 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.EraseSyllCommand.MESSAGE_ERASESYLL_FAILED;
+import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -16,19 +28,9 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.commands.EraseSyllCommand.MESSAGE_ERASESYLL_FAILED;
-import static seedu.address.testutil.TypicalIndexes.*;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditSyllCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * EditSyllCommand.
  */
 public class EditSyllCommandTest {
 
@@ -195,12 +197,12 @@ public class EditSyllCommandTest {
 
     @Test
     public void equals() {
-        EditSyllCommand editSyllFirstCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        EditSyllCommand editSyllSecondCommand = new EditSyllCommand(
-                INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        EditSyllCommand editSyllThirdCommand = new EditSyllCommand(
-                INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
+        EditSyllCommand editSyllFirstCommand = new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT,
+                INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllSecondCommand = new EditSyllCommand(INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT,
+                INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllThirdCommand = new EditSyllCommand(INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT,
+                INDEX_SECOND_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
 
         // same object -> returns true
         assertEquals(editSyllFirstCommand, editSyllFirstCommand);
