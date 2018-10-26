@@ -32,6 +32,8 @@ public class CopySubCommand extends Command {
             + "Example: " + COMMAND_WORD + "1 2 4";
 
     public static final String MESSAGE_COPYSUB_SUCCESS = "Copied syllabus to Person: %1$s";
+    public static final String MESSAGE_COPYSUB_FAILED_SAME_PERSON =
+            "Copying subject to the same person is not allowed: %1$s";
 
     private final Index sourcePersonIndex;
     private final Index subjectIndex;
@@ -56,6 +58,14 @@ public class CopySubCommand extends Command {
         Person personSource = lastShownList.get(sourcePersonIndex.getZeroBased());
         Person personTarget = lastShownList.get(targetPersonIndex.getZeroBased());
 
+        if (sourcePersonIndex.equals(targetPersonIndex)) {
+            throw new CommandException(String.format(MESSAGE_COPYSUB_FAILED_SAME_PERSON, personSource));
+        }
+
+        if (subjectIndex.getZeroBased() >= personSource.getSubjects().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        }
+
         Subject selectedSubject = SubjectsUtil.copySubjectFrom(personSource, subjectIndex);
         Set<Subject> updatedSubjects = updateSubjectsFor(personTarget, selectedSubject);
         Person personUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, updatedSubjects);
@@ -78,7 +88,6 @@ public class CopySubCommand extends Command {
 
         if (SubjectsUtil.hasSubject(personTarget, newSubject.getSubjectType())) {
             Index index = SubjectsUtil.findSubjectIndex(personTarget, newSubject.getSubjectType()).get();
-
             Subject updatedSubject = targetSubjects.get(index.getZeroBased())
                                                    .append(newSubject.getSubjectContent());
             targetSubjects.set(index.getZeroBased(), updatedSubject);

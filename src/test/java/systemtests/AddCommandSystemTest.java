@@ -27,10 +27,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.CATHY;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
@@ -71,6 +70,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + TUITION_TIMING_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
+
         /* Case: undo adding Amy to the list -> Amy deleted */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
@@ -97,7 +97,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add to empty address book -> added */
         deleteAllPersons();
-        assertCommandSuccess(ALICE);
+        assertCommandSuccess(AMY);
 
         /* Case: add a person with tags, command with parameters in random order -> added */
         toAdd = BOB;
@@ -118,7 +118,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: selects first card in the person list, add a person -> added, card selection remains unchanged */
         selectPerson(Index.fromOneBased(1));
-        assertCommandSuccess(CARL);
+        assertCommandSuccess(CATHY);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
@@ -242,7 +242,6 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         Model expectedModel = getModel();
         expectedModel.addPerson(toAdd);
         String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);
-
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 

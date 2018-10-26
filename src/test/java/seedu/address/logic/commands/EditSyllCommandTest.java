@@ -1,6 +1,25 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -16,19 +35,9 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.commands.EraseSyllCommand.MESSAGE_ERASESYLL_FAILED;
-import static seedu.address.testutil.TypicalIndexes.*;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditSyllCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * EditSyllCommand.
  */
 public class EditSyllCommandTest {
 
@@ -72,11 +81,12 @@ public class EditSyllCommandTest {
     @Test
     public void execute_invalidIndexSyllabusUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex, new Syllabus(VALID_SYLLABUS, true));
 
-        assertCommandFailure(editSyllCommand, model, commandHistory, MESSAGE_ERASESYLL_FAILED);
+        assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -122,16 +132,12 @@ public class EditSyllCommandTest {
     @Test
     public void execute_invalidIndexSyllabusFilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget
-                .getSubjects()
-                .stream()
-                .collect(Collectors.toList())
-                .get(INDEX_FIRST_PERSON.getZeroBased())
-                .getSubjectContent().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex, new Syllabus(VALID_SYLLABUS, true));
 
-        assertCommandFailure(editSyllCommand, model, commandHistory, MESSAGE_ERASESYLL_FAILED);
+        assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -195,19 +201,19 @@ public class EditSyllCommandTest {
 
     @Test
     public void equals() {
-        EditSyllCommand editSyllFirstCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        EditSyllCommand editSyllSecondCommand = new EditSyllCommand(
-                INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        EditSyllCommand editSyllThirdCommand = new EditSyllCommand(
-                INDEX_SECOND_PERSON, INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
+        EditSyllCommand editSyllFirstCommand = new EditSyllCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllSecondCommand = new EditSyllCommand(INDEX_SECOND_PERSON,
+                INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllThirdCommand = new EditSyllCommand(INDEX_SECOND_PERSON,
+                INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
 
         // same object -> returns true
         assertEquals(editSyllFirstCommand, editSyllFirstCommand);
 
         // same values -> returns true
-        EditSyllCommand editSyllFirstCommandCopy = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+        EditSyllCommand editSyllFirstCommandCopy = new EditSyllCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
         assertEquals(editSyllFirstCommand, editSyllFirstCommandCopy);
 
         // different types -> returns false
@@ -240,6 +246,5 @@ public class EditSyllCommandTest {
 
         return SubjectsUtil.createPersonWithNewSubjects(personTarget, newSubjects);
     }
-
 
 }
