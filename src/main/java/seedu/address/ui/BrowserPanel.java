@@ -53,11 +53,11 @@ public class BrowserPanel extends UiPart<Region> {
      * @param person Person to read information from.
      */
     private void loadPersonPage(Person person) {
+
         final StringBuilder subjectsBuilder = new StringBuilder();
         person.getSubjects().forEach(subjectsBuilder::append);
 
         final StringBuilder subjectNamesBuilder = new StringBuilder();
-
         List<Subject> subjectNames = new ArrayList<>(person.getSubjects());
         for (int i = 0; i < subjectNames.size(); i++) {
             subjectNamesBuilder.append(subjectNames.get(i).getSubjectName());
@@ -67,7 +67,6 @@ public class BrowserPanel extends UiPart<Region> {
         }
 
         final StringBuilder paymentsBuilder = new StringBuilder();
-
         List<Payment> payments = new ArrayList<>(person.getPayments());
         for (int i = 0; i < payments.size(); i++) {
             Payment selected = payments.get(i);

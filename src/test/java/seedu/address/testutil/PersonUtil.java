@@ -44,7 +44,7 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
-        System.out.println("person descriptor "+sb);
+        System.out.println("person descriptor " + sb);
         return sb.toString();
     }
 
