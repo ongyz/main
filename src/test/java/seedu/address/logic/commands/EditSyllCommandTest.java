@@ -1,25 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.Test;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.subject.Subject;
-import seedu.address.model.subject.Syllabus;
-import seedu.address.model.util.SubjectsUtil;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -35,6 +15,25 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Test;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.Syllabus;
+import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditSyllCommand.
@@ -246,6 +245,5 @@ public class EditSyllCommandTest {
 
         return SubjectsUtil.createPersonWithNewSubjects(personTarget, newSubjects);
     }
-
 
 }

@@ -14,7 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;

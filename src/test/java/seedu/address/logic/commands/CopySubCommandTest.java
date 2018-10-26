@@ -105,7 +105,7 @@ public class CopySubCommandTest {
     }
 
     @Test
-    public void execute_HasExistingSubject_success() {
+    public void execute_hasExistingSubject_success() {
         List<Index> sameSubjectIndex = getSameSubjectPersonsIndexes();
 
         Index firstIndex = sameSubjectIndex.get(0);
@@ -131,7 +131,7 @@ public class CopySubCommandTest {
     }
 
     @Test
-    public void execute_AddNewSubject_success() {
+    public void execute_addNewSubject_success() {
         List<Index> sameSubjectIndex = getDifferentSubjectPersonIndexes();
 
         Index firstIndex = sameSubjectIndex.get(0);
