@@ -72,7 +72,7 @@ public class CopySubCommand extends Command {
 
         model.updatePerson(personTarget, personUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_COPYSUB_SUCCESS, personUpdated));
     }
 

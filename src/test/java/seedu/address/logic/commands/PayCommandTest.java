@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ import seedu.address.testutil.PersonBuilder;
 
 public class PayCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelper(), new UserPrefs());
+    private Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -79,7 +79,7 @@ public class PayCommandTest {
 
         String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS, expectedPerson);
         expectedModel.updatePerson(personOriginal, expectedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(payCommand, model, commandHistory, expectedMessage, expectedModel);
     }

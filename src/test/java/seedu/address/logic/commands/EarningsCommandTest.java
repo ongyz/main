@@ -1,17 +1,18 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelperWithPayments;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithPayments;
-
 public class EarningsCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithPayments(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelperWithPayments(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
