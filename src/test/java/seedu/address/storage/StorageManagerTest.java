@@ -57,7 +57,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void TutorHelperReadSave() throws Exception {
+    public void tutorHelperReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlTutorHelperStorage} class.

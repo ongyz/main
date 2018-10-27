@@ -16,9 +16,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReadOnlyTutorHelper;
 import seedu.address.model.Model;
 import seedu.address.model.TutorHelper;
+import seedu.address.model.ReadOnlyTutorHelper;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
