@@ -26,13 +26,13 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given TutorHelper and userPrefs.
      */
-    public ModelManager(ReadOnlyTutorHelper TutorHelper, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTutorHelper tutorHelper, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(TutorHelper, userPrefs);
+        requireAllNonNull(tutorHelper, userPrefs);
 
-        logger.fine("Initializing with tutor helper: " + TutorHelper + " and user prefs " + userPrefs);
+        logger.fine("Initializing with tutor helper: " + tutorHelper + " and user prefs " + userPrefs);
 
-        versionedTutorHelper = new VersionedTutorHelper(TutorHelper);
+        versionedTutorHelper = new VersionedTutorHelper(tutorHelper);
         filteredPersons = new FilteredList<>(versionedTutorHelper.getPersonList());
     }
 

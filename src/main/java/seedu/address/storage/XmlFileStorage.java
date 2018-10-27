@@ -15,10 +15,10 @@ public class XmlFileStorage {
     /**
      * Saves the given TutorHelper data to the specified file.
      */
-    public static void saveDataToFile(Path file, XmlSerializableTutorHelper TutorHelper)
+    public static void saveDataToFile(Path file, XmlSerializableTutorHelper tutorHelper)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, TutorHelper);
+            XmlUtil.saveDataToFile(file, tutorHelper);
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }

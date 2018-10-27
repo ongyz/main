@@ -73,9 +73,9 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveTutorHelper(ReadOnlyTutorHelper TutorHelper, Path filePath) throws IOException {
+    public void saveTutorHelper(ReadOnlyTutorHelper tutorHelper, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        tutorHelperStorage.saveTutorHelper(TutorHelper, filePath);
+        tutorHelperStorage.saveTutorHelper(tutorHelper, filePath);
     }
 
 

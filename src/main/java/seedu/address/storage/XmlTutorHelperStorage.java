@@ -47,8 +47,8 @@ public class XmlTutorHelperStorage implements TutorHelperStorage {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-                logger.info("TutorHelper file " + filePath + " not found");
-                return Optional.empty();
+            logger.info("TutorHelper file " + filePath + " not found");
+            return Optional.empty();
         }
 
         XmlSerializableTutorHelper xmlTutorHelper = XmlFileStorage.loadDataFromSaveFile(filePath);
@@ -69,12 +69,12 @@ public class XmlTutorHelperStorage implements TutorHelperStorage {
      * Similar to {@link #saveTutorHelper(ReadOnlyTutorHelper)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTutorHelper(ReadOnlyTutorHelper TutorHelper, Path filePath) throws IOException {
-        requireNonNull(TutorHelper);
+    public void saveTutorHelper(ReadOnlyTutorHelper tutorHelper, Path filePath) throws IOException {
+        requireNonNull(tutorHelper);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTutorHelper(TutorHelper));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTutorHelper(tutorHelper));
     }
 
 }

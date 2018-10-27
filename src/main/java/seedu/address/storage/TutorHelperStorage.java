@@ -33,11 +33,11 @@ public interface TutorHelperStorage {
 
     /**
      * Saves the given {@link ReadOnlyTutorHelper} to the storage.
-     * @param TutorHelper cannot be null.
+     * @param tutorHelper cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTutorHelper(ReadOnlyTutorHelper TutorHelper) throws IOException;
+    void saveTutorHelper(ReadOnlyTutorHelper tutorHelper) throws IOException;
 
-    void saveTutorHelper(ReadOnlyTutorHelper TutorHelper, Path filePath) throws IOException;
+    void saveTutorHelper(ReadOnlyTutorHelper tutorHelper, Path filePath) throws IOException;
 
 }
