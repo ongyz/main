@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedTutorHelper extends TutorHelper {
 
-    private final List<ReadOnlyTutorHelper> TutorHelperStateList;
+    private final List<ReadOnlyTutorHelper> tutorHelperStateList;
     private int currentStatePointer;
 
     public VersionedTutorHelper(ReadOnlyTutorHelper initialState) {
         super(initialState);
 
-        TutorHelperStateList = new ArrayList<>();
-        TutorHelperStateList.add(new TutorHelper(initialState));
+        tutorHelperStateList = new ArrayList<>();
+        tutorHelperStateList.add(new TutorHelper(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,12 +25,12 @@ public class VersionedTutorHelper extends TutorHelper {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        TutorHelperStateList.add(new TutorHelper(this));
+        tutorHelperStateList.add(new TutorHelper(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        TutorHelperStateList.subList(currentStatePointer + 1, TutorHelperStateList.size()).clear();
+        tutorHelperStateList.subList(currentStatePointer + 1, tutorHelperStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedTutorHelper extends TutorHelper {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(TutorHelperStateList.get(currentStatePointer));
+        resetData(tutorHelperStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,7 +52,7 @@ public class VersionedTutorHelper extends TutorHelper {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(TutorHelperStateList.get(currentStatePointer));
+        resetData(tutorHelperStateList.get(currentStatePointer));
     }
 
     /**
@@ -66,7 +66,7 @@ public class VersionedTutorHelper extends TutorHelper {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < TutorHelperStateList.size() - 1;
+        return currentStatePointer < tutorHelperStateList.size() - 1;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class VersionedTutorHelper extends TutorHelper {
 
         // state check
         return super.equals(otherVersionedTutorHelper)
-                && TutorHelperStateList.equals(otherVersionedTutorHelper.TutorHelperStateList)
+                && tutorHelperStateList.equals(otherVersionedTutorHelper.tutorHelperStateList)
                 && currentStatePointer == otherVersionedTutorHelper.currentStatePointer;
     }
 

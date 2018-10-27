@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTutorHelper;
-import seedu.address.model.TutorHelper;;
+import seedu.address.model.TutorHelper;
 import seedu.address.model.person.Person;
 
 /**
