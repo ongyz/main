@@ -275,12 +275,12 @@ public class VersionedTutorHelperTest {
      * Creates and returns a {@code VersionedTutorHelper} with the {@code TutorHelperStates} added into it, and the
      * {@code VersionedTutorHelper#currentStatePointer} at the end of list.
      */
-    private VersionedTutorHelper prepareTutorHelperList(ReadOnlyTutorHelper... TutorHelperStates) {
-        assertFalse(TutorHelperStates.length == 0);
+    private VersionedTutorHelper prepareTutorHelperList(ReadOnlyTutorHelper... tutorHelperStates) {
+        assertFalse(tutorHelperStates.length == 0);
 
-        VersionedTutorHelper versionedTutorHelper = new VersionedTutorHelper(TutorHelperStates[0]);
-        for (int i = 1; i < TutorHelperStates.length; i++) {
-            versionedTutorHelper.resetData(TutorHelperStates[i]);
+        VersionedTutorHelper versionedTutorHelper = new VersionedTutorHelper(tutorHelperStates[0]);
+        for (int i = 1; i < tutorHelperStates.length; i++) {
+            versionedTutorHelper.resetData(tutorHelperStates[i]);
             versionedTutorHelper.commit();
         }
 
