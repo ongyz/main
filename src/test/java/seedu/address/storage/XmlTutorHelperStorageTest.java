@@ -21,7 +21,7 @@ import seedu.address.model.TutorHelper;
 import seedu.address.model.ReadOnlyTutorHelper;
 
 public class XmlTutorHelperStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlTutorHelperStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
