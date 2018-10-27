@@ -7,11 +7,11 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithPayments;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelperWithPayments;
 
 public class EarningsCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithPayments(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelperWithPayments(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

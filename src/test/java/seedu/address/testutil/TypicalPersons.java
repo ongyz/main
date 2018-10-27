@@ -50,7 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TutorHelper;
 import seedu.address.model.person.Person;
 
 /**
@@ -72,8 +72,8 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").withPayments("2 200 11 2018", "2 300 12 2018").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com")
-            .withAddress("Wall street").withSubjects("Mathematics")
-            .withSyllabus(Index.fromOneBased(1), "Normal Distribution", "Vector")
+            .withAddress("Wall street").withSubjects("Physics")
+            .withSyllabus(Index.fromOneBased(1), "Kinematics", "Forces")
             .withTuitionTiming("Saturday 1:00pm").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com")
@@ -150,10 +150,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code TutorHelper} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static TutorHelper getTypicalTutorHelper() {
+        TutorHelper ab = new TutorHelper();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
@@ -165,10 +165,10 @@ public class TypicalPersons {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code TutorHelper} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBookWithPayments() {
-        AddressBook ab = new AddressBook();
+    public static TutorHelper getTypicalTutorHelperWithPayments() {
+        TutorHelper ab = new TutorHelper();
         for (Person person : getTypicalPersonsWithPayments()) {
             ab.addPerson(person);
         }

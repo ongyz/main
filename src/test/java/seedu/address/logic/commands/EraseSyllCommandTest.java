@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,8 +36,8 @@ import seedu.address.model.util.SubjectsUtil;
  */
 public class EraseSyllCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelper(), new UserPrefs());
+    private Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -47,12 +47,12 @@ public class EraseSyllCommandTest {
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         String expectedMessage = String.format(EraseSyllCommand.MESSAGE_ERASESYLL_SUCCESS, personTarget);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(eraseSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -98,7 +98,7 @@ public class EraseSyllCommandTest {
         String expectedMessage = String.format(EraseSyllCommand.MESSAGE_ERASESYLL_SUCCESS, personTarget);
         Person updatedPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         expectedModel.updatePerson(personTarget, updatedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(eraseSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -109,7 +109,7 @@ public class EraseSyllCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
@@ -142,21 +142,21 @@ public class EraseSyllCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EraseSyllCommand eraseSyllCommand = new EraseSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateEraseSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         // EraseSyll -> first person syllabus is erased
         eraseSyllCommand.execute(model, commandHistory);
 
         // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoTutorHelper();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoTutorHelper();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
