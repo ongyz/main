@@ -13,8 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-public class
-SampleDataTest extends TutorHelperSystemTest {
+public class SampleDataTest extends TutorHelperSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
@@ -45,7 +44,7 @@ SampleDataTest extends TutorHelperSystemTest {
     }
 
     @Test
-    public void TutorHelper_dataFileDoesNotExist_loadSampleData() {
+    public void tutorHelper_dataFileDoesNotExist_loadSampleData() {
         Person[] expectedList = SampleDataUtil.getSamplePersons();
         assertListMatching(getPersonListPanel(), expectedList);
     }

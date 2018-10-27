@@ -18,7 +18,6 @@ import seedu.address.commons.events.model.TutorHelperChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.ReadOnlyTutorHelper;
 import seedu.address.model.TutorHelper;
-import seedu.address.model.ReadOnlyTutorHelper;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
@@ -33,9 +32,9 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlTutorHelperStorage TutorHelperStorage = new XmlTutorHelperStorage(getTempFilePath("ab"));
+        XmlTutorHelperStorage tutorHelperStorage = new XmlTutorHelperStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(TutorHelperStorage, userPrefsStorage);
+        storageManager = new StorageManager(tutorHelperStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -95,7 +94,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveTutorHelper(ReadOnlyTutorHelper TutorHelper, Path filePath) throws IOException {
+        public void saveTutorHelper(ReadOnlyTutorHelper tutorHelper, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

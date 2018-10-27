@@ -23,9 +23,9 @@ import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedSubject;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableTutorHelper;
-import seedu.address.testutil.TutorHelperBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestUtil;
+import seedu.address.testutil.TutorHelperBuilder;
 
 public class XmlUtilTest {
 

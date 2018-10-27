@@ -18,9 +18,9 @@ import seedu.address.testutil.TutorHelperBuilder;
 
 public class VersionedTutorHelperTest {
 
-    private final ReadOnlyTutorHelper TutorHelperWithAmy = new TutorHelperBuilder().withPerson(AMY).build();
-    private final ReadOnlyTutorHelper TutorHelperWithBob = new TutorHelperBuilder().withPerson(BOB).build();
-    private final ReadOnlyTutorHelper TutorHelperWithCarl = new TutorHelperBuilder().withPerson(CARL).build();
+    private final ReadOnlyTutorHelper tutorHelperWithAmy = new TutorHelperBuilder().withPerson(AMY).build();
+    private final ReadOnlyTutorHelper tutorHelperWithBob = new TutorHelperBuilder().withPerson(BOB).build();
+    private final ReadOnlyTutorHelper tutorHelperWithCarl = new TutorHelperBuilder().withPerson(CARL).build();
     private final ReadOnlyTutorHelper emptyTutorHelper = new TutorHelperBuilder().build();
 
     @Test
@@ -37,19 +37,19 @@ public class VersionedTutorHelperTest {
     @Test
     public void commit_multipleTutorHelperPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
 
         versionedTutorHelper.commit();
         assertTutorHelperListStatus(versionedTutorHelper,
-                Arrays.asList(emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob),
-                TutorHelperWithBob,
+                Arrays.asList(emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob),
+                tutorHelperWithBob,
                 Collections.emptyList());
     }
 
     @Test
     public void commit_multipleTutorHelperPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 2);
 
         versionedTutorHelper.commit();
@@ -62,7 +62,7 @@ public class VersionedTutorHelperTest {
     @Test
     public void canUndo_multipleTutorHelperPointerAtEndOfStateList_returnsTrue() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
 
         assertTrue(versionedTutorHelper.canUndo());
     }
@@ -70,7 +70,7 @@ public class VersionedTutorHelperTest {
     @Test
     public void canUndo_multipleTutorHelperPointerAtStartOfStateList_returnsTrue() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 1);
 
         assertTrue(versionedTutorHelper.canUndo());
@@ -86,7 +86,7 @@ public class VersionedTutorHelperTest {
     @Test
     public void canUndo_multipleTutorHelperPointerAtStartOfStateList_returnsFalse() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 2);
 
         assertFalse(versionedTutorHelper.canUndo());
@@ -95,7 +95,7 @@ public class VersionedTutorHelperTest {
     @Test
     public void canRedo_multipleTutorHelperPointerNotAtEndOfStateList_returnsTrue() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 1);
 
         assertTrue(versionedTutorHelper.canRedo());
@@ -104,7 +104,7 @@ public class VersionedTutorHelperTest {
     @Test
     public void canRedo_multipleTutorHelperPointerAtStartOfStateList_returnsTrue() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 2);
 
         assertTrue(versionedTutorHelper.canRedo());
@@ -120,7 +120,7 @@ public class VersionedTutorHelperTest {
     @Test
     public void canRedo_multipleTutorHelperPointerAtEndOfStateList_returnsFalse() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
 
         assertFalse(versionedTutorHelper.canRedo());
     }
@@ -128,26 +128,26 @@ public class VersionedTutorHelperTest {
     @Test
     public void undo_multipleTutorHelperPointerAtEndOfStateList_success() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
 
         versionedTutorHelper.undo();
         assertTutorHelperListStatus(versionedTutorHelper,
                 Collections.singletonList(emptyTutorHelper),
-                TutorHelperWithAmy,
-                Collections.singletonList(TutorHelperWithBob));
+                tutorHelperWithAmy,
+                Collections.singletonList(tutorHelperWithBob));
     }
 
     @Test
     public void undo_multipleTutorHelperPointerNotAtStartOfStateList_success() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 1);
 
         versionedTutorHelper.undo();
         assertTutorHelperListStatus(versionedTutorHelper,
                 Collections.emptyList(),
                 emptyTutorHelper,
-                Arrays.asList(TutorHelperWithAmy, TutorHelperWithBob));
+                Arrays.asList(tutorHelperWithAmy, tutorHelperWithBob));
     }
 
     @Test
@@ -160,7 +160,7 @@ public class VersionedTutorHelperTest {
     @Test
     public void undo_multipleTutorHelperPointerAtStartOfStateList_throwsNoUndoableStateException() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 2);
 
         assertThrows(VersionedTutorHelper.NoUndoableStateException.class, versionedTutorHelper::undo);
@@ -169,27 +169,27 @@ public class VersionedTutorHelperTest {
     @Test
     public void redo_multipleTutorHelperPointerNotAtEndOfStateList_success() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 1);
 
         versionedTutorHelper.redo();
         assertTutorHelperListStatus(versionedTutorHelper,
-                Arrays.asList(emptyTutorHelper, TutorHelperWithAmy),
-                TutorHelperWithBob,
+                Arrays.asList(emptyTutorHelper, tutorHelperWithAmy),
+                tutorHelperWithBob,
                 Collections.emptyList());
     }
 
     @Test
     public void redo_multipleTutorHelperPointerAtStartOfStateList_success() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 2);
 
         versionedTutorHelper.redo();
         assertTutorHelperListStatus(versionedTutorHelper,
                 Collections.singletonList(emptyTutorHelper),
-                TutorHelperWithAmy,
-                Collections.singletonList(TutorHelperWithBob));
+                tutorHelperWithAmy,
+                Collections.singletonList(tutorHelperWithBob));
     }
 
     @Test
@@ -202,17 +202,17 @@ public class VersionedTutorHelperTest {
     @Test
     public void redo_multipleTutorHelperPointerAtEndOfStateList_throwsNoRedoableStateException() {
         VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(
-                emptyTutorHelper, TutorHelperWithAmy, TutorHelperWithBob);
+                emptyTutorHelper, tutorHelperWithAmy, tutorHelperWithBob);
 
         assertThrows(VersionedTutorHelper.NoRedoableStateException.class, versionedTutorHelper::redo);
     }
 
     @Test
     public void equals() {
-        VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(TutorHelperWithAmy, TutorHelperWithBob);
+        VersionedTutorHelper versionedTutorHelper = prepareTutorHelperList(tutorHelperWithAmy, tutorHelperWithBob);
 
         // same values -> returns true
-        VersionedTutorHelper copy = prepareTutorHelperList(TutorHelperWithAmy, TutorHelperWithBob);
+        VersionedTutorHelper copy = prepareTutorHelperList(tutorHelperWithAmy, tutorHelperWithBob);
         assertTrue(versionedTutorHelper.equals(copy));
 
         // same object -> returns true
@@ -225,12 +225,12 @@ public class VersionedTutorHelperTest {
         assertFalse(versionedTutorHelper.equals(1));
 
         // different state list -> returns false
-        VersionedTutorHelper differentTutorHelperList = prepareTutorHelperList(TutorHelperWithBob, TutorHelperWithCarl);
+        VersionedTutorHelper differentTutorHelperList = prepareTutorHelperList(tutorHelperWithBob, tutorHelperWithCarl);
         assertFalse(versionedTutorHelper.equals(differentTutorHelperList));
 
         // different current pointer index -> returns false
         VersionedTutorHelper differentCurrentStatePointer = prepareTutorHelperList(
-                TutorHelperWithAmy, TutorHelperWithBob);
+                tutorHelperWithAmy, tutorHelperWithBob);
         shiftCurrentStatePointerLeftwards(versionedTutorHelper, 1);
         assertFalse(versionedTutorHelper.equals(differentCurrentStatePointer));
     }

@@ -37,8 +37,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.TutorHelper;
 import seedu.address.model.Model;
+import seedu.address.model.TutorHelper;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.CommandBox;
 
