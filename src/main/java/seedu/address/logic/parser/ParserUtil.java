@@ -110,6 +110,9 @@ public class ParserUtil {
      */
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
+        if (subject.isEmpty()) {
+            throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
+        }
         String trimmedSubject = subject.trim();
         if (!SubjectType.isValidSubjectName(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
@@ -222,7 +225,7 @@ public class ParserUtil {
         }
 
         if (doesNotContainAllDigits == true) {
-            throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
+            throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
 
         if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {

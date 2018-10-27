@@ -10,8 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,8 +36,8 @@ import seedu.address.model.util.SubjectsUtil;
  */
 public class MarkCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelper(), new UserPrefs());
+    private Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -47,12 +46,12 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, personTarget);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateMarkCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(markCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -71,16 +70,17 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
     public void execute_invalidIndexSyllabusUnfilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class MarkCommandTest {
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, personTarget);
         Person updatedPerson = simulateMarkCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         expectedModel.updatePerson(personTarget, updatedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(markCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -104,7 +104,7 @@ public class MarkCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         MarkCommand markCommand = new MarkCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -117,37 +117,38 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
     public void execute_invalidIndexSyllabusFilteredList_throwsCommandException() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_THIRD_SYLLABUS);
+        Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(markCommand, model, commandHistory, MarkCommand.MESSAGE_MARK_FAILED);
+        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateMarkCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         // mark -> first person marked
         markCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons
+        expectedModel.undoTutorHelper();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoTutorHelper();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -173,7 +174,8 @@ public class MarkCommandTest {
         assertEquals(markFirstCommand, markFirstCommand);
 
         // same values -> returns true
-        MarkCommand markFirstCommandCopy = new MarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        MarkCommand markFirstCommandCopy = new MarkCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         assertEquals(markFirstCommand, markFirstCommandCopy);
 
         // different types -> returns false

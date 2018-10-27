@@ -31,7 +31,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
-public class MarkCommandSystemTest extends AddressBookSystemTest {
+public class MarkCommandSystemTest extends TutorHelperSystemTest {
 
     private static final String MESSAGE_INVALID_MARK_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE);
@@ -83,7 +83,7 @@ public class MarkCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
         command = MarkCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased()
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased();
@@ -101,7 +101,7 @@ public class MarkCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getTutorHelper().getPersonList().size() + 1);
         command = MarkCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased() + " 1 1";
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -139,6 +139,16 @@ public class MarkCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(personIndex, subjectIndex, syllabusIndex, null);
     }
 
+    /**
+     * Executes {@code command} and in addition,
+     * 1. Asserts that the command box displays {@code command}.
+     * 2. Asserts that result display box displays {@code expectedResultMessage}.
+     * 3. Asserts that the browser url, selected card and status bar remain unchanged.
+     * 4. Asserts that the command box has the error style.
+     * Verifications 1 and 2 are performed by
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     */
     private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex, String filter)
             throws CommandException {
         Model expectedModel = getModel();
@@ -157,8 +167,8 @@ public class MarkCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
@@ -170,14 +180,14 @@ public class MarkCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Executes {@code command} and in addition,<br>
-     * 1. Asserts that the command box displays {@code command}.<br>
-     * 2. Asserts that result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
-     * 4. Asserts that the command box has the error style.<br>
+     * Executes {@code command} and in addition,
+     * 1. Asserts that the command box displays {@code command}.
+     * 2. Asserts that result display box displays {@code expectedResultMessage}.
+     * 3. Asserts that the browser url, selected card and status bar remain unchanged.
+     * 4. Asserts that the command box has the error style.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

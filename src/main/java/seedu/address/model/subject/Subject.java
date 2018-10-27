@@ -2,13 +2,13 @@ package seedu.address.model.subject;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.commands.EraseSyllCommand.MESSAGE_ERASESYLL_FAILED;
 import static seedu.address.model.subject.SubjectType.convertStringToSubjectName;
 import static seedu.address.model.subject.SubjectType.isValidSubjectName;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -43,7 +43,7 @@ public class Subject {
      *
      * @param subjectName Subjects that the student is taking.
      */
-    public static Subject makeSubject(String subjectName) {
+    public static Subject makeSubject (String subjectName) {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_SUBJECT_CONSTRAINTS);
         Subject subject = new Subject(convertStringToSubjectName(subjectName), new ArrayList<>(), 0);
@@ -152,7 +152,7 @@ public class Subject {
      */
     public Subject remove(Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
-            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
+            throw new CommandException(Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
         }
 
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
@@ -186,7 +186,7 @@ public class Subject {
      */
     public Subject edit(Syllabus syllabus, Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
-            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
+            throw new CommandException(Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
         }
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());
         newSubjectContent.set(index.getZeroBased(), syllabus);
@@ -207,7 +207,7 @@ public class Subject {
      */
     public Subject toggleState(Index index) throws CommandException {
         if (index.getOneBased() > getSubjectContent().size()) {
-            throw new CommandException(MESSAGE_ERASESYLL_FAILED);
+            throw new CommandException(Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
         }
 
         List<Syllabus> newSubjectContent = new ArrayList<>(getSubjectContent());

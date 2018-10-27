@@ -33,7 +33,7 @@ public class EditSyllCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_EDITSYLL_SUCCESS = "Edited syllabus to Person: %1$s";
-    public static final String MESSAGE_SUBJECT_NOT_FOUND = "Subject index not found in Person: %1$s";
+    public static final String MESSAGE_SUBJECT_NOT_FOUND = "Subject index not found in Person";
     public static final String MESSAGE_DUPLICATE_SYLLABUS = "This syllabus already exists in the address book.";
 
     private final Index personIndex;
@@ -77,7 +77,7 @@ public class EditSyllCommand extends Command {
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_EDITSYLL_SUCCESS, personSubjUpdated));
     }
 
@@ -85,8 +85,10 @@ public class EditSyllCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditSyllCommand // instanceof handles nulls
-                && personIndex.equals(((EditSyllCommand) other).personIndex))
-                && syllabusEdit.equals(((EditSyllCommand) other).syllabusEdit); // state check
+                && personIndex.equals(((EditSyllCommand) other).personIndex)
+                && subjectIndex.equals(((EditSyllCommand) other).subjectIndex)
+                && syllabusIndex.equals(((EditSyllCommand) other).syllabusIndex)
+                && syllabusEdit.equals(((EditSyllCommand) other).syllabusEdit)); // state check
     }
 
     /**
