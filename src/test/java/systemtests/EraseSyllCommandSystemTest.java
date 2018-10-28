@@ -32,7 +32,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
-public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
+public class EraseSyllCommandSystemTest extends TutorHelperSystemTest {
 
     private static final String MESSAGE_INVALID_ERASESYLL_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EraseSyllCommand.MESSAGE_USAGE);
@@ -81,13 +81,13 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index personIndex = INDEX_FIRST_PERSON;
         assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
-        assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, KEYWORD_MATCHING_MEIER);
+        assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
         command = EraseSyllCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased()
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased();
@@ -97,7 +97,7 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        invalidIndex = getModel().getAddressBook().getPersonList().size();
+        invalidIndex = getModel().getTutorHelper().getPersonList().size();
         command = EraseSyllCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased()
                 + " " + INDEX_THIRD_SYLLABUS.getOneBased();
@@ -115,7 +115,7 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getTutorHelper().getPersonList().size() + 1);
         command = EraseSyllCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased() + " 1 1";
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -150,11 +150,6 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
         return personUpdated;
     }
 
-    private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex)
-            throws CommandException {
-        assertCommandSuccess(personIndex, subjectIndex, syllabusIndex, null);
-    }
-
     /**
      * Executes {@code command} and in addition,
      * 1. Asserts that the command box displays an empty string.
@@ -163,10 +158,10 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex, String filter)
+    private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex)
             throws CommandException {
         Model expectedModel = getModel();
         Person erasedSyllPerson = eraseSyllPerson(expectedModel, personIndex, subjectIndex, syllabusIndex);
@@ -184,8 +179,8 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
@@ -203,8 +198,8 @@ public class EraseSyllCommandSystemTest extends AddressBookSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

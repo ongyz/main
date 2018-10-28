@@ -1,11 +1,12 @@
 package seedu.address.logic.parser;
 
-import org.junit.Test;
-import seedu.address.logic.commands.EarningsCommand;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.EarningsCommand;
 
 public class EarningsCommandParserTest {
 
@@ -24,15 +25,18 @@ public class EarningsCommandParserTest {
 
         //month missing
         String monthInput = " 2018";
-        assertParseFailure(earning, monthInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earning, monthInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EarningsCommand.MESSAGE_USAGE));
 
         //year missing
         String yearInput = "9";
-        assertParseFailure(earning, yearInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earning, yearInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EarningsCommand.MESSAGE_USAGE));
 
         //all fields missing
         String monthYearInput = " ";
-        assertParseFailure(earning, monthYearInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earning, monthYearInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EarningsCommand.MESSAGE_USAGE));
 
     }
 
@@ -52,7 +56,7 @@ public class EarningsCommandParserTest {
         String wrongMonthSymbolInput = " * 2018";
         assertParseFailure(earnings, wrongMonthSymbolInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EarningsCommand.MESSAGE_USAGE));
-        
+
         String wrongYearNegativeInput = " 8 -2018";
         assertParseFailure(earnings, wrongMonthNegativeInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EarningsCommand.MESSAGE_USAGE));
@@ -60,8 +64,6 @@ public class EarningsCommandParserTest {
         String wrongYearSymbolInput = " 8 &018";
         assertParseFailure(earnings, wrongMonthSymbolInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EarningsCommand.MESSAGE_USAGE));
-
-
 
     }
 

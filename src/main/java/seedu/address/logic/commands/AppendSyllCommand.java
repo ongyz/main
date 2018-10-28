@@ -41,6 +41,9 @@ public class AppendSyllCommand extends Command {
     private final Syllabus syllabus;
 
     public AppendSyllCommand(Index personIndex, Index subjectIndex, Syllabus syllabus) {
+        requireNonNull(personIndex);
+        requireNonNull(subjectIndex);
+        requireNonNull(syllabus);
         this.personIndex = personIndex;
         this.subjectIndex = subjectIndex;
         this.syllabus = syllabus;
@@ -56,12 +59,17 @@ public class AppendSyllCommand extends Command {
         }
 
         Person personTarget = lastShownList.get(personIndex.getZeroBased());
+
+        if (subjectIndex.getZeroBased() >= personTarget.getSubjects().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        }
+
         Set<Subject> addedSubjectContent = addSubjectContentTo(personTarget, subjectIndex, syllabus);
         Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, addedSubjectContent);
 
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_APPENDSYLL_SUCCESS, personSubjUpdated));
     }
 
