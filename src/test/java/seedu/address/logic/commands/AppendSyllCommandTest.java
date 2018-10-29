@@ -11,7 +11,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,8 +42,8 @@ public class AppendSyllCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelper(), new UserPrefs());
+    private Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -63,12 +63,12 @@ public class AppendSyllCommandTest {
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, syllabusTest);
 
         String expectedMessage = String.format(AppendSyllCommand.MESSAGE_APPENDSYLL_SUCCESS, personTarget);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
         Person newPerson = simulateAppendSyllCommand(personTarget, INDEX_FIRST_SUBJECT, syllabusTest);
 
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(appendSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -105,7 +105,7 @@ public class AppendSyllCommandTest {
         String expectedMessage = String.format(AppendSyllCommand.MESSAGE_APPENDSYLL_SUCCESS, personTarget);
         Person updatedPerson = simulateAppendSyllCommand(personTarget, INDEX_FIRST_SUBJECT, syllabusTest);
         expectedModel.updatePerson(personTarget, updatedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(appendSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -116,7 +116,7 @@ public class AppendSyllCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         AppendSyllCommand appendSyllCommand = new AppendSyllCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
 
@@ -159,22 +159,22 @@ public class AppendSyllCommandTest {
         Syllabus syllabusTest = Syllabus.makeSyllabus("AppendSyllTestSyllabus");
         AppendSyllCommand appendSyllCommand = new AppendSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, syllabusTest);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateAppendSyllCommand(personTarget, INDEX_FIRST_SUBJECT, syllabusTest);
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         // AppendSyll -> first person has an added syllabus
         appendSyllCommand.execute(model, commandHistory);
 
         // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoTutorHelper();
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoTutorHelper();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
