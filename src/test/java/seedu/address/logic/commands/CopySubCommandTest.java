@@ -12,7 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getDifferentSubjectPersonIndexes;
 import static seedu.address.testutil.TypicalPersons.getSameSubjectPersonsIndexes;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,7 +37,7 @@ import seedu.address.model.util.SubjectsUtil;
  */
 public class CopySubCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelper(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -48,12 +48,12 @@ public class CopySubCommandTest {
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_SECOND_PERSON);
 
         String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personTarget);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateCopySubCommand(personSource, INDEX_FIRST_SUBJECT, personTarget);
 
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(copySubCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -97,7 +97,7 @@ public class CopySubCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         CopySubCommand copySubCommand = new CopySubCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_PERSON);
 
@@ -118,12 +118,12 @@ public class CopySubCommandTest {
                 firstIndex, INDEX_FIRST_SUBJECT, secondIndex);
 
         String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personTarget);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateCopySubCommand(personSource, INDEX_FIRST_SUBJECT, personTarget);
 
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         // No new subject should be created
         assertEquals(personTarget.getSubjects().size(), newPerson.getSubjects().size());
@@ -144,12 +144,12 @@ public class CopySubCommandTest {
                 firstIndex, INDEX_FIRST_SUBJECT, secondIndex);
 
         String expectedMessage = String.format(CopySubCommand.MESSAGE_COPYSUB_SUCCESS, personTarget);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateCopySubCommand(personSource, INDEX_FIRST_SUBJECT, personTarget);
 
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         // New subject should be created
         assertNotEquals(personTarget.getSubjects().size(), newPerson.getSubjects().size());
@@ -164,23 +164,23 @@ public class CopySubCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         CopySubCommand copySubCommand = new CopySubCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_SECOND_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateCopySubCommand(personSource, INDEX_FIRST_SUBJECT, personTarget);
 
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         // CopySub -> first person syllabus is erased
         copySubCommand.execute(model, commandHistory);
 
         // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoTutorHelper();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoTutorHelper();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

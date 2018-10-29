@@ -22,7 +22,7 @@ public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person>
         DayOfWeek day = person.getTuitionTiming().day;
         String time = person.getTuitionTiming().time;
 
-        if ((keyword.toLowerCase()).matches((TuitionTiming.DAY_REGEX).toLowerCase())) {
+        if (keyword.matches(TuitionTiming.DAY_REGEX)) {
             return day.equals(DayOfWeek.valueOf(keyword.toUpperCase()));
         } else if ((keyword.toLowerCase()).matches((TuitionTiming.TIME_REGEX).toLowerCase())) {
             return StringUtil.containsWordIgnoreCase(time, keyword);

@@ -37,14 +37,21 @@ public class GroupCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
 
-        if (this.isDay) {
+        if (this.isDay && !this.isTime) {
             model.sortByTime();
-        } else if (this.isTime) {
+        } else if (this.isTime && !this.isDay) {
             model.sortByDay();
         }
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
         );
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof GroupCommand // instanceof handles nulls
+                && predicate.equals(((GroupCommand) other).predicate)); // state check
     }
 }

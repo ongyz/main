@@ -200,7 +200,7 @@ This section describes some noteworthy details on how certain features are imple
 
 Classes related to Group and its functionality is listed below:
 
-* `AddressBookParser` -- Creates a GroupCommandParser object and parses the user's input.
+* `TutorHelperParser` -- Creates a GroupCommandParser object and parses the user's input.
 * `GroupCommandParser` -- Analyses the input, creates a predicate based on the input and returns a GroupCommand object with the predicate as the argument.
 * `GroupCommand` -- Filters the list based on the predicate and displays it to the user.
 
@@ -223,12 +223,12 @@ image::GroupSequenceDiagram.png[width="650"]
 
 ==== Current implementation
 
-The Payment mechanism is facilitated by VersionedAddressBook and FilteredList<Person>. VersionedAddressBook extends from AddressBook and classes related to Payment calls methods from VersionedAddressBook to retrieve students' data, update them and display accordingly.
+The Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
 
 Classes that are related to Payment and their functionality are as listed below:
-* `AddressBookParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
+* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
 * `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
-* `PayCommand` -- Calls on methods in VersionedAddressBook to update new Payments made.
+* `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
 * `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
 
 Given below is an example usage scenario and how the payment mechanism behaves at each step.
@@ -238,7 +238,7 @@ Step 2. He/she makes a mental note of Alice's student index as listed in the lef
 
 Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid 2 400 11 2018
 
-Step 2b. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
 
 Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
 
@@ -268,9 +268,9 @@ image:PaymentSequenceDiagram.png[width="800"]
 ==== Current implementation
 
 Classes that are related to Payment and their functionality are as listed below:
-* `AddressBookParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
+* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
 * `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
-* `PayCommand` -- Calls on methods in VersionedAddressBook to update new Payments made.
+* `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
 * `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
 
 Given below is an example usage scenario and how the payment mechanism behaves at each step.
@@ -280,7 +280,7 @@ Step 2. He/she makes a mental note of Alice's student index as listed in the lef
 
 Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid 2 400 11 2018
 
-Step 2b. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
 
 Step 2c. PayCommandParser check if the inputs are of the correct format and it initialises a Payment object with the inputs.
 
@@ -302,10 +302,10 @@ The sequence diagram below illustrates the payment edit feature
 
     1. Current implementation
 
-        The edit Payment mechanism is facilitated by VersionedAddressBook and FilteredList<Person>. VersionedAddressBook extends from AddressBook and classes related to Payment calls methods from VersionedAddressBook to retrieve students' data, update the Payment entry and display accordingly.
+        The edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update the Payment entry and display accordingly.
 
         To be clearer, classes that are related to Payment and their functionality are as listed below:
-        a. AddressBookParser:
+        a. TutorHelperParser:
             -Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
         c. PayCommandParser
             -Analyses the user's input and checks for any violation of syntax.
@@ -313,7 +313,7 @@ The sequence diagram below illustrates the payment edit feature
             -Returns a PayCommand object with Payment object being fed in.
         b. PayCommand:
             -Takes in a Payment object in its constructor to edit an existing Payment object
-            -Calls on methods in VersionedAddressBook to update edit on existing Payments made.
+            -Calls on methods in VersionedTutorHelper to update edit on existing Payments made.
         d. Payment:
             -Contains fields to store student id, amount paid, month of payment and year of payment to compare if it is to be edited
         e. XmlAdaptedPay
@@ -326,7 +326,7 @@ The sequence diagram below illustrates the payment edit feature
         2a. The tutor launches the application and wants to edit an existing payment for his/her student called Alice by updating the amount by another 200.
         2b. He/she makes a mental note of Alice's student index as listed in the left side of the application as well as the month and year of the existing payment.
         2c. Lets say, Alice has student id 2. The existing payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid idx/2 amt/200 m/11 y/2018
-            2C1. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+            2C1. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
             2C3. From the prefixes, PayCommandParser makes use of ArgumentMultimap to check if the inputs are of the correct format and it initialises a Payment object with the inputs.
             2C4. The PayCommandParser method then returns a PayCommand object with payment object.
             2C5. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
@@ -347,7 +347,7 @@ image:EditPaymentSequenceDiagram.png[width="800"]
 The Earnings mechanism is mainly facilitated by the filteredPersonList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
 The classes related to Earnings are EarningsCommand, EarningsCommandParser.
 
-* `AddressBookParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
+* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
 * `EarningsCommandParser` --Takes in users' input and checks if it adheres to the required format. Returns a EarningsCommand with the month and year passed in.
 * `EarningsCommand` -- Takes in month and year as inputs in its constructed. In Execute() method, it performs the checking of all recorded payments and returns the total payments received for that specified month and year.
 
@@ -357,7 +357,7 @@ Step 1. The tutor launches the application and wants to view his/her earnings fo
 
 Step 2. He/she enters input in the format of: earnings 11 2018
 
-Step 2a. The tutor's input is passed from the text box through LogicManager class to AddressBookParser. AddressBookParser sieves out the arguments and command word(in this case, earnings) and creates the EarningsCommandParser object, followed by calling parse method, with the arguments passed in.
+Step 2a. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, earnings) and creates the EarningsCommandParser object, followed by calling parse method, with the arguments passed in.
 
 Step 2b. EarningCommandParser checks if the inputs are of the correct format.
 
@@ -385,7 +385,7 @@ If the other student already has the same subject, append the content of the sub
 
 Classes related to copy command and its functionality are listed below:
 
-* `AddressBookParser` -- Creates CopySubCommandParser which parses the input from user.
+* `TutorHelperParser` -- Creates CopySubCommandParser which parses the input from user.
 * `CopySubCommandParser` -- Parses user's input into proper argument and creates CopySubCommand
 * `CopySubCommand` -- Updates the target person based on the argument
 * `SubjectsUtil` -- Manage the finding and copying aspect of copysub command.
@@ -413,10 +413,10 @@ image::CopySubSequenceDiagrams.png[width="650"]
 
 ==== Implementation
 
-The add / delete subject mechanism is facilitated with `AddressBookParser`.
+The add / delete subject mechanism is facilitated with `TutorHelperParser`.
 Classes related to the functionality of the mechanism are listed below:
 
-* `AddressBookParser` -- Creates a `AddSubCommandParser` / `DeleteSubCommandParser` object and parses the user's input.
+* `TutorHelperParser` -- Creates a `AddSubCommandParser` / `DeleteSubCommandParser` object and parses the user's input.
 * `AddSubCommandParser` / `DeleteSubCommandParser` -- Analyses user input to create a corresponding `Command` object.
 * `AddSubCommand` / `DeleteSubCommand` -- Execution results in addition / deletion of a subject for a specified student index.
 
@@ -461,7 +461,7 @@ image::DeleteSubSequenceDiagram.png[width="650"]
 ==== Current Implementation
 
 Classes that are related to edit syllabus and their functionality are as listed below:
-* `AddressBookParser` -- Creates a EditSyllCommandParser object and calls parse method in object to parse user's argument input.
+* `TutorHelperParser` -- Creates a EditSyllCommandParser object and calls parse method in object to parse user's argument input.
 * `EditSyllCommandParser` -- Analyses the input, checks for any violation of syntax and returns a EditSyllCommand object with the person,subject,syllabus index object as well as the new Syllabus object as the argument.
 * `EditSyllCommand` -- Locates the corresponding syllabus to update and calls corresponding subject to edit syllabus.
 * `Subject` -- Locates and edits existing syllabus entry with new syllabus entry

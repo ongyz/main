@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<TutorHelper>
     <!-- Person with invalid email field -->
     <persons>
         <name>Hans Muster</name>
@@ -9,4 +9,4 @@
         <tuitionTiming isPrivate="false">Monday, 6:00pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Mathematics" completionRate="0.0"/>
     </persons>
-</addressbook>
+</TutorHelper>
