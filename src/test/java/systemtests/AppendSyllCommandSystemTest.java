@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.AppendSyllCommand.MESSAGE_APPENDSYLL_SUCCESS;
-import static seedu.address.logic.commands.CopySubCommand.MESSAGE_COPYSUB_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
@@ -12,8 +11,6 @@ import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
@@ -26,7 +23,6 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AppendSyllCommand;
-import seedu.address.logic.commands.CopySubCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,7 +32,7 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
-public class AppendSyllCommandSystemTest extends AddressBookSystemTest {
+public class AppendSyllCommandSystemTest extends TutorHelperSystemTest {
 
     private static final String MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE);
@@ -92,7 +88,7 @@ public class AppendSyllCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
         command = AppendSyllCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SUBJECT.getOneBased()
                 + " " + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING;
@@ -102,7 +98,7 @@ public class AppendSyllCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        invalidIndex = getModel().getAddressBook().getPersonList()
+        invalidIndex = getModel().getTutorHelper().getPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()).getSubjects().size() + 1;
         command = AppendSyllCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + " " + invalidIndex
@@ -131,7 +127,7 @@ public class AppendSyllCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getTutorHelper().getPersonList().size() + 1);
         command = AppendSyllCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased()
                 + " " + INDEX_FIRST_SUBJECT.getOneBased() + " " + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -174,8 +170,8 @@ public class AppendSyllCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Index sourcePersonIndex, Index subjectIndex, Syllabus syllabus) {
         Model expectedModel = getModel();
@@ -195,8 +191,8 @@ public class AppendSyllCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
@@ -214,8 +210,8 @@ public class AppendSyllCommandSystemTest extends AddressBookSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
