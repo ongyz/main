@@ -15,6 +15,7 @@ import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.Syllabus;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuitiontiming.TuitionTiming;
 import seedu.address.model.util.SampleDataUtil;
@@ -160,6 +161,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Replaces the {@code Syllabus} of the {@code Subject} of the {@code Person} we are building.
+     */
+    public PersonBuilder replaceSyllabus(Index subjectIndex, Index syllabusIndex, String syllabus) {
+        Syllabus selectedSubject = new ArrayList<>(subjects)
+                .get(subjectIndex.getZeroBased())
+                .getSubjectContent()
+                .set(syllabusIndex.getZeroBased(), new Syllabus(syllabus, false));
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, subjects, tuitionTiming, tags, payments);
     }
@@ -173,5 +185,7 @@ public class PersonBuilder {
         subjectSet.add(Subject.makeSubject("Mathematics"));
         return subjectSet;
     }
+
+
 
 }
