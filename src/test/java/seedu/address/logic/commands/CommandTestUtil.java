@@ -17,8 +17,8 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.TutorHelper;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -31,21 +31,46 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CATHY = "Cathy Ho";
+    public static final String VALID_NAME_ALCYONE = "Alcyone Star";
+    public static final String VALID_NAME_BILLY = "Billy Goat";
+    public static final String VALID_NAME_CABBAGE = "Cabbage Green";
+    public static final String VALID_NAME_DAISY = "Daisy Lane";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CATHY = "33333333";
+    public static final String VALID_PHONE_ALCYONE = "11112222";
+    public static final String VALID_PHONE_BILLY = "33334444";
+    public static final String VALID_PHONE_CABBAGE = "44445555";
+    public static final String VALID_PHONE_DAISY = "44444444";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_CATHY = "cathy@example.com";
+    public static final String VALID_EMAIL_ALCYONE = "alcyone@example.com";
+    public static final String VALID_EMAIL_BILLY = "billy@example.com";
+    public static final String VALID_EMAIL_CABBAGE = "cabbage@example.com";
+    public static final String VALID_EMAIL_DAISY = "daisy@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ADDRESS_CATHY = "Block 213, Cathy Street 2";
+    public static final String VALID_ADDRESS_ALCYONE = "Block 111, Alcyone Constellation 3";
+    public static final String VALID_ADDRESS_BILLY = "Block 210, Billy Mountain 88";
+    public static final String VALID_ADDRESS_CABBAGE = "Block 274, Cabbage Patch 95";
+    public static final String VALID_ADDRESS_DAISY = "Block 232, Daisy Lane 55";
     public static final String VALID_SUBJECT_AMY = "Mathematics";
     public static final String VALID_SUBJECT_BOB = "Economics";
     public static final String VALID_SUBJECT_CATHY = "Physics";
+    public static final String VALID_SUBJECT_ALCYONE = "Economics";
+    public static final String VALID_SUBJECT_BILLY = "Physics";
+    public static final String VALID_SUBJECT_CABBAGE = "Chemistry";
+    public static final String VALID_SUBJECT_DAISY = "Chemistry";
     public static final String VALID_TUITION_TIMING_AMY = "Monday 4:00pm";
     public static final String VALID_TUITION_TIMING_BOB = "Tuesday 6:30pm";
     public static final String VALID_TUITION_TIMING_CATHY = "Wednesday 7:30pm";
+    public static final String VALID_TUITION_TIMING_ALCYONE = "Friday 6:30pm";
+    public static final String VALID_TUITION_TIMING_BILLY = "Saturday 7:30pm";
+    public static final String VALID_TUITION_TIMING_CABBAGE = "Sunday 7:30pm";
+    public static final String VALID_TUITION_TIMING_DAISY = "Thursday 7:30pm";
+
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String DUPLICATE_SYLLABUS = "Integration";
@@ -120,7 +145,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        TutorHelper expectedTutorHelper = new TutorHelper(actualModel.getTutorHelper());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -130,7 +155,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedTutorHelper, actualModel.getTutorHelper());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
@@ -156,7 +181,7 @@ public class CommandTestUtil {
     public static void deleteFirstPerson(Model model) {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
-        model.commitAddressBook();
+        model.commitTutorHelper();
     }
 
 }

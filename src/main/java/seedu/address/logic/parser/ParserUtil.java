@@ -225,7 +225,7 @@ public class ParserUtil {
         }
 
         if (doesNotContainAllDigits == true) {
-            throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
+            throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
 
         if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {

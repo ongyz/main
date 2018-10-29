@@ -59,7 +59,7 @@ public class DeleteSubCommand extends Command {
 
         model.updatePerson(studentTarget, updatedStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_DELETESUB_SUCCESS, studentTarget));
     }
 

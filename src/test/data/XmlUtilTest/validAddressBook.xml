@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<TutorHelper>
     <persons>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
@@ -72,4 +72,4 @@
         <tuitionTiming isPrivate="false">Sunday, 11:00am</tuitionTiming>
         <subjects isPrivate="false" subjectName="Chemistry" completionRate="0.0"/>
     </persons>
-</addressbook>
+</TutorHelper>

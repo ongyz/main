@@ -1,32 +1,56 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ALCYONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CABBAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CATHY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DAISY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALCYONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CABBAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CATHY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DAISY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALCYONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CABBAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CATHY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DAISY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ALCYONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CABBAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CATHY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DAISY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ALCYONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CABBAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CATHY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_DAISY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_ALCYONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_CABBAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_CATHY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_DAISY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TutorHelper;
 import seedu.address.model.person.Person;
 
 /**
@@ -48,8 +72,8 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").withPayments("2 200 11 2018", "2 300 12 2018").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com")
-            .withAddress("Wall street").withSubjects("Mathematics")
-            .withSyllabus(Index.fromOneBased(1), "Normal Distribution", "Vector")
+            .withAddress("Wall street").withSubjects("Physics")
+            .withSyllabus(Index.fromOneBased(1), "Kinematics", "Forces")
             .withTuitionTiming("Saturday 1:00pm").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com")
@@ -96,16 +120,39 @@ public class TypicalPersons {
             .withSubjects(VALID_SUBJECT_CATHY).withTuitionTiming(VALID_TUITION_TIMING_CATHY)
             .withTags(VALID_TAG_FRIEND)
             .build();
+    //For Payments
+    public static final Person ALCYONE = new PersonBuilder().withName(VALID_NAME_ALCYONE).withPhone(VALID_PHONE_ALCYONE)
+            .withEmail(VALID_EMAIL_ALCYONE).withAddress(VALID_ADDRESS_ALCYONE)
+            .withSubjects(VALID_SUBJECT_ALCYONE).withTuitionTiming(VALID_TUITION_TIMING_ALCYONE)
+            .withTags(VALID_TAG_FRIEND).withPayments("1 200 2 2018").build();
+    public static final Person BILLY = new PersonBuilder().withName(VALID_NAME_BILLY).withPhone(VALID_PHONE_BILLY)
+            .withEmail(VALID_EMAIL_BILLY).withAddress(VALID_ADDRESS_BILLY)
+            .withSubjects(VALID_SUBJECT_BILLY).withTuitionTiming(VALID_TUITION_TIMING_BILLY)
+            .withPayments("2 200 2 2018")
+            .build();
+    public static final Person CABBAGE = new PersonBuilder().withName(VALID_NAME_CABBAGE).withPhone(VALID_PHONE_CABBAGE)
+            .withEmail(VALID_EMAIL_CABBAGE).withAddress(VALID_ADDRESS_CABBAGE)
+            .withSubjects(VALID_SUBJECT_CABBAGE).withTuitionTiming(VALID_TUITION_TIMING_CABBAGE)
+            .withTags(VALID_TAG_FRIEND)
+            .withPayments("3 300 3 2018")
+            .build();
+    public static final Person DAISY = new PersonBuilder().withName(VALID_NAME_DAISY).withPhone(VALID_PHONE_DAISY)
+            .withEmail(VALID_EMAIL_DAISY).withAddress(VALID_ADDRESS_DAISY)
+            .withSubjects(VALID_SUBJECT_DAISY).withTuitionTiming(VALID_TUITION_TIMING_DAISY)
+            .withTags(VALID_TAG_FRIEND)
+            .withPayments("4 400 3 2018")
+            .build();
+
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code TutorHelper} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static TutorHelper getTypicalTutorHelper() {
+        TutorHelper ab = new TutorHelper();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
@@ -114,6 +161,21 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    /**
+     * Returns an {@code TutorHelper} with all the typical persons.
+     */
+    public static TutorHelper getTypicalTutorHelperWithPayments() {
+        TutorHelper ab = new TutorHelper();
+        for (Person person : getTypicalPersonsWithPayments()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    public static List<Person> getTypicalPersonsWithPayments() {
+        return new ArrayList<>(Arrays.asList(ALCYONE, BILLY, CABBAGE, DAISY));
     }
 
     public static List<Index> getSameSubjectPersonsIndexes() {
