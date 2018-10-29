@@ -26,8 +26,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CABBAGE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_KINETICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_ORGANIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_MEIER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_MEIER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -138,8 +138,8 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new person's name
-        editedPerson = new PersonBuilder(AMY).withTuitionTiming(VALID_TUITION_TIMING_BOB).withSubjects(VALID_SUBJECT_AMY)
-                .withSyllabus(INDEX_FIRST_SUBJECT, DUPLICATE_SYLLABUS).build();
+        editedPerson = new PersonBuilder(AMY).withTuitionTiming(VALID_TUITION_TIMING_BOB)
+                .withSubjects(VALID_SUBJECT_AMY).withSyllabus(INDEX_FIRST_SUBJECT, DUPLICATE_SYLLABUS).build();
         assertCommandSuccess(command, index, editedPerson, index);
 
         /* --------------------------------- Performing invalid edit operation -------------------------------------- */

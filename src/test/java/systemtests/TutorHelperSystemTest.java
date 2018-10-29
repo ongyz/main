@@ -303,8 +303,8 @@ public abstract class TutorHelperSystemTest {
     }
 
     /**
-     * Returns a truncated url with only details on card, the {@code Person}'s {@code Name}, {@code Phone}, {@code Email}
-     * {@code Address} and {@code Tag} if any.
+     * Returns a truncated url with only details on card, the {@code Person}'s {@code Name}, {@code Phone},
+     * {@code Email}, {@code Address} and {@code Tag} if any.
      */
     protected String cardUrl(String queryUrl) {
         StringBuilder truncated = new StringBuilder(queryUrl);

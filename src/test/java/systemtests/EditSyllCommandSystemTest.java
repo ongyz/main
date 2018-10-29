@@ -28,10 +28,10 @@ import seedu.address.testutil.PersonBuilder;
 public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
 
     @Test
-    public void editsyll() throws CommandException {
+    public void editsyll() {
         Model model = getModel();
 
-        /* ----------------- Performing editsyll operation while an unfiltered list is being shown ---------------------- */
+        /* ---------------- Performing editsyll operation while an unfiltered list is being shown ------------------- */
 
         /* Case: edit the syllabus entry of first subject of the first person in the list
          * -> edited
@@ -39,8 +39,9 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
         Index index = INDEX_FIRST_PERSON;
         Index indexSubject = INDEX_FIRST_SUBJECT;
         Index indexSyll = INDEX_FIRST_SYLLABUS;
-        String command = " " + EditSyllCommand.COMMAND_WORD + " " + index.getOneBased() + " " +
-                indexSubject.getOneBased() + " " + indexSyll.getOneBased() + " " + SYLLABUS_DESC_DIFFERENTIATION + " ";
+        String command = " " + EditSyllCommand.COMMAND_WORD + " " + index.getOneBased() + " "
+                + indexSubject.getOneBased() + " " + indexSyll.getOneBased() + " " + SYLLABUS_DESC_DIFFERENTIATION
+                + " ";
 
         Person editedPerson = new PersonBuilder(ALICE).replaceSyllabus(indexSubject, indexSyll,
                 VALID_SYLLABUS).build();
@@ -94,8 +95,8 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredPersonList().size() + 1;
-        assertCommandFailure(EditSyllCommand.COMMAND_WORD + " " + invalidIndex + " " +
-                INDEX_FIRST_SYLLABUS.getOneBased() + " " + SYLLABUS_DESC_DIFFERENTIATION,
+        assertCommandFailure(EditSyllCommand.COMMAND_WORD + " " + invalidIndex + " "
+                + INDEX_FIRST_SYLLABUS.getOneBased() + " " + SYLLABUS_DESC_DIFFERENTIATION,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
 
         /* Case: missing index -> rejected */
