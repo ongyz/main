@@ -1,7 +1,10 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
+import static seedu.address.logic.commands.CommandTestUtil.SYLLABUS_DESC_DIFFERENTIATION;
+import static seedu.address.logic.commands.CommandTestUtil.SYLLABUS_DESC_INTEGRATION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS;
 import static seedu.address.logic.commands.EditSyllCommand.MESSAGE_DUPLICATE_SYLLABUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
