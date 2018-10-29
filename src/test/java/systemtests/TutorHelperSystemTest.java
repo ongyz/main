@@ -39,6 +39,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.Model;
 import seedu.address.model.TutorHelper;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.CommandBox;
 
@@ -224,6 +226,15 @@ public abstract class TutorHelperSystemTest {
 
         assertEquals(expectedUrl,
                 getBrowserPanel().getLoadedUrl().getQuery().replaceAll("\\[", "").replaceAll("\\]", ""));
+        Person expectedSelectedPerson = new PersonBuilder()
+                .withName(selectedCard.getName())
+                .withPhone(selectedCard.getPhone())
+                .withEmail(selectedCard.getEmail())
+                .withAddress(selectedCard.getAddress()).build();
+
+        Person actualSelectedPerson = getBrowserPanel().getLoadedPerson();
+
+        assertTrue(expectedSelectedPerson.isSamePerson(actualSelectedPerson));
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
