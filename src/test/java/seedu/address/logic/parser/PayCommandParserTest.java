@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.Test;
@@ -49,20 +50,20 @@ public class PayCommandParserTest {
         PayCommandParser pay = new PayCommandParser();
 
         String wrongIndexInput = "-1 200 8 2018";
-        assertParseFailure(pay, wrongIndexInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(pay, wrongIndexInput, String.format(MESSAGE_INVALID_INDEX,
                 PayCommand.MESSAGE_USAGE));
 
         String wrongAmountInput = "1 $200 8 2018";
-        assertParseFailure(pay, wrongAmountInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(pay, wrongAmountInput, String.format(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS,
                 PayCommand.MESSAGE_USAGE));
 
         String wrongMonthInput = "1 200 16 2018";
 
-        assertParseFailure(pay, wrongMonthInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(pay, wrongMonthInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS,
                 PayCommand.MESSAGE_USAGE));
 
         String wrongYearInput = "1 200 8 #2018";
-        assertParseFailure(pay, wrongYearInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(pay, wrongYearInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS,
                 PayCommand.MESSAGE_USAGE));
 
     }

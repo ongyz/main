@@ -53,7 +53,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
@@ -62,7 +61,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
-
         internalList.set(index, editedPerson);
     }
 
