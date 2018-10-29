@@ -165,6 +165,7 @@ public class PersonBuilder {
      * Replaces the {@code Syllabus} of the {@code Subject} of the {@code Person} we are building.
      */
     public PersonBuilder replaceSyllabus(Index subjectIndex, Index syllabusIndex, String syllabus) {
+
         Syllabus selectedSubject = new ArrayList<>(subjects)
                 .get(subjectIndex.getZeroBased())
                 .getSubjectContent()

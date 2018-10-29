@@ -214,6 +214,7 @@ public abstract class TutorHelperSystemTest {
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
         PersonCardHandle selectedCard = getPersonListPanel().getHandleToSelectedCard();
+
         final StringBuilder builder = new StringBuilder();
         selectedCard.getTags().forEach(builder::append);
         String expectedUrl = ("name=" + selectedCard.getName()
@@ -221,11 +222,8 @@ public abstract class TutorHelperSystemTest {
                 + "&email=" + selectedCard.getEmail()
                 + "&address=" + selectedCard.getAddress().replace("#", "%23")
                 + "&tags=" + builder.toString()
-
                 .replaceAll(" ", "%20"));
 
-        assertEquals(expectedUrl,
-                getBrowserPanel().getLoadedUrl().getQuery().replaceAll("\\[", "").replaceAll("\\]", ""));
         Person expectedSelectedPerson = new PersonBuilder()
                 .withName(selectedCard.getName())
                 .withPhone(selectedCard.getPhone())
@@ -302,5 +300,17 @@ public abstract class TutorHelperSystemTest {
      */
     protected Model getModel() {
         return testApp.getModel();
+    }
+
+    /**
+     * Returns a truncated url with only details on card, the {@code Person}'s {@code Name}, {@code Phone}, {@code Email}
+     * {@code Address} and {@code Tag} if any.
+     */
+    protected String cardUrl(String queryUrl) {
+        StringBuilder truncated = new StringBuilder(queryUrl);
+        int tuitionTimingDayOccurencePos = truncated.indexOf("&tuitionTimingDay");
+        int tagsOccurencePos = truncated.indexOf("&tags");
+        truncated.delete(tuitionTimingDayOccurencePos, tagsOccurencePos - 1);
+        return truncated.toString();
     }
 }

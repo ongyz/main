@@ -41,9 +41,9 @@
         <email>heinz@example.com</email>
         <address>Wall street</address>
         <tuitionTiming>Saturday 1:00pm</tuitionTiming>
-        <subjects subjectName="Physics" completionRate="0.0">
-            <subjectContent state="false">Kinematics</subjectContent>
-            <subjectContent state="false">Forces</subjectContent>
+        <subjects subjectName="Mathematics" completionRate="0.0">
+            <subjectContent state="false">Calculus II</subjectContent>
+            <subjectContent state="false">Statistics I</subjectContent>
         </subjects>
     </persons>
     <persons>

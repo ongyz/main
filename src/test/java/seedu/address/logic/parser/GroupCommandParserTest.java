@@ -39,7 +39,7 @@ public class GroupCommandParserTest {
         // valid time regex
         expectedGroupCommand =
                 new GroupCommand(
-                        new TuitionTimingContainsKeywordsPredicate("12:00pm"), true, false);
+                        new TuitionTimingContainsKeywordsPredicate("12:00pm"), false, true);
         assertParseSuccess(parser, "12:00pm", expectedGroupCommand);
     }
 }
