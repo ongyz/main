@@ -34,7 +34,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
-public class CopySubCommandSystemTest extends AddressBookSystemTest {
+public class CopySubCommandSystemTest extends TutorHelperSystemTest {
 
     private static final String MESSAGE_INVALID_COPYSUB_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE);
@@ -89,7 +89,7 @@ public class CopySubCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
         command = CopySubCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SUBJECT.getOneBased()
                 + " " + INDEX_SECOND_PERSON.getOneBased();
@@ -99,7 +99,7 @@ public class CopySubCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        invalidIndex = getModel().getAddressBook().getPersonList()
+        invalidIndex = getModel().getTutorHelper().getPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()).getSubjects().size() + 1;
         command = CopySubCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + " " + invalidIndex
@@ -118,7 +118,7 @@ public class CopySubCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getTutorHelper().getPersonList().size() + 1);
         command = CopySubCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased() + " 1 1";
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -172,7 +172,7 @@ public class CopySubCommandSystemTest extends AddressBookSystemTest {
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Index sourcePersonIndex, Index subjectIndex, Index targetPersonIndex) {
         Model expectedModel = getModel();
@@ -192,7 +192,7 @@ public class CopySubCommandSystemTest extends AddressBookSystemTest {
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
@@ -211,7 +211,7 @@ public class CopySubCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

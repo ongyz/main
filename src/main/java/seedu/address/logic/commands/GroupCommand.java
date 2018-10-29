@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.scene.Group;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -43,6 +44,7 @@ public class GroupCommand extends Command {
             model.sortByDay();
         }
 
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
         );
@@ -52,6 +54,8 @@ public class GroupCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GroupCommand // instanceof handles nulls
-                && predicate.equals(((GroupCommand) other).predicate)); // state check
+                && predicate.equals(((GroupCommand) other).predicate)
+                && isDay == (((GroupCommand) other).isDay)
+                && isTime == (((GroupCommand) other).isTime)); // state check
     }
 }
