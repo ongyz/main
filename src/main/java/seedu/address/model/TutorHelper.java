@@ -148,14 +148,8 @@ public class TutorHelper implements ReadOnlyTutorHelper {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-<<<<<<< HEAD:src/main/java/seedu/address/model/AddressBook.java
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
-
-=======
                 || (other instanceof TutorHelper // instanceof handles nulls
                 && persons.equals(((TutorHelper) other).persons));
->>>>>>> master:src/main/java/seedu/address/model/TutorHelper.java
     }
 
     @Override
