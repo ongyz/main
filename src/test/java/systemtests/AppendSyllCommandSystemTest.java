@@ -34,13 +34,14 @@ import seedu.address.model.util.SubjectsUtil;
 
 public class AppendSyllCommandSystemTest extends TutorHelperSystemTest {
 
-    private static final String MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE);
     public static final String APPEND_SYLL_SYLLABUS_STRING = "AppendSyllCommandTest";
 
+    private static final String MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT =
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE);
+
     @Test
-    public void appendsyll() throws CommandException {
-        /* ---------------- Performing appendsyll operation while an unfiltered list is being shown ------------------- */
+    public void appendsyll() {
+        /* -------------- Performing appendsyll operation while an unfiltered list is being shown ------------------*/
 
         /* Case: append the first subject of the first person in the list with a new syllabus
          * command with leading spaces and trailing spaces -> success
