@@ -33,14 +33,14 @@ public class PayCommandParser implements Parser<PayCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
         }
-        String inputpersonIndex = separatedPayment[0];
+        String inputPersonIndex = separatedPayment[0];
         String inputAmount = separatedPayment[1];
         String inputMonth = separatedPayment[2];
         String inputYear = separatedPayment[3];
 
         //Put the arguments into ParserUtil to check for validity
         try {
-            this.personIndex = ParserUtil.parseIndex(inputpersonIndex);
+            this.personIndex = ParserUtil.parseIndex(inputPersonIndex);
         } catch (ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_INDEX, PayCommand.MESSAGE_USAGE), e);

@@ -66,5 +66,10 @@ public class PayCommandParserTest {
         assertParseFailure(pay, wrongYearInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS,
                 PayCommand.MESSAGE_USAGE));
 
+        String wrongYearInputDigits = "1 200 8 018";
+        assertParseFailure(pay, wrongYearInputDigits, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS,
+                PayCommand.MESSAGE_USAGE));
+
+
     }
 }

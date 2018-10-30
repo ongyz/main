@@ -31,6 +31,8 @@ public class PayCommand extends Command {
 
     private Index targetIndex;
     private Payment newPayment;
+    private int MINVALUE = -1;
+    private int MAXPAYMENTSDISPLAYED = 10;
 
     public PayCommand(Payment payment) {
         this.targetIndex = payment.getIndex();
@@ -43,7 +45,7 @@ public class PayCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() <= -1) {
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() <= MINVALUE) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -54,7 +56,7 @@ public class PayCommand extends Command {
         newEntry = findPaymentToUpdate(pay, newPayment);
 
         if (!newEntry) {
-            if (pay.size() > 10) {
+            if (pay.size() > MAXPAYMENTSDISPLAYED) {
                 pay.remove(0);
             }
             pay = updatePayment(personTarget.getPayments(), newPayment);
