@@ -21,7 +21,7 @@ import seedu.address.testutil.PersonBuilder;
 
 
 
-public class PayCommandSystemTest extends TutorHelperSystemTest{
+public class PayCommandSystemTest extends TutorHelperSystemTest {
 
     @Test
     public void pay() {
@@ -30,7 +30,8 @@ public class PayCommandSystemTest extends TutorHelperSystemTest{
 
         /* ------------------------ Perform pay operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: Update payment for first person in a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: Update payment for first person in a non-empty address book,
+         * command with leading spaces and trailing spaces
          * -> pay
          */
 
@@ -118,7 +119,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest{
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         invalidIndex = getModel().getTutorHelper().getPersonList().size();
-        command = PayCommand.COMMAND_WORD + " " +invalidIndex
+        command = PayCommand.COMMAND_WORD + " " + invalidIndex
                 + " 200 8 2018";
         assertCommandFailure(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -143,15 +144,17 @@ public class PayCommandSystemTest extends TutorHelperSystemTest{
 
         /* Case: invalid number of arguments (alphabets) -> rejected */
         assertCommandFailure(
-                PayCommand.COMMAND_WORD + " a b c", String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+                PayCommand.COMMAND_WORD + " a b c", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        PayCommand.MESSAGE_USAGE));
 
         /* Case: invalid number of arguments  -> rejected */
         assertCommandFailure(
-                PayCommand.COMMAND_WORD + " 200 1 2018", String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+                PayCommand.COMMAND_WORD + " 200 1 2018", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        PayCommand.MESSAGE_USAGE));
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(
-                PayCommand.COMMAND_WORD + " 1 a b c",  String.format(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS,
+                PayCommand.COMMAND_WORD + " 1 a b c", String.format(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS,
                         PayCommand.MESSAGE_USAGE));
 
         /* Case: mixed case command word -> rejected */
