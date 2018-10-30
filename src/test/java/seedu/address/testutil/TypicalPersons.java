@@ -113,13 +113,11 @@ public class TypicalPersons {
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withSubjects(VALID_SUBJECT_BOB).withTuitionTiming(VALID_TUITION_TIMING_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     public static final Person CATHY = new PersonBuilder().withName(VALID_NAME_CATHY).withPhone(VALID_PHONE_CATHY)
             .withEmail(VALID_EMAIL_CATHY).withAddress(VALID_ADDRESS_CATHY)
             .withSubjects(VALID_SUBJECT_CATHY).withTuitionTiming(VALID_TUITION_TIMING_CATHY)
-            .withTags(VALID_TAG_FRIEND)
-            .build();
+            .withTags(VALID_TAG_FRIEND).build();
 
     //For Payments
     public static final Person ALCYONE = new PersonBuilder().withName(VALID_NAME_ALCYONE).withPhone(VALID_PHONE_ALCYONE)
@@ -129,21 +127,17 @@ public class TypicalPersons {
     public static final Person BILLY = new PersonBuilder().withName(VALID_NAME_BILLY).withPhone(VALID_PHONE_BILLY)
             .withEmail(VALID_EMAIL_BILLY).withAddress(VALID_ADDRESS_BILLY)
             .withSubjects(VALID_SUBJECT_BILLY).withTuitionTiming(VALID_TUITION_TIMING_BILLY)
-            .withPayments("2 200 2 2018")
-            .build();
+            .withPayments("2 200 2 2018").build();
     public static final Person CABBAGE = new PersonBuilder().withName(VALID_NAME_CABBAGE).withPhone(VALID_PHONE_CABBAGE)
             .withEmail(VALID_EMAIL_CABBAGE).withAddress(VALID_ADDRESS_CABBAGE)
             .withSubjects(VALID_SUBJECT_CABBAGE).withTuitionTiming(VALID_TUITION_TIMING_CABBAGE)
             .withTags(VALID_TAG_FRIEND)
-            .withPayments("3 300 3 2018")
-            .build();
+            .withPayments("3 300 3 2018").build();
     public static final Person DAISY = new PersonBuilder().withName(VALID_NAME_DAISY).withPhone(VALID_PHONE_DAISY)
             .withEmail(VALID_EMAIL_DAISY).withAddress(VALID_ADDRESS_DAISY)
             .withSubjects(VALID_SUBJECT_DAISY).withTuitionTiming(VALID_TUITION_TIMING_DAISY)
             .withTags(VALID_TAG_FRIEND)
-            .withPayments("4 400 3 2018")
-            .build();
-
+            .withPayments("4 400 3 2018").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
     public static final String KEYWORD_MATCHING_ALICE = "Alice"; // A keyword that matches MEIER
@@ -166,7 +160,7 @@ public class TypicalPersons {
     }
 
     /**
-     * Returns an {@code TutorHelper} with all the typical persons.
+     * Returns an {@code TutorHelper} with all the typical persons with payments inclusive.
      */
     public static TutorHelper getTypicalTutorHelperWithPayments() {
         TutorHelper ab = new TutorHelper();
