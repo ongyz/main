@@ -93,4 +93,5 @@ public class SubjectsUtilTest {
         // Number of subject should increase
         assertTrue(newPerson.getSubjects().size() > sourceAmy.getSubjects().size());
     }
+
 }
