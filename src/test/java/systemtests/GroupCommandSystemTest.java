@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -11,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tuitiontiming.TuitionTimingContainsKeywordsPredicate;
 
 public class GroupCommandSystemTest extends TutorHelperSystemTest {
-    private final String MESSAGE_INVALID_GROUP_COMMAND_FORMAT =
+    private static final String MESSAGE_INVALID_GROUP_COMMAND_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE);
 
     @Test
