@@ -181,6 +181,7 @@ public abstract class TutorHelperSystemTest {
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new TutorHelper(expectedModel.getTutorHelper()), testApp.readStorageTutorHelper());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+
     }
 
     /**
