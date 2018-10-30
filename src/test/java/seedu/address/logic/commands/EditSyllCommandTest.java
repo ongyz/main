@@ -53,6 +53,7 @@ public class EditSyllCommandTest {
         ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
         Person newPerson = simulateEditSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS, true));
+
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.commitTutorHelper();
 

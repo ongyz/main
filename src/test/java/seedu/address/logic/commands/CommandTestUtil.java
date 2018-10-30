@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -64,17 +65,20 @@ public class CommandTestUtil {
     public static final String VALID_SUBJECT_CABBAGE = "Chemistry";
     public static final String VALID_SUBJECT_DAISY = "Chemistry";
     public static final String VALID_TUITION_TIMING_AMY = "Monday 4:00pm";
-    public static final String VALID_TUITION_TIMING_BOB = "Tuesday 6:30pm";
+    public static final String VALID_TUITION_TIMING_BOB = "Tuesday 8:00pm";
     public static final String VALID_TUITION_TIMING_CATHY = "Wednesday 7:30pm";
     public static final String VALID_TUITION_TIMING_ALCYONE = "Friday 6:30pm";
     public static final String VALID_TUITION_TIMING_BILLY = "Saturday 7:30pm";
     public static final String VALID_TUITION_TIMING_CABBAGE = "Sunday 7:30pm";
     public static final String VALID_TUITION_TIMING_DAISY = "Thursday 7:30pm";
+    public static final String VALID_TUITION_TIMING_MEIER = "Monday 5:00pm";
 
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String DUPLICATE_SYLLABUS = "Integration";
     public static final String VALID_SYLLABUS = "Differentiation";
+    public static final String VALID_SYLLABUS_KINETICS = "Kinetics";
+    public static final String VALID_SYLLABUS_ORGANIC = "Organic Chemistry";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -90,6 +94,8 @@ public class CommandTestUtil {
     public static final String TUITION_TIMING_DESC_BOB = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String SYLLABUS_DESC_DIFFERENTIATION = PREFIX_SYLLABUS + VALID_SYLLABUS;
+    public static final String SYLLABUS_DESC_INTEGRATION = PREFIX_SYLLABUS + DUPLICATE_SYLLABUS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
