@@ -31,8 +31,8 @@ public class PayCommand extends Command {
 
     private Index targetIndex;
     private Payment newPayment;
-    private int MINVALUE = -1;
-    private int MAXPAYMENTSDISPLAYED = 10;
+    private static final int MINVALUE = -1;
+    private static final int MAXPAYMENTSDISPLAYED = 10;
 
     public PayCommand(Payment payment) {
         this.targetIndex = payment.getIndex();
