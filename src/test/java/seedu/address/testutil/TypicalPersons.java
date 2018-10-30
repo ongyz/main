@@ -118,6 +118,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_CATHY).withAddress(VALID_ADDRESS_CATHY)
             .withSubjects(VALID_SUBJECT_CATHY).withTuitionTiming(VALID_TUITION_TIMING_CATHY)
             .withTags(VALID_TAG_FRIEND).build();
+
     //For Payments
     public static final Person ALCYONE = new PersonBuilder().withName(VALID_NAME_ALCYONE).withPhone(VALID_PHONE_ALCYONE)
             .withEmail(VALID_EMAIL_ALCYONE).withAddress(VALID_ADDRESS_ALCYONE)
