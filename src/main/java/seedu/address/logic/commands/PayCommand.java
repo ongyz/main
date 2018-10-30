@@ -29,10 +29,11 @@ public class PayCommand extends Command {
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
 
-    private Index targetIndex;
-    private Payment newPayment;
     private static final int MINVALUE = -1;
     private static final int MAXPAYMENTSDISPLAYED = 10;
+
+    private Index targetIndex;
+    private Payment newPayment;
 
     public PayCommand(Payment payment) {
         this.targetIndex = payment.getIndex();
