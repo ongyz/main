@@ -96,8 +96,7 @@ public class Subject {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Subject // instanceof handles nulls
-                && subjectType.equals(((Subject) other).subjectType)
-                && contentAreSame((Subject) other)); // content check
+                && subjectType.equals(((Subject) other).subjectType));
     }
 
     /**

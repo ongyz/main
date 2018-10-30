@@ -72,12 +72,12 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").withPayments("2 200 11 2018", "2 300 12 2018").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com")
-            .withAddress("Wall street").withSubjects("Mathematics")
+            .withAddress("Wall street").withSubjects("Mathematics", "Physics")
             .withSyllabus(Index.fromOneBased(1), "Calculus II", "Statistics I")
             .withTuitionTiming("Saturday 1:00pm").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com")
-            .withAddress("10th street").withSubjects("Mathematics")
+            .withAddress("10th street").withSubjects("Mathematics", "Physics")
             .withSyllabus(Index.fromOneBased(1), "Calculus II", "Statistics I")
             .withTuitionTiming("Saturday 3:00pm")
             .withTags("friends").build();

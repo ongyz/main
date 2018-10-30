@@ -3,14 +3,12 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.AppendSyllCommand.MESSAGE_APPENDSYLL_SUCCESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
+import static seedu.address.logic.commands.AddSubCommand.MESSAGE_ADDSUB_SUCCESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
-import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
@@ -22,44 +20,42 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AppendSyllCommand;
+import seedu.address.logic.commands.AddSubCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
-import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
-public class AppendSyllCommandSystemTest extends TutorHelperSystemTest {
+public class AddSubCommandSystemTest extends TutorHelperSystemTest {
 
-    public static final String APPEND_SYLL_SYLLABUS_STRING = "AppendSyllCommandTest";
+    public static final String ADDSUB_TEST_SUBJECT = "Physics";
 
-    private static final String MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AppendSyllCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_ADDSUB_COMMAND_FORMAT =
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE);
 
     @Test
-    public void appendsyll() {
-        /* -------------- Performing appendsyll operation while an unfiltered list is being shown ------------------*/
+    public void addsub() {
+        /* -------------- Performing addsub operation while an unfiltered list is being shown ------------------*/
 
-        /* Case: append the first subject of the first person in the list with a new syllabus
+        /* Case: add a subject to the first person in the list
          * command with leading spaces and trailing spaces -> success
          */
         Model expectedModel = getModel();
-        String command = "     " + AppendSyllCommand.COMMAND_WORD + "      "
+        String command = "     " + AddSubCommand.COMMAND_WORD + "      "
                 + INDEX_FIRST_PERSON.getOneBased() + " "
-                + INDEX_FIRST_SUBJECT.getOneBased() + " "
-                + PREFIX_SYLLABUS + "AppendSyllCommandSystemTest       ";
-        Syllabus syllabusTest = Syllabus.makeSyllabus("AppendSyllCommandSystemTest");
-        Person newPerson = appendSyllPerson(
-                expectedModel, INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, syllabusTest);
-        String expectedResultMessage = String.format(MESSAGE_APPENDSYLL_SUCCESS, newPerson);
+                + PREFIX_SUBJECT + "Physics       ";
+        Subject subjectTest = Subject.makeSubject("Physics");
+        Person newPerson = addSubPerson(
+                expectedModel, INDEX_FIRST_PERSON, subjectTest);
+        String expectedResultMessage = String.format(MESSAGE_ADDSUB_SUCCESS, newPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* Case: append first subject the last person in the list -> success */
+        /* Case: add subject to the last person in the list -> success */
         Model modelBeforeAppendLast = getModel();
         Index lastPersonIndex = getLastIndex(modelBeforeAppendLast);
-        assertCommandSuccess(lastPersonIndex, INDEX_FIRST_SUBJECT, syllabusTest);
+        assertCommandSuccess(lastPersonIndex, subjectTest);
 
         /* Case: undo command the last person in the list -> first person subject reverted */
         command = UndoCommand.COMMAND_WORD;
@@ -68,84 +64,67 @@ public class AppendSyllCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: redo command the last person in the list -> first person subject restored again */
         command = RedoCommand.COMMAND_WORD;
-        appendSyllPerson(modelBeforeAppendLast, lastPersonIndex, INDEX_FIRST_SUBJECT, syllabusTest);
+        addSubPerson(modelBeforeAppendLast, lastPersonIndex, subjectTest);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeAppendLast, expectedResultMessage);
 
-        /* Case: append to the first subject of the middle person in the list -> success */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex, INDEX_FIRST_SUBJECT, syllabusTest);
-
-        /* ----------------- Performing appendsyll operation while a filtered list is being shown ------------------  */
+        /* ----------------- Performing addsub operation while a filtered list is being shown ------------------  */
 
         /* Case: filtered person list, person index within bounds of address book and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index personIndex = INDEX_FIRST_PERSON;
         assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
-        assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT, syllabusTest);
+        assertCommandSuccess(personIndex, subjectTest);
 
         /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getTutorHelper().getPersonList().size();
-        command = AppendSyllCommand.COMMAND_WORD + " " + invalidIndex
-                + " " + INDEX_FIRST_SUBJECT.getOneBased()
-                + " " + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING;
+        command = AddSubCommand.COMMAND_WORD + " " + invalidIndex
+                + " " + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* Case: filtered person list, person index within bounds but subject index is out of bounds
-         * -> rejected
-         */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        invalidIndex = getModel().getTutorHelper().getPersonList()
-                .get(INDEX_FIRST_PERSON.getZeroBased()).getSubjects().size() + 1;
-        command = AppendSyllCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + " " + invalidIndex
-                + " " + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING;
-        assertCommandFailure(command, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
-
-        /* ------------------------------- Performing invalid appendsyll operation ---------------------------------- */
+        /* ------------------------------- Performing invalid addsub operation ---------------------------------- */
 
         /* Case: invalid index (0) -> rejected */
-        command = AppendSyllCommand.COMMAND_WORD + " 0 0 " + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING;
-        assertCommandFailure(command, MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT);
+        command = AddSubCommand.COMMAND_WORD + " 0 " + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT;
+        assertCommandFailure(command, MESSAGE_INVALID_ADDSUB_COMMAND_FORMAT);
 
         /* Case: invalid index (-1) -> rejected */
-        command = AppendSyllCommand.COMMAND_WORD + " -1 -1 " + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING;
-        assertCommandFailure(command, MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT);
+        command = AddSubCommand.COMMAND_WORD + " -1 " + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT;
+        assertCommandFailure(command, MESSAGE_INVALID_ADDSUB_COMMAND_FORMAT);
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
                 getModel().getTutorHelper().getPersonList().size() + 1);
-        command = AppendSyllCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased()
-                + " " + INDEX_FIRST_SUBJECT.getOneBased() + " " + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING;
+        command = AddSubCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased()
+                + " " + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
-        assertCommandFailure(AppendSyllCommand.COMMAND_WORD + " a b "
-                + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING, MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT);
+        assertCommandFailure(AddSubCommand.COMMAND_WORD + " a "
+                + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT, MESSAGE_INVALID_ADDSUB_COMMAND_FORMAT);
 
         /* Case: invalid arguments (extra argument) -> rejected */
-        assertCommandFailure(AppendSyllCommand.COMMAND_WORD + " 1 1 1 "
-                + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING, MESSAGE_INVALID_APPENDSYLL_COMMAND_FORMAT);
+        assertCommandFailure(AddSubCommand.COMMAND_WORD + " 1 1 "
+                + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT, MESSAGE_INVALID_ADDSUB_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("appENDsyLL 1 1 "
-                + PREFIX_SYLLABUS + APPEND_SYLL_SYLLABUS_STRING, MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("aDdSuB 1 "
+                + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT, MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
-     * Appends a syllabus topic {@code syllabus} to the{@code Subjcct} at the specified {@code subjectIndex} for the
-     * {@code Person} at the specified {@code targetPersonIndex} in {@code model}'s address book.
-     * @return the updated person
+     * Adds a subject {@code subject} to the {@code Person}
+     * at the specified {@code index} in {@code model}'s address book.
+     * @return the removed person
      */
-    private Person appendSyllPerson(Model model, Index targetPersonIndex, Index subjectIndex, Syllabus syllabus) {
+    private Person addSubPerson(Model model, Index targetPersonIndex, Subject subject) {
         Person personTarget = getPerson(model, targetPersonIndex);
         List<Subject> targetSubjects = new ArrayList<>(personTarget.getSubjects());
+        targetSubjects.add(subject);
 
-        Subject updatedSubject = targetSubjects.get(subjectIndex.getZeroBased()).add(syllabus);
-        targetSubjects.set(subjectIndex.getZeroBased(), updatedSubject);
         Set<Subject> newSubjects = new HashSet<>(targetSubjects);
 
         Person personUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, newSubjects);
@@ -164,15 +143,14 @@ public class AppendSyllCommandSystemTest extends TutorHelperSystemTest {
      * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
      * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(Index sourcePersonIndex, Index subjectIndex, Syllabus syllabus) {
+    private void assertCommandSuccess(Index sourcePersonIndex, Subject subject) {
         Model expectedModel = getModel();
-        String command = AppendSyllCommand.COMMAND_WORD
+        String command = AddSubCommand.COMMAND_WORD
                 + " " + sourcePersonIndex.getOneBased()
-                + " " + subjectIndex.getOneBased()
-                + " " + PREFIX_SYLLABUS + syllabus.syllabus;
-        Person newPerson = appendSyllPerson(
-                expectedModel, sourcePersonIndex, subjectIndex, syllabus);
-        String expectedResultMessage = String.format(MESSAGE_APPENDSYLL_SUCCESS, newPerson);
+                + " " + PREFIX_SUBJECT + subject.getSubjectName();
+        Person newPerson = addSubPerson(
+                expectedModel, sourcePersonIndex, subject);
+        String expectedResultMessage = String.format(MESSAGE_ADDSUB_SUCCESS, newPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 

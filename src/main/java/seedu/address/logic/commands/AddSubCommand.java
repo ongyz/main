@@ -40,6 +40,8 @@ public class AddSubCommand extends Command {
     private final Subject subject;
 
     public AddSubCommand(Index studentIndex, Subject subject) {
+        requireNonNull(studentIndex);
+        requireNonNull(subject);
         this.studentIndex = studentIndex;
         this.subject = subject;
     }

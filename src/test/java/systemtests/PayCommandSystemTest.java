@@ -97,7 +97,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withEmail("cornelia@example.com")
                 .withAddress("10th street")
                 .withTuitionTiming("Saturday 3:00pm")
-                .withSubjects("Mathematics")
+                .withSubjects("Mathematics", "Physics")
                 .withSyllabus(Index.fromOneBased(1), "Calculus II")
                 .withSyllabus(Index.fromOneBased(1), "Statistics I")
                 .withPayments("4 400 8 2018")
