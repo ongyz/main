@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -48,11 +48,11 @@ public class EditSyllCommandTest {
     public void execute_validIndexesUnfilteredList_success() throws CommandException {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         String expectedMessage = String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, personTarget);
         ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
         Person newPerson = simulateEditSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
-                new Syllabus(VALID_SYLLABUS, true));
+                new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.commitTutorHelper();
@@ -64,7 +64,7 @@ public class EditSyllCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -74,7 +74,7 @@ public class EditSyllCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         assertCommandFailure(editSyllCommand, model, commandHistory, EditSyllCommand.MESSAGE_SUBJECT_NOT_FOUND);
     }
@@ -85,7 +85,7 @@ public class EditSyllCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
                 .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
@@ -95,11 +95,11 @@ public class EditSyllCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
         String expectedMessage = String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, personTarget);
         Person updatedPerson = simulateEditSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
-                new Syllabus(VALID_SYLLABUS, true));
+                new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         expectedModel.updatePerson(personTarget, updatedPerson);
         expectedModel.commitTutorHelper();
 
@@ -114,7 +114,7 @@ public class EditSyllCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -125,7 +125,7 @@ public class EditSyllCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_PERSON, outOfBoundIndex, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         assertCommandFailure(editSyllCommand, model, commandHistory, EditSyllCommand.MESSAGE_SUBJECT_NOT_FOUND);
     }
@@ -136,7 +136,7 @@ public class EditSyllCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(new ArrayList<>(personTarget.getSubjects())
                 .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, outOfBoundIndex, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
     }
@@ -153,11 +153,11 @@ public class EditSyllCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateEditSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
-                new Syllabus(VALID_SYLLABUS, true));
+                new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.commitTutorHelper();
 
@@ -177,7 +177,7 @@ public class EditSyllCommandTest {
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditSyllCommand editSyllCommand = new EditSyllCommand(
-                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
         // execution failed -> address book state not added into model
         assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -203,9 +203,9 @@ public class EditSyllCommandTest {
     @Test
     public void equals() {
         EditSyllCommand editSyllFirstCommand = new EditSyllCommand(INDEX_FIRST_PERSON,
-                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         EditSyllCommand editSyllSecondCommand = new EditSyllCommand(INDEX_SECOND_PERSON,
-                INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         EditSyllCommand editSyllThirdCommand = new EditSyllCommand(INDEX_SECOND_PERSON,
                 INDEX_SECOND_SUBJECT, INDEX_SECOND_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
 
@@ -214,7 +214,7 @@ public class EditSyllCommandTest {
 
         // same values -> returns true
         EditSyllCommand editSyllFirstCommandCopy = new EditSyllCommand(INDEX_FIRST_PERSON,
-                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
         assertEquals(editSyllFirstCommand, editSyllFirstCommandCopy);
 
         // different types -> returns false
