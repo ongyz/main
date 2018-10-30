@@ -120,7 +120,6 @@ public class Person {
         boolean tagSame = otherPerson.getTags().equals(getTags());
         boolean paymentSame = otherPerson.getPayments().equals(getPayments());
         boolean checkSameFields = nameSame && phoneSame && emailSame && addressSame;
-
         //check if this person differs from the other person by just one field
         // (except for name). If so, then raise error.
         boolean checkDifferOne = checkDifferOneFunc(phoneSame, emailSame, addressSame,

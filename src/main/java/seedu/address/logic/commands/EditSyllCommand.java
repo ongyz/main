@@ -64,6 +64,8 @@ public class EditSyllCommand extends Command {
             throw new CommandException(String.format(MESSAGE_SUBJECT_NOT_FOUND, personTarget));
         }
 
+
+
         Subject selectedSubject = subjects.get(subjectIndex.getZeroBased());
 
         if (selectedSubject.contains(syllabusEdit)) {
