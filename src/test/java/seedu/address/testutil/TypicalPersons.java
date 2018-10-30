@@ -77,7 +77,7 @@ public class TypicalPersons {
             .withTuitionTiming("Saturday 1:00pm").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com")
-            .withAddress("10th street").withSubjects("Mathematics")
+            .withAddress("10th street").withSubjects("Mathematics", "Physics")
             .withSyllabus(Index.fromOneBased(1), "Calculus II", "Statistics I")
             .withTuitionTiming("Saturday 3:00pm")
             .withTags("friends").build();
