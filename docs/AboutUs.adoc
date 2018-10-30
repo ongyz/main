@@ -12,16 +12,16 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Andy Chan
 image::andlimey.png[width="150", align="left"]
-{empty}[https://github.com/andlimey[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/andlimey[github]]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Integration
 
 '''
 
 === Anthony Halim
 image::susterdrifter.png[width="150", align="left"]
-{empty}[http://github.com/SusterDrifter[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/SusterDrifter[github]]
 
 Role: Developer +
 Responsibilities: UI
@@ -30,27 +30,27 @@ Responsibilities: UI
 
 === Joel Lee
 image::lywjoel.png[width="150", align="left"]
-{empty}[http://github.com/lywjoel[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/lywjoel[github]]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: UI
 
 '''
 
 === Ong Yan Zhi
 image::ongyz.png[width="150", align="left"]
-{empty}[http://github.com/ongyz[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/ongyz[github]]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Integration
 
 '''
 
 === Ooi Hui Ying
 image::ooihuiying.png[width="150", align="left"]
-{empty}[http://github.com/ooihuiying[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/ooihuiying[github]]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Data
 
 '''
