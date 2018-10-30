@@ -56,20 +56,20 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
         for (String encodedData: personDataDecoded) {
             String[] idAndValue = encodedData.split("=");
             switch(idAndValue[0]) {
-                case "name":
-                    createdPerson.withName(idAndValue[1]);
-                    break;
-                case "phone":
-                    createdPerson.withPhone(idAndValue[1]);
-                    break;
-                case "email":
-                    createdPerson.withEmail(idAndValue[1]);
-                    break;
-                case "address":
-                    createdPerson.withAddress(idAndValue[1]);
-                    break;
-                default:
-                    break;
+            case "name":
+                createdPerson.withName(idAndValue[1]);
+                break;
+            case "phone":
+                createdPerson.withPhone(idAndValue[1]);
+                break;
+            case "email":
+                createdPerson.withEmail(idAndValue[1]);
+                break;
+            case "address":
+                createdPerson.withAddress(idAndValue[1]);
+                break;
+            default:
+                break;
             }
         }
         return createdPerson.build();
