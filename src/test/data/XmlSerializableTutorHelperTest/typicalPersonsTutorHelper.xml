@@ -58,6 +58,8 @@
             <subjectContent state="false">Calculus II</subjectContent>
             <subjectContent state="false">Statistics I</subjectContent>
         </subjects>
+        <subjects subjectName="Physics" completionRate="0.0">
+        </subjects>
         <tagged>friends</tagged>
     </persons>
     <persons>
