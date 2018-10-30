@@ -68,7 +68,7 @@ public class PayCommand extends Command {
 
         model.updatePerson(personTarget, personToPay);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
     }
 

@@ -14,7 +14,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +41,7 @@ import seedu.address.model.util.SubjectsUtil;
  */
 public class EditSyllCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorHelper(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -50,11 +50,12 @@ public class EditSyllCommandTest {
         EditSyllCommand editSyllCommand = new EditSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
         String expectedMessage = String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, personTarget);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
         Person newPerson = simulateEditSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS, true));
+
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(editSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -95,12 +96,12 @@ public class EditSyllCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditSyllCommand editSyllCommand = new EditSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
         String expectedMessage = String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, personTarget);
         Person updatedPerson = simulateEditSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS, true));
         expectedModel.updatePerson(personTarget, updatedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         assertCommandSuccess(editSyllCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -111,7 +112,7 @@ public class EditSyllCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         EditSyllCommand editSyllCommand = new EditSyllCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
 
@@ -153,22 +154,22 @@ public class EditSyllCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditSyllCommand editSyllCommand = new EditSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS, true));
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Person newPerson = simulateEditSyllCommand(personTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS, true));
         expectedModel.updatePerson(personTarget, newPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitTutorHelper();
 
         // EraseSyll -> first person syllabus is erased
         editSyllCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons
+        expectedModel.undoTutorHelper();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoTutorHelper();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

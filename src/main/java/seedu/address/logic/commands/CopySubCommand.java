@@ -29,7 +29,7 @@ public class CopySubCommand extends Command {
             + "by the source student index given into the person identified by the target student index"
             + "New values will be appended into the old syllabus if the subject already exist.\n"
             + "Parameters: SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX\n"
-            + "Example: " + COMMAND_WORD + "1 2 4";
+            + "Example: " + COMMAND_WORD + " 1 2 4";
 
     public static final String MESSAGE_COPYSUB_SUCCESS = "Copied syllabus to Person: %1$s";
     public static final String MESSAGE_COPYSUB_FAILED_SAME_PERSON =
@@ -72,7 +72,7 @@ public class CopySubCommand extends Command {
 
         model.updatePerson(personTarget, personUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_COPYSUB_SUCCESS, personUpdated));
     }
 
