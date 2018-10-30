@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.model.tuitiontiming.TuitionTimingContainsKeywordsPredicate;
 
@@ -39,7 +40,7 @@ public class GroupCommandParserTest {
         // valid time regex
         expectedGroupCommand =
                 new GroupCommand(
-                        new TuitionTimingContainsKeywordsPredicate("12:00pm"), true, false);
+                        new TuitionTimingContainsKeywordsPredicate("12:00pm"), false, true);
         assertParseSuccess(parser, "12:00pm", expectedGroupCommand);
     }
 }
