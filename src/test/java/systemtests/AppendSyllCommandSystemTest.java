@@ -136,8 +136,9 @@ public class AppendSyllCommandSystemTest extends TutorHelperSystemTest {
     }
 
     /**
-     * Removes the {@code Person} at the specified {@code index} in {@code model}'s address book.
-     * @return the removed person
+     * Appends a syllabus topic {@code syllabus} to the{@code Subjcct} at the specified {@code subjectIndex} for the
+     * {@code Person} at the specified {@code targetPersonIndex} in {@code model}'s address book.
+     * @return the updated person
      */
     private Person appendSyllPerson(Model model, Index targetPersonIndex, Index subjectIndex, Syllabus syllabus) {
         Person personTarget = getPerson(model, targetPersonIndex);
