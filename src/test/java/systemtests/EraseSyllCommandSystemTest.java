@@ -2,6 +2,8 @@ package systemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SYLLABUS_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.EraseSyllCommand.MESSAGE_ERASESYLL_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -11,7 +13,6 @@ import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
@@ -89,19 +90,33 @@ public class EraseSyllCommandSystemTest extends TutorHelperSystemTest {
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getTutorHelper().getPersonList().size();
         command = EraseSyllCommand.COMMAND_WORD + " " + invalidIndex
-                + " " + INDEX_FIRST_SYLLABUS.getOneBased()
+                + " " + INDEX_FIRST_SUBJECT.getOneBased()
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* Case: filtered person list, person index within bounds but syllabus index is out of bounds
+        /* Case: filtered person list, person index within bounds but subject index is out of bounds
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        invalidIndex = getModel().getTutorHelper().getPersonList().size();
-        command = EraseSyllCommand.COMMAND_WORD + " " + invalidIndex
-                + " " + INDEX_FIRST_SYLLABUS.getOneBased()
-                + " " + INDEX_THIRD_SYLLABUS.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        invalidIndex = getModel().getTutorHelper().getPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()).getSubjects().size() + 1;
+        command = EraseSyllCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + invalidIndex
+                + " " + INDEX_FIRST_SYLLABUS.getOneBased();
+        assertCommandFailure(command, MESSAGE_INVALID_SUBJECT_INDEX);
+
+        /* Case: filtered person list, person and subject index within bounds but syllabus index is out of bounds
+         * -> rejected
+         */
+        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        Set<Subject> subjects = getModel().getTutorHelper().getPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()).getSubjects();
+        invalidIndex = new ArrayList<>(subjects)
+                .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 5;
+        command = EraseSyllCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + INDEX_FIRST_SUBJECT.getOneBased()
+                + " " + invalidIndex;
+        assertCommandFailure(command, MESSAGE_INVALID_SYLLABUS_INDEX);
 
         /* ------------------------------- Performing invalid erasesyll operation ---------------------------------- */
 
