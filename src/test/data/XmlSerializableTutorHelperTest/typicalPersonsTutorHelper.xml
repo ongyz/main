@@ -45,6 +45,8 @@
             <subjectContent state="false">Calculus II</subjectContent>
             <subjectContent state="false">Statistics I</subjectContent>
         </subjects>
+        <subjects subjectName="Physics" completionRate="0.0">
+        </subjects>
     </persons>
     <persons>
         <name>Daniel Meier</name>
@@ -55,6 +57,8 @@
         <subjects subjectName="Mathematics" completionRate="0.0">
             <subjectContent state="false">Calculus II</subjectContent>
             <subjectContent state="false">Statistics I</subjectContent>
+        </subjects>
+        <subjects subjectName="Physics" completionRate="0.0">
         </subjects>
         <tagged>friends</tagged>
     </persons>

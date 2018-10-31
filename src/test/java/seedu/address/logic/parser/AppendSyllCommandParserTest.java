@@ -19,7 +19,7 @@ public class AppendSyllCommandParserTest {
     private AppendSyllCommandParser parser = new AppendSyllCommandParser();
 
     @Test
-    public void parse_validArgs_returnsAppendSyllMarkCommand() {
+    public void parse_validArgs_returnsAppendSyllCommand() {
         assertParseSuccess(parser, "1 1 sy/Integration",
                 new AppendSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("Integration")));
         assertParseSuccess(parser, "2 3 sy/Kinetics",

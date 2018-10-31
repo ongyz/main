@@ -115,8 +115,8 @@ public class SubjectTest {
         // True by type
         assertTrue(physics.hasTypeOf(physicsFilled.getSubjectType()));
 
-        // False due to different content
-        assertFalse(physics.equals(physicsFilled));
+        // True even though different content
+        assertTrue(physics.equals(physicsFilled));
 
         // False due to different subjectType
         assertFalse(mathematics.equals(biology));
