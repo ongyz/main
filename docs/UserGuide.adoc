@@ -69,10 +69,25 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/Monday 6:00pm`
 
-=== Listing all students : `list`
+=== Deleting a student : `delete`
 
-Shows a list of all students in the TutorHelper. +
-Format: `list`
+Deletes the specified student from the TutorHelper. +
+Format: `delete INDEX`
+
+****
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd student in the TutorHelper.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st student in the results of the `find` command.
 
 === Editing a student : `edit`
 
@@ -80,7 +95,9 @@ Edits an existing student in the TutorHelper. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [d/TIMING] [t/TAG]...`
 
 ****
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -93,6 +110,11 @@ Examples:
 Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+
+=== Listing all students : `list`
+
+Shows a list of all students in the TutorHelper. +
+Format: `list`
 
 === Locating students by name: `find`
 
@@ -133,26 +155,6 @@ Examples:
 Show all classes on Monday, sorted based on timing.
 * `group 12pm` +
 Show all classes at 12pm for the entire week, sorted based on days of the week.
-
-=== Deleting a student : `delete`
-
-Deletes the specified student from the TutorHelper. +
-Format: `delete INDEX`
-
-****
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd student in the TutorHelper.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st student in the results of the `find` command.
 
 === Selecting a student : `select`
 
@@ -244,6 +246,11 @@ Format: `clear`
 Records a payment of a specified amount made by a specified student for a specified month and year. +
 Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 
+[NOTE]
+====
+If a payment entry already exists, the amount will be added to the existing payment record.
+====
+
 ****
 * Records a payment of a specified `AMOUNT` for the student at the specified `STUDENT_INDEX`, for a specified `MONTH` and `YEAR`.
 * The student index refers to the index number shown in the displayed student list.
@@ -253,134 +260,26 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 Examples:
 
 * `paid 1 200 01 2018` +
-`Records $200 payment made on January 2018
-
-=== Editing payment entries : `paid`
-
-Edits a payment of a specified amount made by a specified student for a specified month and year. +
-Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
-
-****
-* Edits a payment at the specified `STUDENT_INDEX`, for a specified `MONTH` and `YEAR` by increasing it by the specified `AMOUNT`.
-* The student index refers to the index number shown in the displayed student list.
-* The student index, month and year *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `paid 1 200 01 2018` +
-`Adds $200 payment made on January 2018 if payment entry already exists
+Records a payment of $200 made for January 2018, or adds $200 to the payment made for January 2018 if a payment entry already exists.
 
 === Display tutor earnings for the month : `earnings`
 
-Display tutor earnings for the specified month of a specified year. +
+Displays total earnings across all students for a specified month of a specified year. +
 Format: `earnings MONTH YEAR`
 
 ****
-* Display tutor earnings for a specified `MONTH` of a specified `YEAR`.
+* Display tutor earnings across all students for a specified `MONTH` of a specified `YEAR`.
 * The month and year *must be positive integers* 1, 2, 3, ...
 ****
 
 Examples:
 
 * `earnings 01 2018` +
-`Shows earnings made on January 2018.`
-
-=== Mark a syllabus topic as complete/incomplete : `mark`
-
-Toggle the state of a specified syllabus topic for a specified student and subject. +
-Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
-
-****
-* Toggle the state of a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
-* The student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
-* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `mark 1 1 3`
-* `mark 2 1 2`
-
-=== Add a syllabus topic to the student’s list of syllabus topics : `appendsyll`
-
-Add a new syllabus topic for a specified student and subject. +
-Format: `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
-
-[NOTE]
-====
-Adding syllabus that already exist under subject will throw an error.
-====
-
-****
-* Adds a new syllabus topic `SYLLABUS` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
-* The student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The student index and subject index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `appendsyll 1 2 sy/Integration`
-* `appendsyll 3 2 sy/Poisson Distribution`
-
-=== Remove a syllabus topic from the student’s list of syllabus topics : `erasesyll`
-
-Remove a syllabus topic for a specified student and subject. +
-Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
-
-****
-* Removes a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
-* The student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
-* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `erasesyll 1 1 2`
-* `erasesyll 3 1 1`
-
-=== Edit a syllabus topic from the student’s list of syllabus topics : `editsyll`
-
-Edit a syllabus topic for a specified student and subject. +
-Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
-
-****
-* Edits a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
-* The student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
-* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `editsyll 1 1 2 sy/Integration`
-* `editsyll 3 1 1 sy/Kinetic Energy`
-
-=== Copy a subject from a student to other student(s) : `copysub`
-
-Duplicate a subject from chosen student and add it to the target student. Duplicate syllabus will not be added. +
-Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
-
-****
-* The source and target student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The source, target student index and subject index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `copysub 1 1 n/John Doe n/Betsy`
-* `copysub 1 2 n/Alex`
+Displays earnings made for January 2018.
 
 === Add a subject to a student : `addsub`
 
-Add a new subject to a specified student. +
+Adds a new subject to a specified student. +
 Format: `addsub STUDENT_INDEX s/SUBJECT`
 
 [NOTE]
@@ -396,8 +295,10 @@ Adding a subject that already exists for the student will throw an error.
 
 Examples:
 
-* `addsub 1 s/Physics
-* `addsub 2 s/Mathematics
+* `addsub 1 s/Physics +
+Adds a subject "Physics" for the first student.
+* `addsub 2 s/Mathematics +
+Adds a subject "Mathematics" for the second student.
 
 === Delete a subject from a student : `deletesub`
 
@@ -419,8 +320,113 @@ A student must have at least one subject.
 
 Examples:
 
-* `deletesub 1 2`
-* `deletesub 3 1`
+* `deletesub 1 2` +
+Deletes the second subject from the first student.
+* `deletesub 3 1` +
+Deletes the first subject from the third student.
+
+=== Copy a subject from a student to another student : `copysub`
+
+Copies a subject and all its syllabus topics from a specified student to specified target student. Duplicate syllabus topics will not be added. +
+Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
+
+****
+* Copies a subject (and all its syllabus topics) at the specified `SUBJECT_INDEX` from the student at the specified `SOURCE_STUDENT_INDEX` to the student at the specified `TARGET_STUDENT_INDEX`.
+* The source and target student indexes refer to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The subject index and source and target student indexes *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `copysub 1 1 2` +
+Copies the first subject from the first student to the second student.
+* `copysub 1 2 3` +
+Copies the second subject from the first student to the third student.
+
+=== Add a syllabus topic to the student’s list of syllabus topics : `appendsyll`
+
+Add a new syllabus topic for a specified student and subject. +
+Format: `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
+
+[NOTE]
+====
+Adding a syllabus topic that already exists under the subject will throw an error.
+====
+
+****
+* Adds a new syllabus topic `SYLLABUS` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The student index and subject index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `appendsyll 1 2 sy/Integration` +
+Adds a syllabus topic "Integration" to the second subject of the first student.
+* `appendsyll 3 2 sy/Poisson Distribution` +
+Adds a syllabus topic "Poisson Distribution" to the second subject of the third student.
+
+=== Remove a syllabus topic from the student’s list of syllabus topics : `erasesyll`
+
+Remove a syllabus topic for a specified student and subject. +
+Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+
+****
+* Removes a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
+* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `erasesyll 1 1 2` +
+Removes the second syllabus topic from the first subject of the first student.
+* `erasesyll 3 1 1` +
+Removes the first syllabus topic from the first subject of the third student.
+
+=== Edit a syllabus topic from the student’s list of syllabus topics : `editsyll`
+
+Edit a syllabus topic for a specified student and subject. +
+Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
+
+****
+* Edits a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
+* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `editsyll 1 1 2 sy/Integration` +
+Changes the second syllabus topic of the first subject of the first student to "Integration".
+* `editsyll 3 1 1 sy/Kinetic Energy` +
+Changes the first syllabus topic of the first subject of the third student to "Kinetic Energy".
+
+=== Mark a syllabus topic as complete/incomplete : `mark`
+
+Toggle the state of a specified syllabus topic for a specified student and subject. +
+Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+
+****
+* Toggle the state of a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
+* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `mark 1 1 3` +
+Marks the third syllabus topic of the first subject of the first student.
+* `mark 2 1 2` +
+Marks the second syllabus topic of the first subject of the second student.
 
 === Exiting the program : `exit`
 
@@ -439,34 +445,39 @@ There is no need to save manually.
 
 == Command Summary
 
+* *Help* : `help`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *List* : `list`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
+* *Group* : `group TIMING` +
+e.g `group Monday OR group 12pm OR group`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Group* : `group TIMING` +
-e.g `group Monday OR group 12pm OR group`
-* *History* : `history`
-* *Payment* : `paid STUDENT_INDEX AMOUNT MONTH YEAR` +
-    eg `paid 1 200 08 2018`
-* *Earnings* : `earnings MONTH YEAR` +
-  `eg earnings 01 2018`
-* *Mark* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
-e.g `mark 1 1 1`
-* *Add Syllabus Topic* : `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
-e.g `appendsyll 1 2 sy/Integration`
-* *Remove Syllabus Topic* : `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
-e.g `erasesyll 1 1 1`
+* *Clear* : `clear`
+* *Record Payment* : `paid STUDENT_INDEX AMOUNT MONTH YEAR` +
+e.g. `paid 1 200 08 2018`
+* *View Earnings* : `earnings MONTH YEAR` +
+e.g. `earnings 01 2018`
+* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT` +
+e.g. `addsub 1 s/Physics`
+* *Remove Subject* : `deletesub STUDENT_INDEX SUBJECT_INDEX` +
+e.g. `deletesub 1 2`
 * *Copy Subject* : `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX` +
-e.g `copysub 1 1 2`
+e.g. `copysub 1 1 2`
+* *Add Syllabus Topic* : `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
+e.g. `appendsyll 1 2 sy/Integration`
+* *Remove Syllabus Topic* : `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g. `erasesyll 1 1 1`
+* *Edit Syllabus Topic* : `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS` +
+e.g. `editsyll 1 1 2 sy/Integration`
+* *Mark Syllabus Topic* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g. `mark 1 1 1`
