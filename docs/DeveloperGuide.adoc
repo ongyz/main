@@ -98,10 +98,6 @@ Value:
     2a. Input is invalid
       2a1. System displays examples of valid input to Tutor.
       Use case ends.
-    2b. Tutor does not input a day or timing
-      2b1. System retrieves current date.
-      2b2. System filters out students with tuition before current date.
-      2b3. Resume from step 3.
 
   6. Record students' payments
 
@@ -214,7 +210,11 @@ Step 2. Assuming that the application isn't empty, the user executes 'group Mond
 [NOTE]
 The user can execute `list` to re-display the full list of students again.
 [NOTE]
-The group command is CASE-SENSITIVE. E.g. Passing MONDAY as an input instead of Monday will throw an error.
+The user can execute `undo` to undo the sorting done to the list.
+[NOTE]
+The group command is CASE-SENSITIVE. E.g. Passing `MONDAY` as an input instead of `Monday` will throw an error.
+[NOTE]
+Only 12-hr timings are valid.
 
 The following sequence diagram shows how the group operation works:
 
