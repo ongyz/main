@@ -123,8 +123,8 @@ Format: `group TIMING`
 ****
 * Lists all students with the specified `TIMING`.
 * The timing refers to either a time or day of the week.
-* The day entered is case sensitive. e.g. "Monday" is valid but "MONDAY" isn't
-* The time entered must be in 12hr format. e.g. "12:00pm" is valid but "1200" isn't
+* The day entered is case sensitive. e.g. `Monday` is valid but `MONDAY` isn't
+* The time entered must be in 12hr format. e.g. `12:00pm` is valid but `1200` isn't
 ****
 
 Examples:
