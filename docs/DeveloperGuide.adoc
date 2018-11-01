@@ -98,10 +98,6 @@ Value:
     2a. Input is invalid
       2a1. System displays examples of valid input to Tutor.
       Use case ends.
-    2b. Tutor does not input a day or timing
-      2b1. System retrieves current date.
-      2b2. System filters out students with tuition before current date.
-      2b3. Resume from step 3.
 
   6. Record students' payments
 
