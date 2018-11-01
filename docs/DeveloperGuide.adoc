@@ -210,7 +210,11 @@ Step 2. Assuming that the application isn't empty, the user executes 'group Mond
 [NOTE]
 The user can execute `list` to re-display the full list of students again.
 [NOTE]
-The group command is CASE-SENSITIVE. E.g. Passing MONDAY as an input instead of Monday will throw an error.
+The user can execute `undo` to undo the sorting done to the list.
+[NOTE]
+The group command is CASE-SENSITIVE. E.g. Passing `MONDAY` as an input instead of `Monday` will throw an error.
+[NOTE]
+Only 12-hr timings are valid.
 
 The following sequence diagram shows how the group operation works:
 
