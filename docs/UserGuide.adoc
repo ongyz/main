@@ -123,6 +123,8 @@ Format: `group TIMING`
 ****
 * Lists all students with the specified `TIMING`.
 * The timing refers to either a time or day of the week.
+* The day entered is case sensitive. e.g. "Monday" is valid but "MONDAY" isn't
+* The time entered must be in 12hr format. e.g. "12:00pm" is valid but "1200" isn't
 ****
 
 Examples:
@@ -130,9 +132,7 @@ Examples:
 * `group Monday` +
 Show all classes on Monday, sorted based on timing.
 * `group 12pm` +
-Show all classes at 12pm for the entire week, sorted based on timing.
-* `group`
-Show all classes sorted based on timing.
+Show all classes at 12pm for the entire week, sorted based on days of the week.
 
 === Deleting a student : `delete`
 
