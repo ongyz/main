@@ -15,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user arguments and creates a new DeleteSubCommand object.
  */
-public class DeleteSubCommandParser {
+public class DeleteSubCommandParser implements Parser<DeleteSubCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteSubCommand
