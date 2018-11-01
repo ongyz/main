@@ -123,6 +123,8 @@ Format: `group TIMING`
 ****
 * Lists all students with the specified `TIMING`.
 * The timing refers to either a time or day of the week.
+* The day entered is case sensitive. e.g. `Monday` is valid but `MONDAY` isn't
+* The time entered must be in 12hr format. e.g. `12:00pm` is valid but `1200` isn't
 ****
 
 Examples:
@@ -130,9 +132,7 @@ Examples:
 * `group Monday` +
 Show all classes on Monday, sorted based on timing.
 * `group 12pm` +
-Show all classes at 12pm for the entire week, sorted based on timing.
-* `group`
-Show all classes sorted based on timing.
+Show all classes at 12pm for the entire week, sorted based on days of the week.
 
 === Deleting a student : `delete`
 
@@ -255,6 +255,21 @@ Examples:
 * `paid 1 200 01 2018` +
 `Records $200 payment made on January 2018
 
+=== Editing payment entries : `paid`
+
+Edits a payment of a specified amount made by a specified student for a specified month and year. +
+Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
+
+****
+* Edits a payment at the specified `STUDENT_INDEX`, for a specified `MONTH` and `YEAR` by increasing it by the specified `AMOUNT`.
+* The student index refers to the index number shown in the displayed student list.
+* The student index, month and year *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `paid 1 200 01 2018` +
+`Adds $200 payment made on January 2018 if payment entry already exists
 
 === Display tutor earnings for the month : `earnings`
 
@@ -328,6 +343,24 @@ Examples:
 
 * `erasesyll 1 1 2`
 * `erasesyll 3 1 1`
+
+=== Edit a syllabus topic from the student’s list of syllabus topics : `editsyll`
+
+Edit a syllabus topic for a specified student and subject. +
+Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
+
+****
+* Edits a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
+* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `editsyll 1 1 2 sy/Integration`
+* `editsyll 3 1 1 sy/Kinetic Energy`
 
 === Copy a subject from a student to other student(s) : `copysub`
 
