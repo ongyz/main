@@ -28,6 +28,7 @@ public class PayCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 200 08 2018 ";
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
+    public static final String MESSAGE_EDITPAYMENT_SUCCESS = "Payment for this person has been edited: %1$s";
 
     private static final int MINVALUE = -1;
     private static final int MAXPAYMENTSDISPLAYED = 10;
@@ -42,7 +43,7 @@ public class PayCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        boolean newEntry = true;
+        boolean editEntry = false;
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -54,9 +55,9 @@ public class PayCommand extends Command {
 
         List<Payment> pay = personTarget.getPayments();
 
-        newEntry = findPaymentToUpdate(pay, newPayment);
+        editEntry = findPaymentToUpdate(pay, newPayment);
 
-        if (!newEntry) {
+        if (!editEntry) {
             if (pay.size() > MAXPAYMENTSDISPLAYED) {
                 pay.remove(0);
             }
@@ -72,7 +73,11 @@ public class PayCommand extends Command {
         model.updatePerson(personTarget, personToPay);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitTutorHelper();
-        return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
+        if (editEntry) {
+            return new CommandResult(String.format(MESSAGE_EDITPAYMENT_SUCCESS, personToPay));
+        } else {
+            return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
+        }
     }
 
     /**
