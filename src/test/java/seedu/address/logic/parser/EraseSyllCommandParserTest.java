@@ -16,19 +16,12 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.EraseSyllCommand;
 
-/**
- * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the EraseSyllCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the EraseSyllCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
- */
 public class EraseSyllCommandParserTest {
 
     private EraseSyllCommandParser parser = new EraseSyllCommandParser();
 
     @Test
-    public void parse_validArgs_returnsEraseSyllMarkCommand() {
+    public void parse_validArgs_returnsEraseSyllCommand() {
         assertParseSuccess(parser, "1 1 2",
                 new EraseSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_SECOND_SYLLABUS));
         assertParseSuccess(parser, "2 3 1",

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class DeleteSubCommand extends Command {
 
     public static final String MESSAGE_DELETESUB_SUCCESS = "Deleted subject from student: %1$s";
     public static final String MESSAGE_DELETE_ONLY_SUBJECT = "At least one subject must be studied by student: %1$s";
-    public static final String MESSAGE_SUBJECT_INDEX_OUT_OF_BOUNDS = "Subject does not exist.";
 
     private final Index studentIndex;
     private final Index subjectIndex;
@@ -73,7 +73,7 @@ public class DeleteSubCommand extends Command {
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
 
         if (isSubjectIndexOutOfBounds(subjects)) {
-            throw new CommandException(MESSAGE_SUBJECT_INDEX_OUT_OF_BOUNDS);
+            throw new CommandException(MESSAGE_INVALID_SUBJECT_INDEX);
         }
 
         if (hasOneSubject(subjects)) {

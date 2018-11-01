@@ -29,6 +29,9 @@ public class PayCommand extends Command {
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
 
+    private static final int MINVALUE = -1;
+    private static final int MAXPAYMENTSDISPLAYED = 10;
+
     private Index targetIndex;
     private Payment newPayment;
 
@@ -43,7 +46,7 @@ public class PayCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() <= MINVALUE) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -54,7 +57,7 @@ public class PayCommand extends Command {
         newEntry = findPaymentToUpdate(pay, newPayment);
 
         if (!newEntry) {
-            if (pay.size() > 10) {
+            if (pay.size() > MAXPAYMENTSDISPLAYED) {
                 pay.remove(0);
             }
             pay = updatePayment(personTarget.getPayments(), newPayment);

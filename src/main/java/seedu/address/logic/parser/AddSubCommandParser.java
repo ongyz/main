@@ -16,7 +16,7 @@ import seedu.address.model.subject.Subject;
 /**
  * Parses user arguments and creates a new AddSubCommand object.
  */
-public class AddSubCommandParser {
+public class AddSubCommandParser implements Parser<AddSubCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddSubCommand
