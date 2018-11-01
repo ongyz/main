@@ -171,7 +171,7 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd student in the address book.
+Selects the 2nd student in the TutorHelper.
 * `find Betsy` +
 `select 1` +
 Selects the 1st student in the results of the `find` command.
@@ -188,12 +188,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 
 === Undo Command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the TutorHelper to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit`, `clear`, `appendsyll`, `erasesyll`, and `copysub`).
+Undoable commands: those commands that modify the TutorHelper's content (`add`, `delete`, `edit`, `clear`, `appendsyll`, `erasesyll`, and `copysub`).
 ====
 
 Examples:
@@ -426,14 +426,14 @@ Marks the third syllabus topic of the first subject of the first student.
 * `mark 2 1 2` +
 Marks the second syllabus topic of the first subject of the second student.
 
-=== Exiting the program : `exit`
+=== Exit Program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
+=== Save Data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+TutorHelper data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 == FAQ
@@ -479,3 +479,4 @@ e.g. `erasesyll 1 1 1`
 e.g. `editsyll 1 1 2 sy/Integration`
 * *Mark Syllabus Topic* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
 e.g. `mark 1 1 1`
+* *Exit TutorHelper* : `exit`
