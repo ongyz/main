@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TutorHelper;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
@@ -64,6 +66,29 @@ public class PayCommandTest {
         assertEquals(actualReturnedPayment, expectedReturnedPaymentList);
 
     }
+
+    @Test
+    public void execute_editPaymentMethod_success() {
+
+        Payment existingPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 1998);
+        Payment editPayment = new Payment(INDEX_FIRST_PERSON, 200, 11, 1998);
+        Payment editedPayment = new Payment(INDEX_FIRST_PERSON, 300, 11, 1998);
+
+        Person existingPerson = new PersonBuilder(ALICE).withPayments(existingPayment).build();
+        Person editedPerson = new PersonBuilder(ALICE).withPayments(editedPayment).build();
+        PayCommand editPayCommand = new PayCommand(editPayment);
+
+        String expectedMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new TutorHelper(model.getTutorHelper()), new UserPrefs());
+        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
+        model.updatePerson(model.getFilteredPersonList().get(0), existingPerson);
+        expectedModel.commitTutorHelper();
+
+        assertCommandSuccess(editPayCommand, model, commandHistory, expectedMessage, expectedModel);
+
+    }
+
     /**
      * Executes a {@code PayCommand} with the given {@code index}
      * is raised with the correct index.
