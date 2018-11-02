@@ -1,63 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <StackPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <AnchorPane prefHeight="600.0" prefWidth="800.0">
       <children>
-         <Label fx:id="nameLabel" layoutX="14.0" layoutY="14.0" text="nameLabel" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
-            <font>
-               <Font size="36.0" />
-            </font>
-         </Label>
-         <Label fx:id="tuitionTimingDayLabel" layoutY="77.0" prefHeight="30.0" prefWidth="100.0" text="tuitionTimingDayLabel" textAlignment="CENTER" AnchorPane.bottomAnchor="485.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="95.0">
-            <font>
-               <Font size="20.0" />
-            </font>
-         </Label>
-         <Label fx:id="tuitionTimingTimeLabel" prefHeight="30.0" prefWidth="100.0" text="tuitionTimingTimeLabel" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="125.0">
-            <font>
-               <Font size="20.0" />
-            </font>
-         </Label>
-         <GridPane layoutX="125.0" layoutY="63.0" prefHeight="100.0" prefWidth="250.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="75.0">
+         <GridPane layoutX="14.0" layoutY="14.0" prefHeight="100.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
            <columnConstraints>
-             <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="200.0" />
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="437.0" minWidth="10.0" prefWidth="350.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="362.0" minWidth="10.0" prefWidth="350.0" />
            </columnConstraints>
            <rowConstraints>
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
             <children>
-               <Label fx:id="subjectsLabel" text="subjectsLabel" />
-               <Label fx:id="addressLabel" text="addressLabel" GridPane.rowIndex="1" />
-               <Label fx:id="emailLabel" text="emailLabel" GridPane.rowIndex="2" />
-               <Label fx:id="phoneLabel" text="phoneLabel" GridPane.rowIndex="3" />
+               <Label alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="Name" textFill="WHITE">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="Tuition Timing" textFill="WHITE" GridPane.rowIndex="1">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="Address" textFill="WHITE" GridPane.rowIndex="2">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="Email" textFill="WHITE" GridPane.rowIndex="3">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="Phone" textFill="WHITE" GridPane.rowIndex="4">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="Payment History" textFill="WHITE" GridPane.rowIndex="5">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="Subjects" textFill="WHITE" GridPane.rowIndex="6">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label fx:id="nameLabel" alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="nameLabel" textFill="WHITE" GridPane.columnIndex="1">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label fx:id="tuitionTimingLabel" alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="tuitionTimingLabel" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label fx:id="addressLabel" alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="addressLabel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label fx:id="emailLabel" alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="emailLabel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label fx:id="phoneLabel" alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="phoneLabel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label fx:id="paymentsLabel" alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="paymentsLabel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Label fx:id="subjectsLabel" alignment="TOP_LEFT" prefHeight="999.0" prefWidth="999.0" text="subjectsLabel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
             </children>
          </GridPane>
-         <Label layoutX="695.0" layoutY="28.0" text="Payment History" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0">
-            <font>
-               <Font size="20.0" />
-            </font>
-         </Label>
-         <ListView layoutX="479.0" layoutY="55.0" prefHeight="120.0" prefWidth="300.0" />
-         <Line endX="800.0" endY="200.0" startY="200.0" AnchorPane.topAnchor="200.0" />
-         <Label layoutX="364.0" layoutY="201.0" text="Subjects" AnchorPane.topAnchor="210.0">
-            <font>
-               <Font size="20.0" />
-            </font>
-         </Label>
-         <ListView layoutX="26.0" layoutY="248.0" prefHeight="300.0" prefWidth="750.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="250.0" />
       </children>
    </AnchorPane>
 </StackPane>

@@ -33,13 +33,7 @@ public class BrowserPanel extends UiPart<Region> {
     private Label nameLabel;
 
     @FXML
-    private Label tuitionTimingDayLabel;
-
-    @FXML
-    private Label tuitionTimingTimeLabel;
-
-    @FXML
-    private Label subjectsLabel;
+    private Label tuitionTimingLabel;
 
     @FXML
     private Label addressLabel;
@@ -49,6 +43,12 @@ public class BrowserPanel extends UiPart<Region> {
 
     @FXML
     private Label phoneLabel;
+
+    @FXML
+    private Label paymentsLabel;
+
+    @FXML
+    private Label subjectsLabel;
 
     public BrowserPanel() {
         super(FXML);
@@ -69,40 +69,45 @@ public class BrowserPanel extends UiPart<Region> {
             // Fill the labels with info from the person object.
             nameLabel.setText(person.getName().fullName);
 
-            tuitionTimingDayLabel.setText(person.getTuitionTiming().day.toString().substring(0, 3));
-
-            tuitionTimingTimeLabel.setText(person.getTuitionTiming().time);
-
-            final StringBuilder subjectNamesBuilder = new StringBuilder();
-            List<Subject> subjectNames = new ArrayList<>(person.getSubjects());
-            for (int i = 0; i < subjectNames.size(); i++) {
-                subjectNamesBuilder.append(subjectNames.get(i).getSubjectName());
-                if (i != subjectNames.size() - 1) {
-                    subjectNamesBuilder.append(" | ");
-                }
-            }
-            subjectsLabel.setText(subjectNamesBuilder.toString());
+            tuitionTimingLabel.setText(person.getTuitionTiming().value);
 
             addressLabel.setText(person.getAddress().value);
 
             emailLabel.setText(person.getEmail().value);
 
             phoneLabel.setText(person.getPhone().value);
+
+            final StringBuilder paymentsBuilder = new StringBuilder();
+            List<Payment> payments = new ArrayList<>(person.getPayments());
+            for (int i = 0; i < payments.size(); i++) {
+                Payment selected = payments.get(i);
+                paymentsBuilder.append(String.format("Month: %5d     Year: %10d     Amount: %10d         \n",
+                        selected.getMonth(), selected.getYear(), selected.getAmount()));
+            }
+            paymentsLabel.setText(paymentsBuilder.toString());
+
+            final StringBuilder subjectsBuilder = new StringBuilder();
+            List<Subject> subjects = new ArrayList<>(person.getSubjects());
+            for (int i = 0; i < subjects.size(); i++) {
+                String subject = subjects.get(i).toString();
+                subjectsBuilder.append(subject.substring(2, subject.length() - 1) + "\n\n");
+            }
+            subjectsLabel.setText(subjectsBuilder.toString().trim());
         } else {
             // Person is null, remove all the text.
             nameLabel.setText("");
 
-            tuitionTimingDayLabel.setText("");
-
-            tuitionTimingTimeLabel.setText("");
-
-            subjectsLabel.setText("");
+            tuitionTimingLabel.setText("");
 
             addressLabel.setText("");
 
             emailLabel.setText("");
 
             phoneLabel.setText("");
+
+            paymentsLabel.setText("");
+
+            subjectsLabel.setText("");
         }
     }
 
