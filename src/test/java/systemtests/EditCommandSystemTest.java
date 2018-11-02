@@ -225,8 +225,6 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         Model expectedModel = getModel();
         expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedPerson);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        System.out.println(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()).toString());
-        System.out.println(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()).getSubjects());
 
         assertCommandSuccess(command, expectedModel,
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), expectedSelectedCardIndex);
