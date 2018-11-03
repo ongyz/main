@@ -32,7 +32,7 @@ import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code EraseSyllCommand}.
+ * EraseSyllCommand.
  */
 public class EraseSyllCommandTest {
 

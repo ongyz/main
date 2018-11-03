@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -58,7 +58,7 @@ public class EditSyllCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Syllabus syllabus = new Syllabus(VALID_SYLLABUS, true);
+        Syllabus syllabus = new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true);
 
         assertParseSuccess(parser, "1 1 2 sy/Differentiation",
                 new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_SECOND_SYLLABUS, syllabus));

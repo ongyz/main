@@ -18,7 +18,7 @@ public class Payment {
     public static final String MESSAGE_PAYMENT_MONTH_CONSTRAINTS =
             "Month of payment should only contain numbers between 1 to 12, inclusive";
     public static final String MESSAGE_PAYMENT_YEAR_CONSTRAINTS =
-            "Year of payment should only contain numbers";
+            "Year of payment should only contain 4 digits numbers";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
 
@@ -77,9 +77,19 @@ public class Payment {
     }
 
     /**
-     * Returns true if a given int is a valid year.
+     * Returns true if a given int is a valid year, 4 digits.
      */
     public static boolean isValidYear(int test) {
+        int digits = 0;
+        int copyTest = test;
+        while (copyTest > 0) {
+            copyTest = copyTest / 10;
+            digits += 1;
+        }
+
+        if (digits != 4) {
+            return false;
+        }
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
     }
 

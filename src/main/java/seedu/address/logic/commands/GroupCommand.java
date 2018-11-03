@@ -39,10 +39,11 @@ public class GroupCommand extends Command {
 
         if (this.isDay && !this.isTime) {
             model.sortByTime();
+            model.commitTutorHelper();
         } else if (this.isTime && !this.isDay) {
             model.sortByDay();
+            model.commitTutorHelper();
         }
-
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())

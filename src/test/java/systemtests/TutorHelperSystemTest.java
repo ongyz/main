@@ -181,6 +181,7 @@ public abstract class TutorHelperSystemTest {
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new TutorHelper(expectedModel.getTutorHelper()), testApp.readStorageTutorHelper());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+
     }
 
     /**
@@ -214,15 +215,6 @@ public abstract class TutorHelperSystemTest {
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
         PersonCardHandle selectedCard = getPersonListPanel().getHandleToSelectedCard();
-
-        final StringBuilder builder = new StringBuilder();
-        selectedCard.getTags().forEach(builder::append);
-        String expectedUrl = ("name=" + selectedCard.getName()
-                + "&phone=" + selectedCard.getPhone()
-                + "&email=" + selectedCard.getEmail()
-                + "&address=" + selectedCard.getAddress().replace("#", "%23")
-                + "&tags=" + builder.toString()
-                .replaceAll(" ", "%20"));
 
         Person expectedSelectedPerson = new PersonBuilder()
                 .withName(selectedCard.getName())

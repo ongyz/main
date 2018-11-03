@@ -82,7 +82,6 @@ public class TutorHelper implements ReadOnlyTutorHelper {
      */
     public void updatePerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 

@@ -64,9 +64,9 @@ public class GroupCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         TuitionTimingContainsKeywordsPredicate predicate = new TuitionTimingContainsKeywordsPredicate(" ");
-        GroupCommand firstCommand = new GroupCommand(predicate, false, false);
+        GroupCommand command = new GroupCommand(predicate, false, false);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(firstCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -78,6 +78,7 @@ public class GroupCommandTest {
         GroupCommand command = new GroupCommand(dayPredicate, true, false);
         expectedModel.updateFilteredPersonList(dayPredicate);
         expectedModel.sortByTime();
+        expectedModel.commitTutorHelper();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, DANIEL), model.getFilteredPersonList());
 
@@ -87,6 +88,7 @@ public class GroupCommandTest {
         command = new GroupCommand(timePredicate, false, true);
         expectedModel.updateFilteredPersonList(timePredicate);
         expectedModel.sortByDay();
+        expectedModel.commitTutorHelper();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredPersonList());
     }

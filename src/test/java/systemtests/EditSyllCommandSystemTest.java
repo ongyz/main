@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
 import static seedu.address.logic.commands.CommandTestUtil.SYLLABUS_DESC_DIFFERENTIATION;
 import static seedu.address.logic.commands.CommandTestUtil.SYLLABUS_DESC_INTEGRATION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
 import static seedu.address.logic.commands.EditSyllCommand.MESSAGE_DUPLICATE_SYLLABUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -43,7 +43,7 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
                 + " ";
 
         Person editedPerson = new PersonBuilder(ALICE).replaceSyllabus(indexSubject, indexSyll,
-                VALID_SYLLABUS).build();
+                VALID_SYLLABUS_DIFFERENTIATION).build();
         assertCommandSuccess(command, index, editedPerson);
 
         /* Case: undo editing the last person in the list -> last person restored */
