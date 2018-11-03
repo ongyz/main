@@ -53,11 +53,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== View Help : `help`
 
 Format: `help`
 
-=== Adding a student: `add`
+=== Add Student: `add`
 
 Adds a student to the TutorHelper +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMING [t/TAG]...`
@@ -69,72 +69,7 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/Monday 6:00pm`
 
-=== Listing all students : `list`
-
-Shows a list of all students in the TutorHelper. +
-Format: `list`
-
-=== Editing a student : `edit`
-
-Edits an existing student in the TutorHelper. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [d/TIMING] [t/TAG]...`
-
-****
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student's tags by typing `t/` without specifying any tags after it.
-****
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-
-=== Locating students by name: `find`
-
-Finds students whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any student having names `Betsy`, `Tim`, or `John`
-
-=== Grouping students by tuition timing : `group`
-
-Lists all students with the specified tuition timing. +
-User can choose to group by time or day of the week. +
-Format: `group TIMING`
-
-****
-* Lists all students with the specified `TIMING`.
-* The timing refers to either a time or day of the week.
-* The day entered is case sensitive. e.g. `Monday` is valid but `MONDAY` isn't
-* The time entered must be in 12hr format. e.g. `12:00pm` is valid but `1200` isn't
-****
-
-Examples:
-
-* `group Monday` +
-Show all classes on Monday, sorted based on timing.
-* `group 12pm` +
-Show all classes at 12pm for the entire week, sorted based on days of the week.
-
-=== Deleting a student : `delete`
+=== Delete Student : `delete`
 
 Deletes the specified student from the TutorHelper. +
 Format: `delete INDEX`
@@ -154,7 +89,74 @@ Deletes the 2nd student in the TutorHelper.
 `delete 1` +
 Deletes the 1st student in the results of the `find` command.
 
-=== Selecting a student : `select`
+=== Edit Student : `edit`
+
+Edits an existing student in the TutorHelper. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [d/TIMING] [t/TAG]...`
+
+****
+* Edits the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` +
+Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+
+=== List Students : `list`
+
+Shows a list of all students in the TutorHelper. +
+Format: `list`
+
+=== Find Students : `find`
+
+Finds students whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any student having names `Betsy`, `Tim`, or `John`
+
+=== Group Students : `group`
+
+Lists all students with the specified tuition timing. +
+User can choose to group by time or day of the week. +
+Format: `group TIMING`
+
+****
+* Lists all students with the specified `TIMING`.
+* The timing refers to either a time or day of the week.
+* The day entered is case sensitive. e.g. `Monday` is valid but `MONDAY` isn't
+* The time entered must be in 12hr format. e.g. `12:00pm` is valid but `1200` isn't
+****
+
+Examples:
+
+* `group Monday` +
+Show all classes on Monday, sorted based on timing.
+* `group 12pm` +
+Show all classes at 12pm for the entire week, sorted based on days of the week.
+
+=== Select Student : `select`
 
 Selects the student identified by the index number used in the displayed student list. +
 Format: `select INDEX`
@@ -169,12 +171,12 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd student in the address book.
+Selects the 2nd student in the TutorHelper.
 * `find Betsy` +
 `select 1` +
 Selects the 1st student in the results of the `find` command.
 
-=== Listing entered commands : `history`
+=== List Command History : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -184,15 +186,14 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undo Command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the TutorHelper to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit`, `clear`, `appendsyll`, `erasesyll`, and `copysub`).
+Undoable commands: those commands that modify the TutorHelper's content (`add`, `delete`, `edit`, `clear`, `appendsyll`, `erasesyll`, and `copysub`).
 ====
 
 Examples:
@@ -211,7 +212,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+=== Redo Command : `redo`
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -232,17 +233,21 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
-// end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clear TutorHelper : `clear`
 
 Clears all student records from the TutorHelper. +
 Format: `clear`
 
-=== Keeping track of payments : `paid`
+=== Record Payment : `paid`
 
 Records a payment of a specified amount made by a specified student for a specified month and year. +
 Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
+
+[NOTE]
+====
+If a payment entry already exists, the amount will be added to the existing payment record.
+====
 
 ****
 * Records a payment of a specified `AMOUNT` for the student at the specified `STUDENT_INDEX`, for a specified `MONTH` and `YEAR`.
@@ -253,101 +258,26 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 Examples:
 
 * `paid 1 200 01 2018` +
-`Records $200 payment made on January 2018
+Records a payment of $200 made for January 2018, or adds $200 to the payment made for January 2018 if a payment entry already exists.
 
+=== Display Earnings : `earnings`
 
-=== Display tutor earnings for the month : `earnings`
-
-Display tutor earnings for the specified month of a specified year. +
+Displays total earnings across all students for a specified month of a specified year. +
 Format: `earnings MONTH YEAR`
 
 ****
-* Display tutor earnings for a specified `MONTH` of a specified `YEAR`.
+* Display tutor earnings across all students for a specified `MONTH` of a specified `YEAR`.
 * The month and year *must be positive integers* 1, 2, 3, ...
 ****
 
 Examples:
 
 * `earnings 01 2018` +
-`Shows earnings made on January 2018.`
+Displays earnings made for January 2018.
 
-=== Mark a syllabus topic as complete/incomplete : `mark`
+=== Add Subject : `addsub`
 
-Toggle the state of a specified syllabus topic for a specified student and subject. +
-Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
-
-****
-* Toggle the state of a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
-* The student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
-* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `mark 1 1 3`
-* `mark 2 1 2`
-
-=== Add a syllabus topic to the student’s list of syllabus topics : `appendsyll`
-
-Add a new syllabus topic for a specified student and subject. +
-Format: `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
-
-[NOTE]
-====
-Adding syllabus that already exist under subject will throw an error.
-====
-
-****
-* Adds a new syllabus topic `SYLLABUS` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
-* The student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The student index and subject index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `appendsyll 1 2 sy/Integration`
-* `appendsyll 3 2 sy/Poisson Distribution`
-
-=== Remove a syllabus topic from the student’s list of syllabus topics : `erasesyll`
-
-Remove a syllabus topic for a specified student and subject. +
-Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
-
-****
-* Removes a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
-* The student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
-* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `erasesyll 1 1 2`
-* `erasesyll 3 1 1`
-
-=== Copy a subject from a student to other student(s) : `copysub`
-
-Duplicate a subject from chosen student and add it to the target student. Duplicate syllabus will not be added. +
-Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
-
-****
-* The source and target student index refers to the index number shown in the displayed student list.
-* The subject index refers to the index number shown in the student's subject list.
-* The source, target student index and subject index *must be positive integers* 1, 2, 3, ...
-****
-
-Examples:
-
-* `copysub 1 1 n/John Doe n/Betsy`
-* `copysub 1 2 n/Alex`
-
-=== Add a subject to a student : `addsub`
-
-Add a new subject to a specified student. +
+Adds a new subject to a specified student. +
 Format: `addsub STUDENT_INDEX s/SUBJECT`
 
 [NOTE]
@@ -363,10 +293,12 @@ Adding a subject that already exists for the student will throw an error.
 
 Examples:
 
-* `addsub 1 s/Physics
-* `addsub 2 s/Mathematics
+* `addsub 1 s/Physics +
+Adds a subject "Physics" for the first student.
+* `addsub 2 s/Mathematics +
+Adds a subject "Mathematics" for the second student.
 
-=== Delete a subject from a student : `deletesub`
+=== Delete Subject : `deletesub`
 
 Deletes a subject from a specified student. +
 Format: `deletesub STUDENT_INDEX SUBJECT_INDEX`
@@ -386,54 +318,165 @@ A student must have at least one subject.
 
 Examples:
 
-* `deletesub 1 2`
-* `deletesub 3 1`
+* `deletesub 1 2` +
+Deletes the second subject from the first student.
+* `deletesub 3 1` +
+Deletes the first subject from the third student.
 
-=== Exiting the program : `exit`
+=== Copy Subject : `copysub`
+
+Copies a subject and all its syllabus topics from a specified student to specified target student. Duplicate syllabus topics will not be added. +
+Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
+
+****
+* Copies a subject (and all its syllabus topics) at the specified `SUBJECT_INDEX` from the student at the specified `SOURCE_STUDENT_INDEX` to the student at the specified `TARGET_STUDENT_INDEX`.
+* The source and target student indexes refer to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The subject index and source and target student indexes *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `copysub 1 1 2` +
+Copies the first subject from the first student to the second student.
+* `copysub 1 2 3` +
+Copies the second subject from the first student to the third student.
+
+=== Add Syllabus Topic : `appendsyll`
+
+Adds a new syllabus topic for a specified student and subject. +
+Format: `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
+
+[NOTE]
+====
+Adding a syllabus topic that already exists under the subject will throw an error.
+====
+
+****
+* Adds a new syllabus topic `SYLLABUS` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The student index and subject index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `appendsyll 1 2 sy/Integration` +
+Adds a syllabus topic "Integration" to the second subject of the first student.
+* `appendsyll 3 2 sy/Poisson Distribution` +
+Adds a syllabus topic "Poisson Distribution" to the second subject of the third student.
+
+=== Remove Syllabus Topic : `erasesyll`
+
+Removes a syllabus topic for a specified student and subject. +
+Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+
+****
+* Removes a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
+* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `erasesyll 1 1 2` +
+Removes the second syllabus topic from the first subject of the first student.
+* `erasesyll 3 1 1` +
+Removes the first syllabus topic from the first subject of the third student.
+
+=== Edit Syllabus Topic : `editsyll`
+
+Edits a syllabus topic for a specified student and subject. +
+Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
+
+****
+* Edits a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
+* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `editsyll 1 1 2 sy/Integration` +
+Changes the second syllabus topic of the first subject of the first student to "Integration".
+* `editsyll 3 1 1 sy/Kinetic Energy` +
+Changes the first syllabus topic of the first subject of the third student to "Kinetic Energy".
+
+=== Mark Syllabus Topic : `mark`
+
+Toggles the state of a specified syllabus topic for a specified student and subject. +
+Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+
+****
+* Toggle the state of a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
+* The student index refers to the index number shown in the displayed student list.
+* The subject index refers to the index number shown in the student's subject list.
+* The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
+* The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+****
+
+Examples:
+
+* `mark 1 1 3` +
+Marks the third syllabus topic of the first subject of the first student.
+* `mark 2 1 2` +
+Marks the second syllabus topic of the first subject of the second student.
+
+=== Exit Program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
+=== Save Data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+TutorHelper data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorHelper folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *View Help* : `help`
+* *Add Student* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
+* *Delete Student* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit Student* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+* *List Students* : `list`
+* *Find Students* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Group* : `group TIMING` +
+* *Group Students* : `group TIMING` +
 e.g `group Monday OR group 12pm OR group`
-* *History* : `history`
-* *Payment* : `paid STUDENT_INDEX AMOUNT MONTH YEAR` +
-    eg `paid 1 200 08 2018`
-* *Earnings* : `earnings MONTH YEAR` +
-  `eg earnings 01 2018`
-* *Mark* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
-e.g `mark 1 1 1`
-* *Add Syllabus Topic* : `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
-e.g `appendsyll 1 2 sy/Integration`
-* *Remove Syllabus Topic* : `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
-e.g `erasesyll 1 1 1`
+* *Select Student* : `select INDEX` +
+e.g.`select 2`
+* *List Command History* : `history`
+* *Undo Command* : `undo`
+* *Redo Command* : `redo`
+* *Clear TutorHelper* : `clear`
+* *Record Payment* : `paid STUDENT_INDEX AMOUNT MONTH YEAR` +
+e.g. `paid 1 200 08 2018`
+* *Display Earnings* : `earnings MONTH YEAR` +
+e.g. `earnings 01 2018`
+* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT` +
+e.g. `addsub 1 s/Physics`
+* *Remove Subject* : `deletesub STUDENT_INDEX SUBJECT_INDEX` +
+e.g. `deletesub 1 2`
 * *Copy Subject* : `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX` +
-e.g `copysub 1 1 2`
+e.g. `copysub 1 1 2`
+* *Add Syllabus Topic* : `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
+e.g. `appendsyll 1 2 sy/Integration`
+* *Remove Syllabus Topic* : `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g. `erasesyll 1 1 1`
+* *Edit Syllabus Topic* : `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS` +
+e.g. `editsyll 1 1 2 sy/Integration`
+* *Mark Syllabus Topic* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g. `mark 1 1 1`
+* *Exit TutorHelper* : `exit`
