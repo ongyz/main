@@ -41,7 +41,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
-
+// tag::validinputs[]
 == Valid Inputs
 
 === Subjects
@@ -75,6 +75,7 @@ Name should only contain alphanumeric characters and spaces, and should not be b
      - start and end with alphanumeric characters
      - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
 
+// end::validinputs[]
 [[Features]]
 == Features
 
@@ -363,6 +364,7 @@ Deletes the second subject from the first student.
 * `deletesub 3 1` +
 Deletes the first subject from the third student.
 
+// tag::copysub[]
 === Copy Subject : `copysub`
 
 Copies a subject and all its syllabus topics from a specified student to specified target student. Duplicate syllabus topics will not be added. +
@@ -384,7 +386,8 @@ Examples:
 Copies the first subject from the first student to the second student.
 * `copysub 1 2 3` +
 Copies the second subject from the first student to the third student.
-
+// end::copysub[]
+// tag::addsyll[]
 === Add Syllabus Topic : `appendsyll`
 
 Adds a new syllabus topic for a specified student and subject. +
@@ -408,7 +411,8 @@ Examples:
 Adds a syllabus topic "Integration" to the second subject of the first student.
 * `appendsyll 3 2 sy/Poisson Distribution` +
 Adds a syllabus topic "Poisson Distribution" to the second subject of the third student.
-
+// end::addsyll[]
+// tag::deletesyll[]
 === Remove Syllabus Topic : `erasesyll`
 
 Removes a syllabus topic for a specified student and subject. +
@@ -428,7 +432,7 @@ Examples:
 Removes the second syllabus topic from the first subject of the first student.
 * `erasesyll 3 1 1` +
 Removes the first syllabus topic from the first subject of the third student.
-
+// end::deletesyll[]
 === Edit Syllabus Topic : `editsyll`
 
 Edits a syllabus topic for a specified student and subject. +
@@ -448,7 +452,7 @@ Examples:
 Changes the second syllabus topic of the first subject of the first student to "Integration".
 * `editsyll 3 1 1 sy/Kinetic Energy` +
 Changes the first syllabus topic of the first subject of the third student to "Kinetic Energy".
-
+// tag::mark[]
 === Mark Syllabus Topic : `mark`
 
 Toggles the state of a specified syllabus topic for a specified student and subject. +
@@ -468,7 +472,7 @@ Examples:
 Marks the third syllabus topic of the first subject of the first student.
 * `mark 2 1 2` +
 Marks the second syllabus topic of the first subject of the second student.
-
+// end::mark[]
 === Exit Program : `exit`
 
 Exits the program. +
