@@ -9,16 +9,12 @@ ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
 
-ifndef::env-github[]
-image::images/Ui.png[width="600"]
-endif::[]
-
 * This is a desktop TutorHelper application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is a Java sample application intended for Tutors who would like to organise their students' information.
 * This application contains:
 ** A GUI that includes a list panel and a details panel.
 ** Test cases, including automated GUI testing.
-** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
+** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI and Appveyor.
 
 == Site Map
 
@@ -29,8 +25,6 @@ endif::[]
 
 == Acknowledgements
 * This application was adapted from https://github.com/nus-cs2103-AY1819S1/AddressBook-level4[AddressBook4]
-* Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
-_Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 
 == Licence : link:LICENSE[MIT]
