@@ -14,6 +14,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Line;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
@@ -100,7 +101,8 @@ public class BrowserPanel extends UiPart<Region> {
             tuitionTimingDayLabel.setText(person.getTuitionTiming().day.toString().substring(0, 3));
             tuitionTimingTimeLabel.setText(person.getTuitionTiming().time);
 
-            person.getSubjects().forEach(subject -> subjectsShort.getChildren().add(new Label(subject.getSubjectName())));
+            person.getSubjects().forEach(subject -> subjectsShort.getChildren().add(
+                    new Label(subject.getSubjectName())));
             person.getTags().forEach(tag -> tagsShort.getChildren().add(new Label(tag.tagName)));
 
             person.getPayments().forEach(amount -> paymentAmount.getChildren().add(
@@ -109,8 +111,13 @@ public class BrowserPanel extends UiPart<Region> {
                     new Label(String.valueOf(amount.getMonth()))));
             person.getPayments().forEach(amount -> paymentYear.getChildren().add(
                     new Label(String.valueOf(amount.getYear()))));
-            person.getSubjects().forEach(subject -> subjectList.getChildren().add(
-                    new Label(subject.toString())));
+
+            for (int i = 0; i < person.getSubjects().size(); i++) {
+                List<Subject> subject = new ArrayList<>(person.getSubjects());
+                Index currentIndex = Index.fromZeroBased(i);
+                subjectList.getChildren().add(
+                        new Label(currentIndex.getOneBased() + ". " + subject.get(i).toString()));
+            }
 
         } else {
             // Person is null, remove all the text.
