@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -83,6 +84,24 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .build();
         assertCommandSuccess(command, toPay, paidPerson);
 
+        /* Case: Edit payment for first person in a non-empty address book -> edit pay */
+
+        command = "  paid 1 100 8 2018 ";
+
+        Index index = INDEX_FIRST_PERSON;;
+
+        Person editedPerson = new PersonBuilder().withName("Alice Pauline")
+                .withPhone("94351253")
+                .withEmail("alice@example.com")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withTuitionTiming("Tuesday 8:00pm")
+                .withSubjects("Mathematics")
+                .withSyllabus(Index.fromOneBased(1), "Integration")
+                .withTags("friends")
+                .withPayments("1 500 8 2018")
+                .build();
+
+        assertEditPayCommandSuccess(command, index, editedPerson);
 
         /* ----------------- Performing payment operation while a filtered list is being shown ------------------  */
 
@@ -104,6 +123,27 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withTags("friends")
                 .build();
         assertCommandSuccess(command, toPay, paidPerson);
+
+        /* Case: filtered person list, person index within bounds of address book and person list -> success */
+        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        command = "  paid 2 100 8 2018 ";
+
+        index = INDEX_SECOND_PERSON;;
+
+        editedPerson = new PersonBuilder().withName("Daniel Meier")
+                .withPhone("87652533")
+                .withEmail("cornelia@example.com")
+                .withAddress("10th street")
+                .withTuitionTiming("Saturday 3:00pm")
+                .withSubjects("Mathematics", "Physics")
+                .withSyllabus(Index.fromOneBased(1), "Calculus II")
+                .withSyllabus(Index.fromOneBased(1), "Statistics I")
+                .withPayments("4 500 8 2018")
+                .withTags("friends")
+                .build();
+
+        assertEditPayCommandSuccess(command, index, editedPerson);
+
 
         /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
          * -> rejected
@@ -207,6 +247,21 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
+    }
+
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
+     * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
+     * 2. Asserts that the model related components are updated to reflect the person at index {@code toEdit} being
+     * updated to values specified {@code editedPerson}.<br>
+     * @param toEdit the index of the current model's filtered list.
+     */
+    private void assertEditPayCommandSuccess(String command, Index toEdit, Person editedPerson) {
+        Model expectedModel = getModel();
+        Person original = expectedModel.getFilteredPersonList().get(toEdit.getZeroBased());
+        expectedModel.updatePerson(original, editedPerson);
+        String expectedResultMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedPerson);
+        assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 
 
