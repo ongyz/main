@@ -35,7 +35,7 @@ public class TuitionTimingTest {
         // valid tuition timing
         assertTrue(TuitionTiming.isValidTiming("Monday 12:00pm"));
         assertTrue(TuitionTiming.isValidTiming("Saturday 11:00am"));
-        assertTrue(TuitionTiming.isValidTiming("Tuesday, 5:00PM"));
-        assertTrue(TuitionTiming.isValidTiming("Sunday, 10:30AM"));
+        assertTrue(TuitionTiming.isValidTiming("Tuesday 5:00PM"));
+        assertTrue(TuitionTiming.isValidTiming("Sunday 10:30AM"));
     }
 }
