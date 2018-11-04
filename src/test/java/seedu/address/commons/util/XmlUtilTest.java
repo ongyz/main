@@ -41,7 +41,7 @@ public class XmlUtilTest {
     private static final String INVALID_PHONE = "9482asf424";
 
     private static final String VALID_NAME = "Hans Muster";
-    private static final String VALID_PHONE = "9482424";
+    private static final String VALID_PHONE = "94824240";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
     private static final String VALID_TUITION_TIMING = "Monday 6:00pm";
