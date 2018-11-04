@@ -43,19 +43,6 @@ public class Payment {
     }
 
     /**
-     * Constructs a {@code Payment} with an incremented amount.
-     *
-     * @param payment A {@code Payment}.
-     * @param toAdd The amount to add.
-     */
-    public Payment(Payment payment, int toAdd) {
-        this.studentIndex = payment.getIndex();
-        this.month = payment.getMonth();
-        this.year = payment.getYear();
-        this.amount = payment.getAmount() + toAdd;
-    }
-
-    /**
      * Returns true if a given int is a valid number.
      */
     public static boolean isValidAmount(int test) {
@@ -91,14 +78,6 @@ public class Payment {
             return false;
         }
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
-    }
-
-    /**
-     * Updates the current {@code Payment} amount to new payment amount
-     * @param toUpdate the {@code Payment}amount to add to current amount
-     */
-    public void update(Payment toUpdate) {
-        this.amount += toUpdate.getAmount();
     }
 
     /**

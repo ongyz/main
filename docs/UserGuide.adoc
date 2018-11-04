@@ -246,7 +246,7 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 
 [NOTE]
 ====
-If a payment entry already exists, the amount will be added to the existing payment record.
+If a payment entry already exists, the amount will replace the existing payment record.
 ====
 
 ****
