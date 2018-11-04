@@ -41,24 +41,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
-[[Features]]
-== Features
 
-====
-*Command Format*
+== Valid Inputs
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-====
+=== Subjects
 
-====
-*Valid Inputs*
-
-_Subjects_
-
-****
 Valid subjects are limited to only the following subjects: +
 
 `Mathematics`, `Biology`, `Chemistry`, `Physics`, `Economics`, `Geography`, `History`
@@ -74,25 +61,30 @@ Examples:
 * `Ma` will not match `Mathematics` because the length of subtring is shorter than three.
 * `phy` will only match `Physics` and will not match `Geography` as matching is done from the beginning of the string.
 * `Maths` will not match `Mathematics` as it is not a full substring match.
-****
 
-_Name_
+=== Name
 
-****
 Name should only contain alphanumeric characters and spaces, and should not be blank.
-****
 
-_Email_
+=== Email
 
-****
 * Emails should be of the format `local-part@domain`
 * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
 * This is followed by a '@' and then a domain name. The domain name must:
      - be at least 2 characters long
      - start and end with alphanumeric characters
      - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
-****
 
+[[Features]]
+== Features
+
+====
+*Command Format*
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === View Help : `help`
