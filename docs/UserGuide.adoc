@@ -65,6 +65,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMI
 [TIP]
 A student can have any number of tags (including 0), and must have at least 1 subject.
 
+****
+* Student must not have the same name, phone number, email and address as an existing student.
+* Name cannot contain any integer or symbols.
+* Phone number must have a length of no more or no less than eight integers.
+* Tuition timing has to be contain a valid day and valid timing in 12 hour format.
+****
+
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/Monday 6:00pm`
