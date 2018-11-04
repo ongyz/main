@@ -1,0 +1,76 @@
+= Anthony Halim - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: TutorHelper - Level 4
+
+---
+
+== Overview
+
+It is a Java sample application intended for Tutors who would like to organise their students' information.
+
+== Summary of contributions
+
+* *Major enhancement*: added the ability *to manipulate state of syllabus within subjects as well as copy a subject from one student to another*.
+
+** What it does: User can add, remove, or mark syllabus from the specified subject. User can also copy a whole subject,
+along its contents, to another student.
+** Justification: Tutors need to differentiate between subjects of different levels or schools.
+Allowing manipulation of syllabus provides greater amount of flexibility and details of each subject.
+However, in the case where multiple students who actually studies the same content, `copysub` command
+allow users to easily manage the subjects.
+** Highlights: Copying can lead to duplicated syllabus and subjects which needs to be addressed.
+
+* *Minor enhancement*:
+
+** Add syllabus into TutorHelper
+** Allow students to have multiple subjects
+** Converts subjects to enumeration for easier management of code
+** Data writing into storage of subject and its syllabus
+
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=SusterDrifter
+* *Other contributions*:
+
+** Project management:
+*** Assign issues to group members and labels on Github
+** Enhancements to existing features:
+*** Allow students to have multiple subjects
+*** Updated the GUI formatting as well as its styling
+*** Wrote additional tests for features added: addsyll, deletesyll, copysub, mark, subjects and syllabus
+** Documentation:
+*** Added section about valid inputs for name, email, and subjects in the User Guide
+*** Added sections for addsyll, deletesyll, copsub, mark in the User Guide
+*** Added section for copysub in the Developer Guide
+** Community:
+*** Review other PRs
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+** Tools:
+*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=validinputs]
+
+include::../UserGuide.adoc[tag=copysub]
+
+include::../UserGuide.adoc[tag=addsyll]
+
+include::../UserGuide.adoc[tag=deletesyll]
+
+include::../UserGuide.adoc[tag=mark]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=copysub]
+
