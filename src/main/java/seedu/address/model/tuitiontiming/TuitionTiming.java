@@ -15,7 +15,7 @@ public class TuitionTiming {
 
     public static final String MESSAGE_TUITION_TIMING_CONSTRAINTS =
             "Tuition Day and Time should not be blank and should be in the format:\n"
-                    + "Day 12-hr Time\n"
+                    + "Day 12-Hour Timing(hh:mmaa)\n"
                     + "Examples of Valid Input:\n"
                     + "Monday 1:00pm\n"
                     + "Tuesday 1:15AM\n"
