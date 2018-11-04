@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
  */
 public class StringUtil {
 
+    public final static int MINIMUM_LENGTH_TO_MATCH = 3;
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -61,8 +63,8 @@ public class StringUtil {
         checkArgument(!preppedToSearch.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedToSearch.split("\\s+").length == 1,
                 "Word parameter should be a single word");
-        // Length of keyword must exceed 2
-        if (preppedToSearch.length() <= 2) {
+        // Length of keyword must exceed minimum length
+        if (preppedToSearch.length() < MINIMUM_LENGTH_TO_MATCH) {
             return false;
         }
         for (int i = 0; i < preppedToSearch.length(); i++) {
