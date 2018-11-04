@@ -48,7 +48,7 @@ public enum SubjectType {
         requireNonNull(subjectName);
         SubjectType result = null;
         for (SubjectType subjectEnum : values()) {
-            if (StringUtil.containsSubstringIgnoreCase(subjectEnum.toString(), subjectName)) {
+            if (StringUtil.isSubstringMatchFromIndexZero(subjectEnum.toString(), subjectName)) {
                 result = subjectEnum;
             }
         }
@@ -61,7 +61,7 @@ public enum SubjectType {
     public static boolean isValidSubjectName(String test) {
         requireNonNull(test);
         return SubjectType.stream()
-                .anyMatch(subjectEnum -> StringUtil.containsSubstringIgnoreCase(subjectEnum.toString(), test));
+                .anyMatch(subjectEnum -> StringUtil.isSubstringMatchFromIndexZero(subjectEnum.toString(), test));
     }
 
     @Override

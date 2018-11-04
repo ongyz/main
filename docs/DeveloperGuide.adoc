@@ -291,7 +291,7 @@ Step 2e. This is propagated back to the LogicManager class which then proceed to
 
 Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
 
-Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
+Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method editPaymentField, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
 
 Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
 
@@ -409,6 +409,7 @@ Step 5. The system will locate the _fourth_ student from the student list, and m
 The process is described with sequence diagram below:
 
 image::CopySubSequenceDiagrams.png[width="650"]
+// end::copysub[]
 
 === Add / Delete Subject
 

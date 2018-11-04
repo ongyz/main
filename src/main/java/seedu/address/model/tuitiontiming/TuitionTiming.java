@@ -15,20 +15,19 @@ public class TuitionTiming {
 
     public static final String MESSAGE_TUITION_TIMING_CONSTRAINTS =
             "Tuition Day and Time should not be blank and should be in the format:\n"
-                    + "1) Day, Time\n"
-                    + "2) Day Time\n"
+                    + "Day 12-Hour Timing(hh:mmaa)\n"
                     + "Examples of Valid Input:\n"
-                    + "Monday, 1:00pm\n"
+                    + "Monday 1:00pm\n"
                     + "Tuesday 1:15AM\n"
-                    + "Wednesday, 12:30pm\n";
+                    + "Wednesday 12:30pm\n";
     public static final String DAY_REGEX = "^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
-    public static final String TIME_REGEX = "\\d{1,2}[:{1}]\\d{2}(am|pm|AM|PM)$";
+    public static final String TIME_REGEX = "((1[012]|[0-9]):([0-5][0-9])(am|pm|AM|PM))$";
 
     /**
      * The first character of the tuition time and day must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String TUITION_TIMING_VALIDATION_REGEX = DAY_REGEX + ".{1,2}" + TIME_REGEX;
+    public static final String TUITION_TIMING_VALIDATION_REGEX = DAY_REGEX + " " + TIME_REGEX;
 
     public final DayOfWeek day;
     public final String time;
@@ -45,17 +44,16 @@ public class TuitionTiming {
         requireNonNull(tuitionTiming);
         checkArgument(isValidTiming(tuitionTiming), MESSAGE_TUITION_TIMING_CONSTRAINTS);
         splitTuitionTiming(tuitionTiming);
+        value = tuitionTiming;
         // this.day and this.time used for comparison purposes for Group Command
         this.day = DayOfWeek.valueOf(dayString.toUpperCase());
         this.time = timeString;
-        value = tuitionTiming;
     }
 
     /**
      * Splits the {@code tuitionTiming} string into Day and Time.
      */
     private void splitTuitionTiming(String tuitionTiming) {
-        tuitionTiming = tuitionTiming.replace(",", " ");
         String[] tuitionTimingArr = tuitionTiming.split("\\s+");
         dayString = tuitionTimingArr[0].trim();
         timeString = tuitionTimingArr[1].trim();

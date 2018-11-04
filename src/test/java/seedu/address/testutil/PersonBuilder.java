@@ -30,7 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Chemistry";
-    public static final String DEFAULT_TUITION_TIMING = "Monday, 6:00pm";
+    public static final String DEFAULT_TUITION_TIMING = "Monday 6:00pm";
 
     private Name name;
     private Phone phone;
