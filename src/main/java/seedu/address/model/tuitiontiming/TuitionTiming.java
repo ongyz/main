@@ -44,10 +44,10 @@ public class TuitionTiming {
         requireNonNull(tuitionTiming);
         checkArgument(isValidTiming(tuitionTiming), MESSAGE_TUITION_TIMING_CONSTRAINTS);
         splitTuitionTiming(tuitionTiming);
+        value = tuitionTiming;
         // this.day and this.time used for comparison purposes for Group Command
         this.day = DayOfWeek.valueOf(dayString.toUpperCase());
         this.time = timeString;
-        value = tuitionTiming;
     }
 
     /**

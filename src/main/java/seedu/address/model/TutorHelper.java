@@ -120,6 +120,8 @@ public class TutorHelper implements ReadOnlyTutorHelper {
         personList.sort((p1, p2) -> {
             String time1 = TuitionTiming.convertTwelveHourToTwentyFourHour(p1.getTuitionTiming().time);
             String time2 = TuitionTiming.convertTwelveHourToTwentyFourHour(p2.getTuitionTiming().time);
+            assert time1 != null : "time1 should not be null";
+            assert time2 != null : "time2 should not be null";
 
             if (time1.compareTo(time2) < 1) {
                 return -1;
