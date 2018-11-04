@@ -53,6 +53,29 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+====
+*Valid Inputs*
+
+1. Subjects
+
+Valid subjects are limited to only the following subjects: +
+
+`Mathematics`, `Biology`, `Chemistry`, `Physics`, `Economics`, `Geography`, `History`
+
+* In order to be valid subjects, the input must be a full substring match of length 3 or more with any of the valid subjects. This is to avoid too short of keyword matching.
+* The match must start at the beginning of the subject name. This is to avoid confusion and multiple matching.
+* Matching is case insensitive.
+
+Examples:
+
+* `Biology`, `Bio`, or `bio` will match with `Biology`.
+* `iology` will not match will `Biology` as the match does not start from the beginning.
+* `Ma` will not match `Mathematics` because the length of subtring is shorter than three.
+* `phy` will only match `Physics` and will not match `Geography` as matching is done from the beginning of the string.
+* `Maths` will not match `Mathematics` as it is not a full substring match.
+
+====
+
 === View Help : `help`
 
 Format: `help`
@@ -67,7 +90,7 @@ A student can have any number of tags (including 0), and must have at least 1 su
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/Monday 6:00pm`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics d/Monday 6:00pm`
 
 === Delete Student : `delete`
 
