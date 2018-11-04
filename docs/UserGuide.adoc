@@ -101,7 +101,7 @@ Format: `help`
 
 === Add Student: `add`
 
-Adds a student to the TutorHelper
+Adds a student to the TutorHelper +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMING [t/TAG]...`
 
 [TIP]
