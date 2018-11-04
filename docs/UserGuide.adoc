@@ -92,6 +92,10 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics d/Monday 6:00pm`
 
+[NOTE]
+All inputs need to be valid for the person to be successfully added. +
+`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics s/* d/Monday 6:00pm` will fail due to one invalid subject.
+
 === Delete Student : `delete`
 
 Deletes the specified student from the TutorHelper. +
@@ -350,6 +354,9 @@ Deletes the first subject from the third student.
 
 Copies a subject and all its syllabus topics from a specified student to specified target student. Duplicate syllabus topics will not be added. +
 Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
+
+[TIP]
+Use `find` command to display both the source and target student on the list.
 
 ****
 * Copies a subject (and all its syllabus topics) at the specified `SUBJECT_INDEX` from the student at the specified `SOURCE_STUDENT_INDEX` to the student at the specified `TARGET_STUDENT_INDEX`.
