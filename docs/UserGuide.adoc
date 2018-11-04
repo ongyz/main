@@ -85,6 +85,7 @@ Format: `delete INDEX`
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -105,6 +106,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [d/TIMI
 * Edits the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -172,6 +174,7 @@ Format: `select INDEX`
 * Selects the student and displays the information of the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index *must be a positive integer* `1, 2, 3, ...`
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -260,6 +263,7 @@ If a payment entry already exists, the amount will replace the existing payment 
 * Records a payment of a specified `AMOUNT` for the student at the specified `STUDENT_INDEX`, for a specified `MONTH` and `YEAR`.
 * The student index refers to the index number shown in the displayed student list.
 * The student index, month and year *must be positive integers* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -296,6 +300,7 @@ Adding a subject that already exists for the student will throw an error.
 * Adds a new subject `SUBJECT` for a student at the specified `STUDENT_INDEX`.
 * The student index refers to the index number shown in the displayed student list.
 * The student index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -321,6 +326,7 @@ A student must have at least one subject.
 * The student index refers to the index number shown in the displayed student list.
 * The subject index refers to the index number shown in the student's subject list.
 * The student index and subject index *must be positive integers* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -340,6 +346,7 @@ Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
 * The source and target student indexes refer to the index number shown in the displayed student list.
 * The subject index refers to the index number shown in the student's subject list.
 * The subject index and source and target student indexes *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -364,6 +371,7 @@ Adding a syllabus topic that already exists under the subject will throw an erro
 * The student index refers to the index number shown in the displayed student list.
 * The subject index refers to the index number shown in the student's subject list.
 * The student index and subject index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -384,6 +392,7 @@ Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 * The subject index refers to the index number shown in the student's subject list.
 * The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
 * The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -404,6 +413,7 @@ Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
 * The subject index refers to the index number shown in the student's subject list.
 * The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
 * The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -424,6 +434,7 @@ Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 * The subject index refers to the index number shown in the student's subject list.
 * The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
 * The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
