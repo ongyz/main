@@ -15,9 +15,8 @@ public class GroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Groups all students based on the specified DAY "
             + "or TIME and displays them as a list.\n"
-            + "The input can also be null and the students will be grouped according to the current day and time.\n"
             + "Parameters: KEYWORD\n"
-            + "Examples: \n" + COMMAND_WORD + " Monday\n"
+            + "Examples:\n" + COMMAND_WORD + " Monday\n"
             + COMMAND_WORD + " 12:00pm";
 
     public static final String MESSAGE_SUCCESS = "Grouped all students";
