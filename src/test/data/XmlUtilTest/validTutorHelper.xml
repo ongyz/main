@@ -5,7 +5,7 @@
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-        <tuitionTiming isPrivate="false">Monday, 6:00pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Monday 6:00pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Mathematics" completionRate="0.0"/>
     </persons>
     <persons>
@@ -13,7 +13,7 @@
         <phone isPrivate="false">87249245</phone>
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street</address>
-        <tuitionTiming isPrivate="false">Tuesday, 7:00pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Tuesday 7:00pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Economics" completionRate="0.0"/>
     </persons>
     <persons>
@@ -21,7 +21,7 @@
         <phone isPrivate="false">95352563</phone>
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street</address>
-        <tuitionTiming isPrivate="false">Tuesday, 8:30pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Tuesday 8:30pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="History" completionRate="0.0"/>
     </persons>
     <persons>
@@ -29,7 +29,7 @@
         <phone isPrivate="false">87652533</phone>
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street</address>
-        <tuitionTiming isPrivate="false">Wednesday, 5:00pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Wednesday 5:00pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Mathematics" completionRate="0.0"/>
     </persons>
     <persons>
@@ -37,7 +37,7 @@
         <phone isPrivate="false">9482224</phone>
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave</address>
-        <tuitionTiming isPrivate="false">Thursday, 5:30pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Thursday 5:30pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Chemistry" completionRate="0.0"/>
     </persons>
     <persons>
@@ -45,7 +45,7 @@
         <phone isPrivate="false">9482427</phone>
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo</address>
-        <tuitionTiming isPrivate="false">Friday, 4:00pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Friday 4:00pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Mathematics" completionRate="0.0"/>
     </persons>
     <persons>
@@ -53,7 +53,7 @@
         <phone isPrivate="false">9482442</phone>
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street</address>
-        <tuitionTiming isPrivate="false">Saturday, 1:00pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Saturday 1:00pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Physics" completionRate="0.0"/>
     </persons>
     <persons>
@@ -61,7 +61,7 @@
         <phone isPrivate="false">8482424</phone>
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india</address>
-        <tuitionTiming isPrivate="false">Saturday, 3:00pm</tuitionTiming>
+        <tuitionTiming isPrivate="false">Saturday 3:00pm</tuitionTiming>
         <subjects isPrivate="false" subjectName="Mathematics" completionRate="0.0"/>
     </persons>
     <persons>
@@ -69,7 +69,7 @@
         <phone isPrivate="false">8482131</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
-        <tuitionTiming isPrivate="false">Sunday, 11:00am</tuitionTiming>
+        <tuitionTiming isPrivate="false">Sunday 11:00am</tuitionTiming>
         <subjects isPrivate="false" subjectName="Chemistry" completionRate="0.0"/>
     </persons>
 </TutorHelper>
