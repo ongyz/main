@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <person>
     <name>Hans Muster</name>
-    <phone>9482424</phone>
+    <phone>94824240</phone>
     <email>hans@example</email>
     <address>4th street</address>
-    <tuitionTiming>Monday, 6:00pm</tuitionTiming>
+    <tuitionTiming>Monday 6:00pm</tuitionTiming>
     <subjects subjectName="Mathematics" completionRate="0.0"/>
     <tagged>friends</tagged>
     <payments>

@@ -31,11 +31,12 @@ public class TuitionTimingTest {
         assertFalse(TuitionTiming.isValidTiming("MONDAY 12:00PM")); //day in caps
         assertFalse(TuitionTiming.isValidTiming("12:00pm")); // time only
         assertFalse(TuitionTiming.isValidTiming("12:00pm Monday")); // wrong format
+        assertFalse(TuitionTiming.isValidTiming("Monday 13:00pm")); //invalid timing
 
         // valid tuition timing
         assertTrue(TuitionTiming.isValidTiming("Monday 12:00pm"));
         assertTrue(TuitionTiming.isValidTiming("Saturday 11:00am"));
-        assertTrue(TuitionTiming.isValidTiming("Tuesday, 5:00PM"));
-        assertTrue(TuitionTiming.isValidTiming("Sunday, 10:30AM"));
+        assertTrue(TuitionTiming.isValidTiming("Tuesday 5:00PM"));
+        assertTrue(TuitionTiming.isValidTiming("Sunday 10:30AM"));
     }
 }
