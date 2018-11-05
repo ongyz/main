@@ -22,7 +22,7 @@ public class Payment {
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
     private static final int MAXPAYMENTAMOUNT = 10000;
-    
+
     private final Index studentIndex;
     private int amount;
     private final int month;
