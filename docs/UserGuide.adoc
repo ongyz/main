@@ -460,6 +460,7 @@ Removes the second syllabus topic from the first subject of the first student.
 * `erasesyll 3 1 1` +
 Removes the first syllabus topic from the first subject of the third student.
 // end::deletesyll[]
+// tag::editsyll[]
 === Edit Syllabus Topic : `editsyll`
 
 Edits a syllabus topic for a specified student and subject. +
@@ -480,6 +481,7 @@ Examples:
 Changes the second syllabus topic of the first subject of the first student to "Integration".
 * `editsyll 3 1 1 sy/Kinetic Energy` +
 Changes the first syllabus topic of the first subject of the third student to "Kinetic Energy".
+// end::editsyll[]
 // tag::mark[]
 === Mark Syllabus Topic : `mark`
 
