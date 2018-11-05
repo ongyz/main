@@ -220,8 +220,8 @@ The following sequence diagram shows how the group operation works:
 
 image::GroupSequenceDiagram.png[width="650"]
 
+// tag:: payment[]
 === Students payment feature
-
 ==== Current implementation
 
 The Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
@@ -237,7 +237,7 @@ Step 1. The tutor launches the application and wants to record a payment for his
 
 Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
 
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid 2 400 11 2018
+Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
 
 Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
 
@@ -253,20 +253,23 @@ Step 2g. Alice person class contains payment class. The PayCommand execute metho
 
 Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
 
-Step 4. XmlAdaptedPay is responsible for converting the data type to the appropriate data type for display through the toModelType method.
-
-Step 5. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
+Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
 [NOTE]
 Payment list will keep up to 10 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
+[NOTE]
+The maximum amount of payment that can be made each time is $10 000.
 
 The diagram below illustrates the sequence diagram.
 
 image:PaymentSequenceDiagram.png[width="800"]
+// end:: payment[]
+
 // tag::editpaid[]
 === Students edit payment feature
-
 ==== Current implementation
+
+The Edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
 
 Classes that are related to Payment and their functionality are as listed below:
 * `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
@@ -279,11 +282,11 @@ Step 1. The tutor launches the application and wants to record a payment for his
 
 Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
 
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid 2 400 11 2018
+Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
 
 Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
 
-Step 2c. PayCommandParser check if the inputs are of the correct format and it initialises a Payment object with the inputs.
+Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
 
 Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
 
@@ -291,59 +294,24 @@ Step 2e. This is propagated back to the LogicManager class which then proceed to
 
 Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
 
-Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method editPaymentField, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
+Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
 
 Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
 
-Step 4. XmlAdaptedPay is responsible for converting the data type to the appropriate data type for display through the toModelType method.
+Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
-Step 5. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
+[NOTE]
+Payment list will keep up to 10 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
+[NOTE]
+The maximum amount of payment that can be made each time is $10 000.
 
-The sequence diagram below illustrates the payment edit feature
-
-    1. Current implementation
-
-        The edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update the Payment entry and display accordingly.
-
-        To be clearer, classes that are related to Payment and their functionality are as listed below:
-        a. TutorHelperParser:
-            -Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
-        c. PayCommandParser
-            -Analyses the user's input and checks for any violation of syntax.
-            -Creates a Payment object with users' input.
-            -Returns a PayCommand object with Payment object being fed in.
-        b. PayCommand:
-            -Takes in a Payment object in its constructor to edit an existing Payment object
-            -Calls on methods in VersionedTutorHelper to update edit on existing Payments made.
-        d. Payment:
-            -Contains fields to store student id, amount paid, month of payment and year of payment to compare if it is to be edited
-        e. XmlAdaptedPay
-            -Responsible for converting the format of data so that it can be displayed below the command text box and stored.
-        f. BrowserPanel
-            -Responsible for displaying payment details in browser panel.
-
-    2. Example usage scenario
-
-        2a. The tutor launches the application and wants to edit an existing payment for his/her student called Alice by updating the amount by another 200.
-        2b. He/she makes a mental note of Alice's student index as listed in the left side of the application as well as the month and year of the existing payment.
-        2c. Lets say, Alice has student id 2. The existing payment she made was $400 for the month and year of November 2018. He/she proceeds to key in command in the following format: paid idx/2 amt/200 m/11 y/2018
-            2C1. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
-            2C3. From the prefixes, PayCommandParser makes use of ArgumentMultimap to check if the inputs are of the correct format and it initialises a Payment object with the inputs.
-            2C4. The PayCommandParser method then returns a PayCommand object with payment object.
-            2C5. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
-            2C6. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
-            2C7. Alice person class contains payment class. The PayCommand execute method proceeds to call editPaymentField to loop through Alice's list of Payments to find the existing payment and update with a new updated list of payments.
-        2d. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
-            2D1. XmlAdaptedPay is responsible for converting the data type to the appropriate data type for display through the toModelType method.
-        2e. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
-
-    3. The sequence diagram below illustrates the payment edit feature
+The diagram below illustrates the sequence diagram.
 
 image:EditPaymentSequenceDiagram.png[width="800"]
 // end::editpaid[]
 
+// tag:: earnings[]
 === Tutor's Earnings feature
-
 ==== Current implementation
 
 The Earnings mechanism is mainly facilitated by the filteredPersonList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
@@ -374,8 +342,9 @@ Step 2e. The amount is then returned.
 Step 3. The tutor will then see a message below the command text box, showing the earnings for the requested month and year.
 
 The diagram below illustrates the sequence diagram.
-image:EarningsSequenceDiagram.png[width="800"]
 
+image:EarningsSequenceDiagram.png[width="800"]
+// end:: earnings[]
 // tag::copysub[]
 === Copy Subject feature
 ==== Current Implementation
