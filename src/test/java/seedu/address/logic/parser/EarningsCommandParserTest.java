@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.address.logic.commands.EarningsCommand;
+import seedu.address.model.person.Payment;
 
 public class EarningsCommandParserTest {
 
@@ -46,24 +47,28 @@ public class EarningsCommandParserTest {
         EarningsCommandParser earnings = new EarningsCommandParser();
 
         String wrongMonthNegativeInput = " -8 2018";
-        assertParseFailure(earnings, wrongMonthNegativeInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earnings, wrongMonthNegativeInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
 
         String wrongMonthOutOfRangeInput = " 16 2018";
-        assertParseFailure(earnings, wrongMonthOutOfRangeInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earnings, wrongMonthOutOfRangeInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
+
+        String wrongMonthOutOfIntegerRangeInput = " 2147483648 2018";
+        assertParseFailure(earnings, wrongMonthOutOfIntegerRangeInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
 
         String wrongMonthSymbolInput = " * 2018";
-        assertParseFailure(earnings, wrongMonthSymbolInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earnings, wrongMonthSymbolInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
 
         String wrongYearNegativeInput = " 8 -2018";
-        assertParseFailure(earnings, wrongMonthNegativeInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earnings, wrongYearNegativeInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS));
 
         String wrongYearSymbolInput = " 8 &018";
-        assertParseFailure(earnings, wrongMonthSymbolInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EarningsCommand.MESSAGE_USAGE));
+        assertParseFailure(earnings, wrongYearSymbolInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS));
+
+        String wrongYearOutOfRangeInput = " 8 20090";
+        assertParseFailure(earnings, wrongYearOutOfRangeInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS));
+
+        String wrongYearOutOfIntegerRangeInput = " 8 2147483648";
+        assertParseFailure(earnings, wrongYearOutOfIntegerRangeInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS));
 
     }
 

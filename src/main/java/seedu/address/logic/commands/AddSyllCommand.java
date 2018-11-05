@@ -22,7 +22,7 @@ import seedu.address.model.util.SubjectsUtil;
 /**
  * Appends a syllabus topic to a specified subject for a specified student in the TutorHelper.
  */
-public class AppendSyllCommand extends Command {
+public class AddSyllCommand extends Command {
 
     public static final String COMMAND_WORD = "appendsyll";
 
@@ -33,14 +33,14 @@ public class AppendSyllCommand extends Command {
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
-    public static final String MESSAGE_APPENDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
+    public static final String MESSAGE_ADDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
     public static final String MESSAGE_DUPLICATE_SYLLABUS = "Syllabus is already in Person: %1$s";
 
     private final Index personIndex;
     private final Index subjectIndex;
     private final Syllabus syllabus;
 
-    public AppendSyllCommand(Index personIndex, Index subjectIndex, Syllabus syllabus) {
+    public AddSyllCommand(Index personIndex, Index subjectIndex, Syllabus syllabus) {
         requireNonNull(personIndex);
         requireNonNull(subjectIndex);
         requireNonNull(syllabus);
@@ -70,7 +70,7 @@ public class AppendSyllCommand extends Command {
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitTutorHelper();
-        return new CommandResult(String.format(MESSAGE_APPENDSYLL_SUCCESS, personSubjUpdated));
+        return new CommandResult(String.format(MESSAGE_ADDSYLL_SUCCESS, personSubjUpdated));
     }
 
     /**
@@ -97,15 +97,15 @@ public class AppendSyllCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AppendSyllCommand // instanceof handles nulls
-                && personIndex.equals(((AppendSyllCommand) other).personIndex))
-                && syllabus.equals(((AppendSyllCommand) other).syllabus); // state check
+                || (other instanceof AddSyllCommand // instanceof handles nulls
+                && personIndex.equals(((AddSyllCommand) other).personIndex))
+                && syllabus.equals(((AddSyllCommand) other).syllabus); // state check
     }
 
     /**
-     * Stores the details of the AppendSyll command format.
+     * Stores the details of the AddSyll command format.
      */
-    public static class AppendSyllFormatChecker {
+    public static class AddSyllFormatChecker {
         public static final int PERSON_INDEX = 0;
         public static final int SUBJECT_INDEX = 1;
         public static final int NUMBER_OF_ARGS = 2;

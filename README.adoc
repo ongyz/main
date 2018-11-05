@@ -9,6 +9,10 @@ ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
 
+ifndef::env-github[]
+image::images/Ui.png[width="600"]
+endif::[]
+
 * This is a desktop TutorHelper application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is a Java sample application intended for Tutors who would like to organise their students' information.
 * This application contains:

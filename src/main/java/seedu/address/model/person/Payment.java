@@ -14,13 +14,14 @@ import seedu.address.commons.core.index.Index;
 public class Payment {
 
     public static final String MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS =
-            "Amount of payment should only contain numbers";
+            "Amount of payment should only contain zero or positive numbers, and has to be smaller than 10 000";
     public static final String MESSAGE_PAYMENT_MONTH_CONSTRAINTS =
             "Month of payment should only contain numbers between 1 to 12, inclusive";
     public static final String MESSAGE_PAYMENT_YEAR_CONSTRAINTS =
             "Year of payment should only contain 4 digits numbers";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
+    private static final int MAXPAYMENTAMOUNT = 10000;
 
     private final Index studentIndex;
     private int amount;
@@ -43,22 +44,12 @@ public class Payment {
     }
 
     /**
-     * Constructs a {@code Payment} with an incremented amount.
-     *
-     * @param payment A {@code Payment}.
-     * @param toAdd The amount to add.
-     */
-    public Payment(Payment payment, int toAdd) {
-        this.studentIndex = payment.getIndex();
-        this.month = payment.getMonth();
-        this.year = payment.getYear();
-        this.amount = payment.getAmount() + toAdd;
-    }
-
-    /**
      * Returns true if a given int is a valid number.
      */
     public static boolean isValidAmount(int test) {
+        if (test > MAXPAYMENTAMOUNT) {
+            return false;
+        }
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
     }
 
@@ -91,14 +82,6 @@ public class Payment {
             return false;
         }
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
-    }
-
-    /**
-     * Updates the current {@code Payment} amount to new payment amount
-     * @param toUpdate the {@code Payment}amount to add to current amount
-     */
-    public void update(Payment toUpdate) {
-        this.amount += toUpdate.getAmount();
     }
 
     /**

@@ -46,6 +46,9 @@ public class PayCommandTest {
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        Index integerOverflowIndex = Index.fromOneBased(Integer.MAX_VALUE);
+        assertExecutionFailure(integerOverflowIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -71,12 +74,11 @@ public class PayCommandTest {
     public void execute_editPaymentMethod_success() {
 
         Payment existingPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 1998);
-        Payment editPayment = new Payment(INDEX_FIRST_PERSON, 200, 11, 1998);
         Payment editedPayment = new Payment(INDEX_FIRST_PERSON, 300, 11, 1998);
 
         Person existingPerson = new PersonBuilder(ALICE).withPayments(existingPayment).build();
         Person editedPerson = new PersonBuilder(ALICE).withPayments(editedPayment).build();
-        PayCommand editPayCommand = new PayCommand(editPayment);
+        PayCommand editPayCommand = new PayCommand(editedPayment);
 
         String expectedMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedPerson);
 

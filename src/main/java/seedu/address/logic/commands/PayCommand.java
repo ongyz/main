@@ -31,7 +31,7 @@ public class PayCommand extends Command {
     public static final String MESSAGE_EDITPAYMENT_SUCCESS = "Payment for this person has been edited: %1$s";
 
     private static final int MINVALUE = -1;
-    private static final int MAXPAYMENTSDISPLAYED = 10;
+    private static final int MAXPAYMENTSDISPLAYED = 9;
 
     private Index targetIndex;
     private Payment newPayment;
@@ -43,7 +43,7 @@ public class PayCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        boolean editEntry = false;
+        boolean editEntry;
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -108,13 +108,13 @@ public class PayCommand extends Command {
     /**
      * Updates payment field in list of payments.
      * @param payments the list of payment to check for entry with same details.
-     * @param toFind the payment entry to edit.
+     * @param toEdit the payment entry to edit.
      * @return the edited list of payments.
      */
-    private List<Payment> editPaymentField(List<Payment> payments, Payment toFind) {
+    private List<Payment> editPaymentField(List<Payment> payments, Payment toEdit) {
         for (int i = 0; i < payments.size(); i++) {
-            if (payments.get(i).getMonth() == toFind.getMonth() && payments.get(i).getYear() == toFind.getYear()) {
-                payments.set(i, new Payment(payments.get(i), toFind.getAmount()));
+            if (payments.get(i).getMonth() == toEdit.getMonth() && payments.get(i).getYear() == toEdit.getYear()) {
+                payments.set(i, toEdit);
                 break;
             }
         }

@@ -170,11 +170,11 @@ public class ParserUtil {
             throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
 
-        int integerAmount = Integer.parseInt(trimmedAmount);
-        if (!Payment.isValidAmount(integerAmount)) {
+        if ((!StringUtil.isNonZeroUnsignedInteger(trimmedAmount))
+                || !Payment.isValidAmount(Integer.parseInt(trimmedAmount))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
-        return integerAmount;
+        return Integer.parseInt(trimmedAmount);
     }
 
     /**
@@ -198,8 +198,8 @@ public class ParserUtil {
         if (doesNotContainAllDigits == true) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
         }
-
-        if (!Payment.isValidMonth(Integer.parseInt(trimmedMonth))) {
+        if ((!StringUtil.isNonZeroUnsignedInteger(trimmedMonth)
+                || !Payment.isValidMonth(Integer.parseInt(trimmedMonth)))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedMonth);
@@ -214,7 +214,6 @@ public class ParserUtil {
     public static int parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
-
         boolean doesNotContainAllDigits = false;
 
         for (int i = 0; i < trimmedYear.length(); i++) {
@@ -228,7 +227,8 @@ public class ParserUtil {
             throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
 
-        if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {
+        if ((!StringUtil.isNonZeroUnsignedInteger(trimmedYear)
+                || !Payment.isValidYear(Integer.parseInt(trimmedYear)))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedYear);
