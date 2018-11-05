@@ -263,7 +263,7 @@ Payment list will keep up to 10 payments at any one time. When the 11th payment 
 The diagram below illustrates the sequence diagram.
 
 image:PaymentSequenceDiagram.png[width="800"]
-
+// tag::editpaid[]
 === Students edit payment feature
 
 ==== Current implementation
@@ -340,6 +340,7 @@ The sequence diagram below illustrates the payment edit feature
     3. The sequence diagram below illustrates the payment edit feature
 
 image:EditPaymentSequenceDiagram.png[width="800"]
+// end::editpaid[]
 
 === Tutor's Earnings feature
 
@@ -457,7 +458,7 @@ The following sequence diagram shows how the `deletesub` operation works:
 
 image::DeleteSubSequenceDiagram.png[width="650"]
 
-
+// tag::editsyll[]
 === Edit Syllabus
 
 ==== Current Implementation
@@ -484,6 +485,7 @@ The TutorHelper has to have at least 1 student as a precondition for `editsyll`.
 The diagram below shows how the `editsyll` operation works:
 
 image:EditSyllSequenceDiagram.png[width="800"]
+// end::editsyll[]
 
 == Glossary
 . Subject : a branch of knowledge studied by the student
