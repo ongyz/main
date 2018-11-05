@@ -19,8 +19,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class CopySubCommandParser implements Parser<CopySubCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AppendSyllCommand
-     * and returns an AppendSyllCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddSyllCommand
+     * and returns an AddSyllCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public CopySubCommand parse(String args) throws ParseException {
