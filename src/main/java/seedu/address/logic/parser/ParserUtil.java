@@ -157,6 +157,7 @@ public class ParserUtil {
 
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
+        int integerAmount;
         boolean doesNotContainAllDigits = false;
 
         for (int i = 0; i < trimmedAmount.length(); i++) {
@@ -169,8 +170,12 @@ public class ParserUtil {
         if (doesNotContainAllDigits == true) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
-
-        int integerAmount = Integer.parseInt(trimmedAmount);
+        //catch integer overflow
+        try {
+            integerAmount = Integer.parseInt(trimmedAmount);
+        } catch (Exception e) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
+        }
         if (!Payment.isValidAmount(integerAmount)) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
@@ -187,6 +192,7 @@ public class ParserUtil {
         requireNonNull(month);
         String trimmedMonth = month.trim();
         boolean doesNotContainAllDigits = false;
+        int monthAmount;
 
         for (int i = 0; i < trimmedMonth.length(); i++) {
             if (!Character.isDigit(trimmedMonth.charAt(i))) {
@@ -199,7 +205,14 @@ public class ParserUtil {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
         }
 
-        if (!Payment.isValidMonth(Integer.parseInt(trimmedMonth))) {
+        //catch integer overflow
+        try {
+            monthAmount = Integer.parseInt(trimmedMonth);
+        } catch (Exception e) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
+        }
+
+        if (!Payment.isValidMonth(monthAmount)) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedMonth);
@@ -214,7 +227,7 @@ public class ParserUtil {
     public static int parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
-
+        int yearAmount;
         boolean doesNotContainAllDigits = false;
 
         for (int i = 0; i < trimmedYear.length(); i++) {
@@ -228,7 +241,14 @@ public class ParserUtil {
             throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
 
-        if (!Payment.isValidYear(Integer.parseInt(trimmedYear))) {
+        //catch integer overflow
+        try {
+            yearAmount = Integer.parseInt(trimmedYear);
+        } catch (Exception e) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
+        }
+
+        if (!Payment.isValidYear(yearAmount)) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedYear);
