@@ -19,6 +19,12 @@ It is a Java sample application intended for Tutors who would like to organise t
 ** Justification: Tutors are busy and want to know how many classes they have to teach in a specific day or how often in a week they have to teach at a specific timing.
 ** Highlights: Grouping the students will permanently sort the list of students. This can be undone with the `undo` command.
 
+* *Minor enhancement*:
+
+** Add Subject and TuitionTiming into TutorHelper (Pull request https://github.com[#11])
+
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=andlimey
+
 * *Other contributions*:
 
 ** Project management:
