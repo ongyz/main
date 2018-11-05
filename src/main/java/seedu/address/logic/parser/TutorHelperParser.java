@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSubCommand;
-import seedu.address.logic.commands.AppendSyllCommand;
+import seedu.address.logic.commands.AddSyllCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CopySubCommand;
@@ -17,7 +17,7 @@ import seedu.address.logic.commands.DeleteSubCommand;
 import seedu.address.logic.commands.EarningsCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditSyllCommand;
-import seedu.address.logic.commands.EraseSyllCommand;
+import seedu.address.logic.commands.DeleteSyllCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GroupCommand;
@@ -101,11 +101,11 @@ public class TutorHelperParser {
         case EarningsCommand.COMMAND_WORD:
             return new EarningsCommandParser().parse(arguments);
 
-        case AppendSyllCommand.COMMAND_WORD:
-            return new AppendSyllCommandParser().parse(arguments);
+        case AddSyllCommand.COMMAND_WORD:
+            return new AddSyllCommandParser().parse(arguments);
 
-        case EraseSyllCommand.COMMAND_WORD:
-            return new EraseSyllCommandParser().parse(arguments);
+        case DeleteSyllCommand.COMMAND_WORD:
+            return new DeleteSyllCommandParser().parse(arguments);
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
