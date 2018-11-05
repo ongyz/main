@@ -19,7 +19,6 @@ public class EarningsCommandParser implements Parser<EarningsCommand> {
      */
     public EarningsCommand parse(String args) throws ParseException {
 
-        try {
             String trimmedEarnings = args.trim();
             String[] separatedEarnings = trimmedEarnings.split("\\s");
 
@@ -33,9 +32,5 @@ public class EarningsCommandParser implements Parser<EarningsCommand> {
             this.month = ParserUtil.parseMonth(inputMonth);
             this.year = ParserUtil.parseYear(inputYear);
             return new EarningsCommand(month, year);
-
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
-        }
     }
 }
