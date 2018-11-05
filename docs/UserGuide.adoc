@@ -528,7 +528,7 @@ e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find Students* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *Group Students* : `group TIMING` +
-e.g `group Monday OR group 12pm OR group`
+e.g `group Monday OR group 12:00pm`
 * *Select Student* : `select INDEX` +
 e.g.`select 2`
 * *List Command History* : `history`
