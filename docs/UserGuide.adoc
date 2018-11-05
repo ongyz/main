@@ -64,7 +64,11 @@ Examples:
 
 === Name
 
-Name should only contain alphanumeric characters and spaces, and should not be blank.
+Name should only contain alphabetical characters and spaces, and should not be blank.
+
+=== Phone
+
+Phone numbers should only be 8 digits long and should not contain spaces.
 
 === Email
 
@@ -74,6 +78,14 @@ Name should only contain alphanumeric characters and spaces, and should not be b
      - be at least 2 characters long
      - start and end with alphanumeric characters
      - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
+
+=== TuitionTiming
+
+The days of the week are case sensitive and the valid inputs are: +
+
+`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`
+
+* The time should follow the 12-hour clock (e.g. 12:00pm)
 
 // end::validinputs[]
 [[Features]]
@@ -294,6 +306,7 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 [NOTE]
 ====
 If a payment entry already exists, the amount will replace the existing payment record.
+The maximum payment amount allowable is 10 000 each time.
 ====
 
 ****
@@ -515,7 +528,7 @@ e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find Students* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *Group Students* : `group TIMING` +
-e.g `group Monday OR group 12pm OR group`
+e.g `group Monday OR group 12:00pm`
 * *Select Student* : `select INDEX` +
 e.g.`select 2`
 * *List Command History* : `history`

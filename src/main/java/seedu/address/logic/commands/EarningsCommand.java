@@ -24,7 +24,7 @@ public class EarningsCommand extends Command {
 
     private int month;
     private int year;
-    private int earnings = 0;
+    private long earnings = 0;
 
     public EarningsCommand(int month, int year) {
         this.month = month;
