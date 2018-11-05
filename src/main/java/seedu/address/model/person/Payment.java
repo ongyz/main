@@ -21,13 +21,12 @@ public class Payment {
             "Year of payment should only contain 4 digits numbers";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
-
+    private static final int MAXPAYMENTAMOUNT = 10000;
+    
     private final Index studentIndex;
     private int amount;
     private final int month;
     private final int year;
-
-    private static final int MAXPAYMENTAMOUNT = 10000;
 
     /**
      * Constructs a {@code Payment}.
@@ -48,7 +47,7 @@ public class Payment {
      * Returns true if a given int is a valid number.
      */
     public static boolean isValidAmount(int test) {
-        if(test > MAXPAYMENTAMOUNT) {
+        if (test > MAXPAYMENTAMOUNT) {
             return false;
         }
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);

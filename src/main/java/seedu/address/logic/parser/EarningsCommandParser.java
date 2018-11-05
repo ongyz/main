@@ -19,18 +19,18 @@ public class EarningsCommandParser implements Parser<EarningsCommand> {
      */
     public EarningsCommand parse(String args) throws ParseException {
 
-            String trimmedEarnings = args.trim();
-            String[] separatedEarnings = trimmedEarnings.split("\\s");
+        String trimmedEarnings = args.trim();
+        String[] separatedEarnings = trimmedEarnings.split("\\s");
 
-            if (separatedEarnings.length != 2) { //invalid number of fields
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
-            }
-            String inputMonth = separatedEarnings[0];
-            String inputYear = separatedEarnings[1];
+        if (separatedEarnings.length != 2) { //invalid number of fields
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EarningsCommand.MESSAGE_USAGE));
+        }
+        String inputMonth = separatedEarnings[0];
+        String inputYear = separatedEarnings[1];
 
-            //Put the arguments into ParserUtil to check for validity
-            this.month = ParserUtil.parseMonth(inputMonth);
-            this.year = ParserUtil.parseYear(inputYear);
-            return new EarningsCommand(month, year);
+        //Put the arguments into ParserUtil to check for validity
+        this.month = ParserUtil.parseMonth(inputMonth);
+        this.year = ParserUtil.parseYear(inputYear);
+        return new EarningsCommand(month, year);
     }
 }
