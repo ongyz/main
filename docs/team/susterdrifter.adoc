@@ -30,7 +30,7 @@ allow users to easily manage the subjects.
 ** Converts subjects to enumeration for easier management of code
 ** Data writing into storage of subject and its syllabus
 
-* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=SusterDrifter
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=susterdrifter
 * *Other contributions*:
 
 ** Project management:
