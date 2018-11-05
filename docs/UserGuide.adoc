@@ -298,6 +298,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all student records from the TutorHelper. +
 Format: `clear`
 
+// tag::payment[]
 === Record Payment : `paid`
 
 Records a payment of a specified amount made by a specified student for a specified month and year. +
@@ -320,7 +321,8 @@ Examples:
 
 * `paid 1 200 01 2018` +
 Records a payment of $200 made for January 2018, or adds $200 to the payment made for January 2018 if a payment entry already exists.
-
+// end::payment[]
+// tag::earnings[]
 === Display Earnings : `earnings`
 
 Displays total earnings across all students for a specified month of a specified year. +
@@ -335,7 +337,7 @@ Examples:
 
 * `earnings 01 2018` +
 Displays earnings made for January 2018.
-
+// end::earnings[]
 === Add Subject : `addsub`
 
 Adds a new subject to a specified student. Refer to valid subject inputs under 3. Feature. +
