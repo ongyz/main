@@ -1,0 +1,60 @@
+= Andy Chan Wai Yee - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: TutorHelper - Level 4
+
+---
+
+== Overview
+
+It is a Java sample application intended for Tutors who would like to organise their students' information.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to group the students based on their tuition timing and sort accordingly to day or time*.
+
+** What it does: allows the user to either group students by the day of the tuition or the timing. Grouping by day will sort the students in that day by their tuition timing and grouping by time will sort the students with that tuition timing by the days of the week.
+** Justification: Tutors are busy and want to know how many classes they have to teach in a specific day or how often in a week they have to teach at a specific timing.
+** Highlights: Grouping the students will permanently sort the list of students. This can be undone with the `undo` command.
+
+* *Other contributions*:
+
+** Project management:
+*** Created issues for the different milestones and labelled them according to the severity and priority on Github.
+** Enhancements to existing features:
+*** Refined the regex for name, phone and tuition timing (Pull request https://github.com[#193])
+*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#136], https://github.com[#144], https://github.com[#152])
+** Documentation:
+*** Added team members' images in AboutUs
+*** Added section for group in the User Guide
+*** Added section for group in the Developer Guide
+** Community:
+*** Reviewed other PRs
+*** Reported bugs and suggestions for other teams in the class
+** Tools:
+*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=validinputs]
+
+include::../UserGuide.adoc[tag=group]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=userstories]
+
+include::../DeveloperGuide.adoc[tag=usecases]
+
+include::../DeveloperGuide.adoc[tag=group]
