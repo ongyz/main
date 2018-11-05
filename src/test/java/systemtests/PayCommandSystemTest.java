@@ -86,7 +86,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: Edit payment for first person in a non-empty address book -> edit pay */
 
-        command = "  paid 1 100 8 2018 ";
+        command = "  paid 1 500 8 2018 ";
 
         Index index = INDEX_FIRST_PERSON;;
 

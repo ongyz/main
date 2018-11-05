@@ -6,12 +6,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+
+    public static final int MINIMUM_LENGTH_TO_MATCH = 3;
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -30,7 +31,8 @@ public class StringUtil {
 
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        checkArgument(preppedWord.split("\\s+").length == 1,
+                "Word parameter should be a single word");
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
@@ -41,26 +43,37 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code word} contains the substring {@code toSearch}.
+     * Match is only counted from the beginning of {@code word}
+     * {@code toSearch} must be of minimum length three before it is considered to
+     * avoid one letter match.
      *   Ignores case, only a partial word match is required.
      *   <br>examples:<pre>
-     *       containsSubWordIgnoreCase("ABcDef", "cd") == true
-     *       containsSubWordIgnoreCase("ABcdEf", "DEF") == true
-     *       containsSubWordIgnoreCase("Abd", "AB") == true
+     *       containsSubWordIgnoreCase("ABcDef", "cd") == false
+     *       containsSubWordIgnoreCase("ABcdEf", "abc") == true
+     *       containsSubWordIgnoreCase("Abd", "AB") == false // length less than three
      *       </pre>
      * @param word cannot be null
      * @param toSearch cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsSubstringIgnoreCase(String word, String toSearch) {
+    public static boolean isSubstringMatchFromIndexZero(String word, String toSearch) {
         requireNonNull(word);
         requireNonNull(toSearch);
-
         String preppedToSearch = toSearch.trim();
         checkArgument(!preppedToSearch.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedToSearch.split("\\s+").length == 1, "Word parameter should be a single word");
+        checkArgument(preppedToSearch.split("\\s+").length == 1,
+                "Word parameter should be a single word");
+        // Length of keyword must exceed minimum length
+        if (preppedToSearch.length() < MINIMUM_LENGTH_TO_MATCH) {
+            return false;
+        }
+        for (int i = 0; i < preppedToSearch.length(); i++) {
+            if (Character.toLowerCase(word.charAt(i)) != Character.toLowerCase(preppedToSearch.charAt(i))) {
+                return false;
+            }
+        }
 
-        return Pattern.compile(Pattern.quote(toSearch), Pattern.CASE_INSENSITIVE).matcher(word).find();
+        return true;
     }
-
     /**
      * Returns a detailed message of the t, including the stack trace.
      */

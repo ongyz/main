@@ -41,6 +41,41 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
+// tag::validinputs[]
+== Valid Inputs
+
+=== Subjects
+
+Valid subjects are limited to only the following subjects: +
+
+`Mathematics`, `Biology`, `Chemistry`, `Physics`, `Economics`, `Geography`, `History`
+
+* In order to be valid subjects, the input must be a full substring match of length 3 or more with any of the valid subjects. This is to avoid too short of keyword matching.
+* The match must start at the beginning of the subject name. This is to avoid confusion and multiple matching.
+* Matching is case insensitive.
+
+Examples:
+
+* `Biology`, `Bio`, or `bio` will match with `Biology`.
+* `iology` will not match will `Biology` as the match does not start from the beginning.
+* `Ma` will not match `Mathematics` because the length of subtring is shorter than three.
+* `phy` will only match `Physics` and will not match `Geography` as matching is done from the beginning of the string.
+* `Maths` will not match `Mathematics` as it is not a full substring match.
+
+=== Name
+
+Name should only contain alphanumeric characters and spaces, and should not be blank.
+
+=== Email
+
+* Emails should be of the format `local-part@domain`
+* The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
+* This is followed by a '@' and then a domain name. The domain name must:
+     - be at least 2 characters long
+     - start and end with alphanumeric characters
+     - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
+
+// end::validinputs[]
 [[Features]]
 == Features
 
@@ -65,9 +100,18 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMI
 [TIP]
 A student can have any number of tags (including 0), and must have at least 1 subject.
 
+****
+* Student must not have the same name, phone number, email and address as an existing student.
+* Name cannot contain any integer or symbols.
+* Phone number must have a length of no more or no less than eight integers.
+* Tuition timing has to be contain a valid day and valid timing in 12 hour format.
+* All inputs need to be valid for the person to be successfully added.
+****
+
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics, d/Monday 6:00pm`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics d/Monday 6:00pm`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, s/Mathematics s/* d/Monday 6:00pm` will fail due to one invalid subject.
 
 === Delete Student : `delete`
 
@@ -78,6 +122,7 @@ Format: `delete INDEX`
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -98,6 +143,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [d/TIMI
 * Edits the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -165,6 +211,7 @@ Format: `select INDEX`
 * Selects the student and displays the information of the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index *must be a positive integer* `1, 2, 3, ...`
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -246,13 +293,14 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 
 [NOTE]
 ====
-If a payment entry already exists, the amount will be added to the existing payment record.
+If a payment entry already exists, the amount will replace the existing payment record.
 ====
 
 ****
 * Records a payment of a specified `AMOUNT` for the student at the specified `STUDENT_INDEX`, for a specified `MONTH` and `YEAR`.
 * The student index refers to the index number shown in the displayed student list.
 * The student index, month and year *must be positive integers* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -277,7 +325,7 @@ Displays earnings made for January 2018.
 
 === Add Subject : `addsub`
 
-Adds a new subject to a specified student. +
+Adds a new subject to a specified student. Refer to valid subject inputs under 3. Feature. +
 Format: `addsub STUDENT_INDEX s/SUBJECT`
 
 [NOTE]
@@ -289,6 +337,7 @@ Adding a subject that already exists for the student will throw an error.
 * Adds a new subject `SUBJECT` for a student at the specified `STUDENT_INDEX`.
 * The student index refers to the index number shown in the displayed student list.
 * The student index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -314,6 +363,7 @@ A student must have at least one subject.
 * The student index refers to the index number shown in the displayed student list.
 * The subject index refers to the index number shown in the student's subject list.
 * The student index and subject index *must be positive integers* 1, 2, 3, ...
+* The index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -323,16 +373,21 @@ Deletes the second subject from the first student.
 * `deletesub 3 1` +
 Deletes the first subject from the third student.
 
+// tag::copysub[]
 === Copy Subject : `copysub`
 
 Copies a subject and all its syllabus topics from a specified student to specified target student. Duplicate syllabus topics will not be added. +
 Format: `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX`
+
+[TIP]
+Use `find` command to display both the source and target student on the list.
 
 ****
 * Copies a subject (and all its syllabus topics) at the specified `SUBJECT_INDEX` from the student at the specified `SOURCE_STUDENT_INDEX` to the student at the specified `TARGET_STUDENT_INDEX`.
 * The source and target student indexes refer to the index number shown in the displayed student list.
 * The subject index refers to the index number shown in the student's subject list.
 * The subject index and source and target student indexes *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -341,7 +396,8 @@ Examples:
 Copies the first subject from the first student to the second student.
 * `copysub 1 2 3` +
 Copies the second subject from the first student to the third student.
-
+// end::copysub[]
+// tag::addsyll[]
 === Add Syllabus Topic : `appendsyll`
 
 Adds a new syllabus topic for a specified student and subject. +
@@ -357,6 +413,7 @@ Adding a syllabus topic that already exists under the subject will throw an erro
 * The student index refers to the index number shown in the displayed student list.
 * The subject index refers to the index number shown in the student's subject list.
 * The student index and subject index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -365,7 +422,8 @@ Examples:
 Adds a syllabus topic "Integration" to the second subject of the first student.
 * `appendsyll 3 2 sy/Poisson Distribution` +
 Adds a syllabus topic "Poisson Distribution" to the second subject of the third student.
-
+// end::addsyll[]
+// tag::deletesyll[]
 === Remove Syllabus Topic : `erasesyll`
 
 Removes a syllabus topic for a specified student and subject. +
@@ -377,6 +435,7 @@ Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 * The subject index refers to the index number shown in the student's subject list.
 * The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
 * The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -385,7 +444,7 @@ Examples:
 Removes the second syllabus topic from the first subject of the first student.
 * `erasesyll 3 1 1` +
 Removes the first syllabus topic from the first subject of the third student.
-
+// end::deletesyll[]
 === Edit Syllabus Topic : `editsyll`
 
 Edits a syllabus topic for a specified student and subject. +
@@ -397,6 +456,7 @@ Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
 * The subject index refers to the index number shown in the student's subject list.
 * The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
 * The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -405,7 +465,7 @@ Examples:
 Changes the second syllabus topic of the first subject of the first student to "Integration".
 * `editsyll 3 1 1 sy/Kinetic Energy` +
 Changes the first syllabus topic of the first subject of the third student to "Kinetic Energy".
-
+// tag::mark[]
 === Mark Syllabus Topic : `mark`
 
 Toggles the state of a specified syllabus topic for a specified student and subject. +
@@ -417,6 +477,7 @@ Format: `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 * The subject index refers to the index number shown in the student's subject list.
 * The syllabus index refers to the index number shown in the student's list of syllabus topics for a subject.
 * The student index, subject index and syllabus index *must be positive integers* 1, 2, 3, ...
+* The student index cannot be more than number of displayed students on list.
 ****
 
 Examples:
@@ -425,7 +486,7 @@ Examples:
 Marks the third syllabus topic of the first subject of the first student.
 * `mark 2 1 2` +
 Marks the second syllabus topic of the first subject of the second student.
-
+// end::mark[]
 === Exit Program : `exit`
 
 Exits the program. +

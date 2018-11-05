@@ -111,7 +111,7 @@ public class EditCommand extends Command {
         TuitionTiming updatedTuitionTiming = editPersonDescriptor.getTuitionTiming()
                 .orElse(personToEdit.getTuitionTiming());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        List<Payment> updatedPayments = editPersonDescriptor.getPayments().orElse(personToEdit.getPayments());
+        List<Payment> updatedPayments = personToEdit.getPayments();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedSubject, updatedTuitionTiming, updatedTags, updatedPayments);
