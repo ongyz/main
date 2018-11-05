@@ -6,14 +6,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
 
-    public final static int MINIMUM_LENGTH_TO_MATCH = 3;
+    public static final int MINIMUM_LENGTH_TO_MATCH = 3;
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
