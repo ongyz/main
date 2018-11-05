@@ -20,7 +20,7 @@ import seedu.address.model.util.SubjectsUtil;
 /**
  * Removes a syllabus topic from a specified subject for a specified student.
  */
-public class EraseSyllCommand extends Command {
+public class DeleteSyllCommand extends Command {
 
     public static final String COMMAND_WORD = "erasesyll";
 
@@ -29,13 +29,13 @@ public class EraseSyllCommand extends Command {
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
-    public static final String MESSAGE_ERASESYLL_SUCCESS = "Removed selected syllabus from Person: %1$s";
+    public static final String MESSAGE_DELETESYLL_SUCCESS = "Removed selected syllabus from Person: %1$s";
 
     private final Index personIndex;
     private final Index subjectIndex;
     private final Index syllabusIndex;
 
-    public EraseSyllCommand(Index personIndex, Index subjectIndex, Index syllabusIndex) {
+    public DeleteSyllCommand(Index personIndex, Index subjectIndex, Index syllabusIndex) {
         this.personIndex = personIndex;
         this.subjectIndex = subjectIndex;
         this.syllabusIndex = syllabusIndex;
@@ -58,7 +58,7 @@ public class EraseSyllCommand extends Command {
         model.updatePerson(personTarget, personSubjUpdated);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitTutorHelper();
-        return new CommandResult(String.format(MESSAGE_ERASESYLL_SUCCESS, personSubjUpdated));
+        return new CommandResult(String.format(MESSAGE_DELETESYLL_SUCCESS, personSubjUpdated));
     }
 
     /**
@@ -94,14 +94,14 @@ public class EraseSyllCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof EraseSyllCommand // instanceof handles nulls
-                && personIndex.equals(((EraseSyllCommand) other).personIndex))
-                && subjectIndex.equals(((EraseSyllCommand) other).subjectIndex)
-                && syllabusIndex.equals(((EraseSyllCommand) other).syllabusIndex); // state check
+                || (other instanceof DeleteSyllCommand // instanceof handles nulls
+                && personIndex.equals(((DeleteSyllCommand) other).personIndex))
+                && subjectIndex.equals(((DeleteSyllCommand) other).subjectIndex)
+                && syllabusIndex.equals(((DeleteSyllCommand) other).syllabusIndex); // state check
     }
 
     /**
-     * Stores the details of rmtodo command format.
+     * Stores the details of deletesyll command format.
      */
     public static class EraseSyllFormatChecker {
         public static final int PERSON_INDEX = 0;
