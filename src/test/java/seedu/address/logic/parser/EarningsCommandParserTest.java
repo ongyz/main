@@ -50,10 +50,12 @@ public class EarningsCommandParserTest {
         assertParseFailure(earnings, wrongMonthNegativeInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
 
         String wrongMonthOutOfRangeInput = " 16 2018";
-        assertParseFailure(earnings, wrongMonthOutOfRangeInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
+        assertParseFailure(earnings, wrongMonthOutOfRangeInput,
+                String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
 
         String wrongMonthOutOfIntegerRangeInput = " 2147483648 2018";
-        assertParseFailure(earnings, wrongMonthOutOfIntegerRangeInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
+        assertParseFailure(earnings, wrongMonthOutOfIntegerRangeInput,
+                String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
 
         String wrongMonthSymbolInput = " * 2018";
         assertParseFailure(earnings, wrongMonthSymbolInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS));
@@ -68,7 +70,8 @@ public class EarningsCommandParserTest {
         assertParseFailure(earnings, wrongYearOutOfRangeInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS));
 
         String wrongYearOutOfIntegerRangeInput = " 8 2147483648";
-        assertParseFailure(earnings, wrongYearOutOfIntegerRangeInput, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS));
+        assertParseFailure(earnings, wrongYearOutOfIntegerRangeInput,
+                String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS));
 
     }
 

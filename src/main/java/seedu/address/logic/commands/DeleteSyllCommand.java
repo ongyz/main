@@ -103,7 +103,7 @@ public class DeleteSyllCommand extends Command {
     /**
      * Stores the details of deletesyll command format.
      */
-    public static class EraseSyllFormatChecker {
+    public static class DeleteSyllFormatChecker {
         public static final int PERSON_INDEX = 0;
         public static final int SUBJECT_INDEX = 1;
         public static final int SYLLABUS_INDEX = 2;
