@@ -21,7 +21,7 @@ Responsibilities: Integration
 
 === Anthony Halim
 image::susterdrifter.png[width="150", align="left"]
-{empty}[http://github.com/SusterDrifter[github]] [<<SusterDrifter#, portfolio>>]
+{empty}[http://github.com/SusterDrifter[github]][<<susterdrifter#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
@@ -39,7 +39,7 @@ Responsibilities: UI
 
 === Ong Yan Zhi
 image::ongyz.png[width="150", align="left"]
-{empty}[http://github.com/ongyz[github]]
+{empty}[http://github.com/ongyz[github]] [<<ongyz#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Integration
