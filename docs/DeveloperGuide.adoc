@@ -224,8 +224,8 @@ The following sequence diagram shows how the group operation works:
 
 image::GroupSequenceDiagram.png[width="650"]
 // end::group[]
-
 // tag::payment[]
+
 === Students payment feature
 ==== Current implementation
 
