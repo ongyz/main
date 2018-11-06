@@ -194,6 +194,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any student having names `Betsy`, `Tim`, or `John`
 
+// tag::group[]
 === Group Students : `group`
 
 Lists all students with the specified tuition timing. +
@@ -213,6 +214,7 @@ Examples:
 Show all classes on Monday, sorted based on timing.
 * `group 12pm` +
 Show all classes at 12pm for the entire week, sorted based on days of the week.
+// end::group[]
 
 === Select Student : `select`
 
