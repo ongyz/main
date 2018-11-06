@@ -252,7 +252,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the TutorHelper's content (`add`, `delete`, `edit`, `clear`, `appendsyll`, `erasesyll`, and `copysub`).
+Undoable commands: those commands that modify the TutorHelper's content (`add`, `delete`, `edit`, `clear`, `addsyll`, `deletesyll`, and `copysub`).
 ====
 
 Examples:
@@ -413,10 +413,10 @@ Copies the first subject from the first student to the second student.
 Copies the second subject from the first student to the third student.
 // end::copysub[]
 // tag::addsyll[]
-=== Add Syllabus Topic : `appendsyll`
+=== Add Syllabus Topic : `addsyll`
 
 Adds a new syllabus topic for a specified student and subject. +
-Format: `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
+Format: `addsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
 
 [NOTE]
 ====
@@ -433,16 +433,16 @@ Adding a syllabus topic that already exists under the subject will throw an erro
 
 Examples:
 
-* `appendsyll 1 2 sy/Integration` +
+* `addsyll 1 2 sy/Integration` +
 Adds a syllabus topic "Integration" to the second subject of the first student.
-* `appendsyll 3 2 sy/Poisson Distribution` +
+* `addsyll 3 2 sy/Poisson Distribution` +
 Adds a syllabus topic "Poisson Distribution" to the second subject of the third student.
 // end::addsyll[]
 // tag::deletesyll[]
-=== Remove Syllabus Topic : `erasesyll`
+=== Remove Syllabus Topic : `deletesyll`
 
 Removes a syllabus topic for a specified student and subject. +
-Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
+Format: `deletesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 
 ****
 * Removes a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
@@ -455,9 +455,9 @@ Format: `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX`
 
 Examples:
 
-* `erasesyll 1 1 2` +
+* `deletesyll 1 1 2` +
 Removes the second syllabus topic from the first subject of the first student.
-* `erasesyll 3 1 1` +
+* `deletesyll 3 1 1` +
 Removes the first syllabus topic from the first subject of the third student.
 // end::deletesyll[]
 // tag::editsyll[]
@@ -549,10 +549,10 @@ e.g. `addsub 1 s/Physics`
 e.g. `deletesub 1 2`
 * *Copy Subject* : `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX` +
 e.g. `copysub 1 1 2`
-* *Add Syllabus Topic* : `appendsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
-e.g. `appendsyll 1 2 sy/Integration`
-* *Remove Syllabus Topic* : `erasesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
-e.g. `erasesyll 1 1 1`
+* *Add Syllabus Topic* : `addsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
+e.g. `addsyll 1 2 sy/Integration`
+* *Remove Syllabus Topic* : `deletesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
+e.g. `deletesyll 1 1 1`
 * *Edit Syllabus Topic* : `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS` +
 e.g. `editsyll 1 1 2 sy/Integration`
 * *Mark Syllabus Topic* : `mark STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +

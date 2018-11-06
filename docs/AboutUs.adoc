@@ -21,7 +21,7 @@ Responsibilities: Integration
 
 === Anthony Halim
 image::susterdrifter.png[width="150", align="left"]
-{empty}[http://github.com/SusterDrifter[github]] [<<SusterDrifter#, portfolio>>]
+{empty}[http://github.com/SusterDrifter[github]][<<susterdrifter#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
