@@ -219,6 +219,7 @@ Only 12-hr timings are valid.
 The following sequence diagram shows how the group operation works:
 
 image::GroupSequenceDiagram.png[width="650"]
+// end::group[]
 
 // tag:: payment[]
 === Students payment feature
@@ -382,6 +383,7 @@ The process is described with sequence diagram below:
 image::CopySubSequenceDiagrams.png[width="650"]
 // end::copysub[]
 
+// tag::adddelsub[]
 === Add / Delete Subject
 
 ==== Implementation
@@ -427,6 +429,7 @@ image::AddSubSequenceDiagram.png[width="650"]
 The following sequence diagram shows how the `deletesub` operation works:
 
 image::DeleteSubSequenceDiagram.png[width="650"]
+// end::adddelsub[]
 
 // tag::editsyll[]
 === Edit Syllabus

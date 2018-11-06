@@ -86,8 +86,8 @@ The days of the week are case sensitive and the valid inputs are: +
 `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`
 
 * The time should follow the 12-hour clock (e.g. 12:00pm)
-
 // end::validinputs[]
+
 [[Features]]
 == Features
 
@@ -340,6 +340,7 @@ Examples:
 Displays earnings made for January 2018.
 // end::earnings[]
 
+// tag::adddelsub[]
 === Add Subject : `addsub`
 
 Adds a new subject to a specified student. Refer to valid subject inputs under 3. Feature. +
@@ -389,6 +390,7 @@ Examples:
 Deletes the second subject from the first student.
 * `deletesub 3 1` +
 Deletes the first subject from the third student.
+// end::adddelsub[]
 
 // tag::copysub[]
 === Copy Subject : `copysub`

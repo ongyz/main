@@ -12,45 +12,45 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Andy Chan
 image::andlimey.png[width="150", align="left"]
-{empty}[https://github.com/andlimey[github]] [<<andlimey#, portfolio>>]
+{empty}https://github.com/andlimey[GitHub] | <<andlimey#, Portfolio>>
 
 Role: Developer +
-Responsibilities: Integration
+Responsibilities: Feature Development, Integration
 
 '''
 
 === Anthony Halim
 image::susterdrifter.png[width="150", align="left"]
-{empty}[http://github.com/SusterDrifter[github]][<<susterdrifter#, portfolio>>]
+{empty}http://github.com/SusterDrifter[GitHub] | <<susterdrifter#, Portfolio>>
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Feature Development, UI
 
 '''
 
 === Joel Lee
 image::lywjoel.png[width="150", align="left"]
-{empty}[http://github.com/lywjoel[github]]
+{empty}http://github.com/lywjoel[GitHub] | <<lywjoel#, Portfolio>>
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Feature Development, UI
 
 '''
 
 === Ong Yan Zhi
 image::ongyz.png[width="150", align="left"]
-{empty}[http://github.com/ongyz[github]] [<<ongyz#, portfolio>>]
+{empty}http://github.com/ongyz[GitHub] | <<ongyz#, Portfolio>>
 
 Role: Developer +
-Responsibilities: Integration
+Responsibilities: Feature Development, Integration
 
 '''
 
 === Ooi Hui Ying
 image::ooihuiying.png[width="150", align="left"]
-{empty}[http://github.com/ooihuiying[github]]
+{empty}http://github.com/ooihuiying[GitHub] | <<ooihuiying#, Portfolio>>
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Feature Development, Integration
 
 '''
