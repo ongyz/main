@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.NUMBER_OF_ARGS;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.PERSON_INDEX;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.SUBJECT_INDEX;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.SYLLABUS_INDEX;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.NUMBER_OF_ARGS;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.PERSON_INDEX;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.SUBJECT_INDEX;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.SYLLABUS_INDEX;
 
 import java.util.List;
 
