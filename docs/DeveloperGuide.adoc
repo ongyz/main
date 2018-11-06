@@ -345,6 +345,7 @@ The diagram below illustrates the sequence diagram.
 
 image:EarningsSequenceDiagram.png[width="800"]
 // end:: earnings[]
+
 // tag::copysub[]
 === Copy Subject feature
 ==== Current Implementation
