@@ -26,13 +26,16 @@ Value:
 
 * `Tutors have a platform where they can keep track of all their students' details, their progress and the syllabus they intend to cover.`
 
+// tag::userstories[]
 == User Stories
 
 . As a busy tutor, I want to be able to manage my students' schedules individually, so that I can plan my time properly.
 . As a tutor, I want to be able to find out where my students live and what time I should be there for tuition.
 . As a tutor, I want to know my students' individual progress so that I know what topics I need to cover for the next tuition session.
 . As a tutor, I want to keep track of my students' payments.
+// end::userstories[]
 
+// tag::usecases[]
 == Use Cases
 
   1. Add Student
@@ -181,6 +184,7 @@ Value:
       2d. System find same syllabus entry already exists in subject.
         2d1. System displays error message telling tutor that syllabus already exist.
         2d2. Repeat step 1.
+// end::usecases[]
 
 == Non-Functional Requirements
 
@@ -220,8 +224,8 @@ The following sequence diagram shows how the group operation works:
 
 image::GroupSequenceDiagram.png[width="650"]
 // end::group[]
+// tag::payment[]
 
-// tag:: payment[]
 === Students payment feature
 ==== Current implementation
 
@@ -264,7 +268,7 @@ The maximum amount of payment that can be made each time is $10 000.
 The diagram below illustrates the sequence diagram.
 
 image:PaymentSequenceDiagram.png[width="800"]
-// end:: payment[]
+// end::payment[]
 
 // tag::editpaid[]
 === Students edit payment feature
@@ -311,7 +315,7 @@ The diagram below illustrates the sequence diagram.
 image:EditPaymentSequenceDiagram.png[width="800"]
 // end::editpaid[]
 
-// tag:: earnings[]
+// tag::earnings[]
 === Tutor's Earnings feature
 ==== Current implementation
 
@@ -345,7 +349,7 @@ Step 3. The tutor will then see a message below the command text box, showing th
 The diagram below illustrates the sequence diagram.
 
 image:EarningsSequenceDiagram.png[width="800"]
-// end:: earnings[]
+// end::earnings[]
 
 // tag::copysub[]
 === Copy Subject feature

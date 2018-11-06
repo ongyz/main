@@ -75,17 +75,20 @@ public class Subject {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("\n[" + getSubjectName() + ": ");
+        builder.append(getSubjectName() + ": \n\n");
+        builder.append(contentToString());
+        return builder.toString();
+    }
+
+    public String contentToString() {
+        final StringBuilder builder = new StringBuilder();
         Index numbering;
 
         for (int i = 0; i < getSubjectContent().size(); i++) {
             numbering = Index.fromZeroBased(i);
-            builder.append("\n" + numbering.getOneBased() + ". ")
-                    .append(getSubjectContent().get(i).toString()).append(" ");
+            builder.append(numbering.getOneBased() + ". ")
+                    .append(getSubjectContent().get(i).toString()).append(" \n");
         }
-
-        builder.append("]");
-
         return builder.toString();
     }
 
