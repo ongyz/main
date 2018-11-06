@@ -20,10 +20,11 @@
 }
 
 .payment-text .label {
-    -fx-text-fill: white;
-    -fx-font-size: 14;
+    -fx-text-fill: #ffffffa0;
+    -fx-font-size: 13;
     -fx-text-alignment: center;
     -fx-padding: 0 0 0 0;
+    -fx-font-family: 'Abel';
 }
 
 .subjectList {

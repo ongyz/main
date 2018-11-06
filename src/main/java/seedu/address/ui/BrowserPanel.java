@@ -8,15 +8,14 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Line;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 
@@ -67,6 +66,27 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private FlowPane tagsShort;
 
+    @FXML
+    private AnchorPane paymentBackground;
+
+    @FXML
+    private Line dividerHori;
+
+    @FXML
+    private Line dividerVert;
+
+    @FXML
+    private Label paymentLabel;
+
+    @FXML
+    private Label amountLabel;
+
+    @FXML
+    private Label monthLabel;
+
+    @FXML
+    private Label yearLabel;
+
     public BrowserPanel() {
         super(FXML);
 
@@ -84,6 +104,7 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadPersonPage(Person person) {
         if (person != null) {
 
+            setBackgroundState(true);
             // Clear previous information
             subjectsShort.getChildren().clear();
             tagsShort.getChildren().clear();
@@ -133,7 +154,21 @@ public class BrowserPanel extends UiPart<Region> {
             tagsShort.getChildren().clear();
             subjectsShort.getChildren().clear();
             subjectList.getChildren().clear();
+            setBackgroundState(false);
         }
+    }
+
+    /**
+     * Set visibility of background components based on {@code state}
+     */
+    private void setBackgroundState(boolean state) {
+        paymentBackground.setVisible(state);
+        dividerHori.setVisible(state);
+        dividerVert.setVisible(state);
+        paymentLabel.setVisible(state);
+        monthLabel.setVisible(state);
+        amountLabel.setVisible(state);
+        yearLabel.setVisible(state);
     }
 
     @Subscribe
