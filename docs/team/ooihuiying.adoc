@@ -1,0 +1,73 @@
+= Ooi Hui Ying - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: TutorHelper
+
+---
+
+== Overview
+
+It is a Java sample application intended for Tutors who would like to organise their students' information.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to add payments to a student*.
+
+** What it does: allows the tutor to record payment for his/her student and keep track of which month or year a particular payment amount was made.
+** Justification: It is difficult for tutors to keep track of payment and this feature can help tutors manage their payments and ensure that he/she is fairly paid.
+** Highlights: Making a new payment entry will update the person's details in the database. Only a maximum of $10 000 can be keyed in as payment.
+
+* *Major enhancement*: added *the ability to view tutor's earning for a specific month and year*.
+
+** What it does: Tutor can view his total earnings across the board for a specific year and month.
+** Justification: This feature allows tutor to sum up his monthly salary and allow him to better manage his financial accounts.
+** Highlights: If no payment has been made for that particular month or year, then earnings displayed will be of default $0.
+
+* *Minor enhancement*:
+
+** Add Payment into TutorHelper (Pull request https://github.com[#12])
+
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=ooihuiying
+
+* *Other contributions*:
+
+** Project management:
+*** Created issues for the different milestones and labelled them according to the severity and priority on Github.
+** Enhancements to existing features:
+*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#138])
+*** Did refactoring of addressbook to tutorHelper (Pull requests https://github.com[#143])
+** Documentation:
+*** Added section for payment and earnings in the User Guide
+*** Added section for payment and earnings in the Developer Guide
+** Community:
+*** Reviewed other PRs
+*** Reported bugs and suggestions for other teams in the class
+** Tools:
+*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=payment]
+
+include::../UserGuide.adoc[tag=earnings]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=userstories]
+
+include::../DeveloperGuide.adoc[tag=usecases]
+
+include::../DeveloperGuide.adoc[tag=payment]
+
+include::../DeveloperGuide.adoc[tag=earnings]
