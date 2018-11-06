@@ -1,0 +1,65 @@
+= Ong Yan Zhi - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: TutorHelper
+
+---
+
+== Overview
+
+It is a Java sample application intended for Tutors who would like to organise their students' information.
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to edit existing syllabus entries*
+** What it does: allows the user to edit existing syllabus entries.
+** Justification: Curriculum of subjects taught in schools change constantly, a tutor could update syllabus of a subject whenever there are changes and the app should provide a convenient way to edit them.
+** Highlights: Editing syllabus entries will cause changes in the database. The use of the editsyll command ensures that all other fields of student remains unedited.
+
+* *Major enhancement*: added *the ability to edit existing payment entries*
+** What it does: allows the user to edit existing payment entries using the same paid command.
+** Justification: Students could pay fees in installments or weekly instead of monthly, as such tutors may need to constantly edit payment entries for the month and the app should provide a convenient way to edit them.
+** Highlights: Editing payment entries will cause changes in the database. The use of the paid command looks for existing payment entries with the same month and year.
+
+* *Minor enhancement*:
+
+** Updating of test cases for new changes
+** XmlClasses for data writing into xml files for storage (Pull request https://github.com[#14])
+
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=ongyz
+
+* *Other contributions*:
+
+** Project management:
+*** Created issues for the different milestones and labelled them according to the severity and priority on Github.
+** Enhancements to existing features:
+*** Create max capacity of payment entries tracked (Pull request https://github.com[#73])
+*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#126], https://github.com[#141])
+** Documentation:
+*** Added section for editsyll and editing using paid in the User Guide
+*** Added section for editsyll and editing using paid in the Developer Guide
+** Community:
+*** Reviewed other PRs
+*** Reported bugs and suggestions for other teams in the class
+** Tools:
+*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=editsyll]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=editsyll]
+
+include::../DeveloperGuide.adoc[tag=editpaid]

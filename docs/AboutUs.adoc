@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Andy Chan
 image::andlimey.png[width="150", align="left"]
-{empty}[https://github.com/andlimey[github]]
+{empty}[https://github.com/andlimey[github]] [<<andlimey#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Integration
@@ -21,7 +21,7 @@ Responsibilities: Integration
 
 === Anthony Halim
 image::susterdrifter.png[width="150", align="left"]
-{empty}[http://github.com/SusterDrifter[github]]
+{empty}[http://github.com/SusterDrifter[github]][<<susterdrifter#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
@@ -39,7 +39,7 @@ Responsibilities: UI
 
 === Ong Yan Zhi
 image::ongyz.png[width="150", align="left"]
-{empty}[http://github.com/ongyz[github]]
+{empty}[http://github.com/ongyz[github]] [<<ongyz#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Integration

@@ -14,13 +14,14 @@ import seedu.address.commons.core.index.Index;
 public class Payment {
 
     public static final String MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS =
-            "Amount of payment should only contain numbers";
+            "Amount of payment should only contain zero or positive numbers, and has to be smaller than 10 000";
     public static final String MESSAGE_PAYMENT_MONTH_CONSTRAINTS =
             "Month of payment should only contain numbers between 1 to 12, inclusive";
     public static final String MESSAGE_PAYMENT_YEAR_CONSTRAINTS =
             "Year of payment should only contain 4 digits numbers";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
+    private static final int MAXPAYMENTAMOUNT = 10000;
 
     private final Index studentIndex;
     private int amount;
@@ -46,6 +47,9 @@ public class Payment {
      * Returns true if a given int is a valid number.
      */
     public static boolean isValidAmount(int test) {
+        if (test > MAXPAYMENTAMOUNT) {
+            return false;
+        }
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
     }
 

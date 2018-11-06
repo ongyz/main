@@ -57,9 +57,16 @@ public class PayCommandParserTest {
         assertParseFailure(pay, wrongAmountInput, String.format(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS,
                 PayCommand.MESSAGE_USAGE));
 
-        String wrongMonthInput = "1 200 16 2018";
+        String outOfBoundAmountInput = "1 100001 8 2018";
+        assertParseFailure(pay, outOfBoundAmountInput, String.format(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS,
+                PayCommand.MESSAGE_USAGE));
 
+        String wrongMonthInput = "1 200 16 2018";
         assertParseFailure(pay, wrongMonthInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS,
+                PayCommand.MESSAGE_USAGE));
+
+        String outOfBoundMonthInput = "1 200 2147483648 2018";
+        assertParseFailure(pay, outOfBoundMonthInput, String.format(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS,
                 PayCommand.MESSAGE_USAGE));
 
         String wrongYearInput = "1 200 8 #2018";
@@ -70,6 +77,8 @@ public class PayCommandParserTest {
         assertParseFailure(pay, wrongYearInputDigits, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS,
                 PayCommand.MESSAGE_USAGE));
 
-
+        String outOfBoundYearInputDigits = "1 200 8 20018";
+        assertParseFailure(pay, outOfBoundYearInputDigits, String.format(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS,
+                PayCommand.MESSAGE_USAGE));
     }
 }
