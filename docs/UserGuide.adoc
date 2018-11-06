@@ -322,6 +322,7 @@ Examples:
 * `paid 1 200 01 2018` +
 Records a payment of $200 made for January 2018, or adds $200 to the payment made for January 2018 if a payment entry already exists.
 // end::payment[]
+
 // tag::earnings[]
 === Display Earnings : `earnings`
 
@@ -338,6 +339,7 @@ Examples:
 * `earnings 01 2018` +
 Displays earnings made for January 2018.
 // end::earnings[]
+
 === Add Subject : `addsub`
 
 Adds a new subject to a specified student. Refer to valid subject inputs under 3. Feature. +
@@ -412,6 +414,7 @@ Copies the first subject from the first student to the second student.
 * `copysub 1 2 3` +
 Copies the second subject from the first student to the third student.
 // end::copysub[]
+
 // tag::addsyll[]
 === Add Syllabus Topic : `addsyll`
 
@@ -438,6 +441,7 @@ Adds a syllabus topic "Integration" to the second subject of the first student.
 * `addsyll 3 2 sy/Poisson Distribution` +
 Adds a syllabus topic "Poisson Distribution" to the second subject of the third student.
 // end::addsyll[]
+
 // tag::deletesyll[]
 === Remove Syllabus Topic : `deletesyll`
 
@@ -460,6 +464,7 @@ Removes the second syllabus topic from the first subject of the first student.
 * `deletesyll 3 1 1` +
 Removes the first syllabus topic from the first subject of the third student.
 // end::deletesyll[]
+
 // tag::editsyll[]
 === Edit Syllabus Topic : `editsyll`
 
@@ -482,6 +487,7 @@ Changes the second syllabus topic of the first subject of the first student to "
 * `editsyll 3 1 1 sy/Kinetic Energy` +
 Changes the first syllabus topic of the first subject of the third student to "Kinetic Energy".
 // end::editsyll[]
+
 // tag::mark[]
 === Mark Syllabus Topic : `mark`
 
@@ -504,6 +510,7 @@ Marks the third syllabus topic of the first subject of the first student.
 * `mark 2 1 2` +
 Marks the second syllabus topic of the first subject of the second student.
 // end::mark[]
+
 === Exit Program : `exit`
 
 Exits the program. +
