@@ -31,7 +31,7 @@ public class PayCommand extends Command {
     public static final String MESSAGE_EDITPAYMENT_SUCCESS = "Payment for this person has been edited: %1$s";
 
     private static final int MINVALUE = -1;
-    private static final int MAXPAYMENTSDISPLAYED = 9;
+    private static final int MAXPAYMENTSDISPLAYED = 5;
 
     private Index targetIndex;
     private Payment newPayment;
