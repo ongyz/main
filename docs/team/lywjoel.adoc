@@ -1,0 +1,57 @@
+= Lee Yi Wei, Joel - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Project: TutorHelper
+
+---
+
+== Overview
+
+TutorHelper is a Java application intended for tutors who would like to organise their students' information. The tutor interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 25 kLoC.
+
+== Summary of Contributions
+
+* *Contributed Code*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=lywjoel[RepoSense]
+
+* *Major Enhancement*:
+** Added *the ability to add and delete subjects taken to student entries* (Pull Request https://github.com/CS2103-AY1819S1-W13-4/main/pull/112[#112])
+*** This enhancement allows the tutor to add and delete subjects taken by their students. Each subject will have its own list of syllabus topics.
+*** Justification: Students of tutors may request to receive tuition for more than one subject from the same tutor. This enhancement allows the tutor to record such instances instead of creating a new student entry for each subject.
+*** Highlights: A student entry must have at least one subject taken at all times. Logically, a student entry should not exist if the student is not taking a subject taught by the tutor.
+
+* *Minor Enhancements*:
+** [Deprecated] Added and updated a simple HTML display to facilitate display of student information (Pull Requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/25[#25], https://github.com/CS2103-AY1819S1-W13-4/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W13-4/main/pull/78[#78], https://github.com/CS2103-AY1819S1-W13-4/main/pull/93[#93])
+** Converted original HTML display to an FXML display (Pull Requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/158[#158], https://github.com/CS2103-AY1819S1-W13-4/main/pull/161[#161])
+
+* *Other contributions*:
+** Project Management:
+*** Managed releases v1.1 to v1.3.1 (https://github.com/CS2103-AY1819S1-W13-4/main/releases[4 releases]) on GitHub
+*** Created and labelled issues for the different milestones on Github
+** Enhancements to Existing Features:
+*** Wrote additional tests for new features added to increase code coverage (Pull Requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/30[#30], https://github.com/CS2103-AY1819S1-W13-4/main/pull/132[#132], https://github.com/CS2103-AY1819S1-W13-4/main/pull/153[#153])
+** Documentation:
+*** Reviewed, formatted and standardised terminology in documentation (Pull Requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/47[#47], https://github.com/CS2103-AY1819S1-W13-4/main/pull/78[#78], https://github.com/CS2103-AY1819S1-W13-4/main/pull/87[#87], https://github.com/CS2103-AY1819S1-W13-4/main/pull/115[#115], https://github.com/CS2103-AY1819S1-W13-4/main/pull/159/commits/85ef6a6cbc7b33f0bdc21542a98caaf1ab59b687[#159])
+*** Added section for adding and deleting subjects in the https://github.com/CS2103-AY1819S1-W13-4/main/pull/115/commits/28ca85280267d59e3d8b3b6a8381f8c56d569ba3[User Guide]
+*** Added section for adding and deleting subjects in the https://github.com/CS2103-AY1819S1-W13-4/main/pull/87/commits/40e42156feecd1337b7daf60d2cd598e71f7660b[Developer Guide]
+** Community:
+*** Reviewed other PRs
+*** Fixed code style violations for team
+*** Reported bugs and gave suggestions to other teams in the class
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=adddelsub]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=adddelsub]

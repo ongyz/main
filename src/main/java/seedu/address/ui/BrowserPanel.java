@@ -9,10 +9,13 @@ import com.google.common.eventbus.Subscribe;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Line;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.subject.Subject;
 
@@ -22,8 +25,6 @@ import seedu.address.model.subject.Subject;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "PersonPage.html";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -33,10 +34,13 @@ public class BrowserPanel extends UiPart<Region> {
     private Label nameLabel;
 
     @FXML
-    private Label tuitionTimingLabel;
+    private Label addressLabel;
 
     @FXML
-    private Label addressLabel;
+    private Label tuitionTimingDayLabel;
+
+    @FXML
+    private Label tuitionTimingTimeLabel;
 
     @FXML
     private Label emailLabel;
@@ -45,10 +49,43 @@ public class BrowserPanel extends UiPart<Region> {
     private Label phoneLabel;
 
     @FXML
-    private Label paymentsLabel;
+    private FlowPane paymentAmount;
 
     @FXML
-    private Label subjectsLabel;
+    private FlowPane paymentMonth;
+
+    @FXML
+    private FlowPane paymentYear;
+
+    @FXML
+    private FlowPane subjectList;
+
+    @FXML
+    private FlowPane subjectsShort;
+
+    @FXML
+    private FlowPane tagsShort;
+
+    @FXML
+    private AnchorPane paymentBackground;
+
+    @FXML
+    private Line dividerHori;
+
+    @FXML
+    private Line dividerVert;
+
+    @FXML
+    private Label paymentLabel;
+
+    @FXML
+    private Label amountLabel;
+
+    @FXML
+    private Label monthLabel;
+
+    @FXML
+    private Label yearLabel;
 
     public BrowserPanel() {
         super(FXML);
@@ -66,49 +103,72 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void loadPersonPage(Person person) {
         if (person != null) {
+
+            setBackgroundState(true);
+            // Clear previous information
+            subjectsShort.getChildren().clear();
+            tagsShort.getChildren().clear();
+            paymentAmount.getChildren().clear();
+            paymentMonth.getChildren().clear();
+            paymentYear.getChildren().clear();
+            subjectList.getChildren().clear();
+
             // Fill the labels with info from the person object.
             nameLabel.setText(person.getName().fullName);
-
-            tuitionTimingLabel.setText(person.getTuitionTiming().value);
-
             addressLabel.setText(person.getAddress().value);
-
             emailLabel.setText(person.getEmail().value);
-
             phoneLabel.setText(person.getPhone().value);
 
-            final StringBuilder paymentsBuilder = new StringBuilder();
-            List<Payment> payments = new ArrayList<>(person.getPayments());
-            for (int i = 0; i < payments.size(); i++) {
-                Payment selected = payments.get(i);
-                paymentsBuilder.append(String.format("Month: %5d     Year: %10d     Amount: %10d         \n",
-                        selected.getMonth(), selected.getYear(), selected.getAmount()));
-            }
-            paymentsLabel.setText(paymentsBuilder.toString());
+            tuitionTimingDayLabel.setText(person.getTuitionTiming().day.toString().substring(0, 3));
+            tuitionTimingTimeLabel.setText(person.getTuitionTiming().time);
 
-            final StringBuilder subjectsBuilder = new StringBuilder();
-            List<Subject> subjects = new ArrayList<>(person.getSubjects());
-            for (int i = 0; i < subjects.size(); i++) {
-                String subject = subjects.get(i).toString();
-                subjectsBuilder.append(subject.substring(2, subject.length() - 1) + "\n\n");
+            person.getSubjects().forEach(subject -> subjectsShort.getChildren().add(
+                    new Label(subject.getSubjectName())));
+            person.getTags().forEach(tag -> tagsShort.getChildren().add(new Label(tag.tagName)));
+
+            person.getPayments().forEach(amount -> paymentAmount.getChildren().add(
+                    new Label(String.valueOf(amount.getAmount()))));
+            person.getPayments().forEach(amount -> paymentMonth.getChildren().add(
+                    new Label(String.valueOf(amount.getMonth()))));
+            person.getPayments().forEach(amount -> paymentYear.getChildren().add(
+                    new Label(String.valueOf(amount.getYear()))));
+
+            for (int i = 0; i < person.getSubjects().size(); i++) {
+                List<Subject> subject = new ArrayList<>(person.getSubjects());
+                Index currentIndex = Index.fromZeroBased(i);
+                subjectList.getChildren().add(
+                        new Label(currentIndex.getOneBased() + ". " + subject.get(i).toString()));
             }
-            subjectsLabel.setText(subjectsBuilder.toString().trim());
+
         } else {
             // Person is null, remove all the text.
             nameLabel.setText("");
-
-            tuitionTimingLabel.setText("");
-
             addressLabel.setText("");
-
             emailLabel.setText("");
-
             phoneLabel.setText("");
-
-            paymentsLabel.setText("");
-
-            subjectsLabel.setText("");
+            tuitionTimingDayLabel.setText("");
+            tuitionTimingTimeLabel.setText("");
+            paymentAmount.getChildren().clear();
+            paymentMonth.getChildren().clear();
+            paymentYear.getChildren().clear();
+            tagsShort.getChildren().clear();
+            subjectsShort.getChildren().clear();
+            subjectList.getChildren().clear();
+            setBackgroundState(false);
         }
+    }
+
+    /**
+     * Set visibility of background components based on {@code state}
+     */
+    private void setBackgroundState(boolean state) {
+        paymentBackground.setVisible(state);
+        dividerHori.setVisible(state);
+        dividerVert.setVisible(state);
+        paymentLabel.setVisible(state);
+        monthLabel.setVisible(state);
+        amountLabel.setVisible(state);
+        yearLabel.setVisible(state);
     }
 
     @Subscribe

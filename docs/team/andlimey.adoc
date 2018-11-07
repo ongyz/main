@@ -3,7 +3,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: TutorHelper - Level 4
+== PROJECT: TutorHelper
 
 ---
 
