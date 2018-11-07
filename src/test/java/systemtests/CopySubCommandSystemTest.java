@@ -77,13 +77,13 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
 
         /* ----------------- Performing copysub operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of address book and person list -> success */
+        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index personIndex = INDEX_FIRST_PERSON;
         assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
         assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT, INDEX_SECOND_PERSON);
 
-        /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, person index within bounds of TutorHelper but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -133,7 +133,7 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
     }
 
     /**
-     * Removes the {@code Person} at the specified {@code index} in {@code model}'s address book.
+     * Removes the {@code Person} at the specified {@code index} in {@code model}'s TutorHelper.
      * @return the removed person
      */
     private Person copySubPerson(Model model, Index sourcePersonIndex, Index subjectIndex, Index targetPersonIndex) {
@@ -169,7 +169,7 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
      * 4. Asserts that the status bar's sync status changes.
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
      * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Index sourcePersonIndex, Index subjectIndex, Index targetPersonIndex) {
@@ -189,7 +189,7 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
      * 4. Asserts that the status bar's sync status changes.
      * 5. Asserts that the command box has the default style class.
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
      * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
@@ -208,7 +208,7 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {

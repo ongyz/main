@@ -34,7 +34,7 @@ public class EditSyllCommand extends Command {
 
     public static final String MESSAGE_EDITSYLL_SUCCESS = "Edited syllabus to Person: %1$s";
     public static final String MESSAGE_SUBJECT_NOT_FOUND = "Subject index not found in Person";
-    public static final String MESSAGE_DUPLICATE_SYLLABUS = "This syllabus already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS = "This syllabus already exists in the TutorHelper.";
 
     private final Index personIndex;
     private final Index subjectIndex;

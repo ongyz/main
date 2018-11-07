@@ -64,13 +64,13 @@ public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
 
         /* ----------------- Performing deletesub operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of address book and person list -> success */
+        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index personIndex = INDEX_SECOND_PERSON;
         assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
         assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT);
 
-        /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, person index within bounds of TutorHelper but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -119,7 +119,7 @@ public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
 
     /**
      * Removes the {@code Subject} at the specified {@code subjectIndex} for
-     * the {@code Person} at the specified {@code personIndex} in {@code model}'s address book.
+     * the {@code Person} at the specified {@code personIndex} in {@code model}'s TutorHelper.
      * @return the updated person
      */
     private Person deleteSubPerson(Model model, Index personIndex, Index subjectIndex) {

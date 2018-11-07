@@ -60,7 +60,7 @@ public class TutorHelper implements ReadOnlyTutorHelper {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the TutorHelper.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -68,8 +68,8 @@ public class TutorHelper implements ReadOnlyTutorHelper {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to the TutorHelper.
+     * The person must not already exist in the TutorHelper.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -77,8 +77,8 @@ public class TutorHelper implements ReadOnlyTutorHelper {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the TutorHelper.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the TutorHelper.
      */
     public void updatePerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -87,7 +87,7 @@ public class TutorHelper implements ReadOnlyTutorHelper {
 
     /**
      * Removes {@code key} from this {@code TutorHelper}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the TutorHelper.
      */
     public void removePerson(Person key) {
         persons.remove(key);

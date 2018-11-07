@@ -7,12 +7,12 @@ import seedu.address.model.Model;
 import seedu.address.model.TutorHelper;
 
 /**
- * Clears the address book.
+ * Clears the TutorHelper.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Tutor helper has been cleared!";
+    public static final String MESSAGE_SUCCESS = "TutorHelper has been cleared!";
 
 
     @Override

@@ -111,7 +111,7 @@ public class EditSyllCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of TutorHelper list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         EditSyllCommand editSyllCommand = new EditSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT,
                 INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
@@ -179,10 +179,10 @@ public class EditSyllCommandTest {
         EditSyllCommand editSyllCommand = new EditSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT,
                 INDEX_FIRST_SYLLABUS, new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
-        // execution failed -> address book state not added into model
+        // execution failed -> TutorHelper state not added into model
         assertCommandFailure(editSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
@@ -192,10 +192,10 @@ public class EditSyllCommandTest {
         EditSyllCommand editSyllCommand = new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT,
                 INDEX_FIRST_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
 
-        // execution failed -> address book state not added into model
+        // execution failed -> TutorHelper state not added into model
         assertCommandFailure(editSyllCommand, model, commandHistory, EditSyllCommand.MESSAGE_DUPLICATE_SYLLABUS);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }

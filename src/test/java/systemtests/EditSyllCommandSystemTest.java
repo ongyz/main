@@ -60,7 +60,7 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
-        /* Case: filtered person list, edit index within bounds of address book and person list -> edited */
+        /* Case: filtered person list, edit index within bounds of TutorHelper and person list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_ALICE);
         index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
@@ -71,7 +71,7 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
                 DUPLICATE_SYLLABUS).build();
         assertCommandSuccess(command, index, editedPerson);
 
-        /* Case: filtered person list, edit index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, edit index within bounds of TutorHelper but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_ALICE);

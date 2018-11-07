@@ -73,13 +73,13 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
 
         /* ------------------ Performing mark operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered person list, mark index within bounds of address book and person list -> marked */
+        /* Case: filtered person list, mark index within bounds of TutorHelper and person list -> marked */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index personIndex = INDEX_FIRST_PERSON;
         assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
         assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, KEYWORD_MATCHING_MEIER);
 
-        /* Case: filtered person list, mark index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, mark index within bounds of TutorHelper but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -116,7 +116,7 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
     }
 
     /**
-     * Removes the {@code Person} at the specified {@code index} in {@code model}'s address book.
+     * Removes the {@code Person} at the specified {@code index} in {@code model}'s TutorHelper.
      * @return the removed person
      */
     private Person markPerson(Model model, Index personIndex, Index subjectIndex, Index syllabusIndex)
