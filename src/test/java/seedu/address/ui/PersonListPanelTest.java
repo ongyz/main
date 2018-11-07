@@ -95,10 +95,10 @@ public class PersonListPanelTest extends GuiUnitTest {
         builder.append("<TutorHelper>\n");
         for (int i = 0; i < personCount; i++) {
             builder.append("<persons>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
-            builder.append("<phone>12345678</phone>\n");
-            builder.append("<email>a@example.com</email>\n");
-            builder.append("<address>a</address>\n");
+            builder.append("<name>a</name>\n");
+            builder.append("<phone>" + (10000000 + i) + "</phone>\n");
+            builder.append("<email>" + i + "@example.com</email>\n");
+            builder.append("<address>" + i + "</address>\n");
             builder.append("<tuitionTiming>Monday 6:00pm</tuitionTiming>\n");
             builder.append("<subjects subjectName=\"Biology\" completionRate=\"0.0\"/>\n");
             builder.append("<payments>\n");
