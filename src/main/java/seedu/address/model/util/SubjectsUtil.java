@@ -61,6 +61,6 @@ public class SubjectsUtil {
     public static Person createPersonWithNewSubjects(Person source, Set<Subject> subjects) {
         return new Person(source.getName(), source.getPhone(),
                 source.getEmail(), source.getAddress(), subjects,
-                source.getTuitionTiming(), source.getTags());
+                source.getTuitionTiming(), source.getTags(), source.getPayments());
     }
 }
