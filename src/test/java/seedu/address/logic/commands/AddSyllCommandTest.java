@@ -58,7 +58,7 @@ public class AddSyllCommandTest {
     @Test
     public void execute_allValidArgumentsUnfilteredList_success() {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Syllabus syllabusTest = Syllabus.makeSyllabus("AppendSyllTestSyllabus");
+        Syllabus syllabusTest = Syllabus.makeSyllabus("AddSyllTestSyllabus");
         AddSyllCommand addSyllCommand = new AddSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, syllabusTest);
 
@@ -78,7 +78,7 @@ public class AddSyllCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AddSyllCommand addSyllCommand = new AddSyllCommand(outOfBoundIndex,
-                INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
 
         assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -88,7 +88,7 @@ public class AddSyllCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         AddSyllCommand addSyllCommand = new AddSyllCommand(
-                INDEX_FIRST_PERSON, outOfBoundIndex, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                INDEX_FIRST_PERSON, outOfBoundIndex, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
 
         assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
@@ -98,7 +98,7 @@ public class AddSyllCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Syllabus syllabusTest = Syllabus.makeSyllabus("AppendSyllTestSyllabus");
+        Syllabus syllabusTest = Syllabus.makeSyllabus("AddSyllTestSyllabus");
         AddSyllCommand addSyllCommand = new AddSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, syllabusTest);
 
@@ -118,7 +118,7 @@ public class AddSyllCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getPersonList().size());
         AddSyllCommand addSyllCommand = new AddSyllCommand(
-                outOfBoundIndex, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                outOfBoundIndex, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
 
         assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -128,7 +128,7 @@ public class AddSyllCommandTest {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(personTarget.getSubjects().size() + 1);
         AddSyllCommand addSyllCommand = new AddSyllCommand(
-                INDEX_FIRST_PERSON, outOfBoundIndex, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                INDEX_FIRST_PERSON, outOfBoundIndex, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
 
         assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
     }
@@ -156,7 +156,7 @@ public class AddSyllCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personTarget = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Syllabus syllabusTest = Syllabus.makeSyllabus("AppendSyllTestSyllabus");
+        Syllabus syllabusTest = Syllabus.makeSyllabus("AddSyllTestSyllabus");
         AddSyllCommand addSyllCommand = new AddSyllCommand(
                 INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, syllabusTest);
         Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
@@ -165,7 +165,7 @@ public class AddSyllCommandTest {
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.commitTutorHelper();
 
-        // AppendSyll -> first person has an added syllabus
+        // AddSyll -> first person has an added syllabus
         addSyllCommand.execute(model, commandHistory);
 
         // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons
@@ -182,7 +182,7 @@ public class AddSyllCommandTest {
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AddSyllCommand addSyllCommand = new AddSyllCommand(
-                outOfBoundIndex, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                outOfBoundIndex, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
 
         // execution failed -> address book state not added into model
         assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -195,16 +195,16 @@ public class AddSyllCommandTest {
     @Test
     public void equals() {
         AddSyllCommand addSyllFirstCommand = new AddSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
         AddSyllCommand addSyllSecondCommand = new AddSyllCommand(
-                INDEX_SECOND_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                INDEX_SECOND_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
 
         // same object -> returns true
         assertEquals(addSyllFirstCommand, addSyllFirstCommand);
 
         // same values -> returns true
         AddSyllCommand addSyllFirstCommandCopy = new AddSyllCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AppendSyllTestSyllabus"));
+                INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("AddSyllTestSyllabus"));
         assertEquals(addSyllFirstCommand, addSyllFirstCommandCopy);
 
         // different types -> returns false

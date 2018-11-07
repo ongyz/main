@@ -24,7 +24,7 @@ import seedu.address.model.util.SubjectsUtil;
  */
 public class AddSyllCommand extends Command {
 
-    public static final String COMMAND_WORD = "appendsyll";
+    public static final String COMMAND_WORD = "addsyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the person identified "
             + "by the student index number used in the displayed person list. "
