@@ -38,7 +38,8 @@ public interface Model {
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the TutorHelper.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the TutorHelper.
+     * The student identity of {@code editedStudent} must not be the same as
+     * another existing student in the TutorHelper.
      */
     void updateStudent(Student target, Student editedStudent);
 
