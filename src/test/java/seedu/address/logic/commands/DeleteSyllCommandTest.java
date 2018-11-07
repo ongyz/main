@@ -148,7 +148,7 @@ public class DeleteSyllCommandTest {
         expectedModel.updatePerson(personTarget, newPerson);
         expectedModel.commitTutorHelper();
 
-        // EraseSyll -> first person syllabus is erased
+        // DeleteSyll -> first person syllabus is erased
         deleteSyllCommand.execute(model, commandHistory);
 
         // undo -> reverts TutorHelper back to previous state and filtered person list to show all persons

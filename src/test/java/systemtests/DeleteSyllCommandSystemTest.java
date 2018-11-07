@@ -51,9 +51,9 @@ public class DeleteSyllCommandSystemTest extends TutorHelperSystemTest {
                 + INDEX_FIRST_SUBJECT.getOneBased() + " "
                 + INDEX_FIRST_SYLLABUS.getOneBased() + "       ";
 
-        Person erasedSyllPerson = deleteSyllPerson(
+        Person deletedSyllPerson = deleteSyllPerson(
                 expectedModel, INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        String expectedResultMessage = String.format(MESSAGE_DELETESYLL_SUCCESS, erasedSyllPerson);
+        String expectedResultMessage = String.format(MESSAGE_DELETESYLL_SUCCESS, deletedSyllPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: erase ths syllabus of first subject the last person in the list -> success */
@@ -143,7 +143,7 @@ public class DeleteSyllCommandSystemTest extends TutorHelperSystemTest {
                 DeleteSyllCommand.COMMAND_WORD + " 1 a b c", MESSAGE_INVALID_DELETESYLL_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("ERasESYll 1 1 1", MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("dElEtESYll 1 1 1", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
@@ -179,8 +179,8 @@ public class DeleteSyllCommandSystemTest extends TutorHelperSystemTest {
     private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex)
             throws CommandException {
         Model expectedModel = getModel();
-        Person erasedSyllPerson = deleteSyllPerson(expectedModel, personIndex, subjectIndex, syllabusIndex);
-        String expectedResultMessage = String.format(MESSAGE_DELETESYLL_SUCCESS, erasedSyllPerson);
+        Person deletedSyllPerson = deleteSyllPerson(expectedModel, personIndex, subjectIndex, syllabusIndex);
+        String expectedResultMessage = String.format(MESSAGE_DELETESYLL_SUCCESS, deletedSyllPerson);
         assertCommandSuccess(DeleteSyllCommand.COMMAND_WORD
                 + " " + personIndex.getOneBased() + " " + subjectIndex.getOneBased()
                 + " " + syllabusIndex.getOneBased(), expectedModel, expectedResultMessage);

@@ -22,7 +22,7 @@ import seedu.address.model.util.SubjectsUtil;
  */
 public class DeleteSyllCommand extends Command {
 
-    public static final String COMMAND_WORD = "erasesyll";
+    public static final String COMMAND_WORD = "deletesyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the selected syllabus of the "
             + "person identified by the syllabus index number in the selected student's subject.\n"
