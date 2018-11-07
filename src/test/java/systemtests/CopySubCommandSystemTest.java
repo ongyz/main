@@ -136,7 +136,8 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
      * Removes the {@code Student} at the specified {@code index} in {@code model}'s TutorHelper.
      * @return the removed student
      */
-    private Student copySubStudent(Model model, Index sourceStudentIndex, Index subjectIndex, Index targetStudentIndex) {
+    private Student copySubStudent(Model model, Index sourceStudentIndex,
+                                   Index subjectIndex, Index targetStudentIndex) {
         Student studentSource = getStudent(model, sourceStudentIndex);
         Student studentTarget = getStudent(model, targetStudentIndex);
         List<Subject> sourceSubjects = new ArrayList<>(studentSource.getSubjects());

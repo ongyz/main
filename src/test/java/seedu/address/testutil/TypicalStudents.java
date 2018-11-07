@@ -120,16 +120,16 @@ public class TypicalStudents {
             .withTags(VALID_TAG_FRIEND).build();
 
     //For Payments
-    public static final Student ALCYONE = new StudentBuilder().withName(VALID_NAME_ALCYONE).withPhone(VALID_PHONE_ALCYONE)
-            .withEmail(VALID_EMAIL_ALCYONE).withAddress(VALID_ADDRESS_ALCYONE)
+    public static final Student ALCYONE = new StudentBuilder().withName(VALID_NAME_ALCYONE)
+            .withPhone(VALID_PHONE_ALCYONE).withEmail(VALID_EMAIL_ALCYONE).withAddress(VALID_ADDRESS_ALCYONE)
             .withSubjects(VALID_SUBJECT_ALCYONE).withTuitionTiming(VALID_TUITION_TIMING_ALCYONE)
             .withTags(VALID_TAG_FRIEND).withPayments("1 200 2 2018").build();
     public static final Student BILLY = new StudentBuilder().withName(VALID_NAME_BILLY).withPhone(VALID_PHONE_BILLY)
             .withEmail(VALID_EMAIL_BILLY).withAddress(VALID_ADDRESS_BILLY)
             .withSubjects(VALID_SUBJECT_BILLY).withTuitionTiming(VALID_TUITION_TIMING_BILLY)
             .withPayments("2 200 2 2018").build();
-    public static final Student CABBAGE = new StudentBuilder().withName(VALID_NAME_CABBAGE).withPhone(VALID_PHONE_CABBAGE)
-            .withEmail(VALID_EMAIL_CABBAGE).withAddress(VALID_ADDRESS_CABBAGE)
+    public static final Student CABBAGE = new StudentBuilder().withName(VALID_NAME_CABBAGE)
+            .withPhone(VALID_PHONE_CABBAGE).withEmail(VALID_EMAIL_CABBAGE).withAddress(VALID_ADDRESS_CABBAGE)
             .withSubjects(VALID_SUBJECT_CABBAGE).withTuitionTiming(VALID_TUITION_TIMING_CABBAGE)
             .withTags(VALID_TAG_FRIEND)
             .withPayments("3 300 3 2018").build();

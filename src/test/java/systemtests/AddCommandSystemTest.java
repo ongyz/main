@@ -45,8 +45,8 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuitiontiming.TuitionTiming;
@@ -114,7 +114,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
         showStudentsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a student card is selected --------------------------- */
+        /* ----------------------- Perform add operation while a student card is selected --------------------------- */
 
         /* Case: selects first card in the student list, add a student -> added, card selection remains unchanged */
         selectStudent(Index.fromOneBased(1));

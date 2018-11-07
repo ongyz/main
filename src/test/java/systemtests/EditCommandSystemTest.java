@@ -48,8 +48,8 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
@@ -126,7 +126,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
-        /* --------------------- Performing edit operation while a student card is selected -------------------------- */
+        /* -------------------- Performing edit operation while a student card is selected -------------------------- */
 
         /* Case: selects first card in the student list, edit a student -> edited, card selection remains unchanged but
          * browser url changes

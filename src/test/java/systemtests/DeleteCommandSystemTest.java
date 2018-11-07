@@ -31,7 +31,7 @@ public class DeleteCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: delete the first student in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_STUDENT.getOneBased() + "       ";
+        String command = "     " + DeleteCommand.COMMAND_WORD + "     " + INDEX_FIRST_STUDENT.getOneBased() + "     ";
         Student deletedStudent = removeStudent(expectedModel, INDEX_FIRST_STUDENT);
         String expectedResultMessage = String.format(MESSAGE_DELETE_STUDENT_SUCCESS, deletedStudent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -72,7 +72,7 @@ public class DeleteCommandSystemTest extends TutorHelperSystemTest {
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a student card is selected ------------------------ */
+        /* -------------------- Performing delete operation while a student card is selected ------------------------ */
 
         /* Case: delete the selected student -> student list panel selects the student before the deleted student */
         showAllStudents();

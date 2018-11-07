@@ -168,7 +168,8 @@ public class MarkCommandTest {
     @Test
     public void equals() {
         MarkCommand markFirstCommand = new MarkCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        MarkCommand markSecondCommand = new MarkCommand(INDEX_SECOND_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        MarkCommand markSecondCommand = new MarkCommand(INDEX_SECOND_STUDENT, INDEX_FIRST_SUBJECT,
+                INDEX_FIRST_SYLLABUS);
 
         // same object -> returns true
         assertEquals(markFirstCommand, markFirstCommand);

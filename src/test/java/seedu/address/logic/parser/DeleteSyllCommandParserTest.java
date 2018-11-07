@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
 
 import org.junit.Test;
 
-
 import seedu.address.logic.commands.DeleteSyllCommand;
 
 public class DeleteSyllCommandParserTest {

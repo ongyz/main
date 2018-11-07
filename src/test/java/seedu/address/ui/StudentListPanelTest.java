@@ -56,7 +56,8 @@ public class StudentListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        StudentCardHandle expectedStudent = studentListPanelHandle.getStudentCardHandle(INDEX_SECOND_STUDENT.getZeroBased());
+        StudentCardHandle expectedStudent = studentListPanelHandle
+                .getStudentCardHandle(INDEX_SECOND_STUDENT.getZeroBased());
         StudentCardHandle selectedStudent = studentListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedStudent, selectedStudent);
     }

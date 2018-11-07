@@ -47,7 +47,8 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
                 + INDEX_FIRST_SUBJECT.getOneBased() + " "
                 + INDEX_FIRST_SYLLABUS.getOneBased() + "       ";
 
-        Student markedStudent = markStudent(expectedModel, INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        Student markedStudent = markStudent(expectedModel, INDEX_FIRST_STUDENT,
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         String expectedResultMessage = String.format(MESSAGE_MARK_SUCCESS, markedStudent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 

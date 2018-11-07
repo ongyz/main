@@ -63,7 +63,8 @@ public class DeleteSyllCommandTest {
         DeleteSyllCommand deleteSyllCommand = new DeleteSyllCommand(outOfBoundIndex,
                 INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(deleteSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteSyllCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -113,7 +114,8 @@ public class DeleteSyllCommandTest {
         DeleteSyllCommand deleteSyllCommand = new DeleteSyllCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(deleteSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteSyllCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
 
@@ -167,7 +169,8 @@ public class DeleteSyllCommandTest {
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         // execution failed -> TutorHelper state not added into model
-        assertCommandFailure(deleteSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteSyllCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
