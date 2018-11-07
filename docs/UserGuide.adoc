@@ -113,7 +113,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMI
 A student can have any number of tags (including 0), and must have at least 1 subject.
 
 ****
-* Student must not have the same name, phone number, email and address as an existing student.
+* Student must not have the same name and one of these fields as an existing student: phone number, email and address.
 * Name cannot contain any integer or symbols.
 * Phone number must have a length of no more or no less than eight integers.
 * Tuition timing has to be contain a valid day and valid timing in 12 hour format.
@@ -474,6 +474,11 @@ Removes the first syllabus topic from the first subject of the third student.
 
 Edits a syllabus topic for a specified student and subject. +
 Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
+
+[NOTE]
+====
+Editing a syllabus topic will automatically unmark it.
+====
 
 ****
 * Edits a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.

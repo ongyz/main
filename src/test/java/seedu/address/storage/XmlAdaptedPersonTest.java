@@ -27,7 +27,7 @@ public class XmlAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_SUBJECT = "chinese";
+    private static final String INVALID_SUBJECT = "javanese";
     private static final String INVALID_TUITION_TIMING = "Friday 10.00pm";
     private static final String INVALID_MONTH = "16";
     private static final String INVALID_AMOUNT = "$200";

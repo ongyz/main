@@ -115,7 +115,7 @@ public class Person {
         boolean phoneSame = otherPerson.getPhone().equals(getPhone());
         boolean emailSame = otherPerson.getEmail().equals(getEmail());
         boolean addressSame = otherPerson.getAddress().equals(getAddress());
-        boolean checkSameFields = nameSame && phoneSame && emailSame && addressSame;
+        boolean checkSameFields = (nameSame && phoneSame) || (nameSame && emailSame) || (nameSame && addressSame);
         return checkSameFields;
     }
 

@@ -54,8 +54,8 @@ public class Syllabus {
 
     @Override
     public String toString() {
-        String marked = state ? "X" : " ";
-        return syllabus + "   [" + marked + "]";
+        String marked = state ? "X" : "  ";
+        return "[" + marked + "] " + syllabus;
     }
 
     @Override
