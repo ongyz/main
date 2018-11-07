@@ -475,6 +475,11 @@ Removes the first syllabus topic from the first subject of the third student.
 Edits a syllabus topic for a specified student and subject. +
 Format: `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS`
 
+[NOTE]
+====
+Editing a syllabus topic will automatically unmark it.
+====
+
 ****
 * Edits a syllabus topic at the specified `SYLLABUS_INDEX` for a subject at the specified `SUBJECT_INDEX` for a student at the specified `STUDENT_INDEX`.
 * The student index refers to the index number shown in the displayed student list.
