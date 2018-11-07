@@ -70,13 +70,13 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
 
         /* ----------------- Performing addsub operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of address book and person list -> success */
+        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index personIndex = INDEX_FIRST_PERSON;
         assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
         assertCommandSuccess(personIndex, subjectTest);
 
-        /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, person index within bounds of TutorHelper but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -117,7 +117,7 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
 
     /**
      * Adds a subject {@code subject} to the {@code Person}
-     * at the specified {@code index} in {@code model}'s address book.
+     * at the specified {@code index} in {@code model}'s TutorHelper.
      * @return the removed person
      */
     private Person addSubPerson(Model model, Index targetPersonIndex, Subject subject) {

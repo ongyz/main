@@ -78,13 +78,13 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
 
         /* ----------------- Performing addsyll operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of address book and person list -> success */
+        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index personIndex = INDEX_FIRST_PERSON;
         assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
         assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT, syllabusTest);
 
-        /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, person index within bounds of TutorHelper but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -137,7 +137,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
 
     /**
      * Appends a syllabus topic {@code syllabus} to the{@code Subjcct} at the specified {@code subjectIndex} for the
-     * {@code Person} at the specified {@code targetPersonIndex} in {@code model}'s address book.
+     * {@code Person} at the specified {@code targetPersonIndex} in {@code model}'s TutorHelper.
      * @return the updated person
      */
     private Person addSyllPerson(Model model, Index targetPersonIndex, Index subjectIndex, Syllabus syllabus) {

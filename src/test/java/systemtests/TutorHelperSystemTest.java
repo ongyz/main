@@ -139,7 +139,7 @@ public abstract class TutorHelperSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all persons in the TutorHelper.
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
@@ -163,7 +163,7 @@ public abstract class TutorHelperSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all persons in the TutorHelper.
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);

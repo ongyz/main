@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in the TutorHelper.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {

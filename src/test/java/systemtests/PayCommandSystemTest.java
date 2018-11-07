@@ -31,7 +31,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
 
         /* ------------------------ Perform pay operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: Update payment for first person in a non-empty address book,
+        /* Case: Update payment for first person in a non-empty TutorHelper,
          * command with leading spaces and trailing spaces
          * -> pay
          */
@@ -67,7 +67,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), paidPerson);
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: Update payment for last existing person in a non-empty address book */
+        /* Case: Update payment for last existing person in a non-empty TutorHelper */
 
         command = "paid 7 400 8 2018 ";
 
@@ -84,7 +84,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .build();
         assertCommandSuccess(command, toPay, paidPerson);
 
-        /* Case: Edit payment for first person in a non-empty address book -> edit pay */
+        /* Case: Edit payment for first person in a non-empty TutorHelper -> edit pay */
 
         command = "  paid 1 500 8 2018 ";
 
@@ -105,7 +105,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
 
         /* ----------------- Performing payment operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of address book and person list -> success */
+        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
 
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         command = "paid 2 400 8 2018 ";
@@ -124,7 +124,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .build();
         assertCommandSuccess(command, toPay, paidPerson);
 
-        /* Case: filtered person list, person index within bounds of address book and person list -> success */
+        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         command = "  paid 2 100 8 2018 ";
 
@@ -145,7 +145,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
         assertEditPayCommandSuccess(command, index, editedPerson);
 
 
-        /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, person index within bounds of TutorHelper but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);

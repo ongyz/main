@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's syllabus in the address book.
+ * Represents a Person's syllabus in the TutorHelper.
  * Guarantees: immutable; is valid as declared in {@link #isValidSyllabus(String)}
  */
 public class Syllabus {

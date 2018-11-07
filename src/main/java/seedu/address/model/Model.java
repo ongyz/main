@@ -19,26 +19,26 @@ public interface Model {
     ReadOnlyTutorHelper getTutorHelper();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the TutorHelper.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the TutorHelper.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the TutorHelper.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the TutorHelper.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the TutorHelper.
      */
     void updatePerson(Person target, Person editedPerson);
 
@@ -62,27 +62,27 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous TutorHelper states to restore.
      */
     boolean canUndoTutorHelper();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone TutorHelper states to restore.
      */
     boolean canRedoTutorHelper();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's TutorHelper to its previous state.
      */
     void undoTutorHelper();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's TutorHelper to its previously undone state.
      */
     void redoTutorHelper();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current TutorHelper state for undo/redo.
      */
     void commitTutorHelper();
 }
