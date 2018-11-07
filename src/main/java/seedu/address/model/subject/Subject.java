@@ -75,7 +75,7 @@ public class Subject {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getSubjectName() + ": \n");
+        builder.append(getSubjectName() + "\n");
         builder.append(contentToString());
         return builder.toString();
     }
@@ -91,7 +91,7 @@ public class Subject {
         for (int i = 0; i < getSubjectContent().size(); i++) {
             numbering = Index.fromZeroBased(i);
             builder.append(numbering.getOneBased() + ". ")
-                    .append(getSubjectContent().get(i).toString()).append(" \n");
+                    .append(getSubjectContent().get(i).toString()).append("\n");
         }
         return builder.toString();
     }
