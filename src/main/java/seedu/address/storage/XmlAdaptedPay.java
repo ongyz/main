@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.PayCommand;
-import seedu.address.model.person.Payment;
+import seedu.address.model.student.Payment;
 
 /**
  * JAXB-friendly adapted version of Pay
@@ -58,7 +58,7 @@ public class XmlAdaptedPay {
     /**
      * Converts this jaxb-friendly adapted payment object into the model's payment object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student
      */
     public Payment toModelType() throws IllegalValueException {
 

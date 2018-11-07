@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
-import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
+import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalStudents.CARL;
+import static seedu.address.testutil.TypicalStudents.DANIEL;
+import static seedu.address.testutil.TypicalStudents.GEORGE;
+import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,35 +61,35 @@ public class GroupCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noStudentFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         TuitionTimingContainsKeywordsPredicate predicate = new TuitionTimingContainsKeywordsPredicate(" ");
         GroupCommand command = new GroupCommand(predicate, false, false);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
     }
 
     @Test
-    public void execute_keywords_multiplePersonsFound() {
+    public void execute_keywords_multipleStudentsFound() {
         //day predicate
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
         TuitionTimingContainsKeywordsPredicate dayPredicate = new TuitionTimingContainsKeywordsPredicate("Saturday");
         GroupCommand command = new GroupCommand(dayPredicate, true, false);
-        expectedModel.updateFilteredPersonList(dayPredicate);
+        expectedModel.updateFilteredStudentList(dayPredicate);
         expectedModel.sortByTime();
         expectedModel.commitTutorHelper();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, DANIEL), model.getFilteredStudentList());
 
         //time predicate
-        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
         TuitionTimingContainsKeywordsPredicate timePredicate = new TuitionTimingContainsKeywordsPredicate("5:00pm");
         command = new GroupCommand(timePredicate, false, true);
-        expectedModel.updateFilteredPersonList(timePredicate);
+        expectedModel.updateFilteredStudentList(timePredicate);
         expectedModel.sortByDay();
         expectedModel.commitTutorHelper();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredStudentList());
     }
 }

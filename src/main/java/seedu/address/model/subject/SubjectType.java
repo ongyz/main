@@ -18,7 +18,18 @@ public enum SubjectType {
     Physics("Physics"),
     Economics("Economics"),
     Geography("Geography"),
-    History("History");
+    History("History"),
+    English("English"),
+    Art("Art"),
+    Music("Music"),
+    Computing("Computing"),
+    Chinese("Chinese"),
+    Malay("Malay"),
+    Tamil("Tamil"),
+    French("French"),
+    German("German"),
+    Japanese("Japanese"),
+    Literature("Literature");
 
     public final String stringRepresentation;
 

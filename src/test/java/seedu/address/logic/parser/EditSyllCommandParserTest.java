@@ -4,10 +4,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SUBJECT;
@@ -61,11 +61,11 @@ public class EditSyllCommandParserTest {
         Syllabus syllabus = new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true);
 
         assertParseSuccess(parser, "1 1 2 sy/Differentiation",
-                new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_SECOND_SYLLABUS, syllabus));
+                new EditSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_SECOND_SYLLABUS, syllabus));
         assertParseSuccess(parser, "2 3 1 sy/Differentiation",
-                new EditSyllCommand(INDEX_SECOND_PERSON, INDEX_THIRD_SUBJECT, INDEX_FIRST_SYLLABUS, syllabus));
+                new EditSyllCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_SUBJECT, INDEX_FIRST_SYLLABUS, syllabus));
         assertParseSuccess(parser, "1 2 3 sy/Differentiation",
-                new EditSyllCommand(INDEX_FIRST_PERSON, INDEX_SECOND_SUBJECT, INDEX_THIRD_SYLLABUS, syllabus));
+                new EditSyllCommand(INDEX_FIRST_STUDENT, INDEX_SECOND_SUBJECT, INDEX_THIRD_SYLLABUS, syllabus));
     }
 
 }

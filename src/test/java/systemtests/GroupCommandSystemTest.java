@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 
 import org.junit.Test;
 
@@ -25,9 +25,9 @@ public class GroupCommandSystemTest extends TutorHelperSystemTest {
 
         //Groups by day
         String validDayCommand = command + "Monday ";
-        expectedModel.updateFilteredPersonList(new TuitionTimingContainsKeywordsPredicate("Monday"));
-        String expectedResultMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
+        expectedModel.updateFilteredStudentList(new TuitionTimingContainsKeywordsPredicate("Monday"));
+        String expectedResultMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
+                expectedModel.getFilteredStudentList().size());
         assertCommandSuccess(validDayCommand, true, false, expectedModel, expectedResultMessage);
         //Undo sorting by time
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
@@ -35,9 +35,9 @@ public class GroupCommandSystemTest extends TutorHelperSystemTest {
 
         //Groups by time
         String validTimeCommand = command + "5:00pm ";
-        expectedModel.updateFilteredPersonList(new TuitionTimingContainsKeywordsPredicate("5:00pm"));
-        expectedResultMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
+        expectedModel.updateFilteredStudentList(new TuitionTimingContainsKeywordsPredicate("5:00pm"));
+        expectedResultMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
+                expectedModel.getFilteredStudentList().size());
         assertCommandSuccess(validTimeCommand, false, true, expectedModel, expectedResultMessage);
         //Undo sorting by day
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
@@ -51,16 +51,16 @@ public class GroupCommandSystemTest extends TutorHelperSystemTest {
 
         //Group by day and sort by time first
         String firstGroupCommand = command + "Saturday ";
-        expectedModel.updateFilteredPersonList(new TuitionTimingContainsKeywordsPredicate("Saturday"));
-        expectedResultMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
+        expectedModel.updateFilteredStudentList(new TuitionTimingContainsKeywordsPredicate("Saturday"));
+        expectedResultMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW,
+                expectedModel.getFilteredStudentList().size());
         assertCommandSuccess(firstGroupCommand, true, false, expectedModel, expectedResultMessage);
 
         //Followed by grouping by time and sorting by day
         String secondGroupCommand = command + "1:00pm ";
-        expectedModel.updateFilteredPersonList(new TuitionTimingContainsKeywordsPredicate("1:00pm"));
-        expectedResultMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
+        expectedModel.updateFilteredStudentList(new TuitionTimingContainsKeywordsPredicate("1:00pm"));
+        expectedResultMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW,
+                expectedModel.getFilteredStudentList().size());
         assertCommandSuccess(secondGroupCommand, false, true, expectedModel, expectedResultMessage);
 
         //Undo sorting twice

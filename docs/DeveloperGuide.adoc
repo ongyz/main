@@ -230,7 +230,7 @@ image::GroupSequenceDiagram.png[width="650"]
 === Students payment feature
 ==== Current implementation
 
-The Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
+The Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Student>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
 
 Classes that are related to Payment and their functionality are as listed below:
 * `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
@@ -253,16 +253,16 @@ Step 2d. The PayCommandParser method then returns a PayCommand object with payme
 
 Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
 
-Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
+Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Student class.
 
-Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
+Step 2g. Alice student class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updateStudent in model class to modify Alice Student class with the new updated payment.
 
 Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
 
 Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
 [NOTE]
-Payment list will keep up to 5 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
+Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
 [NOTE]
 The maximum amount of payment that can be made each time is $10 000.
 
@@ -275,7 +275,7 @@ image:PaymentSequenceDiagram.png[width="800"]
 === Students edit payment feature
 ==== Current implementation
 
-The Edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
+The Edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Student>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
 
 Classes that are related to Payment and their functionality are as listed below:
 * `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
@@ -298,16 +298,16 @@ Step 2d. The PayCommandParser method then returns a PayCommand object with payme
 
 Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
 
-Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
+Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Student class.
 
-Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
+Step 2g. Alice student class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updateStudent in model class to modify Alice Student class with the new updated payment.
 
 Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
 
 Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
 [NOTE]
-Payment list will keep up to 5 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
+Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
 [NOTE]
 The maximum amount of payment that can be made each time is $10 000.
 
@@ -320,7 +320,7 @@ image:EditPaymentSequenceDiagram.png[width="800"]
 === Tutor's Earnings feature
 ==== Current implementation
 
-The Earnings mechanism is mainly facilitated by the filteredPersonList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
+The Earnings mechanism is mainly facilitated by the filteredStudentList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
 The classes related to Earnings are EarningsCommand, EarningsCommandParser.
 
 * `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
@@ -365,7 +365,7 @@ Classes related to copy command and its functionality are listed below:
 
 * `TutorHelperParser` -- Creates CopySubCommandParser which parses the input from user.
 * `CopySubCommandParser` -- Parses user's input into proper argument and creates CopySubCommand
-* `CopySubCommand` -- Updates the target person based on the argument
+* `CopySubCommand` -- Updates the target student based on the argument
 * `SubjectsUtil` -- Manage the finding and copying aspect of copysub command.
 
 Given below is an example usage scenario with 2 possible outcomes and how to copy function addresses each case.
@@ -443,7 +443,7 @@ image::DeleteSubSequenceDiagram.png[width="650"]
 
 Classes that are related to edit syllabus and their functionality are as listed below:
 * `TutorHelperParser` -- Creates a EditSyllCommandParser object and calls parse method in object to parse user's argument input.
-* `EditSyllCommandParser` -- Analyses the input, checks for any violation of syntax and returns a EditSyllCommand object with the person,subject,syllabus index object as well as the new Syllabus object as the argument.
+* `EditSyllCommandParser` -- Analyses the input, checks for any violation of syntax and returns a EditSyllCommand object with the student,subject,syllabus index object as well as the new Syllabus object as the argument.
 * `EditSyllCommand` -- Locates the corresponding syllabus to update and calls corresponding subject to edit syllabus.
 * `Subject` -- Locates and edits existing syllabus entry with new syllabus entry
 

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
@@ -26,25 +26,25 @@ public class AddSyllCommand extends Command {
 
     public static final String COMMAND_WORD = "addsyll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the person identified "
-            + "by the student index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the student identified "
+            + "by the student index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
             + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
-    public static final String MESSAGE_ADDSYLL_SUCCESS = "Added syllabus to Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_SYLLABUS = "Syllabus is already in Person: %1$s";
+    public static final String MESSAGE_ADDSYLL_SUCCESS = "Added syllabus to Student: %1$s";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS = "Syllabus is already in Student: %1$s";
 
-    private final Index personIndex;
+    private final Index studentIndex;
     private final Index subjectIndex;
     private final Syllabus syllabus;
 
-    public AddSyllCommand(Index personIndex, Index subjectIndex, Syllabus syllabus) {
-        requireNonNull(personIndex);
+    public AddSyllCommand(Index studentIndex, Index subjectIndex, Syllabus syllabus) {
+        requireNonNull(studentIndex);
         requireNonNull(subjectIndex);
         requireNonNull(syllabus);
-        this.personIndex = personIndex;
+        this.studentIndex = studentIndex;
         this.subjectIndex = subjectIndex;
         this.syllabus = syllabus;
     }
@@ -52,41 +52,41 @@ public class AddSyllCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (personIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (studentIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person personTarget = lastShownList.get(personIndex.getZeroBased());
+        Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
 
-        if (subjectIndex.getZeroBased() >= personTarget.getSubjects().size()) {
+        if (subjectIndex.getZeroBased() >= studentTarget.getSubjects().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
         }
 
-        Set<Subject> addedSubjectContent = addSubjectContentTo(personTarget, subjectIndex, syllabus);
-        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, addedSubjectContent);
+        Set<Subject> addedSubjectContent = addSubjectContentTo(studentTarget, subjectIndex, syllabus);
+        Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, addedSubjectContent);
 
-        model.updatePerson(personTarget, personSubjUpdated);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateStudent(studentTarget, studentSubjUpdated);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
-        return new CommandResult(String.format(MESSAGE_ADDSYLL_SUCCESS, personSubjUpdated));
+        return new CommandResult(String.format(MESSAGE_ADDSYLL_SUCCESS, studentSubjUpdated));
     }
 
     /**
      * Add syllabus to the student.
-     * @param personTarget The student to add to.
+     * @param studentTarget The student to add to.
      * @param subjectIndex The index of subject to add to.
      * @param syllabus The syllabus to add.
      * @return a new {@code Set<Subject>} with the specified syllabus added
      */
-    private Set<Subject> addSubjectContentTo(Person personTarget, Index subjectIndex, Syllabus syllabus)
+    private Set<Subject> addSubjectContentTo(Student studentTarget, Index subjectIndex, Syllabus syllabus)
         throws CommandException {
-        List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
+        List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
         Subject selectedSubject = subjects.get(subjectIndex.getZeroBased());
 
         if (selectedSubject.contains(syllabus)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS, personTarget));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS, studentTarget));
         }
 
         Subject updatedSubject = selectedSubject.add(syllabus);
@@ -98,7 +98,7 @@ public class AddSyllCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddSyllCommand // instanceof handles nulls
-                && personIndex.equals(((AddSyllCommand) other).personIndex))
+                && studentIndex.equals(((AddSyllCommand) other).studentIndex))
                 && syllabus.equals(((AddSyllCommand) other).syllabus); // state check
     }
 
@@ -106,7 +106,7 @@ public class AddSyllCommand extends Command {
      * Stores the details of the AddSyll command format.
      */
     public static class AddSyllFormatChecker {
-        public static final int PERSON_INDEX = 0;
+        public static final int STUDENT_INDEX = 0;
         public static final int SUBJECT_INDEX = 1;
         public static final int NUMBER_OF_ARGS = 2;
     }

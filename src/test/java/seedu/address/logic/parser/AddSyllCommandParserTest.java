@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SUBJECT;
 
@@ -21,11 +21,11 @@ public class AddSyllCommandParserTest {
     @Test
     public void parse_validArgs_returnsAddSyllCommand() {
         assertParseSuccess(parser, "1 1 sy/Integration",
-                new AddSyllCommand(INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("Integration")));
+                new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("Integration")));
         assertParseSuccess(parser, "2 3 sy/Kinetics",
-                new AddSyllCommand(INDEX_SECOND_PERSON, INDEX_THIRD_SUBJECT, Syllabus.makeSyllabus("Kinetics")));
+                new AddSyllCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_SUBJECT, Syllabus.makeSyllabus("Kinetics")));
         assertParseSuccess(parser, "1 2 sy/Molecular Biology",
-                new AddSyllCommand(INDEX_FIRST_PERSON, INDEX_SECOND_SUBJECT,
+                new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_SECOND_SUBJECT,
                         Syllabus.makeSyllabus("Molecular Biology")));
     }
 
