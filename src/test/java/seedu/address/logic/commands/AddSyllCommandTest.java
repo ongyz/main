@@ -166,7 +166,6 @@ public class AddSyllCommandTest {
         expectedModel.commitTutorHelper();
 
         // AddSyll -> first student has an added syllabus
-        addSyllCommand.execute(model, commandHistory);
 
         // undo -> reverts TutorHelper back to previous state and filtered student list to show all students
         expectedModel.undoTutorHelper();
