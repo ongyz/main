@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="browser" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@DarkTheme.css">
       <children>
          <Line fx:id="dividerHori" endX="781.0" endY="204.95953369140625" startX="32.29289245605469" startY="204.9595489501953" stroke="#ffffff76" />
