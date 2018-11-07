@@ -25,10 +25,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.SubjectType;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class SubjectsUtilTest {
 
@@ -36,10 +36,10 @@ public class SubjectsUtilTest {
     public ExpectedException thrown = ExpectedException.none();
 
     /**
-     * All the the test under SubjectsUtilTest will be done based on the following person.
-     * Person's details found in {@code CommandTestUtil}
+     * All the the test under SubjectsUtilTest will be done based on the following student.
+     * Student's details found in {@code CommandTestUtil}
      */
-    public final Person sourceAmy = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    public final Student sourceAmy = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                                         .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                                         .withSubjects(VALID_SUBJECT_AMY).withTuitionTiming(VALID_TUITION_TIMING_AMY)
                                         .withSyllabus(INDEX_FIRST_SUBJECT, VALID_SYLLABUS_DIFFERENTIATION)
@@ -79,19 +79,19 @@ public class SubjectsUtilTest {
     }
 
     @Test
-    public void execute_createPersonWithNewSubjects() {
+    public void execute_createStudentWithNewSubjects() {
         List<Subject> subjects = new ArrayList<>(sourceAmy.getSubjects());
         subjects.add(Subject.makeSubject("Chemistry"));
-        Person newPerson = SubjectsUtil.createPersonWithNewSubjects(sourceAmy, new HashSet<>(subjects));
+        Student newStudent = SubjectsUtil.createStudentWithNewSubjects(sourceAmy, new HashSet<>(subjects));
 
-        // Equivalent under isSamePerson()
-        assertTrue(newPerson.isSamePerson(sourceAmy));
+        // Equivalent under isSameStudent()
+        assertTrue(newStudent.isSameStudent(sourceAmy));
 
         // Non-equivalent under equals
-        assertNotEquals(newPerson, sourceAmy);
+        assertNotEquals(newStudent, sourceAmy);
 
         // Number of subject should increase
-        assertTrue(newPerson.getSubjects().size() > sourceAmy.getSubjects().size());
+        assertTrue(newStudent.getSubjects().size() > sourceAmy.getSubjects().size());
     }
 
 }

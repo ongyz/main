@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTutorHelper;
 import seedu.address.model.TutorHelper;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * An Immutable TutorHelper that is serializable to XML format
@@ -18,17 +18,17 @@ import seedu.address.model.person.Person;
 @XmlRootElement(name = "TutorHelper")
 public class XmlSerializableTutorHelper {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedStudent> students;
 
     /**
      * Creates an empty XmlSerializableTutorHelper.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableTutorHelper() {
-        persons = new ArrayList<>();
+        students = new ArrayList<>();
     }
 
     /**
@@ -36,23 +36,23 @@ public class XmlSerializableTutorHelper {
      */
     public XmlSerializableTutorHelper(ReadOnlyTutorHelper src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        students.addAll(src.getStudentList().stream().map(XmlAdaptedStudent::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this TutorHelper into the model's {@code TutorHelper} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedStudent}.
      */
     public TutorHelper toModelType() throws IllegalValueException {
         TutorHelper tutorHelper = new TutorHelper();
-        for (XmlAdaptedPerson p : persons) {
-            Person person = p.toModelType();
-            if (tutorHelper.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (XmlAdaptedStudent p : students) {
+            Student student = p.toModelType();
+            if (tutorHelper.hasStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            tutorHelper.addPerson(person);
+            tutorHelper.addStudent(student);
         }
         return tutorHelper;
     }
@@ -66,6 +66,6 @@ public class XmlSerializableTutorHelper {
         if (!(other instanceof XmlSerializableTutorHelper)) {
             return false;
         }
-        return persons.equals(((XmlSerializableTutorHelper) other).persons);
+        return students.equals(((XmlSerializableTutorHelper) other).students);
     }
 }

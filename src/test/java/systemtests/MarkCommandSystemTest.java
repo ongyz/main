@@ -1,17 +1,17 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.MarkCommand.MESSAGE_MARK_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TestUtil.getStudent;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,7 +27,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
@@ -40,54 +40,55 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
     public void mark() throws CommandException {
         /* ----------------- Performing mark operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: mark the first person in the list, command with leading spaces and trailing spaces -> marked */
+        /* Case: mark the first student in the list, command with leading spaces and trailing spaces -> marked */
         Model expectedModel = getModel();
         String command = "     " + MarkCommand.COMMAND_WORD + "      "
-                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " "
                 + INDEX_FIRST_SUBJECT.getOneBased() + " "
                 + INDEX_FIRST_SYLLABUS.getOneBased() + "       ";
 
-        Person markedPerson = markPerson(expectedModel, INDEX_FIRST_PERSON, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        String expectedResultMessage = String.format(MESSAGE_MARK_SUCCESS, markedPerson);
+        Student markedStudent = markStudent(expectedModel, INDEX_FIRST_STUDENT,
+                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        String expectedResultMessage = String.format(MESSAGE_MARK_SUCCESS, markedStudent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* Case: mark the last person in the list -> marked */
+        /* Case: mark the last student in the list -> marked */
         Model modelBeforeMarkingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeMarkingLast);
-        assertCommandSuccess(lastPersonIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        Index lastStudentIndex = getLastIndex(modelBeforeMarkingLast);
+        assertCommandSuccess(lastStudentIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        /* Case: undo marking the last person in the list -> last person restored */
+        /* Case: undo marking the last student in the list -> last student restored */
         command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeMarkingLast, expectedResultMessage);
 
-        /* Case: redo marking the last person in the list -> last person marked again */
+        /* Case: redo marking the last student in the list -> last student marked again */
         command = RedoCommand.COMMAND_WORD;
-        markPerson(modelBeforeMarkingLast, lastPersonIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        markStudent(modelBeforeMarkingLast, lastStudentIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeMarkingLast, expectedResultMessage);
 
-        /* Case: marking the middle person in the list -> marked */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+        /* Case: marking the middle student in the list -> marked */
+        Index middleStudentIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleStudentIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         /* ------------------ Performing mark operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered person list, mark index within bounds of TutorHelper and person list -> marked */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index personIndex = INDEX_FIRST_PERSON;
-        assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
-        assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, KEYWORD_MATCHING_MEIER);
+        /* Case: filtered student list, mark index within bounds of TutorHelper and student list -> marked */
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        Index studentIndex = INDEX_FIRST_STUDENT;
+        assertTrue(studentIndex.getZeroBased() < expectedModel.getFilteredStudentList().size());
+        assertCommandSuccess(studentIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, KEYWORD_MATCHING_MEIER);
 
-        /* Case: filtered person list, mark index within bounds of TutorHelper but out of bounds of person list
+        /* Case: filtered student list, mark index within bounds of TutorHelper but out of bounds of student list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getTutorHelper().getStudentList().size();
         command = MarkCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased()
                 + " " + INDEX_FIRST_SYLLABUS.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
 
@@ -101,9 +102,9 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getTutorHelper().getPersonList().size() + 1);
+                getModel().getTutorHelper().getStudentList().size() + 1);
         command = MarkCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased() + " 1 1";
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(MarkCommand.COMMAND_WORD + " a b c", MESSAGE_INVALID_MARK_COMMAND_FORMAT);
@@ -116,27 +117,27 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
     }
 
     /**
-     * Removes the {@code Person} at the specified {@code index} in {@code model}'s TutorHelper.
-     * @return the removed person
+     * Removes the {@code Student} at the specified {@code index} in {@code model}'s TutorHelper.
+     * @return the removed student
      */
-    private Person markPerson(Model model, Index personIndex, Index subjectIndex, Index syllabusIndex)
+    private Student markStudent(Model model, Index studentIndex, Index subjectIndex, Index syllabusIndex)
             throws CommandException {
-        Person personTarget = getPerson(model, personIndex);
-        List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
+        Student studentTarget = getStudent(model, studentIndex);
+        List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
 
         Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).toggleState(syllabusIndex);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
-        Person personUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, newSubjects);
+        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
 
-        model.updatePerson(personTarget, personUpdated);
-        return personUpdated;
+        model.updateStudent(studentTarget, studentUpdated);
+        return studentUpdated;
     }
 
-    private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex)
+    private void assertCommandSuccess(Index studentIndex, Index subjectIndex, Index syllabusIndex)
             throws CommandException {
-        assertCommandSuccess(personIndex, subjectIndex, syllabusIndex, null);
+        assertCommandSuccess(studentIndex, subjectIndex, syllabusIndex, null);
     }
 
     /**
@@ -149,13 +150,13 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
      * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(Index personIndex, Index subjectIndex, Index syllabusIndex, String filter)
+    private void assertCommandSuccess(Index studentIndex, Index subjectIndex, Index syllabusIndex, String filter)
             throws CommandException {
         Model expectedModel = getModel();
-        Person markedPerson = markPerson(expectedModel, personIndex, subjectIndex, syllabusIndex);
-        String expectedResultMessage = String.format(MESSAGE_MARK_SUCCESS, markedPerson);
+        Student markedStudent = markStudent(expectedModel, studentIndex, subjectIndex, syllabusIndex);
+        String expectedResultMessage = String.format(MESSAGE_MARK_SUCCESS, markedStudent);
         assertCommandSuccess(MarkCommand.COMMAND_WORD
-                + " " + personIndex.getOneBased() + " " + subjectIndex.getOneBased()
+                + " " + studentIndex.getOneBased() + " " + subjectIndex.getOneBased()
                 + " " + syllabusIndex.getOneBased(), expectedModel, expectedResultMessage);
     }
 
@@ -172,7 +173,7 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();

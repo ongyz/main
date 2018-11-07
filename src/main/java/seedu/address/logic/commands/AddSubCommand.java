@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
@@ -49,18 +49,18 @@ public class AddSubCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person studentTarget = lastShownList.get(studentIndex.getZeroBased());
+        Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
         Set<Subject> newSubjects = addSubjectTo(studentTarget, subject);
-        Person updatedStudent = SubjectsUtil.createPersonWithNewSubjects(studentTarget, newSubjects);
+        Student updatedStudent = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
 
-        model.updatePerson(studentTarget, updatedStudent);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateStudent(studentTarget, updatedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_ADDSUB_SUCCESS, studentTarget));
     }
@@ -71,7 +71,7 @@ public class AddSubCommand extends Command {
      * @param subject The subject to add to the student.
      * @return A new {@code Set<Subject>} with the specified subject added.
      */
-    private Set<Subject> addSubjectTo(Person studentTarget, Subject subject)
+    private Set<Subject> addSubjectTo(Student studentTarget, Subject subject)
             throws CommandException {
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
 

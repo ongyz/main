@@ -117,7 +117,7 @@ A student can have any number of tags (including 0), and must have at least 1 su
 * Name cannot contain any integer or symbols.
 * Phone number must have a length of no more or no less than eight integers.
 * Tuition timing has to be contain a valid day and valid timing in 12 hour format.
-* All inputs need to be valid for the person to be successfully added.
+* All inputs need to be valid for the student to be successfully added.
 ****
 
 Examples:

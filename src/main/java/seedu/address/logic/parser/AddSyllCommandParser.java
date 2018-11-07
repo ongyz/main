@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.AddSyllCommand.AddSyllFormatChecker.NUMBER_OF_ARGS;
-import static seedu.address.logic.commands.AddSyllCommand.AddSyllFormatChecker.PERSON_INDEX;
+import static seedu.address.logic.commands.AddSyllCommand.AddSyllFormatChecker.STUDENT_INDEX;
 import static seedu.address.logic.commands.AddSyllCommand.AddSyllFormatChecker.SUBJECT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 
@@ -28,7 +28,7 @@ public class AddSyllCommandParser implements Parser<AddSyllCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SYLLABUS);
 
-        Index personIndex;
+        Index studentIndex;
         Index subjectIndex;
         List<Index> indexList;
 
@@ -44,7 +44,7 @@ public class AddSyllCommandParser implements Parser<AddSyllCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSyllCommand.MESSAGE_USAGE));
         }
 
-        personIndex = getPersonIndex(indexList);
+        studentIndex = getStudentIndex(indexList);
         subjectIndex = getSubjectIndex(indexList);
 
         if (!argMultimap.getValue(PREFIX_SYLLABUS).isPresent()) {
@@ -52,11 +52,11 @@ public class AddSyllCommandParser implements Parser<AddSyllCommand> {
         }
 
         Syllabus syllabus = ParserUtil.parseSyllabus(argMultimap.getValue(PREFIX_SYLLABUS).get());
-        return new AddSyllCommand(personIndex, subjectIndex, syllabus);
+        return new AddSyllCommand(studentIndex, subjectIndex, syllabus);
     }
 
-    private static Index getPersonIndex(List<Index> indexList) {
-        return indexList.get(PERSON_INDEX);
+    private static Index getStudentIndex(List<Index> indexList) {
+        return indexList.get(STUDENT_INDEX);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {

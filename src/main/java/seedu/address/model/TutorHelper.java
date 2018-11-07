@@ -5,17 +5,17 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class TutorHelper implements ReadOnlyTutorHelper {
 
-    private final UniquePersonList persons;
+    private final UniqueStudentList students;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -25,13 +25,13 @@ public class TutorHelper implements ReadOnlyTutorHelper {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        students = new UniqueStudentList();
     }
 
     public TutorHelper() {}
 
     /**
-     * Creates an TutorHelper using the Persons in the {@code toBeCopied}
+     * Creates an TutorHelper using the Students in the {@code toBeCopied}
      */
     public TutorHelper(ReadOnlyTutorHelper toBeCopied) {
         this();
@@ -41,11 +41,11 @@ public class TutorHelper implements ReadOnlyTutorHelper {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the student list with {@code students}.
+     * {@code students} must not contain duplicate students.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setStudents(List<Student> students) {
+        this.students.setStudents(students);
     }
 
     /**
@@ -54,51 +54,52 @@ public class TutorHelper implements ReadOnlyTutorHelper {
     public void resetData(ReadOnlyTutorHelper newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setStudents(newData.getStudentList());
     }
 
-    //// person-level operations
+    //// student-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the TutorHelper.
+     * Returns true if a student with the same identity as {@code student} exists in the TutorHelper.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return students.contains(student);
     }
 
     /**
-     * Adds a person to the TutorHelper.
-     * The person must not already exist in the TutorHelper.
+     * Adds a student to the TutorHelper.
+     * The student must not already exist in the TutorHelper.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addStudent(Student p) {
+        students.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the TutorHelper.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the TutorHelper.
+     * The student identity of {@code editedStudent} must not be the same as
+     * another existing student in the TutorHelper.
      */
-    public void updatePerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
-        persons.setPerson(target, editedPerson);
+    public void updateStudent(Student target, Student editedStudent) {
+        requireNonNull(editedStudent);
+        students.setStudent(target, editedStudent);
     }
 
     /**
      * Removes {@code key} from this {@code TutorHelper}.
      * {@code key} must exist in the TutorHelper.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeStudent(Student key) {
+        students.remove(key);
     }
 
     /**
      * Sorts the list based on day.
      */
     public void sortByDay() {
-        ObservableList<Person> personList = persons.asModifiableObservableList();
-        personList.sort(((p1, p2) -> {
+        ObservableList<Student> studentList = students.asModifiableObservableList();
+        studentList.sort(((p1, p2) -> {
             int p1Day = p1.getTuitionTiming().day.getValue();
             int p2Day = p2.getTuitionTiming().day.getValue();
 
@@ -116,8 +117,8 @@ public class TutorHelper implements ReadOnlyTutorHelper {
      * Sorts the list based on time.
      */
     public void sortByTime() {
-        ObservableList<Person> personList = persons.asModifiableObservableList();
-        personList.sort((p1, p2) -> {
+        ObservableList<Student> studentList = students.asModifiableObservableList();
+        studentList.sort((p1, p2) -> {
             String time1 = TuitionTiming.convertTwelveHourToTwentyFourHour(p1.getTuitionTiming().time);
             String time2 = TuitionTiming.convertTwelveHourToTwentyFourHour(p2.getTuitionTiming().time);
             assert time1 != null : "time1 should not be null";
@@ -137,24 +138,24 @@ public class TutorHelper implements ReadOnlyTutorHelper {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return students.asUnmodifiableObservableList().size() + " students";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Student> getStudentList() {
+        return students.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TutorHelper // instanceof handles nulls
-                && persons.equals(((TutorHelper) other).persons));
+                && students.equals(((TutorHelper) other).students));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return students.hashCode();
     }
 }

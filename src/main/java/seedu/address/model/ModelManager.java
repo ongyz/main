@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TutorHelperChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the in-memory model of the TutorHelper data.
@@ -21,7 +21,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedTutorHelper versionedTutorHelper;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given TutorHelper and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with tutor helper: " + tutorHelper + " and user prefs " + userPrefs);
 
         versionedTutorHelper = new VersionedTutorHelper(tutorHelper);
-        filteredPersons = new FilteredList<>(versionedTutorHelper.getPersonList());
+        filteredStudents = new FilteredList<>(versionedTutorHelper.getStudentList());
     }
 
     public ModelManager() {
@@ -57,30 +57,30 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedTutorHelper.hasPerson(person);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return versionedTutorHelper.hasStudent(student);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        versionedTutorHelper.removePerson(target);
+    public void deleteStudent(Student target) {
+        versionedTutorHelper.removeStudent(target);
         indicateTutorHelperChanged();
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedTutorHelper.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addStudent(Student student) {
+        versionedTutorHelper.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         indicateTutorHelperChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void updateStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
 
-        versionedTutorHelper.updatePerson(target, editedPerson);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        versionedTutorHelper.updateStudent(target, editedStudent);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         indicateTutorHelperChanged();
     }
 
@@ -96,34 +96,34 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTutorHelperChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
      * {@code versionedTutorHelper}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Student> getFilteredStudentList() {
 
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+        return FXCollections.unmodifiableObservableList(filteredStudents);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredStudents.setPredicate(predicate);
     }
 
     /**
-     * Updates the filtered persons with 2 predicates.
+     * Updates the filtered students with 2 predicates.
      * @param predicate1 The first predicate.
      * @param predicate2 The second predicate.
      */
-    public void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2) {
+    public void updateFilteredStudentList(Predicate<Student> predicate1, Predicate<Student> predicate2) {
         requireNonNull(predicate1);
         requireNonNull(predicate2);
-        filteredPersons.setPredicate(predicate1);
-        filteredPersons.setPredicate(predicate2);
+        filteredStudents.setPredicate(predicate1);
+        filteredStudents.setPredicate(predicate2);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -170,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedTutorHelper.equals(other.versionedTutorHelper)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredStudents.equals(other.filteredStudents);
     }
 
 }

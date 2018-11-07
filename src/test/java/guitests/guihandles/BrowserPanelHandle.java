@@ -7,8 +7,8 @@ import javafx.concurrent.Worker;
 import javafx.scene.Node;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
 
 /**
  * A handler for the {@code BrowserPanel} of the UI.
@@ -43,36 +43,36 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Translates the given URL into the equivalent {@code Person}
+     * Translates the given URL into the equivalent {@code Student}
      */
-    public Person getLoadedPerson() {
+    public Student getLoadedStudent() {
         String query = getLoadedUrl().getQuery()
                 .replaceAll("\\[", "")
                 .replaceAll("\\]", "")
                 .replaceAll("%20", " ");
-        String[] personDataDecoded = query.split("&");
-        PersonBuilder createdPerson = new PersonBuilder();
+        String[] studentDataDecoded = query.split("&");
+        StudentBuilder createdStudent = new StudentBuilder();
 
-        for (String encodedData: personDataDecoded) {
+        for (String encodedData: studentDataDecoded) {
             String[] idAndValue = encodedData.split("=");
             switch(idAndValue[0]) {
             case "name":
-                createdPerson.withName(idAndValue[1]);
+                createdStudent.withName(idAndValue[1]);
                 break;
             case "phone":
-                createdPerson.withPhone(idAndValue[1]);
+                createdStudent.withPhone(idAndValue[1]);
                 break;
             case "email":
-                createdPerson.withEmail(idAndValue[1]);
+                createdStudent.withEmail(idAndValue[1]);
                 break;
             case "address":
-                createdPerson.withAddress(idAndValue[1]);
+                createdStudent.withAddress(idAndValue[1]);
                 break;
             default:
                 break;
             }
         }
-        return createdPerson.build();
+        return createdStudent.build();
     }
 
     /**
