@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
@@ -47,18 +47,18 @@ public class DeleteSubCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person studentTarget = lastShownList.get(studentIndex.getZeroBased());
+        Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
         Set<Subject> newSubjects = removeSubjectFrom(studentTarget);
-        Person updatedStudent = SubjectsUtil.createPersonWithNewSubjects(studentTarget, newSubjects);
+        Student updatedStudent = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
 
-        model.updatePerson(studentTarget, updatedStudent);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateStudent(studentTarget, updatedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_DELETESUB_SUCCESS, studentTarget));
     }
@@ -68,7 +68,7 @@ public class DeleteSubCommand extends Command {
      * @param studentTarget The student to add the subject to.
      * @return A new {@code Set<Subject>} without the subject.
      */
-    private Set<Subject> removeSubjectFrom(Person studentTarget)
+    private Set<Subject> removeSubjectFrom(Student studentTarget)
             throws CommandException {
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
 

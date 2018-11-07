@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.EditSyllCommand.EditSyllFormatChecker.NUMBER_OF_ARGS;
-import static seedu.address.logic.commands.EditSyllCommand.EditSyllFormatChecker.PERSON_INDEX;
+import static seedu.address.logic.commands.EditSyllCommand.EditSyllFormatChecker.STUDENT_INDEX;
 import static seedu.address.logic.commands.EditSyllCommand.EditSyllFormatChecker.SUBJECT_INDEX;
 import static seedu.address.logic.commands.EditSyllCommand.EditSyllFormatChecker.SYLLABUS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
@@ -28,7 +28,7 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SYLLABUS);
 
-        Index personIndex;
+        Index studentIndex;
         Index subjectIndex;
         Index syllabusIndex;
         List<Index> indexList;
@@ -45,7 +45,7 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
         }
 
-        personIndex = getPersonIndex(indexList);
+        studentIndex = getStudentIndex(indexList);
         subjectIndex = getSubjectIndex(indexList);
         syllabusIndex = getSyllabusIndex(indexList);
 
@@ -54,11 +54,11 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
         }
 
         Syllabus syllabus = ParserUtil.parseSyllabus(argMultimap.getValue(PREFIX_SYLLABUS).get());
-        return new EditSyllCommand(personIndex, subjectIndex, syllabusIndex, syllabus);
+        return new EditSyllCommand(studentIndex, subjectIndex, syllabusIndex, syllabus);
     }
 
-    private static Index getPersonIndex(List<Index> indexList) {
-        return indexList.get(PERSON_INDEX);
+    private static Index getStudentIndex(List<Index> indexList) {
+        return indexList.get(STUDENT_INDEX);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {

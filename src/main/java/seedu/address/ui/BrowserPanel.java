@@ -15,8 +15,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.Line;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.commons.events.ui.StudentPanelSelectionChangedEvent;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 
 /**
@@ -93,16 +93,16 @@ public class BrowserPanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        loadPersonPage(null);
+        loadStudentPage(null);
         registerAsAnEventHandler(this);
     }
 
     /**
-     * Loads a person's information into the AnchorPane.
-     * @param person The person whose page is to be loaded into the AnchorPane.
+     * Loads a student's information into the AnchorPane.
+     * @param student The student whose page is to be loaded into the AnchorPane.
      */
-    private void loadPersonPage(Person person) {
-        if (person != null) {
+    private void loadStudentPage(Student student) {
+        if (student != null) {
 
             setBackgroundState(true);
             // Clear previous information
@@ -113,35 +113,35 @@ public class BrowserPanel extends UiPart<Region> {
             paymentYear.getChildren().clear();
             subjectList.getChildren().clear();
 
-            // Fill the labels with info from the person object.
-            nameLabel.setText(person.getName().fullName);
-            addressLabel.setText(person.getAddress().value);
-            emailLabel.setText(person.getEmail().value);
-            phoneLabel.setText(person.getPhone().value);
+            // Fill the labels with info from the student object.
+            nameLabel.setText(student.getName().fullName);
+            addressLabel.setText(student.getAddress().value);
+            emailLabel.setText(student.getEmail().value);
+            phoneLabel.setText(student.getPhone().value);
 
-            tuitionTimingDayLabel.setText(person.getTuitionTiming().day.toString().substring(0, 3));
-            tuitionTimingTimeLabel.setText(person.getTuitionTiming().time);
+            tuitionTimingDayLabel.setText(student.getTuitionTiming().day.toString().substring(0, 3));
+            tuitionTimingTimeLabel.setText(student.getTuitionTiming().time);
 
-            person.getSubjects().forEach(subject -> subjectsShort.getChildren().add(
+            student.getSubjects().forEach(subject -> subjectsShort.getChildren().add(
                     new Label(subject.getSubjectName())));
-            person.getTags().forEach(tag -> tagsShort.getChildren().add(new Label(tag.tagName)));
+            student.getTags().forEach(tag -> tagsShort.getChildren().add(new Label(tag.tagName)));
 
-            person.getPayments().forEach(amount -> paymentAmount.getChildren().add(
+            student.getPayments().forEach(amount -> paymentAmount.getChildren().add(
                     new Label(String.valueOf(amount.getAmount()))));
-            person.getPayments().forEach(amount -> paymentMonth.getChildren().add(
+            student.getPayments().forEach(amount -> paymentMonth.getChildren().add(
                     new Label(String.valueOf(amount.getMonth()))));
-            person.getPayments().forEach(amount -> paymentYear.getChildren().add(
+            student.getPayments().forEach(amount -> paymentYear.getChildren().add(
                     new Label(String.valueOf(amount.getYear()))));
 
-            for (int i = 0; i < person.getSubjects().size(); i++) {
-                List<Subject> subject = new ArrayList<>(person.getSubjects());
+            for (int i = 0; i < student.getSubjects().size(); i++) {
+                List<Subject> subject = new ArrayList<>(student.getSubjects());
                 Index currentIndex = Index.fromZeroBased(i);
                 subjectList.getChildren().add(
-                        new Label(currentIndex.getOneBased() + ". " + subject.get(i).toString()));
+                        new Label("(" + currentIndex.getOneBased() + ") " + subject.get(i).toString()));
             }
 
         } else {
-            // Person is null, remove all the text.
+            // Student is null, remove all the text.
             nameLabel.setText("");
             addressLabel.setText("");
             emailLabel.setText("");
@@ -172,8 +172,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleStudentPanelSelectionChangedEvent(StudentPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        loadStudentPage(event.getNewSelection());
     }
 }

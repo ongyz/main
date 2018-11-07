@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,27 +11,27 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Payment;
+import seedu.address.model.student.Student;
 
 
 /**
- * Add payment details of an existing person in the TutorHelper.
+ * Add payment details of an existing student in the TutorHelper.
  */
 public class PayCommand extends Command {
     public static final String COMMAND_WORD = "paid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Updates if a person has paid.\n"
+            + ": Updates if a student has paid.\n"
             + "Parameters: "
             + "INDEX AMOUNT MONTH YEAR \n"
             + "Example: " + COMMAND_WORD + " 1 200 08 2018 ";
 
-    public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this person is added: %1$s";
-    public static final String MESSAGE_EDITPAYMENT_SUCCESS = "Payment for this person has been edited: %1$s";
+    public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this student is added: %1$s";
+    public static final String MESSAGE_EDITPAYMENT_SUCCESS = "Payment for this student has been edited: %1$s";
 
     private static final int MINVALUE = -1;
-    private static final int MAXPAYMENTSDISPLAYED = 9;
+    private static final int MAXPAYMENTSDISPLAYED = 5;
 
     private Index targetIndex;
     private Payment newPayment;
@@ -45,15 +45,15 @@ public class PayCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         boolean editEntry;
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() <= MINVALUE) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person personTarget = lastShownList.get(targetIndex.getZeroBased());
+        Student studentTarget = lastShownList.get(targetIndex.getZeroBased());
 
-        List<Payment> pay = personTarget.getPayments();
+        List<Payment> pay = studentTarget.getPayments();
 
         editEntry = findPaymentToUpdate(pay, newPayment);
 
@@ -61,28 +61,28 @@ public class PayCommand extends Command {
             if (pay.size() > MAXPAYMENTSDISPLAYED) {
                 pay.remove(0);
             }
-            pay = updatePayment(personTarget.getPayments(), newPayment);
+            pay = updatePayment(studentTarget.getPayments(), newPayment);
         } else {
             pay = editPaymentField(pay, newPayment);
         }
 
-        Person personToPay = new Person(personTarget.getName(), personTarget.getPhone(),
-                personTarget.getEmail(), personTarget.getAddress(), personTarget.getSubjects(),
-                personTarget.getTuitionTiming(), personTarget.getTags(), pay);
+        Student studentToPay = new Student(studentTarget.getName(), studentTarget.getPhone(),
+                studentTarget.getEmail(), studentTarget.getAddress(), studentTarget.getSubjects(),
+                studentTarget.getTuitionTiming(), studentTarget.getTags(), pay);
 
-        model.updatePerson(personTarget, personToPay);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateStudent(studentTarget, studentToPay);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         if (editEntry) {
-            return new CommandResult(String.format(MESSAGE_EDITPAYMENT_SUCCESS, personToPay));
+            return new CommandResult(String.format(MESSAGE_EDITPAYMENT_SUCCESS, studentToPay));
         } else {
-            return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, personToPay));
+            return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, studentToPay));
         }
     }
 
     /**
-     * Update payment for this person and returns a new instance of this person.
-     * @return the same person but updated with payment.
+     * Update payment for this student and returns a new instance of this student.
+     * @return the same student but updated with payment.
      */
     public List<Payment> updatePayment(List<Payment> oldPayments, Payment newPayment) {
         List<Payment> updatedPayment = new ArrayList<>(oldPayments);
@@ -91,7 +91,7 @@ public class PayCommand extends Command {
     }
 
     /**
-     * Checks if person to edit has the payment field.
+     * Checks if student to edit has the payment field.
      * @param payments the list of payment to check for entry with same details.
      * @param toFind the payment entry to edit.
      * @return true if payment field has already existed; false otherwise.

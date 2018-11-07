@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
 
 import org.junit.Test;
 
@@ -22,11 +22,11 @@ public class AddSubCommandParserTest {
     @Test
     public void parse_validArgs_returnsAddSubCommand() {
         assertParseSuccess(parser, "1 s/Physics",
-                new AddSubCommand(INDEX_FIRST_PERSON, Subject.makeSubject("Physics")));
+                new AddSubCommand(INDEX_FIRST_STUDENT, Subject.makeSubject("Physics")));
         assertParseSuccess(parser, "2 s/Mathematics",
-                new AddSubCommand(INDEX_SECOND_PERSON, Subject.makeSubject("Mathematics")));
+                new AddSubCommand(INDEX_SECOND_STUDENT, Subject.makeSubject("Mathematics")));
         assertParseSuccess(parser, "3 s/Chemistry",
-                new AddSubCommand(INDEX_THIRD_PERSON, Subject.makeSubject("Chemistry")));
+                new AddSubCommand(INDEX_THIRD_STUDENT, Subject.makeSubject("Chemistry")));
     }
 
     @Test

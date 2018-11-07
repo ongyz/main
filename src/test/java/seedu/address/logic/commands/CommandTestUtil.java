@@ -20,9 +20,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorHelper;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -109,14 +109,14 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditStudentDescriptor DESC_AMY;
+    public static final EditCommand.EditStudentDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withEmptyPayments().withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
@@ -144,7 +144,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book and the filtered person list in the {@code actualModel} remain unchanged <br>
+     * - the TutorHelper and the filtered student list in the {@code actualModel} remain unchanged <br>
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
@@ -152,7 +152,7 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         TutorHelper expectedTutorHelper = new TutorHelper(actualModel.getTutorHelper());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -162,31 +162,31 @@ public class CommandTestUtil {
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedTutorHelper, actualModel.getTutorHelper());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
+     * {@code model}'s TutorHelper.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showStudentAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
-        Person person = (Person) model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Student student = (Student) model.getFilteredStudentList().get(targetIndex.getZeroBased());
+        final String[] splitName = student.getName().fullName.split("\\s+");
+        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredStudentList().size());
     }
 
     /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first student in {@code model}'s filtered list from {@code model}'s TutorHelper.
      */
-    public static void deleteFirstPerson(Model model) {
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstPerson);
+    public static void deleteFirstStudent(Model model) {
+        Student firstStudent = model.getFilteredStudentList().get(0);
+        model.deleteStudent(firstStudent);
         model.commitTutorHelper();
     }
 

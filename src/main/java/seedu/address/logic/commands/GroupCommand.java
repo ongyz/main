@@ -34,7 +34,7 @@ public class GroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredStudentList(predicate);
 
         if (this.isDay) {
             assert !this.isTime;
@@ -46,7 +46,7 @@ public class GroupCommand extends Command {
         }
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
+                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size())
         );
     }
 

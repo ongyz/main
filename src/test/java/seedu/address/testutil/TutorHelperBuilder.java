@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.address.model.TutorHelper;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * A utility class to help with building TutorHelper objects.
  * Example usage: <br>
- *     {@code TutorHelper ab = new TutorHelperBuilder().withPerson("John", "Doe").build();}
+ *     {@code TutorHelper ab = new TutorHelperBuilder().withStudent("John", "Doe").build();}
  */
 public class TutorHelperBuilder {
 
@@ -21,10 +21,10 @@ public class TutorHelperBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code TutorHelper} that we are building.
+     * Adds a new {@code Student} to the {@code TutorHelper} that we are building.
      */
-    public TutorHelperBuilder withPerson(Person person) {
-        tutorHelper.addPerson(person);
+    public TutorHelperBuilder withStudent(Student student) {
+        tutorHelper.addStudent(student);
         return this;
     }
 

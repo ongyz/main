@@ -80,6 +80,10 @@ public class Subject {
         return builder.toString();
     }
 
+    /**
+     * Returns a string containing information regarding the syllabus topics of the subject.
+     * @return The string representation of the syllabus topics.
+     */
     public String contentToString() {
         final StringBuilder builder = new StringBuilder();
         Index numbering;
@@ -87,7 +91,7 @@ public class Subject {
         for (int i = 0; i < getSubjectContent().size(); i++) {
             numbering = Index.fromZeroBased(i);
             builder.append(numbering.getOneBased() + ". ")
-                    .append(getSubjectContent().get(i).toString()).append(" \n");
+                    .append(getSubjectContent().get(i).toString()).append("\n");
         }
         return builder.toString();
     }
