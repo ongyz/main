@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,9 +20,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.testutil.StudentBuilder;
 
 public class TutorHelperTest {
 
@@ -33,7 +33,7 @@ public class TutorHelperTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), tutorHelper.getPersonList());
+        assertEquals(Collections.emptyList(), tutorHelper.getStudentList());
     }
 
     @Test
@@ -50,78 +50,78 @@ public class TutorHelperTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withTuitionTiming(VALID_TUITION_TIMING_BOB)
+    public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
+        // Two students with the same identity fields
+        Student editedAlice = new StudentBuilder(ALICE).withTuitionTiming(VALID_TUITION_TIMING_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
 
-        thrown.expect(DuplicatePersonException.class);
-        TutorHelperStub newData = new TutorHelperStub(newPersons);
+        thrown.expect(DuplicateStudentException.class);
+        TutorHelperStub newData = new TutorHelperStub(newStudents);
 
         tutorHelper.resetData(newData);
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasStudent_nullStudent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        tutorHelper.hasPerson(null);
+        tutorHelper.hasStudent(null);
     }
 
     @Test
-    public void hasPerson_personNotInTutorHelper_returnsFalse() {
-        assertFalse(tutorHelper.hasPerson(ALICE));
+    public void hasStudent_studentNotInTutorHelper_returnsFalse() {
+        assertFalse(tutorHelper.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInTutorHelper_returnsTrue() {
-        tutorHelper.addPerson(ALICE);
-        assertTrue(tutorHelper.hasPerson(ALICE));
+    public void hasStudent_studentInTutorHelper_returnsTrue() {
+        tutorHelper.addStudent(ALICE);
+        assertTrue(tutorHelper.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInTutorHelper_returnsTrue() {
-        tutorHelper.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withTuitionTiming(VALID_TUITION_TIMING_BOB)
+    public void hasStudent_studentWithSameIdentityFieldsInTutorHelper_returnsTrue() {
+        tutorHelper.addStudent(ALICE);
+        Student editedAlice = new StudentBuilder(ALICE).withTuitionTiming(VALID_TUITION_TIMING_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(tutorHelper.hasPerson(editedAlice));
+        assertTrue(tutorHelper.hasStudent(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        tutorHelper.getPersonList().remove(0);
+        tutorHelper.getStudentList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyTutorHelper whose persons list can violate interface constraints.
+     * A stub ReadOnlyTutorHelper whose students list can violate interface constraints.
      */
     private static class TutorHelperStub implements ReadOnlyTutorHelper {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Student> students = FXCollections.observableArrayList();
 
-        TutorHelperStub(Collection<Person> persons) throws DuplicatePersonException {
-            if (hasDuplicatePersons(persons)) {
-                throw new DuplicatePersonException();
+        TutorHelperStub(Collection<Student> students) throws DuplicateStudentException {
+            if (hasDuplicateStudents(students)) {
+                throw new DuplicateStudentException();
             }
-            this.persons.setAll(persons);
+            this.students.setAll(students);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Student> getStudentList() {
+            return students;
         }
 
         /**
-         * Returns true if there is multiple person in the given collection.
+         * Returns true if there is multiple student in the given collection.
          */
-        private boolean hasDuplicatePersons (Collection<Person> persons) {
-            List<Person> personsList = persons.stream().collect(Collectors.toList());
-            if (personsList.size() <= 1) {
+        private boolean hasDuplicateStudents (Collection<Student> students) {
+            List<Student> studentsList = students.stream().collect(Collectors.toList());
+            if (studentsList.size() <= 1) {
                 return false;
             }
-            for (int i = 0; i < personsList.size(); i++) {
-                for (int j = i + 1; j < personsList.size(); j++) {
-                    if (personsList.get(i).isSamePerson(personsList.get(j))) {
+            for (int i = 0; i < studentsList.size(); i++) {
+                for (int j = i + 1; j < studentsList.size(); j++) {
+                    if (studentsList.get(i).isSameStudent(studentsList.get(j))) {
                         return true;
                     }
                 }

@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.address.logic.commands.EarningsCommand;
-import seedu.address.model.person.Payment;
+import seedu.address.model.student.Payment;
 
 public class EarningsCommandParserTest {
 

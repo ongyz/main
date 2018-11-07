@@ -7,8 +7,8 @@ import java.util.List;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Payment;
+import seedu.address.model.student.Student;
 
 /**
  * Displays earning of the month, year.
@@ -35,12 +35,12 @@ public class EarningsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         for (int i = 0; i < lastShownList.size(); i++) {
-            List<Payment> personPaymentsList = lastShownList.get(i).getPayments();
-            for (int j = 0; j < personPaymentsList.size(); j++) {
-                Payment thisPayment = personPaymentsList.get(j);
+            List<Payment> studentPaymentsList = lastShownList.get(i).getPayments();
+            for (int j = 0; j < studentPaymentsList.size(); j++) {
+                Payment thisPayment = studentPaymentsList.get(j);
                 if (thisPayment.getMonth() == this.month && thisPayment.getYear() == this.year) {
                     this.earnings += (thisPayment.getAmount());
                 }

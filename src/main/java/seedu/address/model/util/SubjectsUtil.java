@@ -6,20 +6,20 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.SubjectType;
 
 /**
- * Contains utility methods for managing list of subjects of a {@code Person}
+ * Contains utility methods for managing list of subjects of a {@code Student}
  */
 public class SubjectsUtil {
 
     /**
-     * Returns a copy {@code Subject} specified by {@code subjectIndex} from {@code Person}
+     * Returns a copy {@code Subject} specified by {@code subjectIndex} from {@code Student}
      */
-    public static Subject copySubjectFrom(Person person, Index subjectIndex) {
-        List<Subject> sourceSubjects = new ArrayList<>(person.getSubjects());
+    public static Subject copySubjectFrom(Student student, Index subjectIndex) {
+        List<Subject> sourceSubjects = new ArrayList<>(student.getSubjects());
         Subject selectedSubject = sourceSubjects.get(subjectIndex.getZeroBased());
 
         Subject copiedSubject = new Subject(selectedSubject.getSubjectType(),
@@ -30,18 +30,18 @@ public class SubjectsUtil {
     }
 
     /**
-     * Returns true if {@code Person} has the same subject type as {@code SubjectType}
+     * Returns true if {@code Student} has the same subject type as {@code SubjectType}
      */
-    public static boolean hasSubject(Person person, SubjectType type) {
-        return person.getSubjects().stream().anyMatch(subject -> subject.hasTypeOf(type));
+    public static boolean hasSubject(Student student, SubjectType type) {
+        return student.getSubjects().stream().anyMatch(subject -> subject.hasTypeOf(type));
     }
 
     /**
-     * Returns an {@code Optional<Subject>} of the same given type from person
+     * Returns an {@code Optional<Subject>} of the same given type from student
      */
-    public static Optional<Index> findSubjectIndex(Person person, SubjectType type) {
+    public static Optional<Index> findSubjectIndex(Student student, SubjectType type) {
         Optional<Index> index = Optional.empty();
-        List<Subject> subjectList = new ArrayList<>(person.getSubjects());
+        List<Subject> subjectList = new ArrayList<>(student.getSubjects());
         for (int i = 0; i < subjectList.size(); i++) {
             Subject subject = subjectList.get(i);
             if (subject.hasTypeOf(type)) {
@@ -52,14 +52,14 @@ public class SubjectsUtil {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code Person source}
+     * Creates and returns a {@code Student} with the details of {@code Student source}
      * with the updated {@code Set<Subject> subjects}.
-     * @param source the person to be updated
+     * @param source the student to be updated
      * @param subjects the updated subjects
-     * @return a new {@code Person} with updated subjects
+     * @return a new {@code Student} with updated subjects
      */
-    public static Person createPersonWithNewSubjects(Person source, Set<Subject> subjects) {
-        return new Person(source.getName(), source.getPhone(),
+    public static Student createStudentWithNewSubjects(Student source, Set<Subject> subjects) {
+        return new Student(source.getName(), source.getPhone(),
                 source.getEmail(), source.getAddress(), subjects,
                 source.getTuitionTiming(), source.getTags(), source.getPayments());
     }

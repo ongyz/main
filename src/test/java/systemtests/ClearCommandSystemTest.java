@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -36,15 +36,15 @@ public class ClearCommandSystemTest extends TutorHelperSystemTest {
         assertCommandSuccess(command, expectedResultMessage, new ModelManager());
         assertSelectedCardUnchanged();
 
-        /* Case: selects first card in person list and clears TutorHelper -> cleared and no card selected */
+        /* Case: selects first card in student list and clears TutorHelper -> cleared and no card selected */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original TutorHelper
-        selectPerson(Index.fromOneBased(1));
+        selectStudent(Index.fromOneBased(1));
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardDeselected();
 
-        /* Case: filters the person list before clearing -> entire TutorHelper cleared */
+        /* Case: filters the student list before clearing -> entire TutorHelper cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original TutorHelper
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 

@@ -14,6 +14,6 @@ public class TutorHelperChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getPersonList().size();
+        return "number of students " + data.getStudentList().size();
     }
 }

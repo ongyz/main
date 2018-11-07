@@ -1,12 +1,12 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -16,10 +16,9 @@ import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
-
+import seedu.address.model.student.Payment;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
 
 
 public class PayCommandSystemTest extends TutorHelperSystemTest {
@@ -31,16 +30,16 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
 
         /* ------------------------ Perform pay operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: Update payment for first person in a non-empty TutorHelper,
+        /* Case: Update payment for first student in a non-empty TutorHelper,
          * command with leading spaces and trailing spaces
          * -> pay
          */
 
         String command = "  paid 1 400 8 2018 ";
 
-        Person toPay = model.getFilteredPersonList().get(0);
+        Student toPay = model.getFilteredStudentList().get(0);
 
-        Person paidPerson = new PersonBuilder().withName("Alice Pauline")
+        Student paidStudent = new StudentBuilder().withName("Alice Pauline")
                 .withPhone("94351253")
                 .withEmail("alice@example.com")
                 .withAddress("123, Jurong West Ave 6, #08-111")
@@ -51,29 +50,29 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withPayments("1 400 8 2018")
                 .build();
 
-        assertCommandSuccess(command, toPay, paidPerson);
+        assertCommandSuccess(command, toPay, paidStudent);
 
-        /* Case: undo paying Alice(First person) in the list -> Alice restored */
+        /* Case: undo paying Alice(First student) in the list -> Alice restored */
 
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: redo paying Alice(First person) in the list -> Alice has paid again */
+        /* Case: redo paying Alice(First student) in the list -> Alice has paid again */
 
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.updatePerson(
-                getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), paidPerson);
+        model.updateStudent(
+                getModel().getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()), paidStudent);
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: Update payment for last existing person in a non-empty TutorHelper */
+        /* Case: Update payment for last existing student in a non-empty TutorHelper */
 
         command = "paid 7 400 8 2018 ";
 
-        toPay = model.getFilteredPersonList().get(6);
+        toPay = model.getFilteredStudentList().get(6);
 
-        paidPerson = new PersonBuilder().withName("George Best")
+        paidStudent = new StudentBuilder().withName("George Best")
                 .withPhone("9482442")
                 .withEmail("anna@example.com")
                 .withAddress("4th street")
@@ -82,15 +81,15 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withSyllabus(Index.fromOneBased(1), "Macroeconomics")
                 .withPayments("4 400 8 2018")
                 .build();
-        assertCommandSuccess(command, toPay, paidPerson);
+        assertCommandSuccess(command, toPay, paidStudent);
 
-        /* Case: Edit payment for first person in a non-empty TutorHelper -> edit pay */
+        /* Case: Edit payment for first student in a non-empty TutorHelper -> edit pay */
 
         command = "  paid 1 500 8 2018 ";
 
-        Index index = INDEX_FIRST_PERSON;;
+        Index index = INDEX_FIRST_STUDENT;;
 
-        Person editedPerson = new PersonBuilder().withName("Alice Pauline")
+        Student editedStudent = new StudentBuilder().withName("Alice Pauline")
                 .withPhone("94351253")
                 .withEmail("alice@example.com")
                 .withAddress("123, Jurong West Ave 6, #08-111")
@@ -101,17 +100,17 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withPayments("1 500 8 2018")
                 .build();
 
-        assertEditPayCommandSuccess(command, index, editedPerson);
+        assertEditPayCommandSuccess(command, index, editedStudent);
 
         /* ----------------- Performing payment operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
+        /* Case: filtered student list, student index within bounds of TutorHelper and student list -> success */
 
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
         command = "paid 2 400 8 2018 ";
-        toPay = model.getFilteredPersonList().get(3);
+        toPay = model.getFilteredStudentList().get(3);
 
-        paidPerson = new PersonBuilder().withName("Daniel Meier")
+        paidStudent = new StudentBuilder().withName("Daniel Meier")
                 .withPhone("87652533")
                 .withEmail("cornelia@example.com")
                 .withAddress("10th street")
@@ -122,15 +121,15 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withPayments("4 400 8 2018")
                 .withTags("friends")
                 .build();
-        assertCommandSuccess(command, toPay, paidPerson);
+        assertCommandSuccess(command, toPay, paidStudent);
 
-        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        /* Case: filtered student list, student index within bounds of TutorHelper and student list -> success */
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
         command = "  paid 2 100 8 2018 ";
 
-        index = INDEX_SECOND_PERSON;;
+        index = INDEX_SECOND_STUDENT;;
 
-        editedPerson = new PersonBuilder().withName("Daniel Meier")
+        editedStudent = new StudentBuilder().withName("Daniel Meier")
                 .withPhone("87652533")
                 .withEmail("cornelia@example.com")
                 .withAddress("10th street")
@@ -142,26 +141,26 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withTags("friends")
                 .build();
 
-        assertEditPayCommandSuccess(command, index, editedPerson);
+        assertEditPayCommandSuccess(command, index, editedStudent);
 
 
-        /* Case: filtered person list, person index within bounds of TutorHelper but out of bounds of person list
+        /* Case: filtered student list, student index within bounds of TutorHelper but out of bounds of student list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getTutorHelper().getStudentList().size();
         command = PayCommand.COMMAND_WORD + " " + invalidIndex
                 + " 200 8 2018";
-        assertCommandFailure(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
-        /* Case: filtered person list, person index within bounds but syllabus index is out of bounds
+        /* Case: filtered student list, student index within bounds but syllabus index is out of bounds
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        invalidIndex = getModel().getTutorHelper().getPersonList().size();
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        invalidIndex = getModel().getTutorHelper().getStudentList().size();
         command = PayCommand.COMMAND_WORD + " " + invalidIndex
                 + " 200 8 2018";
-        assertCommandFailure(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* ------------------------------- Performing invalid payment operation ---------------------------------- */
 
@@ -177,9 +176,9 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getTutorHelper().getPersonList().size() + 1);
+                getModel().getTutorHelper().getStudentList().size() + 1);
         command = PayCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased() + " 200 8 2018";
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
                 PayCommand.MESSAGE_USAGE));
 
         /* Case: invalid number of arguments (alphabets) -> rejected */
@@ -202,21 +201,21 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(Person)}. Executes {@code command}
+     * Performs the same verification as {@code assertCommandSuccess(Student)}. Executes {@code command}
      * instead.
      */
-    private void assertCommandSuccess(String command, Person original, Person toPay) {
+    private void assertCommandSuccess(String command, Student original, Student toPay) {
         Model expectedModel = getModel();
-        expectedModel.updatePerson(original, toPay);
+        expectedModel.updateStudent(original, toPay);
         String expectedResultMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS, toPay);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Person)} except asserts that
+     * Performs the same verification as {@code assertCommandSuccess(String, Student)} except asserts that
      * the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 2. {@code Storage} and {@code StudentListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
      * @see PayCommandSystemTest
      */
@@ -233,7 +232,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchang
+     * 4. {@code Storage} and {@code StudentListPanel} remain unchang
      * ed.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
@@ -252,15 +251,15 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
-     * 2. Asserts that the model related components are updated to reflect the person at index {@code toEdit} being
-     * updated to values specified {@code editedPerson}.<br>
+     * 2. Asserts that the model related components are updated to reflect the student at index {@code toEdit} being
+     * updated to values specified {@code editedStudent}.<br>
      * @param toEdit the index of the current model's filtered list.
      */
-    private void assertEditPayCommandSuccess(String command, Index toEdit, Person editedPerson) {
+    private void assertEditPayCommandSuccess(String command, Index toEdit, Student editedStudent) {
         Model expectedModel = getModel();
-        Person original = expectedModel.getFilteredPersonList().get(toEdit.getZeroBased());
-        expectedModel.updatePerson(original, editedPerson);
-        String expectedResultMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedPerson);
+        Student original = expectedModel.getFilteredStudentList().get(toEdit.getZeroBased());
+        expectedModel.updateStudent(original, editedStudent);
+        String expectedResultMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedStudent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 

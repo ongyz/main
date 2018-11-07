@@ -1,15 +1,15 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.AddSubCommand.MESSAGE_ADDSUB_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TestUtil.getStudent;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +24,7 @@ import seedu.address.logic.commands.AddSubCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
@@ -39,51 +39,51 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
     public void addsub() {
         /* -------------- Performing addsub operation while an unfiltered list is being shown ------------------*/
 
-        /* Case: add a subject to the first person in the list
+        /* Case: add a subject to the first student in the list
          * command with leading spaces and trailing spaces -> success
          */
         Model expectedModel = getModel();
         String command = "     " + AddSubCommand.COMMAND_WORD + "      "
-                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " "
                 + PREFIX_SUBJECT + "Physics       ";
         Subject subjectTest = Subject.makeSubject("Physics");
-        Person newPerson = addSubPerson(
-                expectedModel, INDEX_FIRST_PERSON, subjectTest);
-        String expectedResultMessage = String.format(MESSAGE_ADDSUB_SUCCESS, newPerson);
+        Student newStudent = addSubStudent(
+                expectedModel, INDEX_FIRST_STUDENT, subjectTest);
+        String expectedResultMessage = String.format(MESSAGE_ADDSUB_SUCCESS, newStudent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* Case: add subject to the last person in the list -> success */
+        /* Case: add subject to the last student in the list -> success */
         Model modelBeforeAppendLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeAppendLast);
-        assertCommandSuccess(lastPersonIndex, subjectTest);
+        Index lastStudentIndex = getLastIndex(modelBeforeAppendLast);
+        assertCommandSuccess(lastStudentIndex, subjectTest);
 
-        /* Case: undo command the last person in the list -> first person subject reverted */
+        /* Case: undo command the last student in the list -> first student subject reverted */
         command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeAppendLast, expectedResultMessage);
 
-        /* Case: redo command the last person in the list -> first person subject restored again */
+        /* Case: redo command the last student in the list -> first student subject restored again */
         command = RedoCommand.COMMAND_WORD;
-        addSubPerson(modelBeforeAppendLast, lastPersonIndex, subjectTest);
+        addSubStudent(modelBeforeAppendLast, lastStudentIndex, subjectTest);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeAppendLast, expectedResultMessage);
 
         /* ----------------- Performing addsub operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of TutorHelper and person list -> success */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index personIndex = INDEX_FIRST_PERSON;
-        assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
-        assertCommandSuccess(personIndex, subjectTest);
+        /* Case: filtered student list, student index within bounds of TutorHelper and student list -> success */
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        Index studentIndex = INDEX_FIRST_STUDENT;
+        assertTrue(studentIndex.getZeroBased() < expectedModel.getFilteredStudentList().size());
+        assertCommandSuccess(studentIndex, subjectTest);
 
-        /* Case: filtered person list, person index within bounds of TutorHelper but out of bounds of person list
+        /* Case: filtered student list, student index within bounds of TutorHelper but out of bounds of student list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getTutorHelper().getStudentList().size();
         command = AddSubCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* ------------------------------- Performing invalid addsub operation ---------------------------------- */
 
@@ -97,10 +97,10 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getTutorHelper().getPersonList().size() + 1);
+                getModel().getTutorHelper().getStudentList().size() + 1);
         command = AddSubCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased()
                 + " " + PREFIX_SUBJECT + ADDSUB_TEST_SUBJECT;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(AddSubCommand.COMMAND_WORD + " a "
@@ -116,20 +116,20 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
     }
 
     /**
-     * Adds a subject {@code subject} to the {@code Person}
+     * Adds a subject {@code subject} to the {@code Student}
      * at the specified {@code index} in {@code model}'s TutorHelper.
-     * @return the removed person
+     * @return the removed student
      */
-    private Person addSubPerson(Model model, Index targetPersonIndex, Subject subject) {
-        Person personTarget = getPerson(model, targetPersonIndex);
-        List<Subject> targetSubjects = new ArrayList<>(personTarget.getSubjects());
+    private Student addSubStudent(Model model, Index targetStudentIndex, Subject subject) {
+        Student studentTarget = getStudent(model, targetStudentIndex);
+        List<Subject> targetSubjects = new ArrayList<>(studentTarget.getSubjects());
         targetSubjects.add(subject);
 
         Set<Subject> newSubjects = new HashSet<>(targetSubjects);
 
-        Person personUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, newSubjects);
-        model.updatePerson(personTarget, personUpdated);
-        return personUpdated;
+        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        model.updateStudent(studentTarget, studentUpdated);
+        return studentUpdated;
     }
 
     /**
@@ -143,14 +143,14 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
      * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
      * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(Index sourcePersonIndex, Subject subject) {
+    private void assertCommandSuccess(Index sourceStudentIndex, Subject subject) {
         Model expectedModel = getModel();
         String command = AddSubCommand.COMMAND_WORD
-                + " " + sourcePersonIndex.getOneBased()
+                + " " + sourceStudentIndex.getOneBased()
                 + " " + PREFIX_SUBJECT + subject.getSubjectName();
-        Person newPerson = addSubPerson(
-                expectedModel, sourcePersonIndex, subject);
-        String expectedResultMessage = String.format(MESSAGE_ADDSUB_SUCCESS, newPerson);
+        Student newStudent = addSubStudent(
+                expectedModel, sourceStudentIndex, subject);
+        String expectedResultMessage = String.format(MESSAGE_ADDSUB_SUCCESS, newStudent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 
@@ -167,7 +167,7 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();

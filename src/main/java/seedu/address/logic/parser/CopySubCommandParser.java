@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.NUMBER_OF_ARGS;
-import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.SOURCE_PERSON_INDEX;
+import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.SOURCE_STUDENT_INDEX;
 import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.SUBJECT_INDEX;
-import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.TARGET_PERSON_INDEX;
+import static seedu.address.logic.commands.CopySubCommand.CopySubFormatChecker.TARGET_STUDENT_INDEX;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ public class CopySubCommandParser implements Parser<CopySubCommand> {
     public CopySubCommand parse(String args) throws ParseException {
         requireNonNull(args);
         List<Index> indexList;
-        Index sourcePersonIndex;
+        Index sourceStudentIndex;
         Index subjectIndex;
-        Index targetPersonIndex;
+        Index targetStudentIndex;
 
         try {
             indexList = ParserUtil.parseIndexes(args);
@@ -42,20 +42,20 @@ public class CopySubCommandParser implements Parser<CopySubCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE));
         }
 
-        sourcePersonIndex = getSourcePersonIndex(indexList);
+        sourceStudentIndex = getSourceStudentIndex(indexList);
         subjectIndex = getSubjectIndex(indexList);
-        targetPersonIndex = getTargetPersonIndex(indexList);
+        targetStudentIndex = getTargetStudentIndex(indexList);
 
-        return new CopySubCommand(sourcePersonIndex, subjectIndex, targetPersonIndex);
+        return new CopySubCommand(sourceStudentIndex, subjectIndex, targetStudentIndex);
     }
 
-    private static Index getSourcePersonIndex(List<Index> indexList) {
-        return indexList.get(SOURCE_PERSON_INDEX);
+    private static Index getSourceStudentIndex(List<Index> indexList) {
+        return indexList.get(SOURCE_STUDENT_INDEX);
     }
     private static Index getSubjectIndex(List<Index> indexList) {
         return indexList.get(SUBJECT_INDEX);
     }
-    private static Index getTargetPersonIndex(List<Index> indexList) {
-        return indexList.get(TARGET_PERSON_INDEX);
+    private static Index getTargetStudentIndex(List<Index> indexList) {
+        return indexList.get(TARGET_STUDENT_INDEX);
     }
 }

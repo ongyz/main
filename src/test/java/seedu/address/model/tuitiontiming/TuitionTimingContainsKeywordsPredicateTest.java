@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
 
 public class TuitionTimingContainsKeywordsPredicateTest {
 
@@ -34,36 +34,36 @@ public class TuitionTimingContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
     public void test_tuitionTimingContainsKeywords_returnsTrue() {
-        Person person = new PersonBuilder().withTuitionTiming("Monday 12:00pm").build();
+        Student student = new StudentBuilder().withTuitionTiming("Monday 12:00pm").build();
 
         //keyword follows day regex
         TuitionTimingContainsKeywordsPredicate predicate = new TuitionTimingContainsKeywordsPredicate("Monday");
-        assertTrue(predicate.test(person));
+        assertTrue(predicate.test(student));
 
         //keyword follows time regex
         predicate = new TuitionTimingContainsKeywordsPredicate("12:00pm");
-        assertTrue(predicate.test(person));
+        assertTrue(predicate.test(student));
     }
 
     @Test
     public void test_tuitionTimingDoesNotContainKeywords_returnsFalse() {
-        Person person = new PersonBuilder().withTuitionTiming("Monday 12:00pm").build();
+        Student student = new StudentBuilder().withTuitionTiming("Monday 12:00pm").build();
 
         //Zero keywords
         TuitionTimingContainsKeywordsPredicate predicate = new TuitionTimingContainsKeywordsPredicate("");
-        assertFalse(predicate.test(person));
+        assertFalse(predicate.test(student));
 
         //Non-matching keywords
         predicate = new TuitionTimingContainsKeywordsPredicate("Tuesday");
-        assertFalse(predicate.test(person));
+        assertFalse(predicate.test(student));
 
         predicate = new TuitionTimingContainsKeywordsPredicate("1:00pm");
-        assertFalse(predicate.test(person));
+        assertFalse(predicate.test(student));
     }
 }

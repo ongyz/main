@@ -7,14 +7,14 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Payment;
+import seedu.address.model.student.Payment;
 
 /**
  * Parses input arguments and creates a new PayCommand object
  */
 public class PayCommandParser implements Parser<PayCommand> {
 
-    private Index personIndex;
+    private Index studentIndex;
     private int amount;
     private int month;
     private int year;
@@ -33,14 +33,14 @@ public class PayCommandParser implements Parser<PayCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
         }
-        String inputPersonIndex = separatedPayment[0];
+        String inputStudentIndex = separatedPayment[0];
         String inputAmount = separatedPayment[1];
         String inputMonth = separatedPayment[2];
         String inputYear = separatedPayment[3];
 
         //Put the arguments into ParserUtil to check for validity
         try {
-            this.personIndex = ParserUtil.parseIndex(inputPersonIndex);
+            this.studentIndex = ParserUtil.parseIndex(inputStudentIndex);
         } catch (ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_INDEX, PayCommand.MESSAGE_USAGE), e);
@@ -65,7 +65,7 @@ public class PayCommandParser implements Parser<PayCommand> {
         }
 
         //all input are valid and can be added
-        Payment payment = new Payment(personIndex, amount, month, year);
+        Payment payment = new Payment(studentIndex, amount, month, year);
         return new PayCommand(payment);
     }
 
