@@ -135,9 +135,8 @@ public class BrowserPanel extends UiPart<Region> {
 
             for (int i = 0; i < person.getSubjects().size(); i++) {
                 List<Subject> subject = new ArrayList<>(person.getSubjects());
-                Index currentIndex = Index.fromZeroBased(i);
                 subjectList.getChildren().add(
-                        new Label(currentIndex.getOneBased() + ". " + subject.get(i).toString()));
+                        new Label(subject.get(i).toString()));
             }
 
         } else {
