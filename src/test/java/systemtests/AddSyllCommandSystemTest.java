@@ -40,7 +40,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
 
     @Test
     public void addsyll() {
-        /* -------------- Performing appendsyll operation while an unfiltered list is being shown ------------------*/
+        /* -------------- Performing addsyll operation while an unfiltered list is being shown ------------------*/
 
         /* Case: append the first subject of the first person in the list with a new syllabus
          * command with leading spaces and trailing spaces -> success
@@ -76,7 +76,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
         Index middlePersonIndex = getMidIndex(getModel());
         assertCommandSuccess(middlePersonIndex, INDEX_FIRST_SUBJECT, syllabusTest);
 
-        /* ----------------- Performing appendsyll operation while a filtered list is being shown ------------------  */
+        /* ----------------- Performing addsyll operation while a filtered list is being shown ------------------  */
 
         /* Case: filtered person list, person index within bounds of address book and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -105,7 +105,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
                 + " " + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING;
         assertCommandFailure(command, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
 
-        /* ------------------------------- Performing invalid appendsyll operation ---------------------------------- */
+        /* ------------------------------- Performing invalid addsyll operation ---------------------------------- */
 
         /* Case: invalid index (0) -> rejected */
         command = AddSyllCommand.COMMAND_WORD + " 0 0 " + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING;
@@ -131,7 +131,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
                 + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING, MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("appENDsyLL 1 1 "
+        assertCommandFailure("aDdsyLL 1 1 "
                 + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING, MESSAGE_UNKNOWN_COMMAND);
     }
 
