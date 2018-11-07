@@ -262,7 +262,7 @@ Step 3. Now, payment details have been updated and the tutor will be able to see
 Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
 [NOTE]
-Payment list will keep up to 5 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
+Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
 [NOTE]
 The maximum amount of payment that can be made each time is $10 000.
 
@@ -307,7 +307,7 @@ Step 3. Now, payment details have been updated and the tutor will be able to see
 Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
 
 [NOTE]
-Payment list will keep up to 5 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
+Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
 [NOTE]
 The maximum amount of payment that can be made each time is $10 000.
 
