@@ -33,14 +33,14 @@ import seedu.address.model.util.SubjectsUtil;
 
 public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
 
-    public static final String APPEND_SYLLABUS_STRING = "AddSyllCommandTest";
+    public static final String ADD_SYLLABUS_STRING = "AddSyllCommandTest";
 
     private static final String MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddSyllCommand.MESSAGE_USAGE);
 
     @Test
-    public void appendsyll() {
-        /* -------------- Performing appendsyll operation while an unfiltered list is being shown ------------------*/
+    public void addsyll() {
+        /* -------------- Performing addsyll operation while an unfiltered list is being shown ------------------*/
 
         /* Case: append the first subject of the first person in the list with a new syllabus
          * command with leading spaces and trailing spaces -> success
@@ -76,7 +76,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
         Index middlePersonIndex = getMidIndex(getModel());
         assertCommandSuccess(middlePersonIndex, INDEX_FIRST_SUBJECT, syllabusTest);
 
-        /* ----------------- Performing appendsyll operation while a filtered list is being shown ------------------  */
+        /* ----------------- Performing addsyll operation while a filtered list is being shown ------------------  */
 
         /* Case: filtered person list, person index within bounds of address book and person list -> success */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -91,7 +91,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
         int invalidIndex = getModel().getTutorHelper().getPersonList().size();
         command = AddSyllCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SUBJECT.getOneBased()
-                + " " + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING;
+                + " " + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered person list, person index within bounds but subject index is out of bounds
@@ -102,37 +102,37 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
                 .get(INDEX_FIRST_PERSON.getZeroBased()).getSubjects().size() + 1;
         command = AddSyllCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + " " + invalidIndex
-                + " " + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING;
+                + " " + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING;
         assertCommandFailure(command, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
 
-        /* ------------------------------- Performing invalid appendsyll operation ---------------------------------- */
+        /* ------------------------------- Performing invalid addsyll operation ---------------------------------- */
 
         /* Case: invalid index (0) -> rejected */
-        command = AddSyllCommand.COMMAND_WORD + " 0 0 " + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING;
+        command = AddSyllCommand.COMMAND_WORD + " 0 0 " + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING;
         assertCommandFailure(command, MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT);
 
         /* Case: invalid index (-1) -> rejected */
-        command = AddSyllCommand.COMMAND_WORD + " -1 -1 " + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING;
+        command = AddSyllCommand.COMMAND_WORD + " -1 -1 " + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING;
         assertCommandFailure(command, MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT);
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
                 getModel().getTutorHelper().getPersonList().size() + 1);
         command = AddSyllCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased()
-                + " " + INDEX_FIRST_SUBJECT.getOneBased() + " " + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING;
+                + " " + INDEX_FIRST_SUBJECT.getOneBased() + " " + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(AddSyllCommand.COMMAND_WORD + " a b "
-                + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING, MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT);
+                + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING, MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT);
 
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(AddSyllCommand.COMMAND_WORD + " 1 1 1 "
-                + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING, MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT);
+                + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING, MESSAGE_INVALID_ADDSYLL_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("appENDsyLL 1 1 "
-                + PREFIX_SYLLABUS + APPEND_SYLLABUS_STRING, MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("aDdsyLL 1 1 "
+                + PREFIX_SYLLABUS + ADD_SYLLABUS_STRING, MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**

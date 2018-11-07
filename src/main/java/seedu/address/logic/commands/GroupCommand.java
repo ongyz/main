@@ -8,14 +8,14 @@ import seedu.address.model.Model;
 import seedu.address.model.tuitiontiming.TuitionTimingContainsKeywordsPredicate;
 
 /**
- * Groups the students in TutorHelper based on their tuition timings.
+ * Groups the students in TutorHelper based on their tuition timings and sorts the list accordingly.
  */
 public class GroupCommand extends Command {
     public static final String COMMAND_WORD = "group";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Groups all students based on the specified DAY "
             + "or TIME and displays them as a list.\n"
-            + "Parameters: KEYWORD\n"
+            + "Parameter: KEYWORD\n"
             + "Examples:\n" + COMMAND_WORD + " Monday\n"
             + COMMAND_WORD + " 12:00pm";
 
@@ -36,10 +36,11 @@ public class GroupCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
 
-        if (this.isDay && !this.isTime) {
+        if (this.isDay) {
+            assert !this.isTime;
             model.sortByTime();
             model.commitTutorHelper();
-        } else if (this.isTime && !this.isDay) {
+        } else if (this.isTime) {
             model.sortByDay();
             model.commitTutorHelper();
         }
