@@ -4,12 +4,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.PayCommand;
-import seedu.address.model.person.Payment;
+import seedu.address.model.student.Payment;
 
 public class PayCommandParserTest {
 
@@ -19,7 +19,7 @@ public class PayCommandParserTest {
         String input = "1 200 8 2008";
 
         PayCommandParser pay = new PayCommandParser();
-        Payment expectedPayment = new Payment(INDEX_FIRST_PERSON, 200, 8, 2008);
+        Payment expectedPayment = new Payment(INDEX_FIRST_STUDENT, 200, 8, 2008);
         assertParseSuccess(pay, input, new PayCommand(expectedPayment));
     }
 

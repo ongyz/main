@@ -25,7 +25,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns TutorHelper in the file or an empty TutorHelper
      */
     public static XmlSerializableTutorHelper loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {

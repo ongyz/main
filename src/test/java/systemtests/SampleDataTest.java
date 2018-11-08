@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 import seedu.address.model.TutorHelper;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
@@ -45,7 +45,7 @@ public class SampleDataTest extends TutorHelperSystemTest {
 
     @Test
     public void tutorHelper_dataFileDoesNotExist_loadSampleData() {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertListMatching(getPersonListPanel(), expectedList);
+        Student[] expectedList = SampleDataUtil.getSampleStudents();
+        assertListMatching(getStudentListPanel(), expectedList);
     }
 }

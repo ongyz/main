@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
@@ -22,21 +22,21 @@ import seedu.address.model.util.SubjectsUtil;
  */
 public class DeleteSyllCommand extends Command {
 
-    public static final String COMMAND_WORD = "erasesyll";
+    public static final String COMMAND_WORD = "deletesyll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the selected syllabus of the "
-            + "person identified by the syllabus index number in the selected student's subject.\n"
+            + "student identified by the syllabus index number in the selected student's subject.\n"
             + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
-    public static final String MESSAGE_DELETESYLL_SUCCESS = "Removed selected syllabus from Person: %1$s";
+    public static final String MESSAGE_DELETESYLL_SUCCESS = "Removed selected syllabus from Student: %1$s";
 
-    private final Index personIndex;
+    private final Index studentIndex;
     private final Index subjectIndex;
     private final Index syllabusIndex;
 
-    public DeleteSyllCommand(Index personIndex, Index subjectIndex, Index syllabusIndex) {
-        this.personIndex = personIndex;
+    public DeleteSyllCommand(Index studentIndex, Index subjectIndex, Index syllabusIndex) {
+        this.studentIndex = studentIndex;
         this.subjectIndex = subjectIndex;
         this.syllabusIndex = syllabusIndex;
     }
@@ -44,31 +44,31 @@ public class DeleteSyllCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (personIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (studentIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person personTarget = lastShownList.get(personIndex.getZeroBased());
+        Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
 
-        Set<Subject> removedSubjectContent = removeSubjectContentFrom(personTarget);
-        Person personSubjUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, removedSubjectContent);
+        Set<Subject> removedSubjectContent = removeSubjectContentFrom(studentTarget);
+        Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, removedSubjectContent);
 
-        model.updatePerson(personTarget, personSubjUpdated);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateStudent(studentTarget, studentSubjUpdated);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
-        return new CommandResult(String.format(MESSAGE_DELETESYLL_SUCCESS, personSubjUpdated));
+        return new CommandResult(String.format(MESSAGE_DELETESYLL_SUCCESS, studentSubjUpdated));
     }
 
     /**
      * Removes syllabus topic from the specified student.
-     * @param personTarget The student to remove from.
+     * @param studentTarget The student to remove from.
      * @return a new {@code Set<Subject>} with the specified syllabus removed
      * @throws CommandException if the index to remove from is invalid
      */
-    private Set<Subject> removeSubjectContentFrom(Person personTarget) throws CommandException {
-        List<Subject> subjects = personTarget.getSubjects().stream().collect(Collectors.toList());
+    private Set<Subject> removeSubjectContentFrom(Student studentTarget) throws CommandException {
+        List<Subject> subjects = studentTarget.getSubjects().stream().collect(Collectors.toList());
 
         if (hasExceededNumberOfSubjects(subjects)) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
@@ -95,7 +95,7 @@ public class DeleteSyllCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteSyllCommand // instanceof handles nulls
-                && personIndex.equals(((DeleteSyllCommand) other).personIndex))
+                && studentIndex.equals(((DeleteSyllCommand) other).studentIndex))
                 && subjectIndex.equals(((DeleteSyllCommand) other).subjectIndex)
                 && syllabusIndex.equals(((DeleteSyllCommand) other).syllabusIndex); // state check
     }
@@ -104,7 +104,7 @@ public class DeleteSyllCommand extends Command {
      * Stores the details of deletesyll command format.
      */
     public static class DeleteSyllFormatChecker {
-        public static final int PERSON_INDEX = 0;
+        public static final int STUDENT_INDEX = 0;
         public static final int SUBJECT_INDEX = 1;
         public static final int SYLLABUS_INDEX = 2;
         public static final int NUMBER_OF_ARGS = 3;
