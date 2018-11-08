@@ -100,6 +100,7 @@ public class EditSyllCommandTest {
         String expectedMessage = String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, studentTarget);
         Student updatedStudent = simulateEditSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
+
         expectedModel.updateStudentInternalField(studentTarget, updatedStudent);
         expectedModel.commitTutorHelper();
 
@@ -158,6 +159,7 @@ public class EditSyllCommandTest {
 
         Student newStudent = simulateEditSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
+
         expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 

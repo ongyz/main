@@ -92,6 +92,7 @@ public class MarkCommandTest {
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, studentTarget);
         Student updatedStudent = simulateMarkCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
+
         expectedModel.updateStudentInternalField(studentTarget, updatedStudent);
         expectedModel.commitTutorHelper();
 
