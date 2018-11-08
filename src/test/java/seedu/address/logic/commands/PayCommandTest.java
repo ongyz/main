@@ -83,8 +83,8 @@ public class PayCommandTest {
         String expectedMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorHelper(model.getTutorHelper()), new UserPrefs());
-        expectedModel.updateStudent(model.getFilteredStudentList().get(0), editedStudent);
-        model.updateStudent(model.getFilteredStudentList().get(0), existingStudent);
+        expectedModel.updateStudentInternalField(model.getFilteredStudentList().get(0), editedStudent);
+        model.updateStudentInternalField(model.getFilteredStudentList().get(0), existingStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(editPayCommand, model, commandHistory, expectedMessage, expectedModel);
