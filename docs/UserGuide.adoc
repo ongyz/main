@@ -44,6 +44,23 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 // tag::validinputs[]
 == Valid Inputs
 
+=== Name
+
+Name should only contain alphabetical characters and spaces, and should not be blank.
+
+=== Phone
+
+Phone numbers should only be 8 digits long and should not contain spaces.
+
+=== Email
+
+* Emails should be of the format `local-part@domain`
+* The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
+* This is followed by a '@' and then a domain name. The domain name must:
+     - be at least 2 characters long
+     - start and end with alphanumeric characters
+     - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
+
 === Subjects
 
 Valid subjects are limited to only the following subjects: +
@@ -61,23 +78,6 @@ Examples:
 * `Ma` will not match `Mathematics` because the length of subtring is shorter than three.
 * `phy` will only match `Physics` and will not match `Geography` as matching is done from the beginning of the string.
 * `Maths` will not match `Mathematics` as it is not a full substring match.
-
-=== Name
-
-Name should only contain alphabetical characters and spaces, and should not be blank.
-
-=== Phone
-
-Phone numbers should only be 8 digits long and should not contain spaces.
-
-=== Email
-
-* Emails should be of the format `local-part@domain`
-* The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
-* This is followed by a '@' and then a domain name. The domain name must:
-     - be at least 2 characters long
-     - start and end with alphanumeric characters
-     - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
 
 === TuitionTiming
 
@@ -115,8 +115,8 @@ A student can have any number of tags (including 0), and must have at least 1 su
 ****
 * Student must not have the same name and one of these fields as an existing student: phone number, email and address.
 * Name cannot contain any integer or symbols.
-* Phone number must have a length of no more or no less than eight integers.
-* Tuition timing has to be contain a valid day and valid timing in 12 hour format.
+* Phone number must only be 8 digits long.
+* Tuition timing has to contain a valid day and valid timing in 12 hour format.
 * All inputs need to be valid for the student to be successfully added.
 ****
 
@@ -212,8 +212,8 @@ Examples:
 
 * `group Monday` +
 Show all classes on Monday, sorted based on timing.
-* `group 12pm` +
-Show all classes at 12pm for the entire week, sorted based on days of the week.
+* `group 12:00pm` +
+Show all classes at 12:00pm for the entire week, sorted based on days of the week.
 // end::group[]
 
 === Select Student : `select`
@@ -548,7 +548,8 @@ e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find Students* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *Group Students* : `group TIMING` +
-e.g `group Monday OR group 12:00pm`
+e.g `group Monday` +
+e.g `group 12:00pm`
 * *Select Student* : `select INDEX` +
 e.g.`select 2`
 * *List Command History* : `history`
