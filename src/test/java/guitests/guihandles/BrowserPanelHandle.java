@@ -45,7 +45,7 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
     }
 
     public boolean isStudentChanged() {
-        return !lastStudent.equals(getLoadedScene());
+        return !lastStudent.equals(getLoadedStudent());
     }
 
     /**
