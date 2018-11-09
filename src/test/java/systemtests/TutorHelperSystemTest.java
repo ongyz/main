@@ -207,7 +207,7 @@ public abstract class TutorHelperSystemTest {
     /**
      * Asserts that the browser's url is changed to display the details of the student in the student list panel at
      * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
-     * @see BrowserPanelHandle#isUrlChanged()
+     * @see BrowserPanelHandle#isStudentChanged()
      * @see StudentListPanelHandle#isSelectedStudentCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
