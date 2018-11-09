@@ -115,7 +115,7 @@ public class Student {
         boolean phoneSame = otherStudent.getPhone().equals(getPhone());
         boolean emailSame = otherStudent.getEmail().equals(getEmail());
         boolean addressSame = otherStudent.getAddress().equals(getAddress());
-        boolean checkSameFields = nameSame && (phoneSame ||  emailSame || addressSame);
+        boolean checkSameFields = nameSame && (phoneSame || emailSame || addressSame);
         return checkSameFields;
     }
 
