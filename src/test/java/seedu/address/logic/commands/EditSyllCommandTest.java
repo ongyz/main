@@ -54,7 +54,7 @@ public class EditSyllCommandTest {
         Student newStudent = simulateEditSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
 
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(editSyllCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -100,7 +100,8 @@ public class EditSyllCommandTest {
         String expectedMessage = String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, studentTarget);
         Student updatedStudent = simulateEditSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
-        expectedModel.updateStudent(studentTarget, updatedStudent);
+
+        expectedModel.updateStudentInternalField(studentTarget, updatedStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(editSyllCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -158,7 +159,8 @@ public class EditSyllCommandTest {
 
         Student newStudent = simulateEditSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
                 new Syllabus(VALID_SYLLABUS_DIFFERENTIATION, true));
-        expectedModel.updateStudent(studentTarget, newStudent);
+
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 
         // DeleteSyll -> first student syllabus is erased

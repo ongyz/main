@@ -55,7 +55,7 @@ public class DeleteSyllCommand extends Command {
         Set<Subject> removedSubjectContent = removeSubjectContentFrom(studentTarget);
         Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, removedSubjectContent);
 
-        model.updateStudent(studentTarget, studentSubjUpdated);
+        model.updateStudentInternalField(studentTarget, studentSubjUpdated);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_DELETESYLL_SUCCESS, studentSubjUpdated));

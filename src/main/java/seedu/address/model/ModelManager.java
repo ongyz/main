@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TutorHelperChangedEvent;
+import seedu.address.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.address.model.student.Student;
 
 /**
@@ -56,6 +57,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TutorHelperChangedEvent(versionedTutorHelper));
     }
 
+    /** Raises an event to indicate the model has changed */
+    private void raiseSelectionChangeEvent(Student student) {
+        raise(new StudentPanelSelectionChangedEvent(student));
+    }
+
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -78,10 +84,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         versionedTutorHelper.updateStudent(target, editedStudent);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         indicateTutorHelperChanged();
+    }
+
+    @Override
+    public void updateStudentInternalField(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        versionedTutorHelper.updateStudent(target, editedStudent);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        indicateTutorHelperChanged();
+        raiseSelectionChangeEvent(editedStudent);
     }
 
     @Override

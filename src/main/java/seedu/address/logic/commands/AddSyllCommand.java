@@ -67,7 +67,7 @@ public class AddSyllCommand extends Command {
         Set<Subject> addedSubjectContent = addSubjectContentTo(studentTarget, subjectIndex, syllabus);
         Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, addedSubjectContent);
 
-        model.updateStudent(studentTarget, studentSubjUpdated);
+        model.updateStudentInternalField(studentTarget, studentSubjUpdated);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_ADDSYLL_SUCCESS, studentSubjUpdated));
