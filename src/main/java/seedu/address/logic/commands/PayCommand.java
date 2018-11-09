@@ -8,6 +8,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -70,12 +71,15 @@ public class PayCommand extends Command {
                 studentTarget.getEmail(), studentTarget.getAddress(), studentTarget.getSubjects(),
                 studentTarget.getTuitionTiming(), studentTarget.getTags(), pay);
 
-        model.updateStudent(studentTarget, studentToPay);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.commitTutorHelper();
         if (editEntry) {
+            model.updateStudentInternalField(studentTarget, studentToPay);
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            model.commitTutorHelper();
             return new CommandResult(String.format(MESSAGE_EDITPAYMENT_SUCCESS, studentToPay));
         } else {
+            model.updateStudent(studentTarget, studentToPay);
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            model.commitTutorHelper();
             return new CommandResult(String.format(MESSAGE_PAYMENT_SUCCESS, studentToPay));
         }
     }

@@ -51,7 +51,7 @@ public class DeleteSyllCommandTest {
 
         Student newStudent = simulateDeleteSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(deleteSyllCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -98,7 +98,7 @@ public class DeleteSyllCommandTest {
 
         String expectedMessage = String.format(DeleteSyllCommand.MESSAGE_DELETESYLL_SUCCESS, studentTarget);
         Student updatedStudent = simulateDeleteSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        expectedModel.updateStudent(studentTarget, updatedStudent);
+        expectedModel.updateStudentInternalField(studentTarget, updatedStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(deleteSyllCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -147,7 +147,7 @@ public class DeleteSyllCommandTest {
         Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Student newStudent = simulateDeleteSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 
         // DeleteSyll -> first student syllabus is erased

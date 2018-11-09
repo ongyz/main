@@ -56,7 +56,7 @@ public class MarkCommand extends Command {
         Set<Subject> updatedSubjectContent = markSubjectContentFrom(studentTarget);
         Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, updatedSubjectContent);
 
-        model.updateStudent(studentTarget, studentSubjUpdated);
+        model.updateStudentInternalField(studentTarget, studentSubjUpdated);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_MARK_SUCCESS, studentSubjUpdated));

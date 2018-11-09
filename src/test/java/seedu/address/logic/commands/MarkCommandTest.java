@@ -50,7 +50,7 @@ public class MarkCommandTest {
 
         Student newStudent = simulateMarkCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(markCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -92,7 +92,8 @@ public class MarkCommandTest {
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, studentTarget);
         Student updatedStudent = simulateMarkCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        expectedModel.updateStudent(studentTarget, updatedStudent);
+
+        expectedModel.updateStudentInternalField(studentTarget, updatedStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(markCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -137,7 +138,7 @@ public class MarkCommandTest {
         Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Student newStudent = simulateMarkCommand(studentTarget, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 
         // mark -> first student marked
