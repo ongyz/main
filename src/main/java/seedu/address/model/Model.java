@@ -44,6 +44,15 @@ public interface Model {
     void updateStudent(Student target, Student editedStudent);
 
     /**
+     * Replaces the given student {@code target} with {@code editedStudent}.
+     * {@code target} must exist in the TutorHelper.
+     * The student identity of {@code editedStudent} must not be the same as
+     * another existing student in the TutorHelper. This is used to update an
+     * internal field of student.
+     */
+    void updateStudentInternalField(Student target, Student editedStudent);
+
+    /**
      * Sorts the list by day.
      */
     void sortByDay();
