@@ -152,7 +152,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `TutorHelperChangedEvent` when the TutorHelper data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -172,7 +172,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -192,9 +192,9 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `TutorHelperParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a student) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -213,12 +213,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the TutorHelper data.
+* exposes an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `TutorHelper`, which `Student` can reference. This would allow `TutorHelper` to only require one `Tag` object per unique `Tag`, instead of each `Student` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -233,12 +233,12 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the TutorHelper data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -715,7 +715,7 @@ Here are the steps to create a new release.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
+A project often depends on third-party libraries. For example, TutorHelper depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
@@ -854,7 +854,7 @@ Value Proposition:
 
     System: TutorHelper
     Actor: Tutor
-    Precondition: Tutor has recorded payment from students before.
+    Precondition: Tutor has recorded payment for students before.
     MSS:
       1. Tutor request for earnings for a specific month and year.
       2. System searches for all the payment records made from all the students for that particular month and year.
@@ -864,6 +864,13 @@ Value Proposition:
      Extensions:
       2a. System does not find any payment recorded for that month and year.
         2a1. System displays $0 as result.
+      2b. Tutor does not enter all the required entries correctly
+        2b1. System displays error message
+        2b2. System gives tutor an example of a correct entry.
+        2b3. Repeat step 1
+      2c. Tutor does not enter a valid entry
+        2c1. System displays error message telling tutor that entry is invalid
+        2c2. Repeat step 1.
 
   9. Edit students' syllabus for that subject
 
@@ -923,6 +930,7 @@ Given below are instructions to test the app manually.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
+
 === Launch and Shutdown
 
 . Initial launch
@@ -937,15 +945,15 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-=== Deleting a person
+=== Deleting a student
 
-. Deleting a person while all persons are listed
+. Deleting a student while all students are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all students using the `list` command. Multiple students in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
@@ -954,3 +962,174 @@ These instructions only provide a starting point for testers to work on; testers
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+
+=== Grouping
+. Grouping by day or time while all persons are listed.
+
+.. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+.. Test case: 'group Monday'
+   Expected: X students listed! (X is the number of students meeting the requirements)
+.. Test case: 'group 3:00pm'
+   Expected: X students listed!
+.. Test case: 'group Monday 3pm'
+   Expected: Invalid command format. Group command message usage is shown.
+.. Other incorrect grouping commands to try 'group', 'group monday', 'group 3pm'
+   Expected: Invalid command format. Group command message usage is shown.
+=== Making Payment for a student
+. Adding a payment while all persons are listed
+
+.. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+.. Test case: 'paid 1 200 8 2018' +
+   Expected: Payment for this student is added. Details of the paid contact shown in the status message.
+.. Test case: 'paid 0 200 8 2018' +
+   Expected: Index is not a non-zero unsigned integer.
+.. Test case: 'paid X 200 8 920' (X is a number greater than the list) +
+   Expected: The student index provided is invalid.
+.. Test case: 'paid 1 -200 8 2018' +
+   Expected: Amount should only contain zero or positive numbers, and has to be smaller than 10 000.
+.. Test case: 'paid 1 200 16 2018' +
+   Expected: Month should only contain numbers between 1 to 12, inclusive.
+.. Test case: 'paid 1 200 8 920' +
+   Expected: Year should only contain 4 digits numbers.
+.. Other incorrect payment commands to try: `paid`, `paid x` (where x is any number), 'paid x 8',
+   'paid x 200 8', 'paid x 200 2018'
+   Expected: Invalid command format. Pay command message usage is shown.
+
+=== Editing Payment for a student
+. Editing a payment while all persons are listed
+
+.. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+.. Prerequisites: Payment for the month and year must have been added previously.
+.. Test case: 'paid 1 200 8 2018' +
+   Expected: Payment for this student has been edited: Details of the paid contact shown in the status message.
+.. Test case: 'paid 0 200 8 2018' +
+   Expected: Index is not a non-zero unsigned integer.
+.. Test case: 'paid X 200 8 920' (X is a number greater than the list) +
+   Expected: The student index provided is invalid.
+.. Test case: 'paid 1 -200 8 2018' +
+   Expected: Amount should only contain zero or positive numbers, and has to be smaller than 10 000.
+.. Test case: 'paid 1 200 16 2018' +
+   Expected: Month should only contain numbers between 1 to 12, inclusive.
+.. Test case: 'paid 1 200 8 920' +
+   Expected: Year should only contain 4 digits numbers.
+.. Other incorrect payment commands to try: `paid`, `paid x` (where x is any number), 'paid x 8',
+   'paid x 200 8', 'paid x 200 2018'
+   Expected: Invalid command format. Pay command message usage is shown.
+
+=== Viewing earnings command
+.. Test case: 'earnings 8 2018'
+   Expected: Earnings: $X (X is the total earnings)
+.. Test case: 'earnings 8 299'
+   Expected: Year should only contain 4 digits numbers.
+.. Test case: 'earnings 0 2018'
+   Expected:  Month should only contain numbers between 1 to 12, inclusive.
+.. Other incorrect earnings commands to try: 'earnings', 'earnings 8', 'earnings 2018'
+   Expected: Invalid command format. Earnings command message usage is shown.
+
+=== Add subject command
+.. Adding a subject to an existing student
+
+.. Prerequisite: TutorHelper is not empty
+.. Test case: 'addsub 1 s/Chemistry'
+   Expected: Added subject to student: Display student details
+.. Test case: 'addsub X s/Chemistry' (X is an invalid student index)
+.. Expected: The student index provided is invalid
+.. Test case: 'addsub 1 s/X' (X is a subject student index 1 is already taking)
+.. Expected: Subject is already taken by student: Display student index.
+.. Other incorrect addsub commands to try: 'addsub', 'addsub 2', 'addsub 1 Physics', 'áddsub Physics'
+.. Expected: Invalid command format. addsub command message usage is shown.
+
+== Delete subject command
+.. Deleting subject from existing student
+
+.. Prerequisite: Tutorhelper is not empty
+.. Test case: 'deletesub 1 1'
+.. Expected: Deleted subject from student: Display student details
+.. Test case: 'deletesub 1 X' (X is an invalid subject index)
+.. Expected: The subject index provided is invalid.
+.. Test case: 'deletesub X 1' (X is an invalid student index)
+.. Expected: The student index provided is invalid
+.. Other incorrect deletesub commands to try: 'deletesub', 'deletesub 1'
+.. Expected: Invalid command format. deletesub command message usage is shown.
+
+
+=== Copy subject command
+.. Copying a subject from one student profile to another student.
+
+.. Prerequisites: Tutorhelper is not empty.
+.. Test case: 'copysub 1 1 2'
+   Expected: Copied syllabus to Student: Display student's details.
+.. Test case: 'copysub 1 X 2' (X is an invalid subject index of the source student)
+   Expected: The subject index provided is invalid
+.. Test case: 'copysub 1 1 X' (X is an invalid student index)
+   Expected: The student index provided is invalid
+.. Test case: 'copysub X 1 1' (X is in invalid student index)
+   Expected: The student index provided is invalid
+.. Test case: 'copysub 1 1 1'
+   Expected: Copying subject to the same student is not allowed: Display student's details.
+.. Test case: 'copysub 1 X 3' (X is an existing subject in student 3)
+   Expected: Copied syllabus to Student: Display destination student details
+.. Other incorrect copysub commands to try: 'copysub', 'copysub 1', 'copysub 1 1'
+   Expected: Invalid command format. copysub command message usage is shown.
+
+== Add syllabus command
+.. Adds a new syllabus topic for a specified student and subject
+
+.. Prerequisite: Tutorhelper must not be empty
+.. Test case: 'addsyll 1 1 sy/Integration'
+.. Expected: Added syllabus to Student: Display destination student details
+.. Test case: 'addsyll X 1 sy/Integration' (X is an invalid student index)
+.. Expected: The student index provided is invalid
+.. Test case: 'addsyll 1 X sy/Integration' (X is an invalid subject index)
+.. Expected: The subject index provided is invalid
+.. Test case: 'addsyll 1 1 sy/X' (X is a syllabus already in student)
+.. Expected: Syllabus is already in Student: Display student details.
+.. Other incorrect addsyll commands to try: 'addsyll', 'addsyll 1', 'addsyll 1 1', 'addsyll 1 1 sy/'
+.. Expected: Invalid command format. addsyll command message usage is shown.
+
+== Delete syllabus command
+.. Deletes a syllabus from an existing student
+
+.. Prerequisite: Tutorhelper must not be empty
+.. Test case: 'deletesyll 1 1 1'
+.. Expected: Removed selected syllabus from Student: Display student's details.
+.. Test case: 'deletesyll X 1 1' (X is an invalid student index)
+.. Expected: The student index provided is invalid
+.. Test case: 'deletesyll 1 X 1' (X is an invalid subject index)
+.. Expected: The subject index provided is invalid
+.. Test case: 'deletesyll 1 1 X' (X is an invalid syllabus index)
+.. Expected: The syllabus index provided is invalid
+.. Other incorrect deletesyll commands to try: 'deletesyll', 'deletesyll 1', 'deletesyll 1 1'
+.. Expected: Invalid command format. deletesyll command message usage is shown.
+
+== Edit syllabus command
+.. Edits a syllabus from an existing student
+
+.. Prerequisite: Tutorhelper must not be empty
+.. Test case: 'editsyll 1 1 1 sy/Integration'
+.. Expected: Edited syllabus to Student: Display student's details.
+.. Test case: 'editsyll X 1 1 sy/Integration' (X is an invalid student index)
+.. Expected: The student index provided is invalid
+.. Test case: 'editsyll 1 X 1 sy/Integration' (X is an invalid subject index)
+.. Expected: The subject index provided is invalid
+.. Test case: 'editsyll 1 1 X sy/Integration' (X is an invalid syllabus index)
+.. Expected: The syllabus index provided is invalid
+.. Test case: 'editsyll 1 1 X sy/' (X is an invalid syllabus index)
+.. Expected: Syllabus can take any values, and it should not be blank or preceded by white space.
+.. Other incorrect editsyll commands to try: 'editsyll', 'editsyll 1', 'editsyll 1 1', 'editsyll 1 1 1'
+.. Expected: Invalid command format. editsyll command message usage is shown.
+
+=== Mark command
+.. Toggles the state of a specified syllabus topic for a specified student and subject.
+
+.. Prerequisite: Tutorhelper must not be empty
+.. Test case: 'mark 1 1 1'
+.. Expected: Changed selected syllabus from Student: Display student's details
+.. Test case: 'mark X 1 1 ' (X is an invalid student index)
+.. Expected: The student index provided is invalid
+.. Test case: 'mark 1 X 1 ' (X is an invalid subject index)
+.. Expected: The subject index provided is invalid
+.. Test case: 'mark 1 1 X ' (X is an invalid syllabus index)
+.. Expected: The syllabus index provided is invalid
+.. Other incorrect mark commands to try: 'mark', 'mark 1', 'mark 1 1'
+.. Expected: Invalid command format. marksyll command message usage is shown.
