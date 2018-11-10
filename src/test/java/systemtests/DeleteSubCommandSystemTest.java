@@ -1,16 +1,16 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteSubCommand.MESSAGE_DELETESUB_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TestUtil.getPerson;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static seedu.address.testutil.TestUtil.getStudent;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +25,7 @@ import seedu.address.logic.commands.DeleteSubCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
@@ -38,54 +38,54 @@ public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
     public void deletesub() {
         /* ----------------- Performing erase operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: delete the first subject of the third person in the list,
+        /* Case: delete the first subject of the third student in the list,
          * command with leading spaces and trailing spaces -> success
          */
         Model lastModel = getModel();
         Model expectedModel = getModel();
         String command = "     " + DeleteSubCommand.COMMAND_WORD + "      "
-                + INDEX_THIRD_PERSON.getOneBased() + " "
+                + INDEX_THIRD_STUDENT.getOneBased() + " "
                 + INDEX_FIRST_SUBJECT.getOneBased() + "       ";
 
-        Person deletedSubPerson = deleteSubPerson(expectedModel, INDEX_THIRD_PERSON, INDEX_FIRST_SUBJECT);
-        String expectedResultMessage = String.format(MESSAGE_DELETESUB_SUCCESS, deletedSubPerson);
+        Student deletedSubStudent = deleteSubStudent(expectedModel, INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
+        String expectedResultMessage = String.format(MESSAGE_DELETESUB_SUCCESS, deletedSubStudent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* Case: undo command  -> third person restored */
+        /* Case: undo command  -> third student restored */
         command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, lastModel, expectedResultMessage);
 
-        /* Case: redo command the last person in the list -> last person syllabus is erased again */
+        /* Case: redo command the last student in the list -> last student syllabus is erased again */
         command = RedoCommand.COMMAND_WORD;
-        deleteSubPerson(lastModel, INDEX_THIRD_PERSON, INDEX_FIRST_SUBJECT);
+        deleteSubStudent(lastModel, INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, lastModel, expectedResultMessage);
 
         /* ----------------- Performing deletesub operation while a filtered list is being shown ------------------  */
 
-        /* Case: filtered person list, person index within bounds of address book and person list -> success */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index personIndex = INDEX_SECOND_PERSON;
-        assertTrue(personIndex.getZeroBased() < expectedModel.getFilteredPersonList().size());
-        assertCommandSuccess(personIndex, INDEX_FIRST_SUBJECT);
+        /* Case: filtered student list, student index within bounds of TutorHelper and student list -> success */
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        Index studentIndex = INDEX_SECOND_STUDENT;
+        assertTrue(studentIndex.getZeroBased() < expectedModel.getFilteredStudentList().size());
+        assertCommandSuccess(studentIndex, INDEX_FIRST_SUBJECT);
 
-        /* Case: filtered person list, person index within bounds of address book but out of bounds of person list
+        /* Case: filtered student list, student index within bounds of TutorHelper but out of bounds of student list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getTutorHelper().getPersonList().size();
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getTutorHelper().getStudentList().size();
         command = DeleteSubCommand.COMMAND_WORD + " " + invalidIndex
                 + " " + INDEX_FIRST_SUBJECT.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
-        /* Case: filtered person list, person index within bounds but subject index is out of bounds
+        /* Case: filtered student list, student index within bounds but subject index is out of bounds
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        invalidIndex = getModel().getTutorHelper().getPersonList()
-                .get(INDEX_SECOND_PERSON.getZeroBased()).getSubjects().size() + 1;
-        command = DeleteSubCommand.COMMAND_WORD + " " + INDEX_SECOND_PERSON.getOneBased()
+        showStudentsWithName(KEYWORD_MATCHING_MEIER);
+        invalidIndex = getModel().getTutorHelper().getStudentList()
+                .get(INDEX_SECOND_STUDENT.getZeroBased()).getSubjects().size() + 1;
+        command = DeleteSubCommand.COMMAND_WORD + " " + INDEX_SECOND_STUDENT.getOneBased()
                 + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_SUBJECT_INDEX);
 
@@ -101,9 +101,9 @@ public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getTutorHelper().getPersonList().size() + 1);
+                getModel().getTutorHelper().getStudentList().size() + 1);
         command = DeleteSubCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased() + " 1";
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(
@@ -119,19 +119,19 @@ public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
 
     /**
      * Removes the {@code Subject} at the specified {@code subjectIndex} for
-     * the {@code Person} at the specified {@code personIndex} in {@code model}'s address book.
-     * @return the updated person
+     * the {@code Student} at the specified {@code studentIndex} in {@code model}'s TutorHelper.
+     * @return the updated student
      */
-    private Person deleteSubPerson(Model model, Index personIndex, Index subjectIndex) {
-        Person personTarget = getPerson(model, personIndex);
-        List<Subject> subjects = new ArrayList<>(personTarget.getSubjects());
+    private Student deleteSubStudent(Model model, Index studentIndex, Index subjectIndex) {
+        Student studentTarget = getStudent(model, studentIndex);
+        List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
         subjects.remove(subjectIndex.getZeroBased());
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
-        Person personUpdated = SubjectsUtil.createPersonWithNewSubjects(personTarget, newSubjects);
+        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
 
-        model.updatePerson(personTarget, personUpdated);
-        return personUpdated;
+        model.updateStudent(studentTarget, studentUpdated);
+        return studentUpdated;
     }
 
     /**
@@ -145,13 +145,13 @@ public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
      * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
      * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(Index personIndex, Index subjectIndex) {
+    private void assertCommandSuccess(Index studentIndex, Index subjectIndex) {
         Model expectedModel = getModel();
         String command = DeleteSubCommand.COMMAND_WORD
-                + " " + personIndex.getOneBased()
+                + " " + studentIndex.getOneBased()
                 + " " + subjectIndex.getOneBased();
-        Person deletedSubPerson = deleteSubPerson(expectedModel, personIndex, subjectIndex);
-        String expectedResultMessage = String.format(MESSAGE_DELETESUB_SUCCESS, deletedSubPerson);
+        Student deletedSubStudent = deleteSubStudent(expectedModel, studentIndex, subjectIndex);
+        String expectedResultMessage = String.format(MESSAGE_DELETESUB_SUCCESS, deletedSubStudent);
         assertCommandSuccess(command,
                 expectedModel, expectedResultMessage);
     }
@@ -169,7 +169,7 @@ public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();

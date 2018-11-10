@@ -5,11 +5,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TutorHelper;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Payment;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
 
 public class PayCommandTest {
 
@@ -35,31 +35,31 @@ public class PayCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
-        assertExecutionSuccess(INDEX_SECOND_PERSON);
-        assertExecutionSuccess(INDEX_THIRD_PERSON);
-        assertExecutionSuccess(lastPersonIndex);
+        Index lastStudentIndex = Index.fromOneBased(model.getFilteredStudentList().size());
+        assertExecutionSuccess(INDEX_FIRST_STUDENT);
+        assertExecutionSuccess(INDEX_SECOND_STUDENT);
+        assertExecutionSuccess(INDEX_THIRD_STUDENT);
+        assertExecutionSuccess(lastStudentIndex);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         Index integerOverflowIndex = Index.fromOneBased(Integer.MAX_VALUE);
-        assertExecutionFailure(integerOverflowIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertExecutionFailure(integerOverflowIndex, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_updatePaymentMethod_success() {
-        Payment originalPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 1998);
+        Payment originalPayment = new Payment(INDEX_FIRST_STUDENT, 100, 11, 1998);
         PayCommand originalPayCommand = new PayCommand(originalPayment);
 
         List<Payment> oldPaymentList = new ArrayList<>();
         oldPaymentList.add(originalPayment);
 
-        Payment newPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 2018);
+        Payment newPayment = new Payment(INDEX_FIRST_STUDENT, 100, 11, 2018);
         List<Payment> actualReturnedPayment = originalPayCommand.updatePayment(oldPaymentList, newPayment);
 
         List<Payment> expectedReturnedPaymentList = new ArrayList<>();
@@ -73,18 +73,19 @@ public class PayCommandTest {
     @Test
     public void execute_editPaymentMethod_success() {
 
-        Payment existingPayment = new Payment(INDEX_FIRST_PERSON, 100, 11, 1998);
-        Payment editedPayment = new Payment(INDEX_FIRST_PERSON, 300, 11, 1998);
+        Payment existingPayment = new Payment(INDEX_FIRST_STUDENT, 100, 11, 1998);
+        Payment editedPayment = new Payment(INDEX_FIRST_STUDENT, 300, 11, 1998);
 
-        Person existingPerson = new PersonBuilder(ALICE).withPayments(existingPayment).build();
-        Person editedPerson = new PersonBuilder(ALICE).withPayments(editedPayment).build();
+        Student existingStudent = new StudentBuilder(ALICE).withPayments(existingPayment).build();
+        Student editedStudent = new StudentBuilder(ALICE).withPayments(editedPayment).build();
         PayCommand editPayCommand = new PayCommand(editedPayment);
 
-        String expectedMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedPerson);
+        String expectedMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorHelper(model.getTutorHelper()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
-        model.updatePerson(model.getFilteredPersonList().get(0), existingPerson);
+      
+        expectedModel.updateStudentInternalField(model.getFilteredStudentList().get(0), editedStudent);
+        model.updateStudentInternalField(model.getFilteredStudentList().get(0), existingStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(editPayCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -100,12 +101,12 @@ public class PayCommandTest {
         Payment payment = new Payment(index, 200, 9, 2020);
         PayCommand payCommand = new PayCommand(payment);
 
-        Person personOriginal = model.getFilteredPersonList().get(index.getZeroBased());
-        Person personOriginalClone = new PersonBuilder(personOriginal).build();
-        Person expectedPerson = new PersonBuilder(personOriginalClone).withPayments(payment).build();
+        Student studentOriginal = model.getFilteredStudentList().get(index.getZeroBased());
+        Student studentOriginalClone = new StudentBuilder(studentOriginal).build();
+        Student expectedStudent = new StudentBuilder(studentOriginalClone).withPayments(payment).build();
 
-        String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS, expectedPerson);
-        expectedModel.updatePerson(personOriginal, expectedPerson);
+        String expectedMessage = String.format(PayCommand.MESSAGE_PAYMENT_SUCCESS, expectedStudent);
+        expectedModel.updateStudent(studentOriginal, expectedStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(payCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -124,8 +125,8 @@ public class PayCommandTest {
     @Test
     public void equals() {
 
-        Payment alicePayment = new Payment(INDEX_FIRST_PERSON, 200, 10, 2018);
-        Payment bobPayment = new Payment(INDEX_SECOND_PERSON, 200, 10, 2018);
+        Payment alicePayment = new Payment(INDEX_FIRST_STUDENT, 200, 10, 2018);
+        Payment bobPayment = new Payment(INDEX_SECOND_STUDENT, 200, 10, 2018);
 
         PayCommand payAliceCommand = new PayCommand(alicePayment);
         PayCommand payBobCommand = new PayCommand(bobPayment);

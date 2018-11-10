@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalTutorHelper;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.HOON;
+import static seedu.address.testutil.TypicalStudents.IDA;
+import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -62,15 +62,15 @@ public class XmlTutorHelperStorageTest {
     }
 
     @Test
-    public void readTutorHelper_invalidPersonTutorHelper_throwDataConversionException() throws Exception {
+    public void readTutorHelper_invalidStudentTutorHelper_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readTutorHelper("invalidPersonTutorHelper.xml");
+        readTutorHelper("invalidStudentTutorHelper.xml");
     }
 
     @Test
-    public void readTutorHelper_invalidAndValidPersonTutorHelper_throwDataConversionException() throws Exception {
+    public void readTutorHelper_invalidAndValidStudentTutorHelper_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readTutorHelper("invalidAndValidPersonTutorHelper.xml");
+        readTutorHelper("invalidAndValidStudentTutorHelper.xml");
     }
 
     @Test
@@ -85,14 +85,14 @@ public class XmlTutorHelperStorageTest {
         assertEquals(original, new TutorHelper(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addStudent(HOON);
+        original.removeStudent(ALICE);
         xmlTutorHelperStorage.saveTutorHelper(original, filePath);
         readBack = xmlTutorHelperStorage.readTutorHelper(filePath).get();
         assertEquals(original, new TutorHelper(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addStudent(IDA);
         xmlTutorHelperStorage.saveTutorHelper(original); //file path not specified
         readBack = xmlTutorHelperStorage.readTutorHelper().get(); //file path not specified
         assertEquals(original, new TutorHelper(readBack));

@@ -4,12 +4,12 @@ import java.time.DayOfWeek;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Student}'s {@code TuitionTiming} matches any of the keywords given.
  */
-public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person> {
+public class TuitionTimingContainsKeywordsPredicate implements Predicate<Student> {
 
     private final String keyword; //note that keyword is capitalised for day.
 
@@ -18,9 +18,9 @@ public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person>
     }
 
     @Override
-    public boolean test(Person person) {
-        DayOfWeek day = person.getTuitionTiming().day;
-        String time = person.getTuitionTiming().time;
+    public boolean test(Student student) {
+        DayOfWeek day = student.getTuitionTiming().day;
+        String time = student.getTuitionTiming().time;
 
         if (keyword.matches(TuitionTiming.DAY_REGEX)) {
             return day.equals(DayOfWeek.valueOf(keyword.toUpperCase()));

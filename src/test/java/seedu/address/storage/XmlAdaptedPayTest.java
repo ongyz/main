@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.PayCommand;
-import seedu.address.model.person.Payment;
+import seedu.address.model.student.Payment;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedPayTest {
@@ -23,7 +23,7 @@ public class XmlAdaptedPayTest {
     private static final String VALID_YEAR = "2018";
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validStudentDetails_returnsStudent() throws Exception {
         Payment pay = new Payment(Index.fromOneBased(1), 200, 11, 2018);
         XmlAdaptedPay payment = new XmlAdaptedPay(VALID_INDEX, VALID_AMOUNT, VALID_MONTH, VALID_YEAR);
         assertEquals(pay, payment.toModelType());

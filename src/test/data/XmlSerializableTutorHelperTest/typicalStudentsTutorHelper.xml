@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- TutorHelper save file which contains the same Student values as in TypicalStudents#getTypicalTutorHelper() -->
+<TutorHelper>
+    <students>
+        <name>Alice Pauline</name>
+        <phone>94351253</phone>
+        <email>alice@example.com</email>
+        <address>123, Jurong West Ave 6, #08-111</address>
+        <tuitionTiming>Tuesday 8:00pm</tuitionTiming>
+        <subjects subjectName="Mathematics" completionRate="0.0">
+            <subjectContent state="false">Integration</subjectContent>
+        </subjects>
+        <tagged>friends</tagged>
+    </students>
+    <students>
+        <name>Benson Meier</name>
+        <phone>98765432</phone>
+        <email>johnd@example.com</email>
+        <address>311, Clementi Ave 2, #02-25</address>
+        <tuitionTiming>Monday 5:00pm</tuitionTiming>
+        <subjects subjectName="Chemistry" completionRate="0.0">
+            <subjectContent state="false">Kinetics</subjectContent>
+            <subjectContent state="false">Organic Chemistry</subjectContent>
+        </subjects>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+        <payments>
+            <amount>200</amount>
+            <year>2018</year>
+            <month>11</month>
+        </payments>
+        <payments>
+            <amount>300</amount>
+            <year>2018</year>
+            <month>12</month>
+        </payments>
+    </students>
+    <students>
+        <name>Carl Kurz</name>
+        <phone>95352563</phone>
+        <email>heinz@example.com</email>
+        <address>Wall street</address>
+        <tuitionTiming>Saturday 1:00pm</tuitionTiming>
+        <subjects subjectName="Mathematics" completionRate="0.0">
+            <subjectContent state="false">Calculus II</subjectContent>
+            <subjectContent state="false">Statistics I</subjectContent>
+        </subjects>
+        <subjects subjectName="Physics" completionRate="0.0">
+        </subjects>
+    </students>
+    <students>
+        <name>Daniel Meier</name>
+        <phone>87652533</phone>
+        <email>cornelia@example.com</email>
+        <address>10th street</address>
+        <tuitionTiming>Saturday 3:00pm</tuitionTiming>
+        <subjects subjectName="Mathematics" completionRate="0.0">
+            <subjectContent state="false">Calculus II</subjectContent>
+            <subjectContent state="false">Statistics I</subjectContent>
+        </subjects>
+        <subjects subjectName="Physics" completionRate="0.0">
+        </subjects>
+        <tagged>friends</tagged>
+    </students>
+    <students>
+        <name>Elle Meyer</name>
+        <phone>94822240</phone>
+        <email>werner@example.com</email>
+        <address>Michegan ave</address>
+        <tuitionTiming>Sunday 11:00am</tuitionTiming>
+        <subjects subjectName="Economics" completionRate="0.0">
+            <subjectContent state="false">Demand and Supply</subjectContent>
+        </subjects>
+    </students>
+    <students>
+        <name>Fiona Kunz</name>
+        <phone>94824270</phone>
+        <email>lydia@example.com</email>
+        <address>little tokyo</address>
+        <tuitionTiming>Thursday 3:30pm</tuitionTiming>
+        <subjects subjectName="Chemistry" completionRate="0.0">
+            <subjectContent state="false">Organic Chemistry</subjectContent>
+            <subjectContent state="false">Acids and Bases</subjectContent>
+        </subjects>
+    </students>
+    <students>
+        <name>George Best</name>
+        <phone>94824420</phone>
+        <email>anna@example.com</email>
+        <address>4th street</address>
+        <tuitionTiming>Friday 5:00pm</tuitionTiming>
+        <subjects subjectName="Economics" completionRate="0.0">
+            <subjectContent state="false">Macroeconomics</subjectContent>
+        </subjects>
+    </students>
+</TutorHelper>

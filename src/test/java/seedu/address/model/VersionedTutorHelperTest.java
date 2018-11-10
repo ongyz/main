@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalStudents.CARL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import seedu.address.testutil.TutorHelperBuilder;
 
 public class VersionedTutorHelperTest {
 
-    private final ReadOnlyTutorHelper tutorHelperWithAmy = new TutorHelperBuilder().withPerson(AMY).build();
-    private final ReadOnlyTutorHelper tutorHelperWithBob = new TutorHelperBuilder().withPerson(BOB).build();
-    private final ReadOnlyTutorHelper tutorHelperWithCarl = new TutorHelperBuilder().withPerson(CARL).build();
+    private final ReadOnlyTutorHelper tutorHelperWithAmy = new TutorHelperBuilder().withStudent(AMY).build();
+    private final ReadOnlyTutorHelper tutorHelperWithBob = new TutorHelperBuilder().withStudent(BOB).build();
+    private final ReadOnlyTutorHelper tutorHelperWithCarl = new TutorHelperBuilder().withStudent(CARL).build();
     private final ReadOnlyTutorHelper emptyTutorHelper = new TutorHelperBuilder().build();
 
     @Test

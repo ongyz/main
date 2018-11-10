@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.NUMBER_OF_ARGS;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.PERSON_INDEX;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.SUBJECT_INDEX;
-import static seedu.address.logic.commands.DeleteSyllCommand.EraseSyllFormatChecker.SYLLABUS_INDEX;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.NUMBER_OF_ARGS;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.STUDENT_INDEX;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.SUBJECT_INDEX;
+import static seedu.address.logic.commands.DeleteSyllCommand.DeleteSyllFormatChecker.SYLLABUS_INDEX;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class DeleteSyllCommandParser implements Parser<DeleteSyllCommand> {
     public DeleteSyllCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        Index personIndex;
+        Index studentIndex;
         Index subjectIndex;
         Index syllabusIndex;
         List<Index> indexList;
@@ -43,15 +43,15 @@ public class DeleteSyllCommandParser implements Parser<DeleteSyllCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSyllCommand.MESSAGE_USAGE));
         }
 
-        personIndex = getPersonIndex(indexList);
+        studentIndex = getStudentIndex(indexList);
         subjectIndex = getSubjectIndex(indexList);
         syllabusIndex = getSyllabusIndex(indexList);
 
-        return new DeleteSyllCommand(personIndex, subjectIndex, syllabusIndex);
+        return new DeleteSyllCommand(studentIndex, subjectIndex, syllabusIndex);
     }
 
-    private static Index getPersonIndex(List<Index> indexList) {
-        return indexList.get(PERSON_INDEX);
+    private static Index getStudentIndex(List<Index> indexList) {
+        return indexList.get(STUDENT_INDEX);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {

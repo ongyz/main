@@ -9,11 +9,14 @@ import com.google.common.eventbus.Subscribe;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Line;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.StudentPanelSelectionChangedEvent;
+import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 
 /**
@@ -21,11 +24,7 @@ import seedu.address.model.subject.Subject;
  */
 public class BrowserPanel extends UiPart<Region> {
 
-    public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "PersonPage.html";
-
-    private static final String FXML = "BrowserPanel.fxml";
+    public static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -33,10 +32,13 @@ public class BrowserPanel extends UiPart<Region> {
     private Label nameLabel;
 
     @FXML
-    private Label tuitionTimingLabel;
+    private Label addressLabel;
 
     @FXML
-    private Label addressLabel;
+    private Label tuitionTimingDayLabel;
+
+    @FXML
+    private Label tuitionTimingTimeLabel;
 
     @FXML
     private Label emailLabel;
@@ -45,10 +47,43 @@ public class BrowserPanel extends UiPart<Region> {
     private Label phoneLabel;
 
     @FXML
-    private Label paymentsLabel;
+    private FlowPane paymentAmount;
 
     @FXML
-    private Label subjectsLabel;
+    private FlowPane paymentMonth;
+
+    @FXML
+    private FlowPane paymentYear;
+
+    @FXML
+    private FlowPane subjectList;
+
+    @FXML
+    private FlowPane subjectsShort;
+
+    @FXML
+    private FlowPane tagsShort;
+
+    @FXML
+    private AnchorPane paymentBackground;
+
+    @FXML
+    private Line dividerHori;
+
+    @FXML
+    private Line dividerVert;
+
+    @FXML
+    private Label paymentLabel;
+
+    @FXML
+    private Label amountLabel;
+
+    @FXML
+    private Label monthLabel;
+
+    @FXML
+    private Label yearLabel;
 
     public BrowserPanel() {
         super(FXML);
@@ -56,64 +91,87 @@ public class BrowserPanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        loadPersonPage(null);
+        loadStudentPage(null);
         registerAsAnEventHandler(this);
     }
 
     /**
-     * Loads a person's information into the AnchorPane.
-     * @param person The person whose page is to be loaded into the AnchorPane.
+     * Loads a student's information into the AnchorPane.
+     * @param student The student whose page is to be loaded into the AnchorPane.
      */
-    private void loadPersonPage(Person person) {
-        if (person != null) {
-            // Fill the labels with info from the person object.
-            nameLabel.setText(person.getName().fullName);
+    private void loadStudentPage(Student student) {
+        if (student != null) {
 
-            tuitionTimingLabel.setText(person.getTuitionTiming().value);
+            setBackgroundState(true);
+            // Clear previous information
+            subjectsShort.getChildren().clear();
+            tagsShort.getChildren().clear();
+            paymentAmount.getChildren().clear();
+            paymentMonth.getChildren().clear();
+            paymentYear.getChildren().clear();
+            subjectList.getChildren().clear();
 
-            addressLabel.setText(person.getAddress().value);
+            // Fill the labels with info from the student object.
+            nameLabel.setText(student.getName().fullName);
+            addressLabel.setText(student.getAddress().value);
+            emailLabel.setText(student.getEmail().value);
+            phoneLabel.setText(student.getPhone().value);
 
-            emailLabel.setText(person.getEmail().value);
+            tuitionTimingDayLabel.setText(student.getTuitionTiming().day.toString().substring(0, 3));
+            tuitionTimingTimeLabel.setText(student.getTuitionTiming().time);
 
-            phoneLabel.setText(person.getPhone().value);
+            student.getSubjects().forEach(subject -> subjectsShort.getChildren().add(
+                    new Label(subject.getSubjectName())));
+            student.getTags().forEach(tag -> tagsShort.getChildren().add(new Label(tag.tagName)));
 
-            final StringBuilder paymentsBuilder = new StringBuilder();
-            List<Payment> payments = new ArrayList<>(person.getPayments());
-            for (int i = 0; i < payments.size(); i++) {
-                Payment selected = payments.get(i);
-                paymentsBuilder.append(String.format("Month: %5d     Year: %10d     Amount: %10d         \n",
-                        selected.getMonth(), selected.getYear(), selected.getAmount()));
+            student.getPayments().forEach(amount -> paymentAmount.getChildren().add(
+                    new Label(String.valueOf(amount.getAmount()))));
+            student.getPayments().forEach(amount -> paymentMonth.getChildren().add(
+                    new Label(String.valueOf(amount.getMonth()))));
+            student.getPayments().forEach(amount -> paymentYear.getChildren().add(
+                    new Label(String.valueOf(amount.getYear()))));
+
+            for (int i = 0; i < student.getSubjects().size(); i++) {
+                List<Subject> subject = new ArrayList<>(student.getSubjects());
+                Index currentIndex = Index.fromZeroBased(i);
+                subjectList.getChildren().add(
+                        new Label("(" + currentIndex.getOneBased() + ") " + subject.get(i).toString()));
             }
-            paymentsLabel.setText(paymentsBuilder.toString());
 
-            final StringBuilder subjectsBuilder = new StringBuilder();
-            List<Subject> subjects = new ArrayList<>(person.getSubjects());
-            for (int i = 0; i < subjects.size(); i++) {
-                String subject = subjects.get(i).toString();
-                subjectsBuilder.append(subject.substring(2, subject.length() - 1) + "\n\n");
-            }
-            subjectsLabel.setText(subjectsBuilder.toString().trim());
         } else {
-            // Person is null, remove all the text.
+            // Student is null, remove all the text.
             nameLabel.setText("");
-
-            tuitionTimingLabel.setText("");
-
             addressLabel.setText("");
-
             emailLabel.setText("");
-
             phoneLabel.setText("");
-
-            paymentsLabel.setText("");
-
-            subjectsLabel.setText("");
+            tuitionTimingDayLabel.setText("");
+            tuitionTimingTimeLabel.setText("");
+            paymentAmount.getChildren().clear();
+            paymentMonth.getChildren().clear();
+            paymentYear.getChildren().clear();
+            tagsShort.getChildren().clear();
+            subjectsShort.getChildren().clear();
+            subjectList.getChildren().clear();
+            setBackgroundState(false);
         }
     }
 
+    /**
+     * Set visibility of background components based on {@code state}
+     */
+    private void setBackgroundState(boolean state) {
+        paymentBackground.setVisible(state);
+        dividerHori.setVisible(state);
+        dividerVert.setVisible(state);
+        paymentLabel.setVisible(state);
+        monthLabel.setVisible(state);
+        amountLabel.setVisible(state);
+        yearLabel.setVisible(state);
+    }
+
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleStudentPanelSelectionChangedEvent(StudentPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        loadStudentPage(event.getNewSelection());
     }
 }

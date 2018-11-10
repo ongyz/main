@@ -75,17 +75,24 @@ public class Subject {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("\n[" + getSubjectName() + ": ");
+        builder.append(getSubjectName() + ": \n\n");
+        builder.append(contentToString());
+        return builder.toString();
+    }
+
+    /**
+     * Returns a string containing information regarding the syllabus topics of the subject.
+     * @return The string representation of the syllabus topics.
+     */
+    public String contentToString() {
+        final StringBuilder builder = new StringBuilder();
         Index numbering;
 
         for (int i = 0; i < getSubjectContent().size(); i++) {
             numbering = Index.fromZeroBased(i);
-            builder.append("\n" + numbering.getOneBased() + ". ")
-                    .append(getSubjectContent().get(i).toString()).append(" ");
+            builder.append(numbering.getOneBased() + ". ")
+                    .append(getSubjectContent().get(i).toString()).append("\n");
         }
-
-        builder.append("]");
-
         return builder.toString();
     }
 
@@ -100,27 +107,11 @@ public class Subject {
     }
 
     /**
-     * Returns true if both subjects have the same content
-     */
-    public boolean contentAreSame(Subject other) {
-        if (getSubjectContent().size() != other.getSubjectContent().size()) {
-            return false;
-        }
-
-        for (int i = 0; i < getSubjectContent().size(); i++) {
-            if (!getSubjectContent().get(i).equals(other.getSubjectContent().get(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Returns true if both subjects have the same {@code SubjectType}.
      * Defines a weaker notion of equal for class {@code Subject}.
      */
-    public boolean hasTypeOf(SubjectType other) {
-        return getSubjectType().equals(other);
+    public boolean hasTypeOf(SubjectType type) {
+        return getSubjectType().equals(type);
     }
 
 

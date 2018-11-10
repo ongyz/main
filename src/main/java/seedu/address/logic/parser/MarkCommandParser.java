@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.MarkCommand.MarkFormatChecker.MARK_NUMBER_OF_ARGS;
-import static seedu.address.logic.commands.MarkCommand.MarkFormatChecker.PERSON_INDEX_LOCATION;
+import static seedu.address.logic.commands.MarkCommand.MarkFormatChecker.STUDENT_INDEX_LOCATION;
 import static seedu.address.logic.commands.MarkCommand.MarkFormatChecker.SUBJECT_INDEX_LOCATION;
 import static seedu.address.logic.commands.MarkCommand.MarkFormatChecker.SYLLABUS_INDEX_LOCATION;
 
@@ -26,7 +26,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
     public MarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        Index personIndex;
+        Index studentIndex;
         Index subjectIndex;
         Index syllabusIndex;
         List<Index> indexList;
@@ -43,15 +43,15 @@ public class MarkCommandParser implements Parser<MarkCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
 
-        personIndex = getPersonIndex(indexList);
+        studentIndex = getStudentIndex(indexList);
         subjectIndex = getSubjectIndex(indexList);
         syllabusIndex = getSyllabusIndex(indexList);
 
-        return new MarkCommand(personIndex, subjectIndex, syllabusIndex);
+        return new MarkCommand(studentIndex, subjectIndex, syllabusIndex);
     }
 
-    private static Index getPersonIndex(List<Index> indexList) {
-        return indexList.get(PERSON_INDEX_LOCATION);
+    private static Index getStudentIndex(List<Index> indexList) {
+        return indexList.get(STUDENT_INDEX_LOCATION);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {

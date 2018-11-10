@@ -15,27 +15,736 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-W13-4/main/tree/master
 
-== Value Proposition
+By: `CS2103-AY1819S1-W13-4`      Since: `Aug 2018`
+
+== Setting up
+
+=== Prerequisites
+
+. *JDK `9`* or later
++
+[WARNING]
+JDK `10` on Windows will fail to run tests in <<UsingGradle#Running-Tests, headless mode>> due to a https://github.com/javafxports/openjdk-jfx/issues/66[JavaFX bug].
+Windows developers are highly recommended to use JDK `9`.
+
+. *IntelliJ* IDE
++
+[NOTE]
+IntelliJ by default has Gradle and JavaFx plugins installed. +
+Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
+
+
+=== Setting up the project in your computer
+
+. Fork this repo, and clone the fork to your computer
+. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+. Set up the correct JDK version for Gradle
+.. Click `Configure` > `Project Defaults` > `Project Structure`
+.. Click `New...` and find the directory of the JDK
+. Click `Import Project`
+. Locate the `build.gradle` file and select it. Click `OK`
+. Click `Open as Project`
+. Click `OK` to accept the default settings
+. Open a console and run the command `gradlew processResources` (Mac/Linux: `./gradlew processResources`). It should finish with the `BUILD SUCCESSFUL` message. +
+This will generate all resources required by the application and tests.
+. Open link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedStudent.java[`XmlAdaptedStudent.java`] and link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow.java`] and check for any code errors
+.. Due to an ongoing https://youtrack.jetbrains.com/issue/IDEA-189060[issue] with some of the newer versions of IntelliJ, code errors may be detected even if the project can be built and run successfully
+.. To resolve this, place your cursor over any of the code section highlighted in red. Press kbd:[ALT + ENTER], and select `Add '--add-modules=...' to module compiler options` for each error
+. Repeat this for the test folder as well (e.g. check link:{repoURL}/src/test/java/seedu/address/commons/util/XmlUtilTest.java[`XmlUtilTest.java`] and link:{repoURL}/src/test/java/seedu/address/ui/HelpWindowTest.java[`HelpWindowTest.java`] for code errors, and if so, resolve it the same way)
+
+=== Verifying the setup
+
+. Run the `seedu.address.MainApp` and try a few commands
+. <<Testing,Run the tests>> to ensure they all pass.
+
+=== Configurations to do before writing code
+
+==== Configuring the coding style
+
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
+
+. Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
+. Select `Editor` > `Code Style` > `Java`
+. Click on the `Imports` tab to set the order
+
+* For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
+* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.*`, `import all other imports`. Add a `<blank line>` between each `import`
+
+Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to configure Intellij to check style-compliance as you write code.
+
+==== Updating documentation to match your fork
+
+After forking the repo, the documentation will still refer to the `CS2103-AY1819S1-W13-4/main` repo.
+
+If you plan to develop this fork as a separate product (i.e. instead of contributing to `CS2103-AY1819S1-W13-4/main`), you should do the following:
+
+. Configure the <<Docs-SiteWideDocSettings, site-wide documentation settings>> in link:{repoURL}/build.gradle[`build.gradle`], such as the `site-name`, to suit your own project.
+
+. Replace the URL in the attribute `repoURL` in link:{repoURL}/docs/DeveloperGuide.adoc[`DeveloperGuide.adoc`] and link:{repoURL}/docs/UserGuide.adoc[`UserGuide.adoc`] with the URL of your fork.
+
+==== Setting up CI
+
+Set up Travis to perform Continuous Integration (CI) for your fork. See <<UsingTravis#, UsingTravis.adoc>> to learn how to set it up.
+
+After setting up Travis, you can optionally set up coverage reporting for your team fork (see <<UsingCoveralls#, UsingCoveralls.adoc>>).
+
+[NOTE]
+Coverage reporting could be useful for a team repository that hosts the final version but it is not that useful for your personal fork.
+
+Optionally, you can set up AppVeyor as a second CI (see <<UsingAppVeyor#, UsingAppVeyor.adoc>>).
+
+[NOTE]
+Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
+
+==== Getting started with coding
+
+When you are ready to start coding,
+
+1. Get some sense of the overall design by reading <<Design-Architecture>>.
+2. Take a look at <<GetStartedProgramming>>.
+
+== Design
+
+[[Design-Architecture]]
+=== Architecture
+
+.Architecture Diagram
+image::Architecture.png[width="600"]
+
+The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
+
+[TIP]
+The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+
+`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup method where necessary.
+
+<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
+
+* `EventsCenter` : This class (written using https://github.com/google/guava/wiki/EventBusExplained[Google's Event Bus library]) is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
+* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+
+The rest of the App consists of four components.
+
+* <<Design-Ui,*`UI`*>>: The UI of the App.
+* <<Design-Logic,*`Logic`*>>: The command executor.
+* <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
+* <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
+
+Each of the four components
+
+* Defines its _API_ in an `interface` with the same name as the Component.
+* Exposes its functionality using a `{Component Name}Manager` class.
+
+For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
+
+.Class Diagram of the Logic Component
+image::LogicClassDiagram.png[width="800"]
+
+[discrete]
+==== Events-Driven nature of the design
+
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
+
+.Component interactions for `delete 1` command (part 1)
+image::SDforDeletePerson.png[width="800"]
+
+[NOTE]
+Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+
+The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
+
+.Component interactions for `delete 1` command (part 2)
+image::SDforDeletePersonEventHandling.png[width="800"]
+
+[NOTE]
+Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
+
+The sections below give more details of each component.
+
+[[Design-Ui]]
+=== UI component
+
+.Structure of the UI Component
+image::UiClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+
+The `UI` component,
+
+* Executes user commands using the `Logic` component.
+* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Responds to events raised from various parts of the App and updates the UI accordingly.
+
+[[Design-Logic]]
+=== Logic component
+
+[[fig-LogicClassDiagram]]
+.Structure of the Logic Component
+image::LogicClassDiagram.png[width="800"]
+
+*API* :
+link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+
+.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  This results in a `Command` object which is executed by the `LogicManager`.
+.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+
+.Interactions Inside the Logic Component for the `delete 1` Command
+image::DeletePersonSdForLogic.png[width="800"]
+
+[[Design-Model]]
+=== Model component
+
+.Structure of the Model Component
+image::ModelClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+
+The `Model`,
+
+* stores a `UserPref` object that represents the user's preferences.
+* stores the Address Book data.
+* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* does not depend on any of the other three components.
+
+[NOTE]
+As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+ +
+image:ModelClassBetterOopDiagram.png[width="800"]
+
+[[Design-Storage]]
+=== Storage component
+
+.Structure of the Storage Component
+image::StorageClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+
+The `Storage` component,
+
+* can save `UserPref` objects in json format and read it back.
+* can save the Address Book data in xml format and read it back.
+
+[[Design-Commons]]
+=== Common classes
+
+Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+== Implementation
+
+This section describes some noteworthy details on how certain features are implemented.
+
+// tag::group[]
+=== Group Students feature
+==== Current Implementation
+
+Classes related to Group and its functionality is listed below:
+
+* `TutorHelperParser` -- Creates a GroupCommandParser object and parses the user's input.
+* `GroupCommandParser` -- Analyses the input, creates a predicate based on the input and returns a GroupCommand object with the predicate as the argument.
+* `GroupCommand` -- Filters the list based on the predicate and displays it to the user.
+
+Given below is an example usage scenario and how the group mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. Assuming that the application isn't empty, the user executes 'group Monday' command to group all students with a class on Monday. The group command will be called by `GroupCommandParser.parse()`, parsing the argument to check against. The application will check the list and display all students with classes on Monday, sorted based on the earliest timing.
+
+[NOTE]
+The user can execute `list` to re-display the full list of students again.
+[NOTE]
+The user can execute `undo` to undo the sorting done to the list.
+[NOTE]
+The group command is CASE-SENSITIVE. E.g. Passing `MONDAY` as an input instead of `Monday` will throw an error.
+[NOTE]
+Only 12-hr timings are valid.
+
+The following sequence diagram shows how the group operation works:
+
+image::GroupSequenceDiagram.png[width="650"]
+// end::group[]
+// tag::payment[]
+
+=== Students payment feature
+==== Current implementation
+
+The Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Student>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
+
+Classes that are related to Payment and their functionality are as listed below:
+* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
+* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
+* `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
+* `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
+
+Given below is an example usage scenario and how the payment mechanism behaves at each step.
+Step 1. The tutor launches the application and wants to record a payment for his/her student called Alice.
+
+Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
+
+Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
+
+Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+
+Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
+
+Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
+
+Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
+
+Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Student class.
+
+Step 2g. Alice student class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updateStudent in model class to modify Alice Student class with the new updated payment.
+
+Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
+
+Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
+
+[NOTE]
+Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
+[NOTE]
+The maximum amount of payment that can be made each time is $10 000.
+
+The diagram below illustrates the sequence diagram.
+
+image:PaymentSequenceDiagram.png[width="800"]
+// end::payment[]
+
+// tag::editpaid[]
+=== Students edit payment feature
+==== Current implementation
+
+The Edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Student>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
+
+Classes that are related to Payment and their functionality are as listed below:
+* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
+* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
+* `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
+* `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
+
+Given below is an example usage scenario and how the payment mechanism behaves at each step.
+Step 1. The tutor launches the application and wants to record a payment for his/her student called Alice.
+
+Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
+
+Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
+
+Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+
+Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
+
+Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
+
+Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
+
+Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Student class.
+
+Step 2g. Alice student class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updateStudent in model class to modify Alice Student class with the new updated payment.
+
+Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
+
+Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
+
+[NOTE]
+Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
+[NOTE]
+The maximum amount of payment that can be made each time is $10 000.
+
+The diagram below illustrates the sequence diagram.
+
+image:EditPaymentSequenceDiagram.png[width="800"]
+// end::editpaid[]
+
+// tag::earnings[]
+=== Tutor's Earnings feature
+==== Current implementation
+
+The Earnings mechanism is mainly facilitated by the filteredStudentList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
+The classes related to Earnings are EarningsCommand, EarningsCommandParser.
+
+* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
+* `EarningsCommandParser` --Takes in users' input and checks if it adheres to the required format. Returns a EarningsCommand with the month and year passed in.
+* `EarningsCommand` -- Takes in month and year as inputs in its constructed. In Execute() method, it performs the checking of all recorded payments and returns the total payments received for that specified month and year.
+
+Given below is an example usage scenario and how the earning mechanism behaves at each step.
+
+Step 1. The tutor launches the application and wants to view his/her earnings for the month of November 2018.
+
+Step 2. He/she enters input in the format of: earnings 11 2018
+
+Step 2a. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, earnings) and creates the EarningsCommandParser object, followed by calling parse method, with the arguments passed in.
+
+Step 2b. EarningCommandParser checks if the inputs are of the correct format.
+
+Step 2b. The PayCommandParser method then returns a EarningCommand object with month and year passed in.
+
+Step 2c. This is propagated back to the LogicManager class which then proceed to call execute method in the returned EarningsCommand object.
+
+Step 2d. The execute method in EarningsCommand proceed to obtain the list of students from the model and proceeds to search for Payment records made for that requested month and year.
+
+Step 2e. The amount is then returned.
+
+Step 3. The tutor will then see a message below the command text box, showing the earnings for the requested month and year.
+
+The diagram below illustrates the sequence diagram.
+
+image:EarningsSequenceDiagram.png[width="800"]
+// end::earnings[]
+
+// tag::copysub[]
+=== Copy Subject feature
+==== Current Implementation
+
+The copy subject command operates by making a duplicate of the selected subject of the student and adds it the other student.
+
+[NOTE]
+If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied. Duplicate syllabus will not be added.
+
+Classes related to copy command and its functionality are listed below:
+
+* `TutorHelperParser` -- Creates CopySubCommandParser which parses the input from user.
+* `CopySubCommandParser` -- Parses user's input into proper argument and creates CopySubCommand
+* `CopySubCommand` -- Updates the target student based on the argument
+* `SubjectsUtil` -- Manage the finding and copying aspect of copysub command.
+
+Given below is an example usage scenario with 2 possible outcomes and how to copy function addresses each case.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. Assuming that the application isn't empty, the user executes `copysub 1 2 4`.
+
+Step 3. Assuming that each argument given is a valid input, the system will perform the copysub command.
+
+Step 4. The system will locate the _first_ student from the student list, and make a separate copy of the _second_ subject stored under the student data.
+
+Step 5. The system will locate the _fourth_ student from the student list, and make a decision.
+
+* Step 5a. If the same subject as _second_ subject in Step 4, system will append the content of subject of _second_ subject into the _fourth_ student.
+* Step 5b. If there is no subject same as _second_ subject in Step 4, system will add the _second_ subject as a new subject under the _fourth_ student.
+
+The process is described with sequence diagram below:
+
+image::CopySubSequenceDiagrams.png[width="650"]
+// end::copysub[]
+
+// tag::adddelsub[]
+=== Add / Delete Subject
+
+==== Implementation
+
+The add / delete subject mechanism is facilitated with `TutorHelperParser`.
+Classes related to the functionality of the mechanism are listed below:
+
+* `TutorHelperParser` -- Creates a `AddSubCommandParser` / `DeleteSubCommandParser` object and parses the user's input.
+* `AddSubCommandParser` / `DeleteSubCommandParser` -- Analyses user input to create a corresponding `Command` object.
+* `AddSubCommand` / `DeleteSubCommand` -- Execution results in addition / deletion of a subject for a specified student index.
+
+Given below is an example usage scenario of how the add / delete subject mechanism behaves at each step.
+
+===== Add Subject
+
+Step 1. The user launches the application.
+
+Step 2. The tutor executes a command of the format `addsub STUDENT_INDEX s/SUBJECT` on the CLI.
+
+Step 3. The arguments are parsed by `AddSubCommandParser`, which produces an instance of `AddSubCommand`.
+
+Step 4. `AddSubCommand.execute()` is called, and the supplied subject is added for the student at the specified student index by TutorHelper.
+
+===== Delete Subject
+
+Step 1. The user launches the application.
+
+Step 2. The tutor executes a command of the format `deletesub STUDENT_INDEX SUBJECT_INDEX` on the CLI.
+
+Step 3. The arguments are parsed by `DeleteSubCommandParser`, which produces an instance of `DeleteSubCommand`.
+
+Step 4. `DeleteSubCommand.execute()` is called, and the subject at the specified subject index of the student at the specified student index is deleted by TutorHelper.
+
+[TIP]
+The TutorHelper has to have at least 1 student as a precondition for both `addsub` and `deletesub`.
+[TIP]
+`deletesub` requires the student at the specified student index to have at least two subjects. After deletion, a student cannot have 0 subjects.
+
+The following sequence diagram shows how the `addsub` operation works:
+
+image::AddSubSequenceDiagram.png[width="650"]
+
+The following sequence diagram shows how the `deletesub` operation works:
+
+image::DeleteSubSequenceDiagram.png[width="650"]
+// end::adddelsub[]
+
+// tag::editsyll[]
+=== Edit Syllabus
+
+==== Current Implementation
+
+Classes that are related to edit syllabus and their functionality are as listed below:
+* `TutorHelperParser` -- Creates a EditSyllCommandParser object and calls parse method in object to parse user's argument input.
+* `EditSyllCommandParser` -- Analyses the input, checks for any violation of syntax and returns a EditSyllCommand object with the student,subject,syllabus index object as well as the new Syllabus object as the argument.
+* `EditSyllCommand` -- Locates the corresponding syllabus to update and calls corresponding subject to edit syllabus.
+* `Subject` -- Locates and edits existing syllabus entry with new syllabus entry
+
+Given below is an example usage scenario and how the earning mechanism behaves at each step.
+
+Step 1. The tutor launches the application.
+
+Step 2. He/she executes the command in the format `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS` on the CLI.
+
+Step 3. The arguments are parsed by `EditSyllCommandParser`, which produces an instance of `EditSyllCommand`.
+
+Step 4. `EditSyllCommand.execute()` is called, and the syllabus at the specified subject index and syllabus index of the student at the specified student index is edited by TutorHelper.
+
+[TIP]
+The TutorHelper has to have at least 1 student as a precondition for `editsyll`.
+
+The diagram below shows how the `editsyll` operation works:
+
+image:EditSyllSequenceDiagram.png[width="800"]
+// end::editsyll[]
+
+=== Logging
+
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+
+* The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
+* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
+* Currently log messages are output through: `Console` and to a `.log` file.
+
+*Logging Levels*
+
+* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
+* `WARNING` : Can continue, but with caution
+* `INFO` : Information showing the noteworthy actions by the App
+* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+
+[[Implementation-Configuration]]
+=== Configuration
+
+Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+== Documentation
+
+We use asciidoc for writing documentation.
+
+[NOTE]
+We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
+
+=== Editing Documentation
+
+See <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to learn how to render `.adoc` files locally to preview the end result of your edits.
+Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your `.adoc` files in real-time.
+
+=== Publishing Documentation
+
+See <<UsingTravis#deploying-github-pages, UsingTravis.adoc>> to learn how to deploy GitHub Pages using Travis.
+
+=== Converting Documentation to PDF format
+
+We use https://www.google.com/chrome/browser/desktop/[Google Chrome] for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
+
+Here are the steps to convert the project documentation files to PDF format.
+
+.  Follow the instructions in <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to convert the AsciiDoc files in the `docs/` directory to HTML format.
+.  Go to your generated HTML files in the `build/docs` folder, right click on them and select `Open with` -> `Google Chrome`.
+.  Within Chrome, click on the `Print` option in Chrome's menu.
+.  Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.
+
+.Saving documentation as PDF files in Chrome
+image::chrome_save_as_pdf.png[width="300"]
+
+[[Docs-SiteWideDocSettings]]
+=== Site-wide Documentation Settings
+
+The link:{repoURL}/build.gradle[`build.gradle`] file specifies some project-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how all documentation files within this project are rendered.
+
+[TIP]
+Attributes left unset in the `build.gradle` file will use their *default value*, if any.
+
+[cols="1,2a,1", options="header"]
+.List of site-wide attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-name`
+|The name of the website.
+If set, the name will be displayed near the top of the page.
+|_not set_
+
+|`site-githuburl`
+|URL to the site's repository on https://github.com[GitHub].
+Setting this will add a "View on GitHub" link in the navigation bar.
+|_not set_
+
+|`site-seedu`
+|Define this attribute if the project is an official SE-EDU project.
+This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.
+|_not set_
+
+|===
+
+[[Docs-PerFileDocSettings]]
+=== Per-file Documentation Settings
+
+Each `.adoc` file may also specify some file-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how the file is rendered.
+
+Asciidoctor's https://asciidoctor.org/docs/user-manual/#builtin-attributes[built-in attributes] may be specified and used as well.
+
+[TIP]
+Attributes left unset in `.adoc` files will use their *default value*, if any.
+
+[cols="1,2a,1", options="header"]
+.List of per-file attributes, excluding Asciidoctor's built-in attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-section`
+|Site section that the document belongs to.
+This will cause the associated item in the navigation bar to be highlighted.
+One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
+
+_{asterisk} Official SE-EDU projects only_
+|_not set_
+
+|`no-site-header`
+|Set this attribute to remove the site navigation bar.
+|_not set_
+
+|===
+
+=== Site Template
+
+The files in link:{repoURL}/docs/stylesheets[`docs/stylesheets`] are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
+You can modify them to change some properties of the site's design.
+
+The files in link:{repoURL}/docs/templates[`docs/templates`] controls the rendering of `.adoc` files into HTML5.
+These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
+
+[WARNING]
+====
+Modifying the template files in link:{repoURL}/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
+You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
+The SE-EDU team does not provide support for modified template files.
+====
+
+[[Testing]]
+== Testing
+
+=== Running Tests
+
+There are three ways to run tests.
+
+[TIP]
+The most reliable way to run tests is the 3rd one. The first two methods might fail some GUI tests due to platform/resolution-specific idiosyncrasies.
+
+*Method 1: Using IntelliJ JUnit test runner*
+
+* To run all tests, right-click on the `src/test/java` folder and choose `Run 'All Tests'`
+* To run a subset of tests, you can right-click on a test package, test class, or a test and choose `Run 'ABC'`
+
+*Method 2: Using Gradle*
+
+* Open a console and run the command `gradlew clean allTests` (Mac/Linux: `./gradlew clean allTests`)
+
+[NOTE]
+See <<UsingGradle#, UsingGradle.adoc>> for more info on how to run tests using Gradle.
+
+*Method 3: Using Gradle (headless)*
+
+Thanks to the https://github.com/TestFX/TestFX[TestFX] library we use, our GUI tests can be run in the _headless_ mode. In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the Computer while the tests are running.
+
+To run tests in headless mode, open a console and run the command `gradlew clean headless allTests` (Mac/Linux: `./gradlew clean headless allTests`)
+
+=== Types of tests
+
+We have two types of tests:
+
+.  *GUI Tests* - These are tests involving the GUI. They include,
+.. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
+.  *Non-GUI Tests* - These are tests not involving the GUI. They include,
+..  _Unit tests_ targeting the lowest level methods/classes. +
+e.g. `seedu.address.commons.StringUtilTest`
+..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
+e.g. `seedu.address.storage.StorageManagerTest`
+..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
+e.g. `seedu.address.logic.LogicManagerTest`
+
+
+=== Troubleshooting Testing
+**Problem: `HelpWindowTest` fails with a `NullPointerException`.**
+
+* Reason: One of its dependencies, `HelpWindow.html` in `src/main/resources/docs` is missing.
+* Solution: Execute Gradle task `processResources`.
+
+== Dev Ops
+
+=== Build Automation
+
+See <<UsingGradle#, UsingGradle.adoc>> to learn how to use Gradle for build automation.
+
+=== Continuous Integration
+
+We use https://travis-ci.org/[Travis CI] and https://www.appveyor.com/[AppVeyor] to perform _Continuous Integration_ on our projects. See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
+
+=== Coverage Reporting
+
+We use https://coveralls.io/[Coveralls] to track the code coverage of our projects. See <<UsingCoveralls#, UsingCoveralls.adoc>> for more details.
+
+=== Documentation Previews
+When a pull request has changes to asciidoc files, you can use https://www.netlify.com/[Netlify] to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <<UsingNetlify#, UsingNetlify.adoc>> for more details.
+
+=== Making a Release
+
+Here are the steps to create a new release.
+
+.  Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
+.  Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
+.  Tag the repo with the version number. e.g. `v0.1`
+.  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
+
+=== Managing Dependencies
+
+A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
+a. Include those libraries in the repo (this bloats the repo size) +
+b. Require developers to download those libraries manually (this creates extra work for developers)
+
+[[GetStartedProgramming]]
+[appendix]
+== Product Scope
 
 Current: +
 
 * `Tutors use reminder applications to keep track of lessons`
 * `Tutors use physical diaries or notepads to keep track of current lesson progress`
 
-Value:
+Value Proposition:
 
 * `Tutors have a platform where they can keep track of all their students' details, their progress and the syllabus they intend to cover.`
 
+[appendix]
 == User Stories
 
 . As a busy tutor, I want to be able to manage my students' schedules individually, so that I can plan my time properly.
 . As a tutor, I want to be able to find out where my students live and what time I should be there for tuition.
 . As a tutor, I want to know my students' individual progress so that I know what topics I need to cover for the next tuition session.
 . As a tutor, I want to keep track of my students' payments.
+. As a tutor, I want to be able to edit teaching data such as editing my syllabus to keep up with changes in school's curriculum or updating payments made by students.
 
+[appendix]
 == Use Cases
 
-  1. Add Student
+1. Add Student
 
   System: TutorHelper
   Actor: Tutor
@@ -182,280 +891,66 @@ Value:
         2d1. System displays error message telling tutor that syllabus already exist.
         2d2. Repeat step 1.
 
-== Non-Functional Requirements
+[appendix]
+== Non Functional Requirements
 
 . The system should respond in two seconds.
 . The system should be understandable to a novice in working with computers.
-
-== Implementation
-
-This section describes some noteworthy details on how certain features are implemented.
-
-// tag::group[]
-=== Group Students feature
-==== Current Implementation
-
-Classes related to Group and its functionality is listed below:
-
-* `TutorHelperParser` -- Creates a GroupCommandParser object and parses the user's input.
-* `GroupCommandParser` -- Analyses the input, creates a predicate based on the input and returns a GroupCommand object with the predicate as the argument.
-* `GroupCommand` -- Filters the list based on the predicate and displays it to the user.
-
-Given below is an example usage scenario and how the group mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time.
-
-Step 2. Assuming that the application isn't empty, the user executes 'group Monday' command to group all students with a class on Monday. The group command will be called by `GroupCommandParser.parse()`, parsing the argument to check against. The application will check the list and display all students with classes on Monday, sorted based on the earliest timing.
-
-[NOTE]
-The user can execute `list` to re-display the full list of students again.
-[NOTE]
-The user can execute `undo` to undo the sorting done to the list.
-[NOTE]
-The group command is CASE-SENSITIVE. E.g. Passing `MONDAY` as an input instead of `Monday` will throw an error.
-[NOTE]
-Only 12-hr timings are valid.
-
-The following sequence diagram shows how the group operation works:
-
-image::GroupSequenceDiagram.png[width="650"]
-
-// tag:: payment[]
-=== Students payment feature
-==== Current implementation
-
-The Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
-
-Classes that are related to Payment and their functionality are as listed below:
-* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
-* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
-* `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
-* `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
-
-Given below is an example usage scenario and how the payment mechanism behaves at each step.
-Step 1. The tutor launches the application and wants to record a payment for his/her student called Alice.
-
-Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
-
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
-
-Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
-
-Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
-
-Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
-
-Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
-
-Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
-
-Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
-
-Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
-
-Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
-
-[NOTE]
-Payment list will keep up to 10 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
-[NOTE]
-The maximum amount of payment that can be made each time is $10 000.
-
-The diagram below illustrates the sequence diagram.
-
-image:PaymentSequenceDiagram.png[width="800"]
-// end:: payment[]
-
-// tag::editpaid[]
-=== Students edit payment feature
-==== Current implementation
-
-The Edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Person>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
-
-Classes that are related to Payment and their functionality are as listed below:
-* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
-* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
-* `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
-* `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
-
-Given below is an example usage scenario and how the payment mechanism behaves at each step.
-Step 1. The tutor launches the application and wants to record a payment for his/her student called Alice.
-
-Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
-
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
-
-Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
-
-Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
-
-Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
-
-Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
-
-Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Person class.
-
-Step 2g. Alice person class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updatePerson in model class to modify Alice Person class with the new updated payment.
-
-Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
-
-Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
-
-[NOTE]
-Payment list will keep up to 10 payments at any one time. When the 11th payment is added, the payment list will remove the oldest payment record.
-[NOTE]
-The maximum amount of payment that can be made each time is $10 000.
-
-The diagram below illustrates the sequence diagram.
-
-image:EditPaymentSequenceDiagram.png[width="800"]
-// end::editpaid[]
-
-// tag:: earnings[]
-=== Tutor's Earnings feature
-==== Current implementation
-
-The Earnings mechanism is mainly facilitated by the filteredPersonList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
-The classes related to Earnings are EarningsCommand, EarningsCommandParser.
-
-* `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
-* `EarningsCommandParser` --Takes in users' input and checks if it adheres to the required format. Returns a EarningsCommand with the month and year passed in.
-* `EarningsCommand` -- Takes in month and year as inputs in its constructed. In Execute() method, it performs the checking of all recorded payments and returns the total payments received for that specified month and year.
-
-Given below is an example usage scenario and how the earning mechanism behaves at each step.
-
-Step 1. The tutor launches the application and wants to view his/her earnings for the month of November 2018.
-
-Step 2. He/she enters input in the format of: earnings 11 2018
-
-Step 2a. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, earnings) and creates the EarningsCommandParser object, followed by calling parse method, with the arguments passed in.
-
-Step 2b. EarningCommandParser checks if the inputs are of the correct format.
-
-Step 2b. The PayCommandParser method then returns a EarningCommand object with month and year passed in.
-
-Step 2c. This is propagated back to the LogicManager class which then proceed to call execute method in the returned EarningsCommand object.
-
-Step 2d. The execute method in EarningsCommand proceed to obtain the list of students from the model and proceeds to search for Payment records made for that requested month and year.
-
-Step 2e. The amount is then returned.
-
-Step 3. The tutor will then see a message below the command text box, showing the earnings for the requested month and year.
-
-The diagram below illustrates the sequence diagram.
-
-image:EarningsSequenceDiagram.png[width="800"]
-// end:: earnings[]
-// tag::copysub[]
-=== Copy Subject feature
-==== Current Implementation
-
-The copy subject command operates by making a duplicate of the selected subject of the student and adds it the other student.
-
-[NOTE]
-If the other student already has the same subject, append the content of the subject instead. State of each syllabus is also copied. Duplicate syllabus will not be added.
-
-Classes related to copy command and its functionality are listed below:
-
-* `TutorHelperParser` -- Creates CopySubCommandParser which parses the input from user.
-* `CopySubCommandParser` -- Parses user's input into proper argument and creates CopySubCommand
-* `CopySubCommand` -- Updates the target person based on the argument
-* `SubjectsUtil` -- Manage the finding and copying aspect of copysub command.
-
-Given below is an example usage scenario with 2 possible outcomes and how to copy function addresses each case.
-
-Step 1. The user launches the application for the first time.
-
-Step 2. Assuming that the application isn't empty, the user executes `copysub 1 2 4`.
-
-Step 3. Assuming that each argument given is a valid input, the system will perform the copysub command.
-
-Step 4. The system will locate the _first_ student from the student list, and make a separate copy of the _second_ subject stored under the student data.
-
-Step 5. The system will locate the _fourth_ student from the student list, and make a decision.
-
-* Step 5a. If the same subject as _second_ subject in Step 4, system will append the content of subject of _second_ subject into the _fourth_ student.
-* Step 5b. If there is no subject same as _second_ subject in Step 4, system will add the _second_ subject as a new subject under the _fourth_ student.
-
-The process is described with sequence diagram below:
-
-image::CopySubSequenceDiagrams.png[width="650"]
-// end::copysub[]
-
-=== Add / Delete Subject
-
-==== Implementation
-
-The add / delete subject mechanism is facilitated with `TutorHelperParser`.
-Classes related to the functionality of the mechanism are listed below:
-
-* `TutorHelperParser` -- Creates a `AddSubCommandParser` / `DeleteSubCommandParser` object and parses the user's input.
-* `AddSubCommandParser` / `DeleteSubCommandParser` -- Analyses user input to create a corresponding `Command` object.
-* `AddSubCommand` / `DeleteSubCommand` -- Execution results in addition / deletion of a subject for a specified student index.
-
-Given below is an example usage scenario of how the add / delete subject mechanism behaves at each step.
-
-===== Add Subject
-
-Step 1. The user launches the application.
-
-Step 2. The tutor executes a command of the format `addsub STUDENT_INDEX s/SUBJECT` on the CLI.
-
-Step 3. The arguments are parsed by `AddSubCommandParser`, which produces an instance of `AddSubCommand`.
-
-Step 4. `AddSubCommand.execute()` is called, and the supplied subject is added for the student at the specified student index by TutorHelper.
-
-===== Delete Subject
-
-Step 1. The user launches the application.
-
-Step 2. The tutor executes a command of the format `deletesub STUDENT_INDEX SUBJECT_INDEX` on the CLI.
-
-Step 3. The arguments are parsed by `DeleteSubCommandParser`, which produces an instance of `DeleteSubCommand`.
-
-Step 4. `DeleteSubCommand.execute()` is called, and the subject at the specified subject index of the student at the specified student index is deleted by TutorHelper.
-
-[TIP]
-The TutorHelper has to have at least 1 student as a precondition for both `addsub` and `deletesub`.
-[TIP]
-`deletesub` requires the student at the specified student index to have at least two subjects. After deletion, a student cannot have 0 subjects.
-
-The following sequence diagram shows how the `addsub` operation works:
-
-image::AddSubSequenceDiagram.png[width="650"]
-
-The following sequence diagram shows how the `deletesub` operation works:
-
-image::DeleteSubSequenceDiagram.png[width="650"]
-
-// tag::editsyll[]
-=== Edit Syllabus
-
-==== Current Implementation
-
-Classes that are related to edit syllabus and their functionality are as listed below:
-* `TutorHelperParser` -- Creates a EditSyllCommandParser object and calls parse method in object to parse user's argument input.
-* `EditSyllCommandParser` -- Analyses the input, checks for any violation of syntax and returns a EditSyllCommand object with the person,subject,syllabus index object as well as the new Syllabus object as the argument.
-* `EditSyllCommand` -- Locates the corresponding syllabus to update and calls corresponding subject to edit syllabus.
-* `Subject` -- Locates and edits existing syllabus entry with new syllabus entry
-
-Given below is an example usage scenario and how the earning mechanism behaves at each step.
-
-Step 1. The tutor launches the application.
-
-Step 2. He/she executes the command in the format `editsyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX sy/SYLLABUS` on the CLI.
-
-Step 3. The arguments are parsed by `EditSyllCommandParser`, which produces an instance of `EditSyllCommand`.
-
-Step 4. `EditSyllCommand.execute()` is called, and the syllabus at the specified subject index and syllabus index of the student at the specified student index is edited by TutorHelper.
-
-[TIP]
-The TutorHelper has to have at least 1 student as a precondition for `editsyll`.
-
-The diagram below shows how the `editsyll` operation works:
-
-image:EditSyllSequenceDiagram.png[width="800"]
-// end::editsyll[]
-
+.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+[appendix]
 == Glossary
-. Subject : a branch of knowledge studied by the student
-. Syllabus: the required topics to be covered under the subject
+
+[[mainstream-os]] Mainstream OS::
+Windows, Linux, Unix, OS-X
+
+[[private-contact-detail]] Private contact detail::
+A contact detail that is not meant to be shared with others
+
+[[subject]] Subject::
+A branch of knowledge studied by the student
+
+[[syllabus]] Syllabus::
+The required topics to be covered under the subject
+
+[appendix]
+== Instructions for Manual Testing
+
+Given below are instructions to test the app manually.
+
+[NOTE]
+These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+
+=== Launch and Shutdown
+
+. Initial launch
+
+.. Download the jar file and copy into an empty folder
+.. Double-click the jar file +
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+
+. Saving window preferences
+
+.. Resize the window to an optimum size. Move the window to a different location. Close the window.
+.. Re-launch the app by double-clicking the jar file. +
+   Expected: The most recent window size and location is retained.
+
+=== Deleting a person
+
+. Deleting a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Test case: `delete 1` +
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `delete 0` +
+   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
+
+=== Saving data
+
+. Dealing with missing/corrupted data files
+
+.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
