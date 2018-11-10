@@ -14,11 +14,11 @@ import seedu.address.commons.core.index.Index;
 public class Payment {
 
     public static final String MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS =
-            "Amount should only contain zero or positive numbers, and has to be smaller than 10 000";
+            "Amount should only contain zero or positive numbers, and has to be smaller than 10 000.";
     public static final String MESSAGE_PAYMENT_MONTH_CONSTRAINTS =
-            "Month should only contain numbers between 1 to 12, inclusive";
+            "Month should only contain numbers between 1 to 12, inclusive.";
     public static final String MESSAGE_PAYMENT_YEAR_CONSTRAINTS =
-            "Year should only contain 4 digits numbers";
+            "Year should only contain 4 digits numbers.";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
     private static final int MAXPAYMENTAMOUNT = 10000;
