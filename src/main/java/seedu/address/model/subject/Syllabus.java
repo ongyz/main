@@ -9,14 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Syllabus {
 
-    public static final String MESSAGE_SYLLABUS_CONSTRAINTS =
-            "Syllabus can take any values, and it should not be blank or preceded by white space.";
+    public static final String MESSAGE_SYLLABUS_CONSTRAINTS = "Syllabus can take any values, and it should not be " +
+            "blank or preceded by white space. Syllabus should not be longer than 15 characters.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the syllabus must not be a whitespace, otherwise " " (a blank string)
+     * becomes a valid input. Syllabus should not be longer than 15 characters.
      */
     public static final String SYLLABUS_VALIDATION_REGEX = "[^\\s].*";
+    public static final int SYLLABUS_VALIDATION_MAX_LENGTH = 30;
 
     public final String syllabus;
 
@@ -46,10 +47,14 @@ public class Syllabus {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid syllabus.
      */
     public static boolean isValidSyllabus(String test) {
-        return test.matches(SYLLABUS_VALIDATION_REGEX);
+        if (test.length() > SYLLABUS_VALIDATION_MAX_LENGTH) {
+            return false;
+        } else {
+            return test.matches(SYLLABUS_VALIDATION_REGEX);
+        }
     }
 
     @Override
