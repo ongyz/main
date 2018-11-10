@@ -234,7 +234,6 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the TutorHelper data in xml format and read it back.
-
 [[Design-Commons]]
 === Common classes
 
