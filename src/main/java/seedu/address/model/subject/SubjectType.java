@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents the subject name of Subjects.
@@ -69,12 +70,11 @@ public enum SubjectType {
     /**
      * Returns true if a given string is a valid subject.
      */
-    public static boolean isValidSubjectName(String test) {
+    public static boolean isValidSubjectName(String test) throws IllegalArgumentException {
         requireNonNull(test);
         return SubjectType.stream()
                 .anyMatch(subjectEnum -> StringUtil.isSubstringMatchFromIndexZero(subjectEnum.toString(), test));
     }
-
     @Override
     public String toString() {
         return stringRepresentation;
