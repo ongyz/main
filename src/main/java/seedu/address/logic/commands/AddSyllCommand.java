@@ -47,7 +47,7 @@ public class AddSyllCommand extends Command {
         requireNonNull(syllabuses);
         this.studentIndex = studentIndex;
         this.subjectIndex = subjectIndex;
-        this.syllabuses = syllabuses;
+        this.syllabuses = removeDuplicateSyllabusEntries(syllabuses);
     }
 
     @Override
@@ -96,6 +96,22 @@ public class AddSyllCommand extends Command {
 
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
+    }
+
+    /**
+     * Remove duplicate syllabus entries to be added.
+     * @param syllabuses unfiltered list.
+     * @return the filtered syllabus list with no duplicates.
+     */
+    private List<Syllabus> removeDuplicateSyllabusEntries(List<Syllabus> syllabuses) {
+        List<Syllabus> filteredList = new ArrayList<>();
+
+        for (Syllabus filtered: syllabuses) {
+            if (!filteredList.contains(filtered)) {
+                filteredList.add(filtered);
+            }
+        }
+        return filteredList;
     }
 
     @Override

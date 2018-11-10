@@ -306,11 +306,14 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> syllabuses} into a {@code List<Syllabus>}.
      */
-    public static List<Syllabus> parseSyllabuses(List<String> syllabuses) throws ParseException {
+    public static List<Syllabus> parseSyllabuses(String syllabuses) throws ParseException {
         requireNonNull(syllabuses);
         final List<Syllabus> syllabusList = new ArrayList<>();
-        for (String syllabus : syllabuses) {
-            syllabusList.add(parseSyllabus(syllabus));
+        String trimmedSyllabuses = syllabuses.trim();
+        String[] separatedSyllabuses = trimmedSyllabuses.split(",");
+
+        for (String syllabus: separatedSyllabuses) {
+            syllabusList.add(ParserUtil.parseSyllabus(syllabus));
         }
         return syllabusList;
     }
