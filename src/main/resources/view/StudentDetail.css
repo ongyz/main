@@ -39,5 +39,6 @@
     -fx-padding: 5 10 5 10;
     -fx-background-radius: 10;
     -fx-min-width: 250;
-    -fx-max-width: 300;
+    -fx-max-width: 250;
+    -fx-font-family: 'Abel';
 }
