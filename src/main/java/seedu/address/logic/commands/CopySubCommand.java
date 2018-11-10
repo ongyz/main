@@ -18,17 +18,19 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Finds all students whose name matches the keyword and add the to do element to the data.
- * Find is case-insensitive.
+ * Copies a subject and its syllabus topics from one student to another.
  */
 public class CopySubCommand extends Command {
 
     public static final String COMMAND_WORD = "copysub";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Copy the identified subject of the student identified "
-            + "by the source student index given into the student identified by the target student index"
-            + "New values will be appended into the old syllabus if the subject already exist.\n"
-            + "Parameters: SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Copies a subject and its syllabus topics from one student to another. "
+            + "New syllabus topics will be appended in if the student is already taking the subject.\n"
+            + "Parameters: "
+            + "SOURCE_STUDENT_INDEX (must be a positive integer) "
+            + "SUBJECT_INDEX (must be a positive integer) "
+            + "TARGET_STUDENT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 2 4";
 
     public static final String MESSAGE_COPYSUB_SUCCESS = "Copied syllabus to Student: %1$s";
@@ -39,6 +41,10 @@ public class CopySubCommand extends Command {
     private final Index subjectIndex;
     private final Index targetStudentIndex;
 
+    /**
+     * Creates a CopySubCommand to copy the subject at the {@code subjectIndex} from the student at the
+     * {@code sourceStudentIndex} to the student at the {@code targetStudentIndex}.
+     */
     public CopySubCommand(Index sourceStudentIndex, Index subjectIndex, Index targetStudentIndex) {
         this.sourceStudentIndex = sourceStudentIndex;
         this.subjectIndex = subjectIndex;
@@ -107,8 +113,8 @@ public class CopySubCommand extends Command {
                 && subjectIndex.equals(((CopySubCommand) other).subjectIndex));
     }
 
-    /**cop
-     * Stores the details of copysyll command format.
+    /**
+     * Stores the details of CopySyll command format.
      */
     public static class CopySubFormatChecker {
         public static final int SOURCE_STUDENT_INDEX = 0;

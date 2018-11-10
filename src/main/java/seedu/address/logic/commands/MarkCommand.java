@@ -18,16 +18,18 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Finds all students whose name matches the keyword and add the to do element to the data.
- * Find is case-insensitive.
+ * Toggles the marked state of a syllabus topic of a subject of a student.
  */
 public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Toggles the selected syllabus of the "
-            + "student identified by the index number used in the displayed student list. \n"
-            + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Toggles the marked state of a syllabus topic of a subject of a student. \n"
+            + "Parameters: "
+            + "STUDENT_INDEX (must be a positive integer) "
+            + "SUBJECT_INDEX (must be a positive integer) "
+            + "SYLLABUS_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
     public static final String MESSAGE_MARK_SUCCESS = "Changed selected syllabus from Student: %1$s";
@@ -103,7 +105,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Stores the details of rmtodo command format.
+     * Stores the details of the mark command format.
      */
     public static class MarkFormatChecker {
         public static final int STUDENT_INDEX_LOCATION = 0;
