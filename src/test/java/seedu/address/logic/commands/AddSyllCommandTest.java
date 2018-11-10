@@ -140,6 +140,13 @@ public class AddSyllCommandTest {
     }
 
     @Test
+    public void execute_invalidSyllabusExceedLength_throwsCommandException() {
+        thrown.expect(IllegalArgumentException.class);
+        new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT,
+                Syllabus.makeSyllabus("Thisisasyllabusthatexceedsfifteencharactersanditshouldfail"));
+    }
+
+    @Test
     public void execute_duplicateSyllabus_throwsCommandException() {
         Student studentTarget = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Syllabus syllabusCopy = Syllabus.makeSyllabus(new ArrayList<>(studentTarget.getSubjects())

@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Syllabus {
 
     public static final String MESSAGE_SYLLABUS_CONSTRAINTS = "Syllabus can take any values, and it should not be " +
-            "blank or preceded by white space. Syllabus should not be longer than 15 characters.";
+            "blank or preceded by white space. Syllabus should not be longer than 30 characters.";
 
     /*
      * The first character of the syllabus must not be a whitespace, otherwise " " (a blank string)
