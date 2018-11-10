@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,15 +40,15 @@ public class AddSyllCommand extends Command {
 
     private final Index studentIndex;
     private final Index subjectIndex;
-    private final Syllabus syllabus;
+    private final List<Syllabus> syllabuses;
 
-    public AddSyllCommand(Index studentIndex, Index subjectIndex, Syllabus syllabus) {
+    public AddSyllCommand(Index studentIndex, Index subjectIndex, List<Syllabus> syllabuses) {
         requireNonNull(studentIndex);
         requireNonNull(subjectIndex);
-        requireNonNull(syllabus);
+        requireNonNull(syllabuses);
         this.studentIndex = studentIndex;
         this.subjectIndex = subjectIndex;
-        this.syllabus = syllabus;
+        this.syllabuses = syllabuses;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class AddSyllCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
         }
 
-        Set<Subject> addedSubjectContent = addSubjectContentTo(studentTarget, subjectIndex, syllabus);
+        Set<Subject> addedSubjectContent = addSubjectContentTo(studentTarget, subjectIndex, syllabuses);
         Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, addedSubjectContent);
 
         model.updateStudentInternalField(studentTarget, studentSubjUpdated);
@@ -78,19 +79,22 @@ public class AddSyllCommand extends Command {
      * Add syllabus to the student.
      * @param studentTarget The student to add to.
      * @param subjectIndex The index of subject to add to.
-     * @param syllabus The syllabus to add.
+     * @param syllabuses The list of syllabus to add.
      * @return a new {@code Set<Subject>} with the specified syllabus added
      */
-    private Set<Subject> addSubjectContentTo(Student studentTarget, Index subjectIndex, Syllabus syllabus)
+    private Set<Subject> addSubjectContentTo(Student studentTarget, Index subjectIndex, Collection<Syllabus> syllabuses)
         throws CommandException {
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
         Subject selectedSubject = subjects.get(subjectIndex.getZeroBased());
+        Subject updatedSubject = selectedSubject;
 
-        if (selectedSubject.contains(syllabus)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS, studentTarget));
+        for (Syllabus syllabus: syllabuses) {
+            if (selectedSubject.contains(syllabus)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS, studentTarget));
+            }
+            updatedSubject = updatedSubject.add(syllabus);
         }
 
-        Subject updatedSubject = selectedSubject.add(syllabus);
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
     }
@@ -100,7 +104,7 @@ public class AddSyllCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddSyllCommand // instanceof handles nulls
                 && studentIndex.equals(((AddSyllCommand) other).studentIndex))
-                && syllabus.equals(((AddSyllCommand) other).syllabus); // state check
+                && syllabuses.equals(((AddSyllCommand) other).syllabuses); // state check
     }
 
     /**

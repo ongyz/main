@@ -110,11 +110,17 @@ public class ParserUtil {
      */
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
-        if (subject.isEmpty()) {
+        String trimmedSubject;
+        boolean result;
+
+        try {
+            trimmedSubject = subject.trim();
+            result = SubjectType.isValidSubjectName(trimmedSubject);
+        } catch (IllegalArgumentException err) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
-        String trimmedSubject = subject.trim();
-        if (!SubjectType.isValidSubjectName(trimmedSubject)) {
+
+        if (!result) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
         return Subject.makeSubject(trimmedSubject);
@@ -291,6 +297,18 @@ public class ParserUtil {
             throw new ParseException(Syllabus.MESSAGE_SYLLABUS_CONSTRAINTS);
         }
         return new Syllabus(trimmedSyllabus, false);
+    }
+
+    /**
+     * Parses {@code Collection<String> syllabuses} into a {@code List<Syllabus>}.
+     */
+    public static List<Syllabus> parseSyllabuses(List<String> syllabuses) throws ParseException {
+        requireNonNull(syllabuses);
+        final List<Syllabus> syllabusList = new ArrayList<>();
+        for (String syllabus : syllabuses) {
+            syllabusList.add(parseSyllabus(syllabus));
+        }
+        return syllabusList;
     }
 
 }
