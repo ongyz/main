@@ -44,6 +44,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 // tag::validinputs[]
 == Valid Inputs
 
+=== Index
+
+Index should always be an integer. It has a maximum range of 0 (exclusive) to 2,147,483,647 (inclusive).
+Any index outside of this range will automatically make any command an invalid input.
+
 === Name
 
 Name should only contain alphabetical characters and spaces, and should not be blank.
