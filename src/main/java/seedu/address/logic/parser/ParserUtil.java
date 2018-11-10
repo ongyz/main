@@ -123,10 +123,12 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
      */
-    public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+    public static Set<Subject> parseSubjects(String subjects) throws ParseException {
         requireNonNull(subjects);
         final Set<Subject> subjectSet = new HashSet<>();
-        for (String subjectName : subjects) {
+        String trimmedSubjects = subjects.trim();
+        String[] separatedSubjects = trimmedSubjects.split(",");
+        for (String subjectName : separatedSubjects) {
             subjectSet.add(parseSubject(subjectName));
         }
         return subjectSet;
@@ -252,11 +254,13 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(String tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        String trimmedTags = tags.trim();
+        String[] separatedTags = trimmedTags.split(",");
+        for (String tag : separatedTags) {
+            tagSet.add(ParserUtil.parseTag(tag));
         }
         return tagSet;
     }

@@ -63,9 +63,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             editStudentDescriptor.setTuitionTiming(
                     ParserUtil.parseTuitionTiming(argMultimap.getValue(PREFIX_DAY_AND_TIME).get()));
         }
-
-        parseSubjectsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editStudentDescriptor::setSubjects);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editStudentDescriptor::setTags);
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            editStudentDescriptor.setSubjects(ParserUtil.parseSubjects(argMultimap.getValue(PREFIX_SUBJECT).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            editStudentDescriptor.setTags(ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get()));
+        }
 
         if (!editStudentDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -74,36 +77,36 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(index, editStudentDescriptor);
     }
 
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
-    }
-
-    /**
-     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>} if {@code subjects} is non-empty.
-     * If {@code subjects} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Subject>} containing zero tags.
-     */
-    private Optional<Set<Subject>> parseSubjectsForEdit(Collection<String> subjects) throws ParseException {
-        assert subjects != null;
-
-        if (subjects.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> subjectSet = subjects.size() == 1 && subjects.contains("")
-                ? Collections.emptySet() : subjects;
-
-        return Optional.of(ParserUtil.parseSubjects(subjectSet));
-    }
+//    /**
+//     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+//     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+//     * {@code Set<Tag>} containing zero tags.
+//     */
+//    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+//        assert tags != null;
+//
+//        if (tags.isEmpty()) {
+//            return Optional.empty();
+//        }
+//        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+//        return Optional.of(ParserUtil.parseTags(tagSet));
+//    }
+//
+//    /**
+//     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>} if {@code subjects} is non-empty.
+//     * If {@code subjects} contain only one element which is an empty string, it will be parsed into a
+//     * {@code Set<Subject>} containing zero tags.
+//     */
+//    private Optional<Set<Subject>> parseSubjectsForEdit(Collection<String> subjects) throws ParseException {
+//        assert subjects != null;
+//
+//        if (subjects.isEmpty()) {
+//            return Optional.empty();
+//        }
+//        Collection<String> subjectSet = subjects.size() == 1 && subjects.contains("")
+//                ? Collections.emptySet() : subjects;
+//
+//        return Optional.of(ParserUtil.parseSubjects(subjectSet));
+//    }
 
 }
