@@ -66,7 +66,7 @@ public class AddSyllCommandTest {
         ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
         Student newStudent = simulateAddSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, syllabusTest);
 
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitTutorHelper();
 
@@ -104,7 +104,7 @@ public class AddSyllCommandTest {
 
         String expectedMessage = String.format(AddSyllCommand.MESSAGE_ADDSYLL_SUCCESS, studentTarget);
         Student updatedStudent = simulateAddSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, syllabusTest);
-        expectedModel.updateStudent(studentTarget, updatedStudent);
+        expectedModel.updateStudentInternalField(studentTarget, updatedStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(addSyllCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -162,7 +162,7 @@ public class AddSyllCommandTest {
         Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
         Student newStudent = simulateAddSyllCommand(studentTarget, INDEX_FIRST_SUBJECT, syllabusTest);
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         expectedModel.commitTutorHelper();
 
         // AddSyll -> first student has an added syllabus

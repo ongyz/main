@@ -77,7 +77,7 @@ public class EditSyllCommand extends Command {
 
         Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, editedSubjectContent);
 
-        model.updateStudent(studentTarget, studentSubjUpdated);
+        model.updateStudentInternalField(studentTarget, studentSubjUpdated);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_EDITSYLL_SUCCESS, studentSubjUpdated));
