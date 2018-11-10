@@ -69,6 +69,7 @@ Valid subjects are limited to only the following subjects: +
 
 * In order to be valid subjects, the input must be a full substring match of length 3 or more with any of the valid subjects. This is to avoid too short of keyword matching.
 * The match must start at the beginning of the subject name. This is to avoid confusion and multiple matching.
+* Input must be a single word. This is to avoid cases where both invalid and valid keyword are input by user.
 * Matching is case insensitive.
 
 Examples:
@@ -78,6 +79,7 @@ Examples:
 * `Ma` will not match `Mathematics` because the length of subtring is shorter than three.
 * `phy` will only match `Physics` and will not match `Geography` as matching is done from the beginning of the string.
 * `Maths` will not match `Mathematics` as it is not a full substring match.
+* `History Literature` will not match anything as it contains more than 1 word.
 
 === TuitionTiming
 
