@@ -923,6 +923,7 @@ Given below are instructions to test the app manually.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
+
 === Launch and Shutdown
 
 . Initial launch
@@ -954,3 +955,33 @@ These instructions only provide a starting point for testers to work on; testers
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+
+=== Making Payment for a student
+. Adding a payment while all persons are listed
+
+.. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+.. Test case: 'paid 1 200 8 2018' +
+   Expected: Payment for this student is added. Details of the paid contact shown in the status message.
+.. Test case: 'paid 0 200 8 2018' +
+   Expected: Index is not a non-zero unsigned integer.
+.. Test case: 'paid X 200 8 920' (X is a number greater than the list) +
+   Expected: The student index provided is invalid.
+.. Test case: 'paid 1 -200 8 2018' +
+   Expected: Amount should only contain zero or positive numbers, and has to be smaller than 10 000.
+.. Test case: 'paid 1 200 16 2018' +
+   Expected: Month should only contain numbers between 1 to 12, inclusive.
+.. Test case: 'paid 1 200 8 920' +
+   Expected: Year should only contain 4 digits numbers.
+.. Other incorrect delete commands to try: `paid`, `paid x` (where x is any number), 'paid x 8',
+   'paid x 200 8', 'paid x 200 2018'
+   Expected: Invalid command format. Pay command message usage is shown.
+
+=== Viewing earnings command
+.. Test case: 'earnings 8 2018'
+   Expected: Earnings: $X (X is the total earnings)
+.. Test case: 'earnings 8 299'
+   Expected: Year should only contain 4 digits numbers.
+.. Test case: 'earnings 0 2018'
+   Expected:  Month should only contain numbers between 1 to 12, inclusive.
+.. Other incorrect earnings commands to try: 'earnings', 'earnings 8', 'earnings 2018'
+   Expected: Invalid command format. Earnings command message usage is shown.
