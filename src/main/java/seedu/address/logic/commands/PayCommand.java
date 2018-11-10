@@ -62,7 +62,7 @@ public class PayCommand extends Command {
             if (pay.size() > MAXPAYMENTSDISPLAYED) {
                 pay.remove(0);
             }
-            pay = updatePayment(pay, newPayment);
+            pay = updatePayment(studentTarget.getPayments(), newPayment);
         } else {
             pay = editPaymentField(pay, newPayment);
         }
