@@ -20,17 +20,18 @@ import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Appends a syllabus topic to a specified subject for a specified student in the TutorHelper.
+ * Adds a syllabus topic to a subject for a student in the TutorHelper.
  */
 public class AddSyllCommand extends Command {
 
     public static final String COMMAND_WORD = "addsyll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the student identified "
-            + "by the student index number used in the displayed student list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
-            + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a syllabus topic to a subject for a student in the TutorHelper.\n"
+            + "Parameters: "
+            + "STUDENT_INDEX (must be a positive integer) "
+            + "SUBJECT_INDEX (must be a positive integer) "
+            + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_ADDSYLL_SUCCESS = "Added syllabus to Student: %1$s";

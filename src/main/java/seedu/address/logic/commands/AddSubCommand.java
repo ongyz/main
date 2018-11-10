@@ -25,9 +25,10 @@ public class AddSubCommand extends Command {
 
     public static final String COMMAND_WORD = "addsub";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a subject for a student in the TutorHelper. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a subject for a student in the TutorHelper.\n"
             + "Parameters: "
-            + "STUDENT_INDEX "
+            + "STUDENT_INDEX (must be a positive integer) "
             + PREFIX_SUBJECT + "SUBJECT\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
@@ -39,6 +40,9 @@ public class AddSubCommand extends Command {
     private final Index studentIndex;
     private final Subject subject;
 
+    /**
+     * Creates an AddSubCommand to add the {@code Subject} to the student at the {@code studentIndex}.
+     */
     public AddSubCommand(Index studentIndex, Subject subject) {
         requireNonNull(studentIndex);
         requireNonNull(subject);

@@ -18,7 +18,7 @@ public class Payment {
     public static final String MESSAGE_PAYMENT_MONTH_CONSTRAINTS =
             "Month of payment should only contain numbers between 1 to 12, inclusive";
     public static final String MESSAGE_PAYMENT_YEAR_CONSTRAINTS =
-            "Year of payment should only contain 4 digits numbers";
+            "Year of payment should only contain 4-digit numbers";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
     private static final int MAXPAYMENTAMOUNT = 10000;

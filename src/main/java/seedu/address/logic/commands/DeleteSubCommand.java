@@ -25,10 +25,11 @@ public class DeleteSubCommand extends Command {
 
     public static final String COMMAND_WORD = "deletesub";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a subject for a student in the TutorHelper. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes a subject for a student in the TutorHelper.\n"
             + "Parameters: "
-            + "STUDENT_INDEX "
-            + "SUBJECT_INDEX\n"
+            + "STUDENT_INDEX (must be a positive integer) "
+            + "SUBJECT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + "2";
@@ -39,6 +40,10 @@ public class DeleteSubCommand extends Command {
     private final Index studentIndex;
     private final Index subjectIndex;
 
+    /**
+     * Creates a DeleteSubCommand to delete the subject at the {@code subjectIndex}
+     * from the student at the {@code studentIndex}.
+     */
     public DeleteSubCommand(Index studentIndex, Index subjectIndex) {
         this.studentIndex = studentIndex;
         this.subjectIndex = subjectIndex;
@@ -102,7 +107,7 @@ public class DeleteSubCommand extends Command {
     }
 
     /**
-     * Stores the format of the AddSub Command.
+     * Stores the format of the DeleteSub Command.
      */
     public static class DeleteSubFormatChecker {
         public static final int STUDENT_INDEX = 0;
