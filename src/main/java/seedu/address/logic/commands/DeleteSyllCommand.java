@@ -18,15 +18,18 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Removes a syllabus topic from a specified subject for a specified student.
+ * Removes a syllabus topic from a specified subject of a specified student.
  */
 public class DeleteSyllCommand extends Command {
 
     public static final String COMMAND_WORD = "deletesyll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the selected syllabus of the "
-            + "student identified by the syllabus index number in the selected student's subject.\n"
-            + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Removes a syllabus topic from a subject of a student.\n"
+            + "Parameters: "
+            + "STUDENT_INDEX (must be a positive integer) "
+            + "SUBJECT_INDEX (must be a positive integer) "
+            + "SYLLABUS_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 1 2";
 
     public static final String MESSAGE_DELETESYLL_SUCCESS = "Removed selected syllabus from Student: %1$s";

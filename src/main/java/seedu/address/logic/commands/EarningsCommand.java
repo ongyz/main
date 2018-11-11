@@ -19,7 +19,8 @@ public class EarningsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows earnings of the month\n"
             + "Parameters: "
-            + "MONTH YEAR \n"
+            + "MONTH (must be an integer from 1 to 12, inclusive) "
+            + "YEAR (must be a 4-digit integer) \n"
             + "Example: " + COMMAND_WORD + " 08 2018 ";
 
     private int month;

@@ -20,16 +20,18 @@ import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Finds syllabus in subjectIndex of student with studentIndex and edits the syllabus.
+ * Edits a syllabus topic of a subject of a student.
  */
 public class EditSyllCommand extends Command {
     public static final String COMMAND_WORD = "editsyll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the syllabus of the student identified "
-            + "by the student index number used in the displayed student list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX "
-            + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits a syllabus topic of a subject of a student.\n"
+            + "Parameters: "
+            + "STUDENT_INDEX (must be a positive integer) "
+            + "SUBJECT_INDEX (must be a positive integer) "
+            + "SYLLABUS_INDEX (must be a positive integer) "
+            + PREFIX_SYLLABUS + "SYLLABUS\n"
             + "Example: " + COMMAND_WORD + " 1 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_EDITSYLL_SUCCESS = "Edited syllabus to Student: %1$s";
@@ -94,7 +96,7 @@ public class EditSyllCommand extends Command {
     }
 
     /**
-     * Stores the details of todo command format.
+     * Stores the details of EditSyll command format.
      */
     public static class EditSyllFormatChecker {
         public static final int STUDENT_INDEX = 0;

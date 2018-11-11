@@ -44,6 +44,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 // tag::validinputs[]
 == Valid Inputs
 
+=== Index
+
+Index should always be an integer. It has a maximum range of 0 (exclusive) to 2,147,483,647 (inclusive).
+Any index outside of this range will automatically make any command an invalid input.
+
 === Name
 
 Name should only contain alphabetical characters and spaces, and should not be blank.
@@ -69,6 +74,7 @@ Valid subjects are limited to only the following subjects: +
 
 * In order to be valid subjects, the input must be a full substring match of length 3 or more with any of the valid subjects. This is to avoid too short of keyword matching.
 * The match must start at the beginning of the subject name. This is to avoid confusion and multiple matching.
+* Input must be a single word. This is to avoid cases where both invalid and valid keyword are input by user.
 * Matching is case insensitive.
 
 Examples:
@@ -78,6 +84,7 @@ Examples:
 * `Ma` will not match `Mathematics` because the length of subtring is shorter than three.
 * `phy` will only match `Physics` and will not match `Geography` as matching is done from the beginning of the string.
 * `Maths` will not match `Mathematics` as it is not a full substring match.
+* `History Literature` will not match anything as it contains more than 1 word.
 
 === TuitionTiming
 
@@ -107,7 +114,7 @@ Format: `help`
 === Add Student: `add`
 
 Adds a student to the TutorHelper +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMING [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT... d/TUITION TIMING [t/TAG], [MORE TAGS]...`
 
 [TIP]
 A student can have any number of tags (including 0), and must have at least 1 subject.
@@ -310,6 +317,7 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 ====
 If a payment entry already exists, the amount will replace the existing payment record.
 The maximum payment amount allowable is 10 000 each time.
+Only positive integers are accepted as payment amount.
 ====
 
 ****
@@ -346,11 +354,13 @@ Displays earnings made for January 2018.
 === Add Subject : `addsub`
 
 Adds a new subject to a specified student. Refer to valid subject inputs under 3. Feature. +
-Format: `addsub STUDENT_INDEX s/SUBJECT`
+Format: `addsub STUDENT_INDEX s/SUBJECT, [MORE SUBJECTS...]`
 
 [NOTE]
 ====
-Adding a subject that already exists for the student will throw an error.
+* Adding a subject that already exists for the student will throw an error.
+* Adding subject of the same type in a single input will throw an error. +
+e.g `addsub 1 1 s/Chemistry s/Chemistry` is not permitted.
 ====
 
 ****
@@ -422,12 +432,14 @@ Copies the second subject from the first student to the third student.
 // tag::addsyll[]
 === Add Syllabus Topic : `addsyll`
 
-Adds a new syllabus topic for a specified student and subject. +
-Format: `addsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS`
+Adds new syllabuses topic for a specified student and subject. +
+Format: `addsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS, [MORE SYLLABUSES...]`
 
 [NOTE]
 ====
-Adding a syllabus topic that already exists under the subject will throw an error.
+* Adding a syllabus topic that already exists under the subject will throw an error.
+* Adding syllabuses of the same topic in a single input will throw an error. +
+e.g `addsyll 1 1 sy/Calculus sy/Calculus` is not permitted.
 ====
 
 ****
@@ -560,13 +572,13 @@ e.g.`select 2`
 e.g. `paid 1 200 08 2018`
 * *Display Earnings* : `earnings MONTH YEAR` +
 e.g. `earnings 01 2018`
-* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT` +
+* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT, [MORE SUBJECTS...]` +
 e.g. `addsub 1 s/Physics`
 * *Remove Subject* : `deletesub STUDENT_INDEX SUBJECT_INDEX` +
 e.g. `deletesub 1 2`
 * *Copy Subject* : `copysub SOURCE_STUDENT_INDEX SUBJECT_INDEX TARGET_STUDENT_INDEX` +
 e.g. `copysub 1 1 2`
-* *Add Syllabus Topic* : `addsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS` +
+* *Add Syllabus Topic* : `addsyll STUDENT_INDEX SUBJECT_INDEX sy/SYLLABUS, [MORE SYLLABUS...]` +
 e.g. `addsyll 1 2 sy/Integration`
 * *Remove Syllabus Topic* : `deletesyll STUDENT_INDEX SUBJECT_INDEX SYLLABUS_INDEX` +
 e.g. `deletesyll 1 1 1`
