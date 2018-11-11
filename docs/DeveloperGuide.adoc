@@ -738,7 +738,7 @@ Value Proposition:
 // end::userstories[]
 
 [appendix]
-// tag::userstories[]
+// tag::usecases[]
 == Use Cases
 
 1. Add Student
@@ -894,7 +894,7 @@ Value Proposition:
       2d. System find same syllabus entry already exists in subject.
         2d1. System displays error message telling tutor that syllabus already exist.
         2d2. Repeat step 1.
-// end::userstories[]
+// end::usecases[]
 
 [appendix]
 == Non Functional Requirements
