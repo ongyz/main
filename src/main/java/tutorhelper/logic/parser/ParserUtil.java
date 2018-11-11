@@ -164,17 +164,11 @@ public class ParserUtil {
 
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
-        boolean doesNotContainAllDigits = false;
 
         for (int i = 0; i < trimmedAmount.length(); i++) {
             if (!Character.isDigit(trimmedAmount.charAt(i))) {
-                doesNotContainAllDigits = true;
-                break;
+                throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
             }
-        }
-
-        if (doesNotContainAllDigits == true) {
-            throw new ParseException(Payment.MESSAGE_PAYMENT_AMOUNT_CONSTRAINTS);
         }
 
         if ((!StringUtil.isNonZeroUnsignedInteger(trimmedAmount))
@@ -193,18 +187,12 @@ public class ParserUtil {
     public static int parseMonth(String month) throws ParseException {
         requireNonNull(month);
         String trimmedMonth = month.trim();
-        boolean doesNotContainAllDigits = false;
-
         for (int i = 0; i < trimmedMonth.length(); i++) {
             if (!Character.isDigit(trimmedMonth.charAt(i))) {
-                doesNotContainAllDigits = true;
-                break;
+                throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
             }
         }
 
-        if (doesNotContainAllDigits == true) {
-            throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
-        }
         if ((!StringUtil.isNonZeroUnsignedInteger(trimmedMonth)
                 || !Payment.isValidMonth(Integer.parseInt(trimmedMonth)))) {
             throw new ParseException(Payment.MESSAGE_PAYMENT_MONTH_CONSTRAINTS);
@@ -221,17 +209,11 @@ public class ParserUtil {
     public static int parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
-        boolean doesNotContainAllDigits = false;
 
         for (int i = 0; i < trimmedYear.length(); i++) {
             if (!Character.isDigit(trimmedYear.charAt(i))) {
-                doesNotContainAllDigits = true;
-                break;
+                throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
             }
-        }
-
-        if (doesNotContainAllDigits == true) {
-            throw new ParseException(Payment.MESSAGE_PAYMENT_YEAR_CONSTRAINTS);
         }
 
         if ((!StringUtil.isNonZeroUnsignedInteger(trimmedYear)
