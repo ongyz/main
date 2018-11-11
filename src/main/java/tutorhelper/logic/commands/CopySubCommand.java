@@ -115,14 +115,4 @@ public class CopySubCommand extends Command {
                 && targetStudentIndex.equals(((CopySubCommand) other).targetStudentIndex)
                 && subjectIndex.equals(((CopySubCommand) other).subjectIndex));
     }
-
-    /**
-     * Stores the details of CopySyll command format.
-     */
-    public static class CopySubFormatChecker {
-        public static final int SOURCE_STUDENT_INDEX = 0;
-        public static final int SUBJECT_INDEX = 1;
-        public static final int TARGET_STUDENT_INDEX = 2;
-        public static final int NUMBER_OF_ARGS = 3;
-    }
 }

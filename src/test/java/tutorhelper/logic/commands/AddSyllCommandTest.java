@@ -166,6 +166,18 @@ public class AddSyllCommandTest {
     public void execute_duplicateSyllabus_throwsCommandException() {
         Student studentTarget = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         List<Syllabus> syllabusTest = new ArrayList<>();
+        syllabusTest.add(Syllabus.makeSyllabus("SyllabusCopy"));
+        syllabusTest.add(Syllabus.makeSyllabus("SyllabusCopy"));
+        AddSyllCommand addSyllCommand = new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, syllabusTest);
+
+        assertCommandFailure(addSyllCommand, model, commandHistory,
+                String.format(AddSyllCommand.MESSAGE_DUPLICATE_SYLLABUS_IN_ARGUMENT, studentTarget));
+    }
+
+    @Test
+    public void execute_duplicateSyllabusInArguments_throwsCommandException() {
+        Student studentTarget = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        List<Syllabus> syllabusTest = new ArrayList<>();
         Syllabus syllabusCopy = Syllabus.makeSyllabus(new ArrayList<>(studentTarget.getSubjects())
                 .get(INDEX_FIRST_SUBJECT.getZeroBased())
                 .getSubjectContent()

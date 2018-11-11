@@ -120,13 +120,4 @@ public class AddSyllCommand extends Command {
                 && studentIndex.equals(((AddSyllCommand) other).studentIndex))
                 && syllabuses.equals(((AddSyllCommand) other).syllabuses); // state check
     }
-
-    /**
-     * Stores the details of the AddSyll command format.
-     */
-    public static class AddSyllFormatChecker {
-        public static final int STUDENT_INDEX = 0;
-        public static final int SUBJECT_INDEX = 1;
-        public static final int NUMBER_OF_ARGS = 2;
-    }
 }

@@ -94,14 +94,4 @@ public class EditSyllCommand extends Command {
                 && syllabusIndex.equals(((EditSyllCommand) other).syllabusIndex)
                 && syllabusEdit.equals(((EditSyllCommand) other).syllabusEdit)); // state check
     }
-
-    /**
-     * Stores the details of EditSyll command format.
-     */
-    public static class EditSyllFormatChecker {
-        public static final int STUDENT_INDEX = 0;
-        public static final int SUBJECT_INDEX = 1;
-        public static final int SYLLABUS_INDEX = 2;
-        public static final int NUMBER_OF_ARGS = 3;
-    }
 }

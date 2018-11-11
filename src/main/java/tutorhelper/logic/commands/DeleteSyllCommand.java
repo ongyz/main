@@ -104,14 +104,4 @@ public class DeleteSyllCommand extends Command {
                 && subjectIndex.equals(((DeleteSyllCommand) other).subjectIndex)
                 && syllabusIndex.equals(((DeleteSyllCommand) other).syllabusIndex); // state check
     }
-
-    /**
-     * Stores the details of deletesyll command format.
-     */
-    public static class DeleteSyllFormatChecker {
-        public static final int STUDENT_INDEX = 0;
-        public static final int SUBJECT_INDEX = 1;
-        public static final int SYLLABUS_INDEX = 2;
-        public static final int NUMBER_OF_ARGS = 3;
-    }
 }

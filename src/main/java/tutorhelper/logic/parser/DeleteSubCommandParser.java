@@ -2,9 +2,6 @@ package tutorhelper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorhelper.logic.commands.DeleteSubCommand.DeleteSubFormatChecker.NUMBER_OF_ARGS;
-import static tutorhelper.logic.commands.DeleteSubCommand.DeleteSubFormatChecker.STUDENT_INDEX;
-import static tutorhelper.logic.commands.DeleteSubCommand.DeleteSubFormatChecker.SUBJECT_INDEX;
 
 import java.util.List;
 
@@ -16,6 +13,10 @@ import tutorhelper.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteSubCommand object.
  */
 public class DeleteSubCommandParser implements Parser<DeleteSubCommand> {
+
+    public static final int STUDENT_INDEX = 0;
+    public static final int SUBJECT_INDEX = 1;
+    public static final int NUMBER_OF_ARGS = 2;
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteSubCommand
