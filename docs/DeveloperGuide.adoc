@@ -252,7 +252,7 @@ Classes related to Group and its functionality is listed below:
 
 * `TutorHelperParser` -- Creates a GroupCommandParser object and parses the user's input.
 * `GroupCommandParser` -- Analyses the input, creates a predicate based on the input and returns a GroupCommand object with the predicate as the argument.
-* `GroupCommand` -- Filters the list based on the predicate and displays it to the user.
+* `GroupCommand` -- Filters the list based on the predicate, sorts the list and displays it to the user.
 
 Given below is an example usage scenario and how the group mechanism behaves at each step.
 
@@ -269,9 +269,10 @@ The group command is CASE-SENSITIVE. E.g. Passing `MONDAY` as an input instead o
 [NOTE]
 Only 12-hr timings are valid.
 
-The following sequence diagram shows how the group operation works:
+The following sequence diagram shows how the group operation works for day parameter and time parameter:
 
-image::GroupSequenceDiagram.png[width="650"]
+image::GroupSequenceDiagramDay.png[width="650"]
+image::GroupSequenceDiagramTime.png[width="650]
 // end::group[]
 // tag::payment[]
 
@@ -967,14 +968,15 @@ These instructions only provide a starting point for testers to work on; testers
 . Grouping by day or time while all persons are listed.
 
 .. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
-.. Test case: 'group Monday'
-   Expected: X students listed! (X is the number of students meeting the requirements)
-.. Test case: 'group 3:00pm'
+.. Test case: 'group Monday' +
+   Expected: X students listed! (X is the number of students meeting the requirement)
+.. Test case: 'group 3:00pm' +
    Expected: X students listed!
-.. Test case: 'group Monday 3pm'
+.. Test case: 'group Monday 3pm' +
    Expected: Invalid command format. Group command message usage is shown.
-.. Other incorrect grouping commands to try 'group', 'group monday', 'group 3pm'
+.. Other incorrect grouping commands to try 'group', 'group monday', 'group 3pm' +
    Expected: Invalid command format. Group command message usage is shown.
+
 === Making Payment for a student
 . Adding a payment while all persons are listed
 
@@ -1017,119 +1019,121 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Invalid command format. Pay command message usage is shown.
 
 === Viewing earnings command
-.. Test case: 'earnings 8 2018'
+. Display earnings made by the tutor
+
+.. Test case: 'earnings 8 2018' +
    Expected: Earnings: $X (X is the total earnings)
-.. Test case: 'earnings 8 299'
+.. Test case: 'earnings 8 299' +
    Expected: Year should only contain 4 digits numbers.
-.. Test case: 'earnings 0 2018'
+.. Test case: 'earnings 0 2018' +
    Expected:  Month should only contain numbers between 1 to 12, inclusive.
-.. Other incorrect earnings commands to try: 'earnings', 'earnings 8', 'earnings 2018'
+.. Other incorrect earnings commands to try: 'earnings', 'earnings 8', 'earnings 2018' +
    Expected: Invalid command format. Earnings command message usage is shown.
 
 === Add subject command
-.. Adding a subject to an existing student
+. Adding a subject to an existing student
 
 .. Prerequisite: TutorHelper is not empty
-.. Test case: 'addsub 1 s/Chemistry'
+.. Test case: 'addsub 1 s/Chemistry' +
    Expected: Added subject to student: Display student details
-.. Test case: 'addsub X s/Chemistry' (X is an invalid student index)
-.. Expected: The student index provided is invalid
-.. Test case: 'addsub 1 s/X' (X is a subject student index 1 is already taking)
-.. Expected: Subject is already taken by student: Display student index.
-.. Other incorrect addsub commands to try: 'addsub', 'addsub 2', 'addsub 1 Physics', 'áddsub Physics'
-.. Expected: Invalid command format. addsub command message usage is shown.
+.. Test case: 'addsub X s/Chemistry' (X is an invalid student index) +
+   Expected: The student index provided is invalid
+.. Test case: 'addsub 1 s/X' (X is a subject student index 1 is already taking) +
+   Expected: Subject is already taken by student: Display student index.
+.. Other incorrect addsub commands to try: 'addsub', 'addsub 2', 'addsub 1 Physics', 'áddsub Physics' +
+   Expected: Invalid command format. addsub command message usage is shown.
 
 == Delete subject command
-.. Deleting subject from existing student
+. Deleting subject from existing student
 
 .. Prerequisite: Tutorhelper is not empty
-.. Test case: 'deletesub 1 1'
-.. Expected: Deleted subject from student: Display student details
-.. Test case: 'deletesub 1 X' (X is an invalid subject index)
-.. Expected: The subject index provided is invalid.
-.. Test case: 'deletesub X 1' (X is an invalid student index)
-.. Expected: The student index provided is invalid
-.. Other incorrect deletesub commands to try: 'deletesub', 'deletesub 1'
-.. Expected: Invalid command format. deletesub command message usage is shown.
+.. Test case: 'deletesub 1 1' +
+   Expected: Deleted subject from student: Display student details
+.. Test case: 'deletesub 1 X' (X is an invalid subject index) +
+   Expected: The subject index provided is invalid.
+.. Test case: 'deletesub X 1' (X is an invalid student index) +
+   Expected: The student index provided is invalid
+.. Other incorrect deletesub commands to try: 'deletesub', 'deletesub 1' +
+   Expected: Invalid command format. deletesub command message usage is shown.
 
 
 === Copy subject command
-.. Copying a subject from one student profile to another student.
+. Copying a subject from one student profile to another student.
 
 .. Prerequisites: Tutorhelper is not empty.
-.. Test case: 'copysub 1 1 2'
+.. Test case: 'copysub 1 1 2' +
    Expected: Copied syllabus to Student: Display student's details.
-.. Test case: 'copysub 1 X 2' (X is an invalid subject index of the source student)
+.. Test case: 'copysub 1 X 2' (X is an invalid subject index of the source student) +
    Expected: The subject index provided is invalid
-.. Test case: 'copysub 1 1 X' (X is an invalid student index)
+.. Test case: 'copysub 1 1 X' (X is an invalid student index) +
    Expected: The student index provided is invalid
-.. Test case: 'copysub X 1 1' (X is in invalid student index)
+.. Test case: 'copysub X 1 1' (X is in invalid student index) +
    Expected: The student index provided is invalid
-.. Test case: 'copysub 1 1 1'
+.. Test case: 'copysub 1 1 1' +
    Expected: Copying subject to the same student is not allowed: Display student's details.
-.. Test case: 'copysub 1 X 3' (X is an existing subject in student 3)
+.. Test case: 'copysub 1 X 3' (X is an existing subject in student 3) +
    Expected: Copied syllabus to Student: Display destination student details
-.. Other incorrect copysub commands to try: 'copysub', 'copysub 1', 'copysub 1 1'
+.. Other incorrect copysub commands to try: 'copysub', 'copysub 1', 'copysub 1 1' +
    Expected: Invalid command format. copysub command message usage is shown.
 
 == Add syllabus command
-.. Adds a new syllabus topic for a specified student and subject
+. Adds a new syllabus topic for a specified student and subject
 
 .. Prerequisite: Tutorhelper must not be empty
-.. Test case: 'addsyll 1 1 sy/Integration'
-.. Expected: Added syllabus to Student: Display destination student details
-.. Test case: 'addsyll X 1 sy/Integration' (X is an invalid student index)
-.. Expected: The student index provided is invalid
-.. Test case: 'addsyll 1 X sy/Integration' (X is an invalid subject index)
-.. Expected: The subject index provided is invalid
-.. Test case: 'addsyll 1 1 sy/X' (X is a syllabus already in student)
-.. Expected: Syllabus is already in Student: Display student details.
-.. Other incorrect addsyll commands to try: 'addsyll', 'addsyll 1', 'addsyll 1 1', 'addsyll 1 1 sy/'
-.. Expected: Invalid command format. addsyll command message usage is shown.
+.. Test case: 'addsyll 1 1 sy/Integration' +
+   Expected: Added syllabus to Student: Display destination student details
+.. Test case: 'addsyll X 1 sy/Integration' (X is an invalid student index) +
+   Expected: The student index provided is invalid
+.. Test case: 'addsyll 1 X sy/Integration' (X is an invalid subject index) +
+   Expected: The subject index provided is invalid
+.. Test case: 'addsyll 1 1 sy/X' (X is a syllabus already in student) +
+   Expected: Syllabus is already in Student: Display student details.
+.. Other incorrect addsyll commands to try: 'addsyll', 'addsyll 1', 'addsyll 1 1', 'addsyll 1 1 sy/' +
+   Expected: Invalid command format. addsyll command message usage is shown.
 
 == Delete syllabus command
-.. Deletes a syllabus from an existing student
+. Deletes a syllabus from an existing student
 
 .. Prerequisite: Tutorhelper must not be empty
-.. Test case: 'deletesyll 1 1 1'
-.. Expected: Removed selected syllabus from Student: Display student's details.
-.. Test case: 'deletesyll X 1 1' (X is an invalid student index)
-.. Expected: The student index provided is invalid
-.. Test case: 'deletesyll 1 X 1' (X is an invalid subject index)
-.. Expected: The subject index provided is invalid
-.. Test case: 'deletesyll 1 1 X' (X is an invalid syllabus index)
-.. Expected: The syllabus index provided is invalid
-.. Other incorrect deletesyll commands to try: 'deletesyll', 'deletesyll 1', 'deletesyll 1 1'
-.. Expected: Invalid command format. deletesyll command message usage is shown.
+.. Test case: 'deletesyll 1 1 1' +
+   Expected: Removed selected syllabus from Student: Display student's details.
+.. Test case: 'deletesyll X 1 1' (X is an invalid student index) +
+   Expected: The student index provided is invalid
+.. Test case: 'deletesyll 1 X 1' (X is an invalid subject index) +
+   Expected: The subject index provided is invalid
+.. Test case: 'deletesyll 1 1 X' (X is an invalid syllabus index) +
+   Expected: The syllabus index provided is invalid
+.. Other incorrect deletesyll commands to try: 'deletesyll', 'deletesyll 1', 'deletesyll 1 1' +
+   Expected: Invalid command format. deletesyll command message usage is shown.
 
 == Edit syllabus command
-.. Edits a syllabus from an existing student
+. Edits a syllabus from an existing student
 
 .. Prerequisite: Tutorhelper must not be empty
-.. Test case: 'editsyll 1 1 1 sy/Integration'
-.. Expected: Edited syllabus to Student: Display student's details.
-.. Test case: 'editsyll X 1 1 sy/Integration' (X is an invalid student index)
-.. Expected: The student index provided is invalid
-.. Test case: 'editsyll 1 X 1 sy/Integration' (X is an invalid subject index)
-.. Expected: The subject index provided is invalid
-.. Test case: 'editsyll 1 1 X sy/Integration' (X is an invalid syllabus index)
-.. Expected: The syllabus index provided is invalid
-.. Test case: 'editsyll 1 1 X sy/' (X is an invalid syllabus index)
-.. Expected: Syllabus can take any values, and it should not be blank or preceded by white space.
-.. Other incorrect editsyll commands to try: 'editsyll', 'editsyll 1', 'editsyll 1 1', 'editsyll 1 1 1'
-.. Expected: Invalid command format. editsyll command message usage is shown.
+.. Test case: 'editsyll 1 1 1 sy/Integration' +
+   Expected: Edited syllabus to Student: Display student's details.
+.. Test case: 'editsyll X 1 1 sy/Integration' (X is an invalid student index) +
+   Expected: The student index provided is invalid
+.. Test case: 'editsyll 1 X 1 sy/Integration' (X is an invalid subject index) +
+   Expected: The subject index provided is invalid
+.. Test case: 'editsyll 1 1 X sy/Integration' (X is an invalid syllabus index) +
+   Expected: The syllabus index provided is invalid
+.. Test case: 'editsyll 1 1 X sy/' (X is an invalid syllabus index) +
+   Expected: Syllabus can take any values, and it should not be blank or preceded by white space.
+.. Other incorrect editsyll commands to try: 'editsyll', 'editsyll 1', 'editsyll 1 1', 'editsyll 1 1 1' +
+   Expected: Invalid command format. editsyll command message usage is shown.
 
 === Mark command
-.. Toggles the state of a specified syllabus topic for a specified student and subject.
+. Toggles the state of a specified syllabus topic for a specified student and subject.
 
 .. Prerequisite: Tutorhelper must not be empty
-.. Test case: 'mark 1 1 1'
-.. Expected: Changed selected syllabus from Student: Display student's details
-.. Test case: 'mark X 1 1 ' (X is an invalid student index)
-.. Expected: The student index provided is invalid
-.. Test case: 'mark 1 X 1 ' (X is an invalid subject index)
-.. Expected: The subject index provided is invalid
-.. Test case: 'mark 1 1 X ' (X is an invalid syllabus index)
-.. Expected: The syllabus index provided is invalid
-.. Other incorrect mark commands to try: 'mark', 'mark 1', 'mark 1 1'
-.. Expected: Invalid command format. marksyll command message usage is shown.
+.. Test case: 'mark 1 1 1' +
+   Expected: Changed selected syllabus from Student: Display student's details
+.. Test case: 'mark X 1 1 ' (X is an invalid student index) +
+   Expected: The student index provided is invalid
+.. Test case: 'mark 1 X 1 ' (X is an invalid subject index) +
+   Expected: The subject index provided is invalid
+.. Test case: 'mark 1 1 X ' (X is an invalid syllabus index) +
+   Expected: The syllabus index provided is invalid
+.. Other incorrect mark commands to try: 'mark', 'mark 1', 'mark 1 1' +
+   Expected: Invalid command format. marksyll command message usage is shown.
