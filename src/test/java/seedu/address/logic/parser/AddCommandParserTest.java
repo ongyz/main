@@ -20,6 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TUITION_TIMING_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TUITION_TIMING_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -30,6 +31,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.student.Email.MESSAGE_EMAIL_CONSTRAINTS;
+import static seedu.address.model.student.Name.MESSAGE_NAME_CONSTRAINTS;
+import static seedu.address.model.student.Phone.MESSAGE_PHONE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
@@ -56,31 +60,11 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedStudent));
 
-        // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedStudent));
-
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedStudent));
-
-        // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedStudent));
-
-        // multiple addresses - last address accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedStudent));
-
         // multiple tags - all accepted
         Student expectedStudentMultipleTags = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_HUSBAND_FRIEND,
                 new AddCommand(expectedStudentMultipleTags));
     }
 
@@ -122,17 +106,17 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_NAME_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, MESSAGE_NAME_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_PHONE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, MESSAGE_PHONE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_EMAIL_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, MESSAGE_EMAIL_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
@@ -148,12 +132,27 @@ public class AddCommandParserTest {
         // two invalid values, only first invalid subjectName reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB, Name.MESSAGE_NAME_CONSTRAINTS);
+                + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB, MESSAGE_NAME_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        // multiple names - invalid name
+        assertParseFailure(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
+                MESSAGE_NAME_CONSTRAINTS);
+
+        // multiple phones - invalid phone
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
+                MESSAGE_PHONE_CONSTRAINTS);
+
+        // multiple emails - last email accepted
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_FRIEND,
+                MESSAGE_EMAIL_CONSTRAINTS);
     }
 }

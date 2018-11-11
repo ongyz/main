@@ -129,10 +129,12 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
      */
-    public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+    public static Set<Subject> parseSubjects(String subjects) throws ParseException {
         requireNonNull(subjects);
         final Set<Subject> subjectSet = new HashSet<>();
-        for (String subjectName : subjects) {
+        String trimmedSubjects = subjects.trim();
+        String[] separatedSubjects = trimmedSubjects.split(",");
+        for (String subjectName : separatedSubjects) {
             subjectSet.add(parseSubject(subjectName));
         }
         return subjectSet;
@@ -258,11 +260,16 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(String tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        if (tags.length() == 0) { // We allow no tag input
+            return tagSet;
+        }
+        String trimmedTags = tags.trim();
+        String[] separatedTags = trimmedTags.split(",");
+        for (String tag : separatedTags) {
+            tagSet.add(ParserUtil.parseTag(tag));
         }
         return tagSet;
     }
@@ -302,11 +309,14 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> syllabuses} into a {@code List<Syllabus>}.
      */
-    public static List<Syllabus> parseSyllabuses(List<String> syllabuses) throws ParseException {
+    public static List<Syllabus> parseSyllabuses(String syllabuses) throws ParseException {
         requireNonNull(syllabuses);
         final List<Syllabus> syllabusList = new ArrayList<>();
-        for (String syllabus : syllabuses) {
-            syllabusList.add(parseSyllabus(syllabus));
+        String trimmedSyllabuses = syllabuses.trim();
+        String[] separatedSyllabuses = trimmedSyllabuses.split(",");
+
+        for (String syllabus: separatedSyllabuses) {
+            syllabusList.add(ParserUtil.parseSyllabus(syllabus));
         }
         return syllabusList;
     }

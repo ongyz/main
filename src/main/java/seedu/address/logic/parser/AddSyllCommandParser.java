@@ -51,7 +51,7 @@ public class AddSyllCommandParser implements Parser<AddSyllCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSyllCommand.MESSAGE_USAGE));
         }
 
-        List<Syllabus> syllabuses = ParserUtil.parseSyllabuses(argMultimap.getAllValues(PREFIX_SYLLABUS));
+        List<Syllabus> syllabuses = ParserUtil.parseSyllabuses(argMultimap.getValue(PREFIX_SYLLABUS).get());
         return new AddSyllCommand(studentIndex, subjectIndex, syllabuses);
     }
 
