@@ -8,7 +8,6 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,15 +16,18 @@ import seedu.address.model.student.Student;
 
 
 /**
- * Add payment details of an existing student in the TutorHelper.
+ * Adds a payment record of a student.
  */
 public class PayCommand extends Command {
     public static final String COMMAND_WORD = "paid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Updates if a student has paid.\n"
+            + ": Adds a payment record of a student.\n"
             + "Parameters: "
-            + "INDEX AMOUNT MONTH YEAR \n"
+            + "INDEX (must be a positive integer) "
+            + "AMOUNT (must be a positive integer between 0 to 10 000) "
+            + "MONTH (must be an integer from 1 to 12, inclusive) "
+            + "YEAR (must be a 4-digit integer)\n"
             + "Example: " + COMMAND_WORD + " 1 200 08 2018 ";
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this student is added: %1$s";
