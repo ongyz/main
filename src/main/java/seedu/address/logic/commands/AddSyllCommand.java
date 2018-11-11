@@ -81,7 +81,7 @@ public class AddSyllCommand extends Command {
      * @param syllabuses The list of syllabus to add.
      * @return a new {@code Set<Subject>} with the specified syllabus added
      */
-    private Set<Subject> addSubjectContentTo(Student studentTarget, Index subjectIndex, Collection<Syllabus> syllabuses)
+    public Set<Subject> addSubjectContentTo(Student studentTarget, Index subjectIndex, Collection<Syllabus> syllabuses)
         throws CommandException {
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
         Subject selectedSubject = subjects.get(subjectIndex.getZeroBased());

@@ -14,19 +14,25 @@ import org.junit.Test;
 import seedu.address.logic.commands.AddSyllCommand;
 import seedu.address.model.subject.Syllabus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddSyllCommandParserTest {
 
     private AddSyllCommandParser parser = new AddSyllCommandParser();
 
     @Test
     public void parse_validArgs_returnsAddSyllCommand() {
+        List<Syllabus> syllabusList = new ArrayList<>();
+        syllabusList.add(Syllabus.makeSyllabus("Integration"));
         assertParseSuccess(parser, "1 1 sy/Integration",
-                new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, Syllabus.makeSyllabus("Integration")));
+                new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, syllabusList));
+        syllabusList.set(0, Syllabus.makeSyllabus("Kinetics"));
         assertParseSuccess(parser, "2 3 sy/Kinetics",
-                new AddSyllCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_SUBJECT, Syllabus.makeSyllabus("Kinetics")));
+                new AddSyllCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_SUBJECT, syllabusList));
+        syllabusList.set(0, Syllabus.makeSyllabus("Molecular Biology"));
         assertParseSuccess(parser, "1 2 sy/Molecular Biology",
-                new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_SECOND_SUBJECT,
-                        Syllabus.makeSyllabus("Molecular Biology")));
+                new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_SECOND_SUBJECT, syllabusList));
     }
 
     @Test

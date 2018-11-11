@@ -263,6 +263,9 @@ public class ParserUtil {
     public static Set<Tag> parseTags(String tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        if (tags.length() == 0) { // We allow no tag input
+            return tagSet;
+        }
         String trimmedTags = tags.trim();
         String[] separatedTags = trimmedTags.split(",");
         for (String tag : separatedTags) {
