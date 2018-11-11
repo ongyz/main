@@ -1,7 +1,6 @@
 package tutorhelper.model.tuitiontiming;
 
 import static java.util.Objects.requireNonNull;
-import static tutorhelper.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

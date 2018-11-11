@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.EditSyllCommand;
 import tutorhelper.logic.parser.exceptions.ParseException;
 import tutorhelper.model.subject.Syllabus;
-import tutorhelper.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new EditSyllCommand object
@@ -45,7 +45,8 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
         syllabusIndex = getSyllabusIndex(indexList);
 
         if (!argMultimap.getValue(CliSyntax.PREFIX_SYLLABUS).isPresent()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditSyllCommand.MESSAGE_USAGE));
         }
 
         Syllabus syllabus = ParserUtil.parseSyllabus(argMultimap.getValue(CliSyntax.PREFIX_SYLLABUS).get());

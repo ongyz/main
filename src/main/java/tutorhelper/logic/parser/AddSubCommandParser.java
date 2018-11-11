@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.AddSubCommand;
 import tutorhelper.logic.parser.exceptions.ParseException;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new AddSubCommand object.
@@ -42,7 +42,8 @@ public class AddSubCommandParser implements Parser<AddSubCommand> {
         studentIndex = getStudentIndex(indexList);
 
         if (!argMultimap.getValue(CliSyntax.PREFIX_SUBJECT).isPresent()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddSubCommand.MESSAGE_USAGE));
         }
 
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(CliSyntax.PREFIX_SUBJECT).get());

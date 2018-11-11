@@ -7,10 +7,10 @@ import static tutorhelper.logic.commands.DeleteSubCommand.DeleteSubFormatChecker
 
 import java.util.List;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.DeleteSubCommand;
 import tutorhelper.logic.parser.exceptions.ParseException;
-import tutorhelper.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new DeleteSubCommand object.

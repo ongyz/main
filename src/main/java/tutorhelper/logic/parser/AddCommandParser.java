@@ -1,6 +1,13 @@
 package tutorhelper.logic.parser;
 
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_DAY_AND_TIME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_NAME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_PHONE;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,25 +37,25 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
-                            CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_SUBJECT, CliSyntax.PREFIX_DAY_AND_TIME, CliSyntax.PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                            PREFIX_ADDRESS, PREFIX_SUBJECT, PREFIX_DAY_AND_TIME, PREFIX_TAG);
 
-            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
-                    CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_SUBJECT, CliSyntax.PREFIX_DAY_AND_TIME)
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                    PREFIX_ADDRESS, PREFIX_SUBJECT, PREFIX_DAY_AND_TIME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
-            Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
-            Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getValue(CliSyntax.PREFIX_SUBJECT).get());
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+            Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getValue(PREFIX_SUBJECT).get());
             TuitionTiming tuitionTiming = ParserUtil.parseTuitionTiming(
-                    argMultimap.getValue(CliSyntax.PREFIX_DAY_AND_TIME).get());
+                    argMultimap.getValue(PREFIX_DAY_AND_TIME).get());
             Set<Tag> tagList = new HashSet<>();
-            if (argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()) {
-                tagList = ParserUtil.parseTags(argMultimap.getValue(CliSyntax.PREFIX_TAG).get());
+            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+                tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
             }
             Student student = new Student(name, phone, email, address, subjects, tuitionTiming, tagList);
             return new AddCommand(student);

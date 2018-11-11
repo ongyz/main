@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
+import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
-import tutorhelper.logic.parser.CliSyntax;
 
 /**
  * Adds a student to the TutorHelper.

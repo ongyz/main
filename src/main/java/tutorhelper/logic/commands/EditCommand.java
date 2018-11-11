@@ -15,6 +15,7 @@ import tutorhelper.commons.core.index.Index;
 import tutorhelper.commons.util.CollectionUtil;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
+import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Address;
 import tutorhelper.model.student.Email;
@@ -25,7 +26,6 @@ import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.model.tag.Tag;
 import tutorhelper.model.tuitiontiming.TuitionTiming;
-import tutorhelper.logic.parser.CliSyntax;
 
 /**
  * Edits the details of an existing student in the TutorHelper.

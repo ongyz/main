@@ -11,11 +11,11 @@ import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
+import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.model.util.SubjectsUtil;
-import tutorhelper.logic.parser.CliSyntax;
 
 /**
  * Adds a subject for a student in the TutorHelper.
