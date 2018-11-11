@@ -56,14 +56,13 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
         Scene scene = getLoadedScene();
         StudentBuilder createdStudent = new StudentBuilder();
 
-        String name = ((Label)scene.lookup("#nameLabel")).getText();
-        String address = ((Label)scene.lookup("#addressLabel")).getText();
-        String phone = ((Label)scene.lookup("#phoneLabel")).getText();
-        String email = ((Label)scene.lookup("#emailLabel")).getText();
+        String name = ((Label) scene.lookup("#nameLabel")).getText();
+        String address = ((Label) scene.lookup("#addressLabel")).getText();
+        String phone = ((Label) scene.lookup("#phoneLabel")).getText();
+        String email = ((Label) scene.lookup("#emailLabel")).getText();
 
         if (name.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-            logger.log(Level.WARNING,  "No student has been loaded. " +
-                    "Using default student information instead.");
+            logger.log(Level.WARNING, "No student has been loaded. Using default student information instead.");
             lastStudent = DEFAULT_STUDENT;
             return DEFAULT_STUDENT;
         }

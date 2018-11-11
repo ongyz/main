@@ -106,7 +106,7 @@ public class AddSyllCommand extends Command {
     private void checkForDuplicates(Collection<Syllabus> syllabuses) throws CommandException {
         Set<Syllabus> duplicateCheck = new HashSet<>();
         for (Syllabus syllabus : syllabuses) {
-            if(!duplicateCheck.add(syllabus)){
+            if (!duplicateCheck.add(syllabus)) {
                 throw new CommandException(MESSAGE_DUPLICATE_SYLLABUS_IN_ARGUMENT);
             }
         }
