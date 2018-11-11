@@ -21,21 +21,23 @@ import seedu.address.model.subject.Syllabus;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Appends a syllabus topic to a specified subject for a specified student in the TutorHelper.
+ * Adds a syllabus topic to a subject for a student in the TutorHelper.
  */
 public class AddSyllCommand extends Command {
 
     public static final String COMMAND_WORD = "addsyll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the syllabus of the student identified "
-            + "by the student index number used in the displayed student list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: STUDENT_INDEX SUBJECT_INDEX "
-            + "" + PREFIX_SYLLABUS + "SYLLABUS\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a syllabus topic to a subject for a student in the TutorHelper.\n"
+            + "Parameters: "
+            + "STUDENT_INDEX (must be a positive integer) "
+            + "SUBJECT_INDEX (must be a positive integer) "
+            + PREFIX_SYLLABUS + "SYLLABUS, [MORE SYLLABUSES]...\n"
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_ADDSYLL_SUCCESS = "Added syllabus to Student: %1$s";
-    public static final String MESSAGE_DUPLICATE_SYLLABUS = "Syllabus is already in Student: %1$s";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS_IN_STUDENT = "Syllabus is already in Student: %1$s";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS_IN_ARGUMENT = "Duplicate syllabuses are not allowed";
 
     private final Index studentIndex;
     private final Index subjectIndex;
@@ -47,7 +49,7 @@ public class AddSyllCommand extends Command {
         requireNonNull(syllabuses);
         this.studentIndex = studentIndex;
         this.subjectIndex = subjectIndex;
-        this.syllabuses = removeDuplicateSyllabusEntries(syllabuses);
+        this.syllabuses = syllabuses;
     }
 
     @Override
@@ -83,13 +85,13 @@ public class AddSyllCommand extends Command {
      */
     private Set<Subject> addSubjectContentTo(Student studentTarget, Index subjectIndex, Collection<Syllabus> syllabuses)
         throws CommandException {
+        checkForDuplicates(syllabuses);
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
         Subject selectedSubject = subjects.get(subjectIndex.getZeroBased());
         Subject updatedSubject = selectedSubject;
-
         for (Syllabus syllabus: syllabuses) {
             if (selectedSubject.contains(syllabus)) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS, studentTarget));
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS_IN_STUDENT, studentTarget));
             }
             updatedSubject = updatedSubject.add(syllabus);
         }
@@ -99,19 +101,15 @@ public class AddSyllCommand extends Command {
     }
 
     /**
-     * Remove duplicate syllabus entries to be added.
-     * @param syllabuses unfiltered list.
-     * @return the filtered syllabus list with no duplicates.
+     * @throws CommandException if duplicates exist within the {@code syllabuses}.
      */
-    private List<Syllabus> removeDuplicateSyllabusEntries(List<Syllabus> syllabuses) {
-        List<Syllabus> filteredList = new ArrayList<>();
-
-        for (Syllabus filtered: syllabuses) {
-            if (!filteredList.contains(filtered)) {
-                filteredList.add(filtered);
+    private void checkForDuplicates(Collection<Syllabus> syllabuses) throws CommandException {
+        Set<Syllabus> duplicateCheck = new HashSet<>();
+        for (Syllabus syllabus : syllabuses) {
+            if(!duplicateCheck.add(syllabus)){
+                throw new CommandException(MESSAGE_DUPLICATE_SYLLABUS_IN_ARGUMENT);
             }
         }
-        return filteredList;
     }
 
     @Override

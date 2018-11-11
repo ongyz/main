@@ -1,6 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -93,7 +94,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
          */
         toAdd = new StudentBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         command = StudentUtil.getAddCommand(toAdd);
-        assertCommandSuccess(command, toAdd);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add to empty TutorHelper -> added */
         deleteAllStudents();
@@ -124,26 +125,26 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: add a duplicate student -> rejected */
         command = StudentUtil.getAddCommand(HOON);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different phone -> rejected */
         toAdd = new StudentBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
         command = StudentUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different email -> rejected */
         toAdd = new StudentBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
         command = StudentUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different address -> rejected */
         toAdd = new StudentBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = StudentUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different tags -> rejected */
         command = StudentUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + SUBJECT_DESC_AMY

@@ -173,7 +173,7 @@ public class AddSyllCommandTest {
         AddSyllCommand addSyllCommand = new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, syllabusTest);
 
         assertCommandFailure(addSyllCommand, model, commandHistory,
-                String.format(AddSyllCommand.MESSAGE_DUPLICATE_SYLLABUS, studentTarget));
+                String.format(AddSyllCommand.MESSAGE_DUPLICATE_SYLLABUS_IN_STUDENT, studentTarget));
     }
 
     @Test

@@ -73,7 +73,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
         toPay = model.getFilteredStudentList().get(6);
 
         paidStudent = new StudentBuilder().withName("George Best")
-                .withPhone("9482442")
+                .withPhone("94824420")
                 .withEmail("anna@example.com")
                 .withAddress("4th street")
                 .withTuitionTiming("Friday 5:00pm")
