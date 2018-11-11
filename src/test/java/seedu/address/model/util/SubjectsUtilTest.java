@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXAM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 
@@ -43,7 +43,7 @@ public class SubjectsUtilTest {
                                         .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                                         .withSubjects(VALID_SUBJECT_AMY).withTuitionTiming(VALID_TUITION_TIMING_AMY)
                                         .withSyllabus(INDEX_FIRST_SUBJECT, VALID_SYLLABUS_DIFFERENTIATION)
-                                        .withTags(VALID_TAG_FRIEND).build();
+                                        .withTags(VALID_TAG_EXAM).build();
 
     @Test
     public void execute_copySubject() {

@@ -14,7 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.subject.Subject;
 
 /**
- * Parses user arguments and creates a new AddSubCommand object.
+ * Parses input arguments and creates a new AddSubCommand object.
  */
 public class AddSubCommandParser implements Parser<AddSubCommand> {
 

@@ -73,8 +73,8 @@ public class CommandTestUtil {
     public static final String VALID_TUITION_TIMING_DAISY = "Thursday 7:30pm";
     public static final String VALID_TUITION_TIMING_MEIER = "Monday 5:00pm";
 
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_WEAK = "weak";
+    public static final String VALID_TAG_EXAM = "exam";
     public static final String DUPLICATE_SYLLABUS = "Integration";
     public static final String VALID_SYLLABUS_DIFFERENTIATION = "Differentiation";
     public static final String VALID_SYLLABUS_KINETICS = "Kinetics";
@@ -92,9 +92,9 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
     public static final String TUITION_TIMING_DESC_AMY = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_AMY;
     public static final String TUITION_TIMING_DESC_BOB = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String TAG_DESC_HUSBAND_FRIEND = " " + PREFIX_TAG + VALID_TAG_HUSBAND + ", " + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_EXAM = " " + PREFIX_TAG + VALID_TAG_EXAM;
+    public static final String TAG_DESC_WEAK = " " + PREFIX_TAG + VALID_TAG_WEAK;
+    public static final String TAG_DESC_WEAK_EXAM = " " + PREFIX_TAG + VALID_TAG_WEAK + ", " + VALID_TAG_EXAM;
     public static final String SYLLABUS_DESC_DIFFERENTIATION = PREFIX_SYLLABUS + VALID_SYLLABUS_DIFFERENTIATION;
     public static final String SYLLABUS_DESC_INTEGRATION = PREFIX_SYLLABUS + DUPLICATE_SYLLABUS;
 
@@ -116,10 +116,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withEmptyPayments().withTags(VALID_TAG_FRIEND).build();
+                .withEmptyPayments().withTags(VALID_TAG_EXAM).build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_WEAK, VALID_TAG_EXAM).build();
     }
 
     /**
