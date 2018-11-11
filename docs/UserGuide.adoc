@@ -70,7 +70,8 @@ Phone numbers should only be 8 digits long and should not contain spaces.
 
 Valid subjects are limited to only the following subjects: +
 
-`Mathematics`, `Biology`, `Chemistry`, `Physics`, `Economics`, `Geography`, `History`
+`Mathematics`, `Biology`, `Chemistry`, `Physics`, `Economics`, `Geography`, `History`, `English`, `Art`, `Music`,
+`Computing`, `Chinese`, `Malay`, `Tamil`, `French`, `German`, `Japanese`, `Literature`
 
 * In order to be valid subjects, the input must be a full substring match of length 3 or more with any of the valid subjects. This is to avoid too short of keyword matching.
 * The match must start at the beginning of the subject name. This is to avoid confusion and multiple matching.

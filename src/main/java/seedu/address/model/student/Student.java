@@ -120,20 +120,6 @@ public class Student {
     }
 
     /**
-     * This function returns true if there is one true boolean
-     * Otherwise, returns false.
-     */
-    public boolean checkDifferOneFunc(boolean... vars) {
-        int count = 0;
-        for (boolean var: vars) {
-            count += ((!var) ? 1 : 0);
-        }
-        if (count == 1) {
-            return true;
-        }
-        return false;
-    }
-    /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
      */
