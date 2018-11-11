@@ -190,7 +190,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         index = INDEX_FIRST_STUDENT;
         assertFalse(getModel().getFilteredStudentList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND_FRIEND;
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND_FRIEND;ster
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: edit a student with new values same as another student's values but with different tags -> rejected */
