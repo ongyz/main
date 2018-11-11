@@ -7,8 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 
-import tutorhelper.commons.util.AppUtil;
-
 /**
  * Represents tuition timing in TutorHelper.
  * Guarantees: immutable; is valid as declared in {@link #isValidTiming(String)}
