@@ -6,7 +6,9 @@ import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYE
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.logic.commands.DeleteSubCommand.MESSAGE_DELETE_ONLY_SUBJECT;
 import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
@@ -156,6 +158,15 @@ public class DeleteSubCommandTest {
 
         // different command -> returns false
         assertNotEquals(deleteSubCommand1, deleteSubCommand2);
+    }
+
+    @Test
+    public void execute_deleteOnlySubject_throwsCommandException() {
+        DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT);
+
+        assertCommandFailure(deleteSubCommand, model, commandHistory,
+                String.format(MESSAGE_DELETE_ONLY_SUBJECT,
+                        model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased())));
     }
 
     /**

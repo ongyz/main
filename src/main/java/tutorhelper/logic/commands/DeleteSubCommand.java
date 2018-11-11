@@ -105,13 +105,4 @@ public class DeleteSubCommand extends Command {
                 && studentIndex.equals(((DeleteSubCommand) other).studentIndex))
                 && subjectIndex.equals(((DeleteSubCommand) other).subjectIndex); // state check
     }
-
-    /**
-     * Stores the format of the DeleteSub Command.
-     */
-    public static class DeleteSubFormatChecker {
-        public static final int STUDENT_INDEX = 0;
-        public static final int SUBJECT_INDEX = 1;
-        public static final int NUMBER_OF_ARGS = 2;
-    }
 }

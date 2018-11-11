@@ -15,6 +15,12 @@ import tutorhelper.model.subject.Syllabus;
  * Parses input arguments and creates a new EditSyllCommand object
  */
 public class EditSyllCommandParser implements Parser<EditSyllCommand> {
+
+    public static final int STUDENT_INDEX = 0;
+    public static final int SUBJECT_INDEX = 1;
+    public static final int SYLLABUS_INDEX = 2;
+    public static final int NUMBER_OF_ARGS = 3;
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditSyllCommand
      * and returns an EditSyllCommand object for execution.
@@ -36,7 +42,7 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE), pe);
         }
 
-        if (indexList.size() != EditSyllCommand.EditSyllFormatChecker.NUMBER_OF_ARGS) {
+        if (indexList.size() != NUMBER_OF_ARGS) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
         }
@@ -55,14 +61,14 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
     }
 
     private static Index getStudentIndex(List<Index> indexList) {
-        return indexList.get(EditSyllCommand.EditSyllFormatChecker.STUDENT_INDEX);
+        return indexList.get(STUDENT_INDEX);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {
-        return indexList.get(EditSyllCommand.EditSyllFormatChecker.SUBJECT_INDEX);
+        return indexList.get(SUBJECT_INDEX);
     }
 
     private static Index getSyllabusIndex(List<Index> indexList) {
-        return indexList.get(EditSyllCommand.EditSyllFormatChecker.SYLLABUS_INDEX);
+        return indexList.get(SYLLABUS_INDEX);
     }
 }

@@ -14,6 +14,11 @@ import tutorhelper.logic.parser.exceptions.ParseException;
  */
 public class MarkCommandParser implements Parser<MarkCommand> {
 
+    public static final int STUDENT_INDEX_LOCATION = 0;
+    public static final int SUBJECT_INDEX_LOCATION = 1;
+    public static final int SYLLABUS_INDEX_LOCATION = 2;
+    public static final int MARK_NUMBER_OF_ARGS = 3;
+
     /**
      * Parses the given {@code String} of arguments in the context of the MarkCommand
      * and returns an MarkCommand object for execution.
@@ -34,7 +39,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE), pe);
         }
 
-        if (indexList.size() != MarkCommand.MarkFormatChecker.MARK_NUMBER_OF_ARGS) {
+        if (indexList.size() != MARK_NUMBER_OF_ARGS) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
@@ -47,14 +52,14 @@ public class MarkCommandParser implements Parser<MarkCommand> {
     }
 
     private static Index getStudentIndex(List<Index> indexList) {
-        return indexList.get(MarkCommand.MarkFormatChecker.STUDENT_INDEX_LOCATION);
+        return indexList.get(STUDENT_INDEX_LOCATION);
     }
 
     private static Index getSubjectIndex(List<Index> indexList) {
-        return indexList.get(MarkCommand.MarkFormatChecker.SUBJECT_INDEX_LOCATION);
+        return indexList.get(SUBJECT_INDEX_LOCATION);
     }
 
     private static Index getSyllabusIndex(List<Index> indexList) {
-        return indexList.get(MarkCommand.MarkFormatChecker.SYLLABUS_INDEX_LOCATION);
+        return indexList.get(SYLLABUS_INDEX_LOCATION);
     }
 }

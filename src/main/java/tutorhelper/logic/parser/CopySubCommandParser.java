@@ -2,10 +2,6 @@ package tutorhelper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.NUMBER_OF_ARGS;
-import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.SOURCE_STUDENT_INDEX;
-import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.SUBJECT_INDEX;
-import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.TARGET_STUDENT_INDEX;
 
 import java.util.List;
 
@@ -17,6 +13,11 @@ import tutorhelper.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new CopySubCommand object
  */
 public class CopySubCommandParser implements Parser<CopySubCommand> {
+
+    public static final int SOURCE_STUDENT_INDEX = 0;
+    public static final int SUBJECT_INDEX = 1;
+    public static final int TARGET_STUDENT_INDEX = 2;
+    public static final int NUMBER_OF_ARGS = 3;
 
     /**
      * Parses the given {@code String} of arguments in the context of the CopySubCommand

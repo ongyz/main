@@ -95,12 +95,4 @@ public class AddSubCommand extends Command {
                 && studentIndex.equals(((AddSubCommand) other).studentIndex))
                 && subject.equals(((AddSubCommand) other).subject); // state check
     }
-
-    /**
-     * Stores the format of the AddSub Command.
-     */
-    public static class AddSubFormatChecker {
-        public static final int STUDENT_INDEX = 0;
-        public static final int NUMBER_OF_ARGS = 1;
-    }
 }

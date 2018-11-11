@@ -52,7 +52,8 @@ public class MarkCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
+                    new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX));
         }
 
         Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
@@ -104,15 +105,5 @@ public class MarkCommand extends Command {
                 && studentIndex.equals(((MarkCommand) other).studentIndex))
                 && subjectIndex.equals(((MarkCommand) other).subjectIndex)
                 && syllabusIndex.equals(((MarkCommand) other).syllabusIndex); // state check
-    }
-
-    /**
-     * Stores the details of the mark command format.
-     */
-    public static class MarkFormatChecker {
-        public static final int STUDENT_INDEX_LOCATION = 0;
-        public static final int SUBJECT_INDEX_LOCATION = 1;
-        public static final int SYLLABUS_INDEX_LOCATION = 2;
-        public static final int MARK_NUMBER_OF_ARGS = 3;
     }
 }

@@ -15,6 +15,9 @@ import tutorhelper.model.subject.Subject;
  */
 public class AddSubCommandParser implements Parser<AddSubCommand> {
 
+    public static final int STUDENT_INDEX = 0;
+    public static final int NUMBER_OF_ARGS = 1;
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddSubCommand
      * and returns an AddSubCommand object for execution.
@@ -34,7 +37,7 @@ public class AddSubCommandParser implements Parser<AddSubCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE), pe);
         }
 
-        if (indexList.size() != AddSubCommand.AddSubFormatChecker.NUMBER_OF_ARGS) {
+        if (indexList.size() != NUMBER_OF_ARGS) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE));
         }
@@ -51,7 +54,7 @@ public class AddSubCommandParser implements Parser<AddSubCommand> {
     }
 
     private static Index getStudentIndex(List<Index> indexList) {
-        return indexList.get(AddSubCommand.AddSubFormatChecker.STUDENT_INDEX);
+        return indexList.get(STUDENT_INDEX);
     }
 
 }
