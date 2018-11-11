@@ -80,7 +80,7 @@ public class PayCommandTest {
         Student editedStudent = new StudentBuilder(ALICE).withPayments(editedPayment).build();
         PayCommand editPayCommand = new PayCommand(editedPayment);
 
-        String expectedMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(PayCommand.MESSAGE_EDIT_PAYMENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorHelper(model.getTutorHelper()), new UserPrefs());
         expectedModel.updateStudentInternalField(model.getFilteredStudentList().get(0), editedStudent);

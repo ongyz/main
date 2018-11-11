@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 
 /**
- * Unmodifiable view of a tutor helper
+ * Unmodifiable view of the TutorHelper
  */
 public interface ReadOnlyTutorHelper {
 

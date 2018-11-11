@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Subject in the TutorHelper.
- * Guarantees: immutable; name is valid as declared in SubjectType.isValidSubjectName(String)
+ * Guarantees: immutable; name is valid as declared in {@link SubjectType#isValidSubjectName(String)}
  */
 public class Subject {
 
@@ -168,7 +168,7 @@ public class Subject {
     }
 
     /**
-     * Finda {@code List<Syllabus>} to the current subject and returns
+     * Find a {@code List<Syllabus>} to the current subject and returns
      * a new {@code Subject} containing the newly added syllabus list.
      * @param syllabus the {@code List<Syllabus>} to be added.
      * @param index the index to replace old syllabus.

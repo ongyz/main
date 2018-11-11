@@ -8,7 +8,7 @@
         <address>123, Jurong West Ave 6, #08-111</address>
         <tuitionTiming>Monday 6:00pm</tuitionTiming>
         <subjects subjectName="Mathematics" completionRate="0.0"/>
-        <tagged>friends</tagged>
+        <tagged>exam</tagged>
     </students>
 
     <!-- Student with same identity as Alice Pauline -->
@@ -19,7 +19,7 @@
         <address>123, Jurong West Ave 6, #08-111</address>
         <tuitionTiming>Monday 6:00pm</tuitionTiming>
         <subjects subjectName="Mathematics" completionRate="0.0"/>
-        <tagged>friends</tagged>
+        <tagged>exam</tagged>
     </students>
 
 </TutorHelper>

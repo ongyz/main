@@ -169,8 +169,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stu
-     * b that contains a single student.
+     * A Model stub that contains a single student.
      */
     private class ModelStubWithStudent extends ModelStub {
         private final Student student;

@@ -18,7 +18,7 @@ import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SubjectsUtil;
 
 /**
- * Removes a syllabus topic from a specified subject of a specified student.
+ * Removes a syllabus topic from a specified subject under the selected student.
  */
 public class DeleteSyllCommand extends Command {
 

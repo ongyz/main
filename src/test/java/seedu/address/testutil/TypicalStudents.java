@@ -35,8 +35,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CABBAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CATHY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_DAISY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXAM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEAK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_ALCYONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BILLY;
@@ -63,13 +63,13 @@ public class TypicalStudents {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withSubjects("Mathematics")
             .withSyllabus(Index.fromOneBased(1), "Integration")
-            .withTuitionTiming("Tuesday 8:00pm").withTags("friends").build();
+            .withTuitionTiming("Tuesday 8:00pm").withTags("exam").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
             .withPhone("98765432").withSubjects("Chemistry")
             .withSyllabus(Index.fromOneBased(1), "Kinetics", "Organic Chemistry")
             .withTuitionTiming("Monday 5:00pm")
-            .withTags("owesMoney", "friends").withPayments("2 200 11 2018", "2 300 12 2018").build();
+            .withTags("owesMoney", "smart").withPayments("2 200 11 2018", "2 300 12 2018").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com")
             .withAddress("Wall street").withSubjects("Mathematics", "Physics")
@@ -80,7 +80,7 @@ public class TypicalStudents {
             .withAddress("10th street").withSubjects("Mathematics", "Physics")
             .withSyllabus(Index.fromOneBased(1), "Calculus II", "Statistics I")
             .withTuitionTiming("Saturday 3:00pm")
-            .withTags("friends").build();
+            .withTags("exam").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer")
             .withPhone("94822240").withEmail("werner@example.com")
             .withAddress("Michegan ave").withSubjects("Economics")
@@ -109,21 +109,21 @@ public class TypicalStudents {
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withSubjects(VALID_SUBJECT_AMY).withTuitionTiming(VALID_TUITION_TIMING_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_EXAM).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withSubjects(VALID_SUBJECT_BOB).withTuitionTiming(VALID_TUITION_TIMING_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_WEAK, VALID_TAG_EXAM).build();
     public static final Student CATHY = new StudentBuilder().withName(VALID_NAME_CATHY).withPhone(VALID_PHONE_CATHY)
             .withEmail(VALID_EMAIL_CATHY).withAddress(VALID_ADDRESS_CATHY)
             .withSubjects(VALID_SUBJECT_CATHY).withTuitionTiming(VALID_TUITION_TIMING_CATHY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_EXAM).build();
 
     //For Payments
     public static final Student ALCYONE = new StudentBuilder().withName(VALID_NAME_ALCYONE)
             .withPhone(VALID_PHONE_ALCYONE).withEmail(VALID_EMAIL_ALCYONE).withAddress(VALID_ADDRESS_ALCYONE)
             .withSubjects(VALID_SUBJECT_ALCYONE).withTuitionTiming(VALID_TUITION_TIMING_ALCYONE)
-            .withTags(VALID_TAG_FRIEND).withPayments("1 200 2 2018").build();
+            .withTags(VALID_TAG_EXAM).withPayments("1 200 2 2018").build();
     public static final Student BILLY = new StudentBuilder().withName(VALID_NAME_BILLY).withPhone(VALID_PHONE_BILLY)
             .withEmail(VALID_EMAIL_BILLY).withAddress(VALID_ADDRESS_BILLY)
             .withSubjects(VALID_SUBJECT_BILLY).withTuitionTiming(VALID_TUITION_TIMING_BILLY)
@@ -131,12 +131,12 @@ public class TypicalStudents {
     public static final Student CABBAGE = new StudentBuilder().withName(VALID_NAME_CABBAGE)
             .withPhone(VALID_PHONE_CABBAGE).withEmail(VALID_EMAIL_CABBAGE).withAddress(VALID_ADDRESS_CABBAGE)
             .withSubjects(VALID_SUBJECT_CABBAGE).withTuitionTiming(VALID_TUITION_TIMING_CABBAGE)
-            .withTags(VALID_TAG_FRIEND)
+            .withTags(VALID_TAG_EXAM)
             .withPayments("3 300 3 2018").build();
     public static final Student DAISY = new StudentBuilder().withName(VALID_NAME_DAISY).withPhone(VALID_PHONE_DAISY)
             .withEmail(VALID_EMAIL_DAISY).withAddress(VALID_ADDRESS_DAISY)
             .withSubjects(VALID_SUBJECT_DAISY).withTuitionTiming(VALID_TUITION_TIMING_DAISY)
-            .withTags(VALID_TAG_FRIEND)
+            .withTags(VALID_TAG_EXAM)
             .withPayments("4 400 3 2018").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

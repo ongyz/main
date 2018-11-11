@@ -33,8 +33,8 @@ public class Payment {
      *
      * @param index A valid index name.
      * @param amount A valid amount.
-     * @param month A valid month subjectName.
-     * @param year A valid year subjectName.
+     * @param month A valid month.
+     * @param year A valid year.
      */
     public Payment(Index index, int amount, int month, int year) {
         this.studentIndex = index;
@@ -44,7 +44,7 @@ public class Payment {
     }
 
     /**
-     * Returns true if a given int is a valid number.
+     * Returns true if a given integer is a valid number.
      */
     public static boolean isValidAmount(int test) {
         if (test > MAXPAYMENTAMOUNT) {
@@ -54,7 +54,7 @@ public class Payment {
     }
 
     /**
-     * Returns true if a given int is a valid month.
+     * Returns true if a given integer is a valid month.
      */
     public static boolean isValidMonth(int test) {
         //Check if month is within the correct range of jan - dec
@@ -68,7 +68,7 @@ public class Payment {
     }
 
     /**
-     * Returns true if a given int is a valid year, 4 digits.
+     * Returns true if a given integer is a valid year.
      */
     public static boolean isValidYear(int test) {
         int digits = 0;

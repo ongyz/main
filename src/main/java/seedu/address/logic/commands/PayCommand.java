@@ -31,10 +31,10 @@ public class PayCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 200 08 2018 ";
 
     public static final String MESSAGE_PAYMENT_SUCCESS = "Payment for this student is added: %1$s";
-    public static final String MESSAGE_EDITPAYMENT_SUCCESS = "Payment for this student has been edited: %1$s";
+    public static final String MESSAGE_EDIT_PAYMENT_SUCCESS = "Payment for this student has been edited: %1$s";
 
-    private static final int MINVALUE = -1;
-    private static final int MAXPAYMENTSDISPLAYED = 5;
+    private static final int MIN_VALUE = -1;
+    private static final int MAX_PAYMENTS_DISPLAYED = 5;
 
     private Index targetIndex;
     private Payment newPayment;
@@ -50,7 +50,7 @@ public class PayCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() <= MINVALUE) {
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() <= MIN_VALUE) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
@@ -61,7 +61,7 @@ public class PayCommand extends Command {
         editEntry = findPaymentToUpdate(pay, newPayment);
 
         if (!editEntry) {
-            if (pay.size() > MAXPAYMENTSDISPLAYED) {
+            if (pay.size() > MAX_PAYMENTS_DISPLAYED) {
                 pay.remove(0);
             }
             pay = updatePayment(studentTarget.getPayments(), newPayment);
@@ -77,7 +77,7 @@ public class PayCommand extends Command {
             model.updateStudentInternalField(studentTarget, studentToPay);
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             model.commitTutorHelper();
-            return new CommandResult(String.format(MESSAGE_EDITPAYMENT_SUCCESS, studentToPay));
+            return new CommandResult(String.format(MESSAGE_EDIT_PAYMENT_SUCCESS, studentToPay));
         } else {
             model.updateStudent(studentTarget, studentToPay);
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
