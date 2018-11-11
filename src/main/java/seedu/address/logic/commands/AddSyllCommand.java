@@ -32,11 +32,12 @@ public class AddSyllCommand extends Command {
             + "Parameters: "
             + "STUDENT_INDEX (must be a positive integer) "
             + "SUBJECT_INDEX (must be a positive integer) "
-            + PREFIX_SYLLABUS + "SYLLABUS\n"
+            + PREFIX_SYLLABUS + "SYLLABUS, [MORE SYLLABUSES]...\n"
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_ADDSYLL_SUCCESS = "Added syllabus to Student: %1$s";
-    public static final String MESSAGE_DUPLICATE_SYLLABUS = "Syllabus is already in Student: %1$s";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS_IN_STUDENT = "Syllabus is already in Student: %1$s";
+    public static final String MESSAGE_DUPLICATE_SYLLABUS_IN_ARGUMENT = "Duplicate syllabuses are not allowed";
 
     private final Index studentIndex;
     private final Index subjectIndex;
@@ -84,19 +85,31 @@ public class AddSyllCommand extends Command {
      */
     private Set<Subject> addSubjectContentTo(Student studentTarget, Index subjectIndex, Collection<Syllabus> syllabuses)
         throws CommandException {
+        checkForDuplicates(syllabuses);
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
         Subject selectedSubject = subjects.get(subjectIndex.getZeroBased());
         Subject updatedSubject = selectedSubject;
-
         for (Syllabus syllabus: syllabuses) {
             if (selectedSubject.contains(syllabus)) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS, studentTarget));
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_SYLLABUS_IN_STUDENT, studentTarget));
             }
             updatedSubject = updatedSubject.add(syllabus);
         }
 
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
         return new HashSet<>(subjects);
+    }
+
+    /**
+     * @throws CommandException if duplicates exist within the {@code syllabuses}.
+     */
+    private void checkForDuplicates(Collection<Syllabus> syllabuses) throws CommandException {
+        Set<Syllabus> duplicateCheck = new HashSet<>();
+        for (Syllabus syllabus : syllabuses) {
+            if (!duplicateCheck.add(syllabus)) {
+                throw new CommandException(MESSAGE_DUPLICATE_SYLLABUS_IN_ARGUMENT);
+            }
+        }
     }
 
     @Override

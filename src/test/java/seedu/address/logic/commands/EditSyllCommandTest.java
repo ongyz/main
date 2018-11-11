@@ -21,7 +21,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -40,6 +42,9 @@ import seedu.address.model.util.SubjectsUtil;
  * EditSyllCommand.
  */
 public class EditSyllCommandTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private Model model = new ModelManager(getTypicalTutorHelper(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -148,6 +153,19 @@ public class EditSyllCommandTest {
                 INDEX_FIRST_SYLLABUS, new Syllabus(DUPLICATE_SYLLABUS, true));
 
         assertCommandFailure(editSyllCommand, model, commandHistory, EditSyllCommand.MESSAGE_DUPLICATE_SYLLABUS);
+    }
+
+    @Test
+    public void execute_invalidSyllabus_throwsCommandException() {
+        thrown.expect(IllegalArgumentException.class);
+        new EditSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS, Syllabus.makeSyllabus(" "));
+    }
+
+    @Test
+    public void execute_invalidSyllabusExceedLength_throwsCommandException() {
+        thrown.expect(IllegalArgumentException.class);
+        new EditSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
+                Syllabus.makeSyllabus("Thisisasyllabusthatexceedsfifteencharactersanditshouldfail"));
     }
 
     @Test

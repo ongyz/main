@@ -41,8 +41,9 @@ public class StudentUtil {
             s -> sb.append(PREFIX_SUBJECT + s.getSubjectName() + " ")
         );
         sb.append(PREFIX_DAY_AND_TIME + student.getTuitionTiming().toString() + " ");
+        sb.append(PREFIX_TAG);
         student.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(s.tagName + ", ")
         );
         return sb.toString();
     }
