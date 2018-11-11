@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEAK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
@@ -53,7 +53,7 @@ public class TutorHelperTest {
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
         Student editedAlice = new StudentBuilder(ALICE).withTuitionTiming(VALID_TUITION_TIMING_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_WEAK).build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
 
         thrown.expect(DuplicateStudentException.class);
@@ -83,7 +83,7 @@ public class TutorHelperTest {
     public void hasStudent_studentWithSameIdentityFieldsInTutorHelper_returnsTrue() {
         tutorHelper.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withTuitionTiming(VALID_TUITION_TIMING_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_WEAK).build();
         assertTrue(tutorHelper.hasStudent(editedAlice));
     }
 

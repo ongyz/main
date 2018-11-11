@@ -39,7 +39,7 @@ import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * EditSyllCommand.
+ * {@code EditSyllCommand}.
  */
 public class EditSyllCommandTest {
 
@@ -165,7 +165,7 @@ public class EditSyllCommandTest {
     public void execute_invalidSyllabusExceedLength_throwsCommandException() {
         thrown.expect(IllegalArgumentException.class);
         new EditSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
-                Syllabus.makeSyllabus("Thisisasyllabusthatexceedsfifteencharactersanditshouldfail"));
+                Syllabus.makeSyllabus("Thisisasyllabusthatexceedsthirtycharactersanditshouldfail"));
     }
 
     @Test

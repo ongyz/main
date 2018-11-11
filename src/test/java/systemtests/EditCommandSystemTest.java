@@ -16,12 +16,12 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_EXAM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WEAK;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WEAK_EXAM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEAK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -63,8 +63,8 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
          */
         Index index = INDEX_FIRST_STUDENT;
         String command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB + " "
-                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + " " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Student editedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_HUSBAND).withSubjects(VALID_SUBJECT_AMY)
+                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + " " + ADDRESS_DESC_BOB + " " + TAG_DESC_WEAK + " ";
+        Student editedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_WEAK).withSubjects(VALID_SUBJECT_AMY)
                 .withSyllabus(INDEX_FIRST_SUBJECT, DUPLICATE_SYLLABUS).build();
         assertCommandSuccess(command, index, editedStudent);
 
@@ -82,7 +82,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: edit a student with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + TAG_DESC_WEAK;
         assertCommandSuccess(command, index, editedStudent);
 
         /* Case: edit a student with new values same as another student's values but with different phone and email
@@ -90,7 +90,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
          */
         index = INDEX_SECOND_STUDENT;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + TAG_DESC_WEAK;
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: clear tags -> cleared */
@@ -128,7 +128,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         index = INDEX_FIRST_STUDENT;
         selectStudent(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + TAG_DESC_EXAM;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new student's name
         editedStudent = new StudentBuilder(AMY).withTuitionTiming(VALID_TUITION_TIMING_BOB)
@@ -184,12 +184,12 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         index = INDEX_FIRST_STUDENT;
         assertFalse(getModel().getFilteredStudentList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND_FRIEND;
+                + ADDRESS_DESC_BOB + TAG_DESC_WEAK_EXAM;
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: edit a student with new values same as another student's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + TAG_DESC_WEAK;
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
 

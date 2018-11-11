@@ -34,16 +34,15 @@ It is a Java sample application intended for Tutors who would like to organise t
 *** Refined the regex for name, phone and tuition timing (Pull request https://github.com[#193])
 *** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#136], https://github.com[#144], https://github.com[#152])
 ** Documentation:
-*** Added team members' images in AboutUs
-*** Edited `Valid Inputs` section in the User Guide
-*** Added section for group in the User Guide
+*** Added team members' images in AboutUs (Pull request https://github.com[#3])
+*** Edited `Valid Inputs` section in the User Guide (Pull request https://github.com[#204])
+*** Added section for group in the User Guide (Pull request https://github.com[#155])
 *** Edited `User Stories` and `Use Cases` in Developer Guide
-*** Added section for group in the Developer Guide
+*** Added section for group in the Developer Guide (Pull request https://github.com[#68])
+*** Updated diagrams and images to be in TutorHelper context (Pull request https://github.com[#227])
 ** Community:
 *** Reviewed other PRs
 *** Reported bugs and suggestions for other teams in the class
-** Tools:
-*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
 
 == Contributions to the User Guide
 
@@ -52,9 +51,9 @@ It is a Java sample application intended for Tutors who would like to organise t
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=validinputs]
-
 include::../UserGuide.adoc[tag=group]
+
+include::../UserGuide.adoc[tag=validinputs]
 
 == Contributions to the Developer Guide
 
@@ -62,8 +61,8 @@ include::../UserGuide.adoc[tag=group]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+include::../DeveloperGuide.adoc[tag=group]
+
 include::../DeveloperGuide.adoc[tag=userstories]
 
 include::../DeveloperGuide.adoc[tag=usecases]
-
-include::../DeveloperGuide.adoc[tag=group]

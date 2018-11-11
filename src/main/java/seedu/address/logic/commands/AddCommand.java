@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Adds a student to the tutor helper.
+ * Adds a student to the TutorHelper.
  */
 public class AddCommand extends Command {
 
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the tutor helper";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the TutorHelper";
 
     private final Student toAdd;
 
