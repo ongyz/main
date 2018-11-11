@@ -1017,8 +1017,8 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect addsub commands to try: 'addsub', 'addsub 2', 'addsub 1 Physics', 'addsub Physics' +
    Expected: Invalid command format. addsub command message usage is shown.
 
-== Delete subject command
-. Deleting subject from existing student.
+=== Delete subject command
+. Deleting subject from existing student
 
 .. Prerequisite: Tutorhelper is not empty.
 .. Test case: 'deletesub 1 1' +
