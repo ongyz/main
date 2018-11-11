@@ -62,7 +62,7 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
         String email = ((Label) scene.lookup("#emailLabel")).getText();
 
         if (name.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-            logger.log(Level.WARNING,"No student has been loaded. Using default student information instead.");
+            logger.log(Level.WARNING, "No student has been loaded. Using default student information instead.");
             lastStudent = DEFAULT_STUDENT;
             return DEFAULT_STUDENT;
         }
