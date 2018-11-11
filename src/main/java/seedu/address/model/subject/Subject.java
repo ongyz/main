@@ -75,7 +75,8 @@ public class Subject {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getSubjectName() + ": \n\n");
+        builder.append(getSubjectName());
+        builder.append(" (" + (int)(getCompletionRate() * 100) + "%) : \n\n");
         builder.append(contentToString());
         return builder.toString();
     }
