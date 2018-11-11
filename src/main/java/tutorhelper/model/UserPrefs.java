@@ -7,7 +7,7 @@ import java.util.Objects;
 import tutorhelper.commons.core.GuiSettings;
 
 /**
- * Represents User's preferences.
+ * Represents Tutor's preferences.
  */
 public class UserPrefs {
 

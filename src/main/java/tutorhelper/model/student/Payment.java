@@ -21,7 +21,9 @@ public class Payment {
             "Year should only contain 4 digits integers.";
 
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
-    private static final int MAXPAYMENTAMOUNT = 10000;
+    private static final int MAX_PAYMENT_AMOUNT = 10000;
+    private static final int JANUARY = 1;
+    private static final int DECEMBER = 12;
 
     private final Index studentIndex;
     private int amount;
@@ -47,7 +49,7 @@ public class Payment {
      * Returns true if a given integer is a valid number.
      */
     public static boolean isValidAmount(int test) {
-        if (test > MAXPAYMENTAMOUNT) {
+        if (test > MAX_PAYMENT_AMOUNT) {
             return false;
         }
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
@@ -59,8 +61,7 @@ public class Payment {
     public static boolean isValidMonth(int test) {
         //Check if month is within the correct range of jan - dec
         if (String.valueOf(test).matches(TAG_VALIDATION_REGEX)) {
-            int testMonth = test;
-            if (testMonth >= 1 && testMonth <= 12) {
+            if (test >= JANUARY && test <= DECEMBER) {
                 return true;
             }
         }

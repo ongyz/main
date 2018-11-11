@@ -146,10 +146,10 @@ image::LogicClassDiagram.png[width="800"]
 [discrete]
 ==== Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact for the scenario where the tutor issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+image::SDforDeleteStudent.png[width="800"]
 
 [NOTE]
 Note how the `Model` simply raises a `TutorHelperChangedEvent` when the TutorHelper data are changed, instead of asking the `Storage` to save the updates to the hard disk.
@@ -157,7 +157,7 @@ Note how the `Model` simply raises a `TutorHelperChangedEvent` when the TutorHel
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteStudentEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -178,7 +178,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
 
 The `UI` component,
 
-* Executes user commands using the `Logic` component.
+* Executes tutor's commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
@@ -192,7 +192,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/tutorhelper/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `TutorHelperParser` class to parse the user command.
+.  `Logic` uses the `TutorHelperParser` class to parse the tutor's command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a student) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -200,7 +200,7 @@ link:{repoURL}/src/main/java/tutorhelper/logic/Logic.java[`Logic.java`]
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+image::DeleteStudentSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -279,36 +279,28 @@ image::GroupSequenceDiagramTime.png[width="650]
 === Students payment feature
 ==== Current implementation
 
-The Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Student>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
-
 Classes that are related to Payment and their functionality are as listed below:
+
 * `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
-* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
+* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the para.
 * `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
 * `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
 
 Given below is an example usage scenario and how the payment mechanism behaves at each step.
+
 Step 1. The tutor launches the application and wants to record a payment for his/her student called Alice.
 
 Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
 
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
+Step 3. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
 
-Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+Step 4. Assuming that each argument given is a valid input, the system will perform the Payment command.
 
-Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
+Step 5. The system will locate Alice from the student list and update payment field for Alice.
 
-Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
+Step 6. Now, payment details have been updated and the tutor will be able to see a successful payment message under the command box.
 
-Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
-
-Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Student class.
-
-Step 2g. Alice student class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updateStudent in model class to modify Alice Student class with the new updated payment.
-
-Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
-
-Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
+Step 7. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed.
 
 [NOTE]
 Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
@@ -324,36 +316,30 @@ image:PaymentSequenceDiagram.png[width="800"]
 === Students edit payment feature
 ==== Current implementation
 
-The Edit Payment mechanism is facilitated by VersionedTutorHelper and FilteredList<Student>. VersionedTutorHelper extends from TutorHelper and classes related to Payment calls methods from VersionedTutorHelper to retrieve students' data, update them and display accordingly.
+Classes that are related to edit Payment and their functionality are as listed below:
 
-Classes that are related to Payment and their functionality are as listed below:
 * `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
-* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the argument.
+* `PayCommandParser` -- Analyses the input, checks for any violation of syntax and returns a PayCommand object with the Payment object as the para.
 * `PayCommand` -- Calls on methods in VersionedTutorHelper to update new Payments made.
 * `Payment` -- -Contains fields to store student id, amount paid, month of payment and year of payment.
 
 Given below is an example usage scenario and how the payment mechanism behaves at each step.
-Step 1. The tutor launches the application and wants to record a payment for his/her student called Alice.
+
+Step 1. The tutor launches the application and wants to edit a payment for his/her student called Alice.
 
 Step 2. He/she makes a mental note of Alice's student index as listed in the left side of the application.
 
-Step 2a. Lets say, Alice has student id 2. The payment she made was $400 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 400 11 2018
+Step 3. Lets say, Alice has student id 2. The payment that the tutor wants to update is $300 for the month and year of November 2018. He/she proceeds to key in the command in the following format: paid 2 300 11 2018
 
-Step 2b. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, paid) and creates the PayCommandParser object, followed by calling parse method, with the arguments passed in.
+Step 4. Assuming that each argument given is a valid input, the system will perform the Payment command.
 
-Step 2c. PayCommandParser then checks if the inputs are of the correct format and it initialises a Payment object with the inputs.
+Step 5. The system will locate Alice from the student list.
 
-Step 2d. The PayCommandParser method then returns a PayCommand object with payment object.
+Step 5a. The system will check that payment for the month and year of November 2018 has been recorded for Alice before, hence it will proceed to update the payment amount instead of creating a new payment entry.
 
-Step 2e. This is propagated back to the LogicManager class which then proceed to call execute method in the returned PayCommand object.
+Step 6. Now, payment details have been updated and the tutor will be able to see a successful edit payment message under the command box.
 
-Step 2f. The execute method in PayCommand proceed to obtain the list of students from the model. Since 2 is a valid student index, it proceeds to retrieve information from Alice Student class.
-
-Step 2g. Alice student class contains payment class. The PayCommand execute method proceeds to call the method updatePayments, then calls updateStudent in model class to modify Alice Student class with the new updated payment.
-
-Step 3. Now, payment details have been updated and the tutor will be able to see a payment updated successfully message below the command text box and the list of payments as well as other details about Alice
-
-Step 4. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed in one of the rows.
+Step 7. The tutor may also choose to view the details from browser panel by clicking on Alice tab on the left. Payments will be displayed.
 
 [NOTE]
 Payment list will keep up to 5 payments at any one time. When the 6th payment is added, the payment list will remove the oldest payment record.
@@ -369,12 +355,11 @@ image:EditPaymentSequenceDiagram.png[width="800"]
 === Tutor's Earnings feature
 ==== Current implementation
 
-The Earnings mechanism is mainly facilitated by the filteredStudentList found in model. It works by checking through all past recorded payments for that specific month and year as requested by the tutor and returns the total earnings.
 The classes related to Earnings are EarningsCommand, EarningsCommandParser.
 
 * `TutorHelperParser` -- Creates a PayCommandParser object and calls parse method in object to parse user's argument input.
 * `EarningsCommandParser` --Takes in users' input and checks if it adheres to the required format. Returns a EarningsCommand with the month and year passed in.
-* `EarningsCommand` -- Takes in month and year as inputs in its constructed. In Execute() method, it performs the checking of all recorded payments and returns the total payments received for that specified month and year.
+* `EarningsCommand` -- Takes in month and year as inputs in its constructor. In Execute() method, it performs the checking of all recorded payments and returns the total payments received for that specified month and year.
 
 Given below is an example usage scenario and how the earning mechanism behaves at each step.
 
@@ -382,21 +367,16 @@ Step 1. The tutor launches the application and wants to view his/her earnings fo
 
 Step 2. He/she enters input in the format of: earnings 11 2018
 
-Step 2a. The tutor's input is passed from the text box through LogicManager class to TutorHelperParser. TutorHelperParser sieves out the arguments and command word(in this case, earnings) and creates the EarningsCommandParser object, followed by calling parse method, with the arguments passed in.
+Step 3. Assuming arguments are correct, the system executes Earnings command.
 
-Step 2b. EarningCommandParser checks if the inputs are of the correct format.
+Step 4. The list of students from the model is obtained and the system proceeds to search for Payment records made for that requested month and year.
 
-Step 2b. The PayCommandParser method then returns a EarningCommand object with month and year passed in.
-
-Step 2c. This is propagated back to the LogicManager class which then proceed to call execute method in the returned EarningsCommand object.
-
-Step 2d. The execute method in EarningsCommand proceed to obtain the list of students from the model and proceeds to search for Payment records made for that requested month and year.
-
-Step 2e. The amount is then returned.
-
-Step 3. The tutor will then see a message below the command text box, showing the earnings for the requested month and year.
+Step 5. The tutor will then see a message below the command text box, showing the earnings for the requested month and year.
 
 The diagram below illustrates the sequence diagram.
+
+[NOTE]
+Default value for earnings of an unrecorded month and year will be $0.
 
 image:EarningsSequenceDiagram.png[width="800"]
 // end::earnings[]
@@ -733,7 +713,8 @@ Value Proposition:
 . As a busy tutor, I want to be able to manage my students' schedules individually, so that I can plan my time properly.
 . As a tutor, I want to be able to find out where my students live and what time I should be there for tuition.
 . As a tutor, I want to know my students' individual progress so that I know what topics I need to cover for the next tuition session.
-. As a tutor, I want to keep track of my students' payments.
+. As a tutor, I want to keep track of my students' payments so that i know who to collect fees from.
+. As a tutor, I want to keep track of my monthly earnings so that i can manage my financial accounts.
 . As a tutor, I want to be able to edit teaching data such as editing my syllabus to keep up with changes in school's curriculum or updating payments made by students.
 // end::userstories[]
 
@@ -809,15 +790,15 @@ Value Proposition:
 
     System: TutorHelper
     Actor: Tutor
-    Precondition: student index entered must be valid.
+    Precondition: Current list of students is not empty.
     MSS:
       1. Tutor request to add in payment for a student.
       2. System searches for that student according to index entered.
       3. System adds Payment amount, month and year to student's record.
       4. System displays payment record in browser panel.
-      5. System displays successful recording of payment under command box.
+      5. System displays successful recording of payment message under command box.
       Use case ends.
-     Extensions:
+    Extensions:
       2a. Tutor does not enter all the required entries correctly
         2a1. System displays error message
         2a2. System gives tutor an example of a correct entry.
@@ -830,15 +811,16 @@ Value Proposition:
 
     System: TutorHelper
     Actor: Tutor
-    Precondition: student index entered must be valid
+    Precondition: Current list of students is not empty.
+    Precondition: Payment for the month and year has been recorded for student before.
     MSS:
       1. Tutor request to add in edited payment for a student.
       2. System finds the existing payment entry with same month and year.
       3. System adds new payment entry to existing entry.
       4. System displays payment record in browser panel.
-      5. System displays successful recording of payment under command box.
+      5. System displays successful editing of payment message under command box.
       Use case ends.
-     Extensions:
+    Extensions:
       2a. Tutor does not enter all the required entries correctly
         2a1. System displays error message
         2a2. System gives tutor an example of a correct entry.
@@ -851,23 +833,20 @@ Value Proposition:
 
     System: TutorHelper
     Actor: Tutor
-    Precondition: Tutor has recorded payment for students before.
+    Precondition: Current list of students is not empty.
     MSS:
       1. Tutor request for earnings for a specific month and year.
       2. System searches for all the payment records made from all the students for that particular month and year.
       3. System adds up all the payment.
       4. System displays total earnings under the command box.
       Use case end.
-     Extensions:
+    Extensions:
       2a. System does not find any payment recorded for that month and year.
         2a1. System displays $0 as result.
       2b. Tutor does not enter all the required entries correctly
         2b1. System displays error message
         2b2. System gives tutor an example of a correct entry.
-        2b3. Repeat step 1
-      2c. Tutor does not enter a valid entry
-        2c1. System displays error message telling tutor that entry is invalid
-        2c2. Repeat step 1.
+        2b3. Repeat step 1.
 
   9. Edit students' syllabus for that subject
 
@@ -972,11 +951,11 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Invalid command format. Group command message usage is shown.
 
 === Making Payment for a student
-. Adding a payment while all persons are listed
+. Adding a payment while all persons are listed.
 
-.. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+.. Prerequisites: TutorHelper is not empty.
 .. Test case: 'paid 1 200 8 2018' +
-   Expected: Payment for this student is added. Details of the paid contact shown in the status message.
+   Expected: Payment for this student is added: Display student's details.
 .. Test case: 'paid 0 200 8 2018' +
    Expected: Index is not a non-zero unsigned integer.
 .. Test case: 'paid X 200 8 920' (X is a number greater than the list) +
@@ -992,12 +971,12 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Invalid command format. Pay command message usage is shown.
 
 === Editing Payment for a student
-. Editing a payment while all persons are listed
+. Editing a payment while all persons are listed.
 
-.. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+.. Prerequisites: TutorHelper is not empty.
 .. Prerequisites: Payment for the month and year must have been added previously.
 .. Test case: 'paid 1 200 8 2018' +
-   Expected: Payment for this student has been edited: Details of the paid contact shown in the status message.
+   Expected: Payment for this student has been edited: Display student's details.
 .. Test case: 'paid 0 200 8 2018' +
    Expected: Index is not a non-zero unsigned integer.
 .. Test case: 'paid X 200 8 920' (X is a number greater than the list) +
@@ -1013,8 +992,9 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Invalid command format. Pay command message usage is shown.
 
 === Viewing earnings command
-. Display earnings made by the tutor
+. Display earnings made by the tutor.
 
+.. Prerequisites: TutorHelper is not empty.
 .. Test case: 'earnings 8 2018' +
    Expected: Earnings: $X (X is the total earnings)
 .. Test case: 'earnings 8 299' +
@@ -1025,28 +1005,28 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Invalid command format. Earnings command message usage is shown.
 
 === Add subject command
-. Adding a subject to an existing student
+. Adding a subject to an existing student.
 
-.. Prerequisite: TutorHelper is not empty
+.. Prerequisite: TutorHelper is not empty.
 .. Test case: 'addsub 1 s/Chemistry' +
-   Expected: Added subject to student: Display student details
+   Expected: Added subject to student: Display student's details.
 .. Test case: 'addsub X s/Chemistry' (X is an invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Test case: 'addsub 1 s/X' (X is a subject student index 1 is already taking) +
    Expected: Subject is already taken by student: Display student index.
-.. Other incorrect addsub commands to try: 'addsub', 'addsub 2', 'addsub 1 Physics', 'áddsub Physics' +
+.. Other incorrect addsub commands to try: 'addsub', 'addsub 2', 'addsub 1 Physics', 'addsub Physics' +
    Expected: Invalid command format. addsub command message usage is shown.
 
 === Delete subject command
 . Deleting subject from existing student
 
-.. Prerequisite: Tutorhelper is not empty
+.. Prerequisite: Tutorhelper is not empty.
 .. Test case: 'deletesub 1 1' +
-   Expected: Deleted subject from student: Display student details
+   Expected: Deleted subject from student: Display student's details.
 .. Test case: 'deletesub 1 X' (X is an invalid subject index) +
    Expected: The subject index provided is invalid.
 .. Test case: 'deletesub X 1' (X is an invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Other incorrect deletesub commands to try: 'deletesub', 'deletesub 1' +
    Expected: Invalid command format. deletesub command message usage is shown.
 
@@ -1058,11 +1038,11 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: 'copysub 1 1 2' +
    Expected: Copied syllabus to Student: Display student's details.
 .. Test case: 'copysub 1 X 2' (X is an invalid subject index of the source student) +
-   Expected: The subject index provided is invalid
+   Expected: The subject index provided is invalid.
 .. Test case: 'copysub 1 1 X' (X is an invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Test case: 'copysub X 1 1' (X is in invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Test case: 'copysub 1 1 1' +
    Expected: Copying subject to the same student is not allowed: Display student's details.
 .. Test case: 'copysub 1 X 3' (X is an existing subject in student 3) +
@@ -1073,45 +1053,45 @@ These instructions only provide a starting point for testers to work on; testers
 === Add syllabus command
 . Adds a new syllabus topic for a specified student and subject
 
-.. Prerequisite: Tutorhelper must not be empty
+.. Prerequisite: Tutorhelper must not be empty.
 .. Test case: 'addsyll 1 1 sy/Integration' +
-   Expected: Added syllabus to Student: Display destination student details
+   Expected: Added syllabus to Student: Display destination student's details
 .. Test case: 'addsyll X 1 sy/Integration' (X is an invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Test case: 'addsyll 1 X sy/Integration' (X is an invalid subject index) +
-   Expected: The subject index provided is invalid
+   Expected: The subject index provided is invalid.
 .. Test case: 'addsyll 1 1 sy/X' (X is a syllabus already in student) +
-   Expected: Syllabus is already in Student: Display student details.
+   Expected: Syllabus is already in Student: Display student's details.
 .. Other incorrect addsyll commands to try: 'addsyll', 'addsyll 1', 'addsyll 1 1', 'addsyll 1 1 sy/' +
    Expected: Invalid command format. addsyll command message usage is shown.
 
 === Delete syllabus command
 . Deletes a syllabus from an existing student
 
-.. Prerequisite: Tutorhelper must not be empty
+.. Prerequisite: Tutorhelper must not be empty.
 .. Test case: 'deletesyll 1 1 1' +
    Expected: Removed selected syllabus from Student: Display student's details.
 .. Test case: 'deletesyll X 1 1' (X is an invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Test case: 'deletesyll 1 X 1' (X is an invalid subject index) +
-   Expected: The subject index provided is invalid
+   Expected: The subject index provided is invalid.
 .. Test case: 'deletesyll 1 1 X' (X is an invalid syllabus index) +
-   Expected: The syllabus index provided is invalid
+   Expected: The syllabus index provided is invalid.
 .. Other incorrect deletesyll commands to try: 'deletesyll', 'deletesyll 1', 'deletesyll 1 1' +
    Expected: Invalid command format. deletesyll command message usage is shown.
 
 === Edit syllabus command
 . Edits a syllabus from an existing student
 
-.. Prerequisite: Tutorhelper must not be empty
+.. Prerequisite: Tutorhelper must not be empty.
 .. Test case: 'editsyll 1 1 1 sy/Integration' +
    Expected: Edited syllabus to Student: Display student's details.
 .. Test case: 'editsyll X 1 1 sy/Integration' (X is an invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Test case: 'editsyll 1 X 1 sy/Integration' (X is an invalid subject index) +
-   Expected: The subject index provided is invalid
+   Expected: The subject index provided is invalid.
 .. Test case: 'editsyll 1 1 X sy/Integration' (X is an invalid syllabus index) +
-   Expected: The syllabus index provided is invalid
+   Expected: The syllabus index provided is invalid.
 .. Test case: 'editsyll 1 1 X sy/' (X is an invalid syllabus index) +
    Expected: Syllabus can take any values, and it should not be blank or preceded by white space.
 .. Other incorrect editsyll commands to try: 'editsyll', 'editsyll 1', 'editsyll 1 1', 'editsyll 1 1 1' +
@@ -1120,14 +1100,14 @@ These instructions only provide a starting point for testers to work on; testers
 === Mark command
 . Toggles the state of a specified syllabus topic for a specified student and subject.
 
-.. Prerequisite: Tutorhelper must not be empty
+.. Prerequisite: Tutorhelper must not be empty.
 .. Test case: 'mark 1 1 1' +
    Expected: Changed selected syllabus from Student: Display student's details
 .. Test case: 'mark X 1 1 ' (X is an invalid student index) +
-   Expected: The student index provided is invalid
+   Expected: The student index provided is invalid.
 .. Test case: 'mark 1 X 1 ' (X is an invalid subject index) +
-   Expected: The subject index provided is invalid
+   Expected: The subject index provided is invalid.
 .. Test case: 'mark 1 1 X ' (X is an invalid syllabus index) +
-   Expected: The syllabus index provided is invalid
+   Expected: The syllabus index provided is invalid.
 .. Other incorrect mark commands to try: 'mark', 'mark 1', 'mark 1 1' +
    Expected: Invalid command format. marksyll command message usage is shown.
