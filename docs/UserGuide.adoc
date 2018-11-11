@@ -317,9 +317,10 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 
 [NOTE]
 ====
-* If a payment entry already exists, the amount will replace the existing payment record.
-* The maximum payment amount allowable is 10 000 each time.
-* Only positive integers are accepted as payment amount.
+If a payment entry already exists, the amount will replace the existing payment record.
+The maximum payment amount allowable is 10 000 each time.
+Only positive integers are accepted as payment amount.
+Only the 5 latest payments will be shown each time.
 ====
 
 ****

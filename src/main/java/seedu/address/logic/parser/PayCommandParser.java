@@ -14,6 +14,8 @@ import seedu.address.model.student.Payment;
  */
 public class PayCommandParser implements Parser<PayCommand> {
 
+    private static final int FOUR_ARGUMENTS = 4;
+
     private Index studentIndex;
     private int amount;
     private int month;
@@ -29,7 +31,7 @@ public class PayCommandParser implements Parser<PayCommand> {
         String trimmedPayment = args.trim();
         String[] separatedPayment = trimmedPayment.split("\\s");
 
-        if (separatedPayment.length != 4) { //invalid number of arguments
+        if (separatedPayment.length != FOUR_ARGUMENTS) { //invalid number of arguments
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
         }
