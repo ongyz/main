@@ -1,10 +1,11 @@
 package tutorhelper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 
 import java.util.List;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.EditSyllCommand;
 import tutorhelper.logic.parser.exceptions.ParseException;
@@ -21,7 +22,7 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
      */
     public EditSyllCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_SYLLABUS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SYLLABUS);
 
         Index studentIndex;
         Index subjectIndex;
@@ -32,24 +33,24 @@ public class EditSyllCommandParser implements Parser<EditSyllCommand> {
             indexList = ParserUtil.parseIndexes(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE), pe);
         }
 
         if (indexList.size() != EditSyllCommand.EditSyllFormatChecker.NUMBER_OF_ARGS) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
         }
 
         studentIndex = getStudentIndex(indexList);
         subjectIndex = getSubjectIndex(indexList);
         syllabusIndex = getSyllabusIndex(indexList);
 
-        if (!argMultimap.getValue(CliSyntax.PREFIX_SYLLABUS).isPresent()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+        if (!argMultimap.getValue(PREFIX_SYLLABUS).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditSyllCommand.MESSAGE_USAGE));
         }
 
-        Syllabus syllabus = ParserUtil.parseSyllabus(argMultimap.getValue(CliSyntax.PREFIX_SYLLABUS).get());
+        Syllabus syllabus = ParserUtil.parseSyllabus(argMultimap.getValue(PREFIX_SYLLABUS).get());
         return new EditSyllCommand(studentIndex, subjectIndex, syllabusIndex, syllabus);
     }
 

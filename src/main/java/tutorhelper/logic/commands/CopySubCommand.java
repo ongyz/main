@@ -1,20 +1,24 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
+import static tutorhelper.model.util.SubjectsUtil.copySubjectFrom;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
+import static tutorhelper.model.util.SubjectsUtil.findSubjectIndex;
+import static tutorhelper.model.util.SubjectsUtil.hasSubject;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Copies a subject and its syllabus topics from one student to another.
@@ -57,7 +61,7 @@ public class CopySubCommand extends Command {
 
         if (sourceStudentIndex.getZeroBased() >= lastShownList.size()
             || targetStudentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentSource = lastShownList.get(sourceStudentIndex.getZeroBased());
@@ -68,12 +72,12 @@ public class CopySubCommand extends Command {
         }
 
         if (subjectIndex.getZeroBased() >= studentSource.getSubjects().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+            throw new CommandException(MESSAGE_INVALID_SUBJECT_INDEX);
         }
 
-        Subject selectedSubject = SubjectsUtil.copySubjectFrom(studentSource, subjectIndex);
+        Subject selectedSubject = copySubjectFrom(studentSource, subjectIndex);
         Set<Subject> updatedSubjects = updateSubjectsFor(studentTarget, selectedSubject);
-        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, updatedSubjects);
+        Student studentUpdated = createStudentWithNewSubjects(studentTarget, updatedSubjects);
 
         model.updateStudent(studentTarget, studentUpdated);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
@@ -91,8 +95,8 @@ public class CopySubCommand extends Command {
     private Set<Subject> updateSubjectsFor(Student studentTarget, Subject newSubject) {
         List<Subject> targetSubjects = new ArrayList<>(studentTarget.getSubjects());
 
-        if (SubjectsUtil.hasSubject(studentTarget, newSubject.getSubjectType())) {
-            Index index = SubjectsUtil.findSubjectIndex(studentTarget, newSubject.getSubjectType()).get();
+        if (hasSubject(studentTarget, newSubject.getSubjectType())) {
+            Index index = findSubjectIndex(studentTarget, newSubject.getSubjectType()).get();
             Subject updatedSubject = targetSubjects.get(index.getZeroBased())
                                                    .append(newSubject.getSubjectContent());
             targetSubjects.set(index.getZeroBased(), updatedSubject);

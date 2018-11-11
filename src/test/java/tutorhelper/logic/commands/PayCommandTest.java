@@ -3,6 +3,7 @@ package tutorhelper.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
@@ -14,7 +15,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
@@ -43,10 +43,10 @@ public class PayCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         Index integerOverflowIndex = Index.fromOneBased(Integer.MAX_VALUE);
-        assertExecutionFailure(integerOverflowIndex, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertExecutionFailure(integerOverflowIndex, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test

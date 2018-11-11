@@ -2,8 +2,11 @@ package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
@@ -16,7 +19,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
@@ -24,7 +26,6 @@ import tutorhelper.model.ModelManager;
 import tutorhelper.model.UserPrefs;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -57,7 +58,7 @@ public class DeleteSubCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT);
 
-        assertCommandFailure(deleteSubCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -66,7 +67,7 @@ public class DeleteSubCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(studentTarget.getSubjects().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_THIRD_STUDENT, outOfBoundIndex);
 
-        assertCommandFailure(deleteSubCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -87,7 +88,7 @@ public class DeleteSubCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT);
 
-        assertCommandFailure(deleteSubCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
 
@@ -97,7 +98,7 @@ public class DeleteSubCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(studentTarget.getSubjects().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_THIRD_STUDENT, outOfBoundIndex);
 
-        assertCommandFailure(deleteSubCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -128,7 +129,7 @@ public class DeleteSubCommandTest {
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT);
 
         // execution failed -> TutorHelper state not added into model
-        assertCommandFailure(deleteSubCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -166,7 +167,7 @@ public class DeleteSubCommandTest {
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
 
-        return SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        return createStudentWithNewSubjects(studentTarget, newSubjects);
     }
 
 }

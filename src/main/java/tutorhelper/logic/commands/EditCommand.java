@@ -1,6 +1,14 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_DAY_AND_TIME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_NAME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_PHONE;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
@@ -10,12 +18,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.commons.util.CollectionUtil;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
-import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Address;
 import tutorhelper.model.student.Email;
@@ -38,16 +44,16 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
-            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
-            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + CliSyntax.PREFIX_SUBJECT + "SUBJECT]... "
-            + "[" + CliSyntax.PREFIX_DAY_AND_TIME + "TUITION TIMING] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
+            + "[" + PREFIX_DAY_AND_TIME + "TUITION TIMING] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_PHONE + "91234567 "
-            + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -74,7 +80,7 @@ public class EditCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());

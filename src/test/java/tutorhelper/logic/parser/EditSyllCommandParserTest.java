@@ -1,5 +1,6 @@
 package tutorhelper.logic.parser;
 
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -14,14 +15,13 @@ import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.EditSyllCommand;
 import tutorhelper.model.subject.Syllabus;
 
 public class EditSyllCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE);
 
     private EditSyllCommandParser parser = new EditSyllCommandParser();
 

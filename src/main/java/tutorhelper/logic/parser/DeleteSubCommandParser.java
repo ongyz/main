@@ -1,13 +1,13 @@
 package tutorhelper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.commands.DeleteSubCommand.DeleteSubFormatChecker.NUMBER_OF_ARGS;
 import static tutorhelper.logic.commands.DeleteSubCommand.DeleteSubFormatChecker.STUDENT_INDEX;
 import static tutorhelper.logic.commands.DeleteSubCommand.DeleteSubFormatChecker.SUBJECT_INDEX;
 
 import java.util.List;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.DeleteSubCommand;
 import tutorhelper.logic.parser.exceptions.ParseException;
@@ -33,12 +33,12 @@ public class DeleteSubCommandParser implements Parser<DeleteSubCommand> {
             indexList = ParserUtil.parseIndexes(args);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteSubCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSubCommand.MESSAGE_USAGE), pe);
         }
 
         if (indexList.size() != NUMBER_OF_ARGS) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteSubCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSubCommand.MESSAGE_USAGE));
         }
 
         studentIndex = getStudentIndex(indexList);

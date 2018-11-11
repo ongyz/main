@@ -1,6 +1,7 @@
 package tutorhelper.model.tuitiontiming;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +44,7 @@ public class TuitionTiming {
      */
     public TuitionTiming(String tuitionTiming) {
         requireNonNull(tuitionTiming);
-        AppUtil.checkArgument(isValidTiming(tuitionTiming), MESSAGE_TUITION_TIMING_CONSTRAINTS);
+        checkArgument(isValidTiming(tuitionTiming), MESSAGE_TUITION_TIMING_CONSTRAINTS);
         splitTuitionTiming(tuitionTiming);
         value = tuitionTiming;
         // this.day and this.time used for comparison purposes for Group Command

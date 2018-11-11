@@ -1,6 +1,7 @@
 package tutorhelper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.NUMBER_OF_ARGS;
 import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.SOURCE_STUDENT_INDEX;
 import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.SUBJECT_INDEX;
@@ -8,7 +9,6 @@ import static tutorhelper.logic.commands.CopySubCommand.CopySubFormatChecker.TAR
 
 import java.util.List;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.CopySubCommand;
 import tutorhelper.logic.parser.exceptions.ParseException;
@@ -34,12 +34,12 @@ public class CopySubCommandParser implements Parser<CopySubCommand> {
             indexList = ParserUtil.parseIndexes(args);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE), pe);
         }
 
         if (indexList.size() != NUMBER_OF_ARGS) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE));
         }
 
         sourceStudentIndex = getSourceStudentIndex(indexList);

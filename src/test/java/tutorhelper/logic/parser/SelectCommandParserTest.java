@@ -1,12 +1,12 @@
 package tutorhelper.logic.parser;
 
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.SelectCommand;
 
 /**
@@ -24,7 +24,7 @@ public class SelectCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SelectCommand.MESSAGE_USAGE));
     }
 }

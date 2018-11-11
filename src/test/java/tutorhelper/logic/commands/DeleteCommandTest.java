@@ -2,6 +2,7 @@ package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -12,7 +13,6 @@ import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
@@ -49,7 +49,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         // execution failed -> TutorHelper state not added into model
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);

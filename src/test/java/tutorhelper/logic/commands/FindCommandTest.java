@@ -3,6 +3,7 @@ package tutorhelper.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorhelper.testutil.TypicalStudents.CARL;
 import static tutorhelper.testutil.TypicalStudents.ELLE;
@@ -14,7 +15,6 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
 import tutorhelper.model.ModelManager;
@@ -58,7 +58,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noStudentFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -68,7 +68,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleStudentsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);

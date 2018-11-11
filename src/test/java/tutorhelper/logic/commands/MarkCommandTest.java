@@ -3,9 +3,13 @@ package tutorhelper.logic.commands;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SYLLABUS_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
@@ -19,7 +23,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
@@ -28,7 +31,6 @@ import tutorhelper.model.ModelManager;
 import tutorhelper.model.UserPrefs;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -61,7 +63,7 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         MarkCommand markCommand = new MarkCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -70,7 +72,7 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(studentTarget.getSubjects().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_STUDENT, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(markCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -80,7 +82,7 @@ public class MarkCommandTest {
                 .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
+        assertCommandFailure(markCommand, model, commandHistory, MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -108,7 +110,7 @@ public class MarkCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorHelper().getStudentList().size());
         MarkCommand markCommand = new MarkCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
 
@@ -118,7 +120,7 @@ public class MarkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(studentTarget.getSubjects().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_STUDENT, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(markCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -128,7 +130,7 @@ public class MarkCommandTest {
                 .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
+        assertCommandFailure(markCommand, model, commandHistory, MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -159,7 +161,7 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         // execution failed -> TutorHelper state not added into model
-        assertCommandFailure(markCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(markCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -211,6 +213,6 @@ public class MarkCommandTest {
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
 
-        return SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        return createStudentWithNewSubjects(studentTarget, newSubjects);
     }
 }

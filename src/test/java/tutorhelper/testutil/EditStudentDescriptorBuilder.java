@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import tutorhelper.logic.commands.EditCommand;
+import tutorhelper.logic.commands.EditCommand.EditStudentDescriptor;
 import tutorhelper.model.student.Address;
 import tutorhelper.model.student.Email;
 import tutorhelper.model.student.Name;
@@ -23,21 +23,21 @@ import tutorhelper.model.tuitiontiming.TuitionTiming;
  */
 public class EditStudentDescriptorBuilder {
 
-    private EditCommand.EditStudentDescriptor descriptor;
+    private EditStudentDescriptor descriptor;
 
     public EditStudentDescriptorBuilder() {
-        descriptor = new EditCommand.EditStudentDescriptor();
+        descriptor = new EditStudentDescriptor();
     }
 
-    public EditStudentDescriptorBuilder(EditCommand.EditStudentDescriptor descriptor) {
-        this.descriptor = new EditCommand.EditStudentDescriptor(descriptor);
+    public EditStudentDescriptorBuilder(EditStudentDescriptor descriptor) {
+        this.descriptor = new EditStudentDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditStudentDescriptor} with fields containing {@code student}'s details
      */
     public EditStudentDescriptorBuilder(Student student) {
-        descriptor = new EditCommand.EditStudentDescriptor();
+        descriptor = new EditStudentDescriptor();
         descriptor.setName(student.getName());
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
@@ -122,7 +122,7 @@ public class EditStudentDescriptorBuilder {
         return this;
     }
 
-    public EditCommand.EditStudentDescriptor build() {
+    public EditStudentDescriptor build() {
         return descriptor;
     }
 }

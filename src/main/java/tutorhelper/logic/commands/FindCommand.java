@@ -1,8 +1,8 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.NameContainsKeywordsPredicate;
@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredStudentList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
+                String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
     }
 
     @Override

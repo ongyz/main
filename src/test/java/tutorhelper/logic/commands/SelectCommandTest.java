@@ -3,6 +3,7 @@ package tutorhelper.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -14,7 +15,6 @@ import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 import org.junit.Rule;
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.commons.events.ui.JumpToListRequestEvent;
 import tutorhelper.logic.CommandHistory;
@@ -47,7 +47,7 @@ public class SelectCommandTest {
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class SelectCommandTest {
         // ensures that outOfBoundIndex is still in bounds of TutorHelper list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getTutorHelper().getStudentList().size());
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test

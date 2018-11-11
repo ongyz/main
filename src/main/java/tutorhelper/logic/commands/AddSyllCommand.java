@@ -1,8 +1,11 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static tutorhelper.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
@@ -18,7 +20,6 @@ import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.model.subject.Syllabus;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Adds a syllabus topic to a subject for a student in the TutorHelper.
@@ -58,17 +59,17 @@ public class AddSyllCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
 
         if (subjectIndex.getZeroBased() >= studentTarget.getSubjects().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+            throw new CommandException(MESSAGE_INVALID_SUBJECT_INDEX);
         }
 
         Set<Subject> addedSubjectContent = addSubjectContentTo(studentTarget, subjectIndex, syllabuses);
-        Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, addedSubjectContent);
+        Student studentSubjUpdated = createStudentWithNewSubjects(studentTarget, addedSubjectContent);
 
         model.updateStudentInternalField(studentTarget, studentSubjUpdated);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

@@ -1,5 +1,6 @@
 package tutorhelper.logic.parser;
 
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -7,7 +8,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.FindCommand;
 import tutorhelper.model.student.NameContainsKeywordsPredicate;
 
@@ -17,7 +17,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE));
     }
 

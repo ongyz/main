@@ -1,5 +1,7 @@
 package tutorhelper.storage;
 
+import static tutorhelper.model.subject.SubjectType.convertStringToSubjectName;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -66,7 +68,7 @@ public class XmlAdaptedSubject {
         for (XmlAdaptedSyllabus syllabus : subjectContent) {
             modelSyllabus.add(syllabus.toModelType());
         }
-        return new Subject(SubjectType.convertStringToSubjectName(subjectName), modelSyllabus, completionRate);
+        return new Subject(convertStringToSubjectName(subjectName), modelSyllabus, completionRate);
     }
 
     @Override

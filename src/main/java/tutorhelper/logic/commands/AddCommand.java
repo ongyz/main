@@ -1,10 +1,16 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_DAY_AND_TIME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_NAME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_PHONE;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_TAG;
 
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
-import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 
@@ -18,21 +24,21 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a student to the TutorHelper.\n"
             + "Parameters: "
-            + CliSyntax.PREFIX_NAME + "NAME "
-            + CliSyntax.PREFIX_PHONE + "PHONE "
-            + CliSyntax.PREFIX_EMAIL + "EMAIL "
-            + CliSyntax.PREFIX_ADDRESS + "ADDRESS "
-            + CliSyntax.PREFIX_SUBJECT + "SUBJECT "
-            + CliSyntax.PREFIX_DAY_AND_TIME + "TUITION TIMING "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_SUBJECT + "SUBJECT "
+            + PREFIX_DAY_AND_TIME + "TUITION TIMING "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_NAME + "John Doe "
-            + CliSyntax.PREFIX_PHONE + "98765432 "
-            + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
-            + CliSyntax.PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + CliSyntax.PREFIX_SUBJECT + "Mathematics "
-            + CliSyntax.PREFIX_DAY_AND_TIME + "Monday 6:00pm "
-            + CliSyntax.PREFIX_TAG + "friends";
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_SUBJECT + "Mathematics "
+            + PREFIX_DAY_AND_TIME + "Monday 6:00pm "
+            + PREFIX_TAG + "friends";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the TutorHelper";

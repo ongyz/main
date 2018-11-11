@@ -1,11 +1,11 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 
 import java.util.List;
 
 import tutorhelper.commons.core.EventsCenter;
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.commons.events.ui.JumpToListRequestEvent;
 import tutorhelper.logic.CommandHistory;
@@ -40,7 +40,7 @@ public class SelectCommand extends Command {
         List<Student> filteredStudentList = model.getFilteredStudentList();
 
         if (targetIndex.getZeroBased() >= filteredStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));

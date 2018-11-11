@@ -1,5 +1,6 @@
 package tutorhelper.logic.parser;
 
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static tutorhelper.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -32,7 +33,6 @@ import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.EditCommand;
 import tutorhelper.logic.commands.EditCommand.EditStudentDescriptor;
@@ -48,7 +48,7 @@ public class EditCommandParserTest {
     private static final String TAG_EMPTY = " " + CliSyntax.PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
 

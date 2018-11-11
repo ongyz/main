@@ -1,5 +1,6 @@
 package tutorhelper.logic.parser;
 
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -13,7 +14,6 @@ import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.MarkCommand;
 
 public class MarkCommandParserTest {
@@ -32,12 +32,12 @@ public class MarkCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "1",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "1 1",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "a 1",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
     }
 }

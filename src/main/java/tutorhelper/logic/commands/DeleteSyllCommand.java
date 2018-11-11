@@ -1,21 +1,23 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SYLLABUS_INDEX;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Removes a syllabus topic from a specified subject under the selected student.
@@ -50,13 +52,13 @@ public class DeleteSyllCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
 
         Set<Subject> removedSubjectContent = removeSubjectContentFrom(studentTarget);
-        Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, removedSubjectContent);
+        Student studentSubjUpdated = createStudentWithNewSubjects(studentTarget, removedSubjectContent);
 
         model.updateStudentInternalField(studentTarget, studentSubjUpdated);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -74,11 +76,11 @@ public class DeleteSyllCommand extends Command {
         List<Subject> subjects = studentTarget.getSubjects().stream().collect(Collectors.toList());
 
         if (hasExceededNumberOfSubjects(subjects)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+            throw new CommandException(MESSAGE_INVALID_SUBJECT_INDEX);
         }
 
         if (hasExceededNumberOfSyllabus(subjects.get(subjectIndex.getZeroBased()))) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
+            throw new CommandException(MESSAGE_INVALID_SYLLABUS_INDEX);
         }
 
         Subject updatedSubject = subjects.get(subjectIndex.getZeroBased()).remove(syllabusIndex);

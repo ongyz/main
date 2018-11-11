@@ -3,9 +3,13 @@ package tutorhelper.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SYLLABUS_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
@@ -19,7 +23,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
@@ -28,7 +31,6 @@ import tutorhelper.model.ModelManager;
 import tutorhelper.model.UserPrefs;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -64,7 +66,7 @@ public class DeleteSyllCommandTest {
                 INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         assertCommandFailure(deleteSyllCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -74,7 +76,7 @@ public class DeleteSyllCommandTest {
         DeleteSyllCommand deleteSyllCommand = new DeleteSyllCommand(
                 INDEX_FIRST_STUDENT, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(deleteSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(deleteSyllCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -85,7 +87,7 @@ public class DeleteSyllCommandTest {
         DeleteSyllCommand deleteSyllCommand = new DeleteSyllCommand(
                 INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(deleteSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
+        assertCommandFailure(deleteSyllCommand, model, commandHistory, MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -115,7 +117,7 @@ public class DeleteSyllCommandTest {
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         assertCommandFailure(deleteSyllCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
 
@@ -126,7 +128,7 @@ public class DeleteSyllCommandTest {
         DeleteSyllCommand deleteSyllCommand = new DeleteSyllCommand(
                 INDEX_FIRST_STUDENT, outOfBoundIndex, INDEX_FIRST_SYLLABUS);
 
-        assertCommandFailure(deleteSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(deleteSyllCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -136,7 +138,7 @@ public class DeleteSyllCommandTest {
                 .get(INDEX_FIRST_SUBJECT.getZeroBased()).getSubjectContent().size() + 1);
         DeleteSyllCommand deleteSyllCommand = new DeleteSyllCommand(
                 INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, outOfBoundIndex);
-        assertCommandFailure(deleteSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SYLLABUS_INDEX);
+        assertCommandFailure(deleteSyllCommand, model, commandHistory, MESSAGE_INVALID_SYLLABUS_INDEX);
     }
 
     @Test
@@ -170,7 +172,7 @@ public class DeleteSyllCommandTest {
 
         // execution failed -> TutorHelper state not added into model
         assertCommandFailure(deleteSyllCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -214,7 +216,7 @@ public class DeleteSyllCommandTest {
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
 
-        return SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        return createStudentWithNewSubjects(studentTarget, newSubjects);
     }
 
 }

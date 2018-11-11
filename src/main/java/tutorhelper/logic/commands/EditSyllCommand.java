@@ -1,22 +1,23 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SYLLABUS;
+import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
-import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.model.subject.Syllabus;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Edits a syllabus topic of a subject of a student.
@@ -30,8 +31,8 @@ public class EditSyllCommand extends Command {
             + "STUDENT_INDEX (must be a positive integer) "
             + "SUBJECT_INDEX (must be a positive integer) "
             + "SYLLABUS_INDEX (must be a positive integer) "
-            + CliSyntax.PREFIX_SYLLABUS + "SYLLABUS\n"
-            + "Example: " + COMMAND_WORD + " 1 1 1 " + CliSyntax.PREFIX_SYLLABUS + "Integration";
+            + PREFIX_SYLLABUS + "SYLLABUS\n"
+            + "Example: " + COMMAND_WORD + " 1 1 1 " + PREFIX_SYLLABUS + "Integration";
 
     public static final String MESSAGE_EDITSYLL_SUCCESS = "Edited syllabus to Student: %1$s";
     public static final String MESSAGE_SUBJECT_NOT_FOUND = "Subject index not found in Student";
@@ -55,7 +56,7 @@ public class EditSyllCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
@@ -76,10 +77,10 @@ public class EditSyllCommand extends Command {
         subjects.set(subjectIndex.getZeroBased(), selectedSubject.edit(syllabusEdit, syllabusIndex));
         Set<Subject> editedSubjectContent = new HashSet<>(subjects);
 
-        Student studentSubjUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, editedSubjectContent);
+        Student studentSubjUpdated = createStudentWithNewSubjects(studentTarget, editedSubjectContent);
 
         model.updateStudentInternalField(studentTarget, studentSubjUpdated);
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_EDITSYLL_SUCCESS, studentSubjUpdated));
     }

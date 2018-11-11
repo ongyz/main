@@ -1,5 +1,6 @@
 package tutorhelper.logic.parser;
 
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static tutorhelper.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -35,7 +36,6 @@ import static tutorhelper.testutil.TypicalStudents.BOB;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.AddCommand;
 import tutorhelper.model.student.Address;
 import tutorhelper.model.student.Email;
@@ -75,7 +75,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -135,7 +135,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SUBJECT_DESC_BOB + TUITION_TIMING_DESC_BOB + TAG_DESC_WEAK + TAG_DESC_EXAM,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         // multiple names - invalid name
         assertParseFailure(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

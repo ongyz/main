@@ -1,21 +1,22 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
-import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Adds a subject for a student in the TutorHelper.
@@ -28,10 +29,10 @@ public class AddSubCommand extends Command {
             + ": Adds a subject for a student in the TutorHelper.\n"
             + "Parameters: "
             + "STUDENT_INDEX (must be a positive integer) "
-            + CliSyntax.PREFIX_SUBJECT + "SUBJECT\n"
+            + PREFIX_SUBJECT + "SUBJECT\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
-            + CliSyntax.PREFIX_SUBJECT + "Physics ";
+            + PREFIX_SUBJECT + "Physics ";
 
     public static final String MESSAGE_ADDSUB_SUCCESS = "Added subject to student: %1$s";
     public static final String MESSAGE_DUPLICATE_SUBJECT = "Subject is already taken by student: %1$s";
@@ -55,15 +56,15 @@ public class AddSubCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
         Set<Subject> newSubjects = addSubjectTo(studentTarget, subject);
-        Student updatedStudent = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        Student updatedStudent = createStudentWithNewSubjects(studentTarget, newSubjects);
 
         model.updateStudent(studentTarget, updatedStudent);
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_ADDSUB_SUCCESS, studentTarget));
     }

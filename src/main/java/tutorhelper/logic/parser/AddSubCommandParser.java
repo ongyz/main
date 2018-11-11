@@ -1,10 +1,10 @@
 package tutorhelper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.List;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.AddSubCommand;
 import tutorhelper.logic.parser.exceptions.ParseException;
@@ -31,18 +31,18 @@ public class AddSubCommandParser implements Parser<AddSubCommand> {
             indexList = ParserUtil.parseIndexes(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE), pe);
         }
 
         if (indexList.size() != AddSubCommand.AddSubFormatChecker.NUMBER_OF_ARGS) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE));
         }
 
         studentIndex = getStudentIndex(indexList);
 
         if (!argMultimap.getValue(CliSyntax.PREFIX_SUBJECT).isPresent()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddSubCommand.MESSAGE_USAGE));
         }
 

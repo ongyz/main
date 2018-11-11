@@ -1,5 +1,7 @@
 package tutorhelper.storage;
 
+import static tutorhelper.commons.util.XmlUtil.getDataFromFile;
+
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
@@ -30,7 +32,7 @@ public class XmlFileStorage {
     public static XmlSerializableTutorHelper loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableTutorHelper.class);
+            return getDataFromFile(file, XmlSerializableTutorHelper.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

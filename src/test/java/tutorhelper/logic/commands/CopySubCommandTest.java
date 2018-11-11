@@ -3,9 +3,14 @@ package tutorhelper.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
+import static tutorhelper.model.util.SubjectsUtil.findSubjectIndex;
+import static tutorhelper.model.util.SubjectsUtil.hasSubject;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
@@ -20,7 +25,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
@@ -28,7 +32,6 @@ import tutorhelper.model.ModelManager;
 import tutorhelper.model.UserPrefs;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -63,12 +66,12 @@ public class CopySubCommandTest {
         CopySubCommand copySubCommand = new CopySubCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_SECOND_STUDENT);
 
-        assertCommandFailure(copySubCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(copySubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         copySubCommand = new CopySubCommand(
                 INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, outOfBoundIndex);
 
-        assertCommandFailure(copySubCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(copySubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -87,7 +90,7 @@ public class CopySubCommandTest {
         CopySubCommand copySubCommand = new CopySubCommand(
                 INDEX_FIRST_STUDENT, outOfBoundIndex, INDEX_SECOND_STUDENT);
 
-        assertCommandFailure(copySubCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(copySubCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -100,7 +103,7 @@ public class CopySubCommandTest {
         CopySubCommand copySubCommand = new CopySubCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_STUDENT);
 
-        assertCommandFailure(copySubCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(copySubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -190,7 +193,7 @@ public class CopySubCommandTest {
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, INDEX_SECOND_STUDENT);
 
         // execution failed -> TutorHelper state not added into model
-        assertCommandFailure(copySubCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(copySubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -232,8 +235,8 @@ public class CopySubCommandTest {
 
         Set<Subject> updatedSubjects;
 
-        if (SubjectsUtil.hasSubject(studentTarget, selectedSubject.getSubjectType())) {
-            Index index = SubjectsUtil.findSubjectIndex(studentTarget, selectedSubject.getSubjectType()).get();
+        if (hasSubject(studentTarget, selectedSubject.getSubjectType())) {
+            Index index = findSubjectIndex(studentTarget, selectedSubject.getSubjectType()).get();
 
             Subject updatedSubject = targetSubjects.get(index.getZeroBased())
                     .append(selectedSubject.getSubjectContent());
@@ -244,7 +247,7 @@ public class CopySubCommandTest {
             updatedSubjects = new HashSet<>(targetSubjects);
         }
 
-        return SubjectsUtil.createStudentWithNewSubjects(studentTarget, updatedSubjects);
+        return createStudentWithNewSubjects(studentTarget, updatedSubjects);
     }
 
 }

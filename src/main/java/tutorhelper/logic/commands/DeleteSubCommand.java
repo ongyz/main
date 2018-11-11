@@ -1,20 +1,22 @@
 package tutorhelper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
+import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Deletes a subject for a student in the TutorHelper.
@@ -53,15 +55,15 @@ public class DeleteSubCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentTarget = lastShownList.get(studentIndex.getZeroBased());
         Set<Subject> newSubjects = removeSubjectFrom(studentTarget);
-        Student updatedStudent = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        Student updatedStudent = createStudentWithNewSubjects(studentTarget, newSubjects);
 
         model.updateStudent(studentTarget, updatedStudent);
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitTutorHelper();
         return new CommandResult(String.format(MESSAGE_DELETESUB_SUCCESS, studentTarget));
     }
@@ -76,7 +78,7 @@ public class DeleteSubCommand extends Command {
         List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
 
         if (isSubjectIndexOutOfBounds(subjects)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+            throw new CommandException(MESSAGE_INVALID_SUBJECT_INDEX);
         }
 
         if (hasOneSubject(subjects)) {

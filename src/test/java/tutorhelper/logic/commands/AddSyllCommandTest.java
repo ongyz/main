@@ -3,10 +3,13 @@ package tutorhelper.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
@@ -22,7 +25,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
@@ -31,7 +33,6 @@ import tutorhelper.model.UserPrefs;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.model.subject.Syllabus;
-import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -85,7 +86,7 @@ public class AddSyllCommandTest {
         AddSyllCommand addSyllCommand = new AddSyllCommand(outOfBoundIndex,
                 INDEX_FIRST_SUBJECT, syllabusTest);
 
-        assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(addSyllCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -97,7 +98,7 @@ public class AddSyllCommandTest {
         AddSyllCommand addSyllCommand = new AddSyllCommand(
                 INDEX_FIRST_STUDENT, outOfBoundIndex, syllabusTest);
 
-        assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(addSyllCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -130,7 +131,7 @@ public class AddSyllCommandTest {
         AddSyllCommand addSyllCommand = new AddSyllCommand(
                 outOfBoundIndex, INDEX_FIRST_SUBJECT, syllabusTest);
 
-        assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(addSyllCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -142,7 +143,7 @@ public class AddSyllCommandTest {
         AddSyllCommand addSyllCommand = new AddSyllCommand(
                 INDEX_FIRST_STUDENT, outOfBoundIndex, syllabusTest);
 
-        assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(addSyllCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
@@ -209,7 +210,7 @@ public class AddSyllCommandTest {
         AddSyllCommand addSyllCommand = new AddSyllCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT, syllabusTest);
 
         // execution failed -> TutorHelper state not added into model
-        assertCommandFailure(addSyllCommand, model, commandHistory, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(addSyllCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // single TutorHelper state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -257,7 +258,7 @@ public class AddSyllCommandTest {
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
 
-        return SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        return createStudentWithNewSubjects(studentTarget, newSubjects);
     }
 
 }
