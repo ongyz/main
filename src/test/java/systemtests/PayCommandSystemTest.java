@@ -1,24 +1,24 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorhelper.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.PayCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.student.Payment;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.commands.PayCommand;
+import tutorhelper.logic.commands.RedoCommand;
+import tutorhelper.logic.commands.UndoCommand;
+import tutorhelper.model.Model;
+import tutorhelper.model.student.Payment;
+import tutorhelper.model.student.Student;
+import tutorhelper.testutil.StudentBuilder;
 
 
 public class PayCommandSystemTest extends TutorHelperSystemTest {

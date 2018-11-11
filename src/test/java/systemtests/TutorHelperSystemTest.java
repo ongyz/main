@@ -4,9 +4,9 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static tutorhelper.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static tutorhelper.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static tutorhelper.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,19 +27,19 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.StudentCardHandle;
 import guitests.guihandles.StudentListPanelHandle;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.Model;
-import seedu.address.model.TutorHelper;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
-import seedu.address.testutil.TypicalStudents;
-import seedu.address.ui.CommandBox;
+import tutorhelper.TestApp;
+import tutorhelper.commons.core.EventsCenter;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.commands.ClearCommand;
+import tutorhelper.logic.commands.FindCommand;
+import tutorhelper.logic.commands.ListCommand;
+import tutorhelper.logic.commands.SelectCommand;
+import tutorhelper.model.Model;
+import tutorhelper.model.TutorHelper;
+import tutorhelper.model.student.Student;
+import tutorhelper.testutil.StudentBuilder;
+import tutorhelper.testutil.TypicalStudents;
+import tutorhelper.ui.CommandBox;
 
 /**
  * A system test class for TutorHelper, which provides access to handles of GUI components and helper methods
