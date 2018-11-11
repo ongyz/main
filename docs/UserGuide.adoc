@@ -355,13 +355,12 @@ Displays earnings made for January 2018.
 === Add Subject : `addsub`
 
 Adds a new subject to a specified student. Refer to valid subject inputs under 3. Feature. +
-Format: `addsub STUDENT_INDEX s/SUBJECT, [MORE SUBJECTS...]`
+Format: `addsub STUDENT_INDEX s/SUBJECT`
 
 [NOTE]
 ====
 * Adding a subject that already exists for the student will throw an error.
-* Adding subject of the same type in a single input will throw an error. +
-e.g `addsub 1 1 s/Chemistry s/Chemistry` is not permitted.
+* Only one subject can be added to a student per command.
 ====
 
 ****
@@ -573,7 +572,7 @@ e.g.`select 2`
 e.g. `paid 1 200 08 2018`
 * *Display Earnings* : `earnings MONTH YEAR` +
 e.g. `earnings 01 2018`
-* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT, [MORE SUBJECTS...]` +
+* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT` +
 e.g. `addsub 1 s/Physics`
 * *Remove Subject* : `deletesub STUDENT_INDEX SUBJECT_INDEX` +
 e.g. `deletesub 1 2`
