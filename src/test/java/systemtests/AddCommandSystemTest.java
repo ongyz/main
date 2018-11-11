@@ -19,8 +19,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_EXAM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WEAK_EXAM;
 import static seedu.address.logic.commands.CommandTestUtil.TUITION_TIMING_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TUITION_TIMING_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -67,7 +67,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
         Student toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
                 + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + SUBJECT_DESC_AMY + "    "
-                + TUITION_TIMING_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + TUITION_TIMING_DESC_AMY + "   " + TAG_DESC_EXAM + " ";
         assertCommandSuccess(command, toAdd);
 
 
@@ -85,7 +85,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
         /* Case: add a student with all fields same as another student in the TutorHelper except name -> added */
         toAdd = new StudentBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + SUBJECT_DESC_AMY + TUITION_TIMING_DESC_AMY + TAG_DESC_FRIEND;
+                + SUBJECT_DESC_AMY + TUITION_TIMING_DESC_AMY + TAG_DESC_EXAM;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a student with all fields same as another student in the TutorHelper except phone and email
@@ -102,7 +102,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
         /* Case: add a student with tags, command with parameters in random order -> added */
         toAdd = BOB;
         command = AddCommand.COMMAND_WORD + PHONE_DESC_BOB + ADDRESS_DESC_BOB + TUITION_TIMING_DESC_BOB
-                + SUBJECT_DESC_BOB + NAME_DESC_BOB + TAG_DESC_HUSBAND_FRIEND + EMAIL_DESC_BOB;
+                + SUBJECT_DESC_BOB + NAME_DESC_BOB + TAG_DESC_WEAK_EXAM + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a student, missing tags -> added */

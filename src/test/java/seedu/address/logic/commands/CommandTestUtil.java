@@ -92,9 +92,9 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
     public static final String TUITION_TIMING_DESC_AMY = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_AMY;
     public static final String TUITION_TIMING_DESC_BOB = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_EXAM;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_WEAK;
-    public static final String TAG_DESC_HUSBAND_FRIEND = " " + PREFIX_TAG + VALID_TAG_WEAK + ", " + VALID_TAG_EXAM;
+    public static final String TAG_DESC_EXAM = " " + PREFIX_TAG + VALID_TAG_EXAM;
+    public static final String TAG_DESC_WEAK = " " + PREFIX_TAG + VALID_TAG_WEAK;
+    public static final String TAG_DESC_WEAK_EXAM = " " + PREFIX_TAG + VALID_TAG_WEAK + ", " + VALID_TAG_EXAM;
     public static final String SYLLABUS_DESC_DIFFERENTIATION = PREFIX_SYLLABUS + VALID_SYLLABUS_DIFFERENTIATION;
     public static final String SYLLABUS_DESC_INTEGRATION = PREFIX_SYLLABUS + DUPLICATE_SYLLABUS;
 
