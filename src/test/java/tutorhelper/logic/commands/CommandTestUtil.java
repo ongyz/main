@@ -18,7 +18,6 @@ import java.util.List;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
-import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.TutorHelper;
 import tutorhelper.model.student.NameContainsKeywordsPredicate;
