@@ -48,7 +48,7 @@ public class StringUtil {
      * avoid one letter match.
      *   Ignores case, only a partial word match is required.
      *   <br>examples:<pre>
-     *       containsSubWordIgnoreCase("ABcDef", "cd") == false
+     *       containsSubWordIgnoreCase("ABcDef", "cde") == false // does not start from beginning
      *       containsSubWordIgnoreCase("ABcdEf", "abc") == true
      *       containsSubWordIgnoreCase("Abd", "AB") == false // length less than three
      *       </pre>

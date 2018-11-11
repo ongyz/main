@@ -35,6 +35,7 @@ public class SubjectTypeTest {
         // unregistered subject names
         assertFalse(SubjectType.isValidSubjectName("Animal"));
         assertFalse(SubjectType.isValidSubjectName("-"));
+        assertFalse(SubjectType.isValidSubjectName("ma"));
 
         assertTrue(SubjectType.isValidSubjectName("Math"));
         assertTrue(SubjectType.isValidSubjectName("Mathematics"));

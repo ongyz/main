@@ -14,7 +14,7 @@ public class Syllabus {
 
     /*
      * The first character of the syllabus must not be a whitespace, otherwise " " (a blank string)
-     * becomes a valid input. Syllabus should not be longer than 15 characters.
+     * becomes a valid input. Syllabus should not be longer than 30 characters.
      */
     public static final String SYLLABUS_VALIDATION_REGEX = "[^\\s].*";
     public static final int SYLLABUS_VALIDATION_MAX_LENGTH = 30;
