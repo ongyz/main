@@ -41,11 +41,10 @@ It is a Java sample application intended for Tutors who would like to organise t
 ** Documentation:
 *** Added section for payment and earnings in the User Guide
 *** Added section for payment and earnings in the Developer Guide
+*** Added section for Instructions for manual testing in Developer Guide
 ** Community:
 *** Reviewed other PRs
 *** Reported bugs and suggestions for other teams in the class
-** Tools:
-*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
 
 == Contributions to the User Guide
 

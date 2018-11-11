@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.student.Student;
+import tutorhelper.model.student.Student;
 
 /**
  * Provides a handle for {@code StudentListPanel} containing the list of {@code StudentCard}.

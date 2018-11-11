@@ -1,16 +1,16 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.DeleteSubCommand.MESSAGE_DELETESUB_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.address.testutil.TestUtil.getStudent;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
-import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorhelper.logic.commands.DeleteSubCommand.MESSAGE_DELETESUB_SUCCESS;
+import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.testutil.TestUtil.getStudent;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,15 +19,15 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteSubCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.student.Student;
-import seedu.address.model.subject.Subject;
-import seedu.address.model.util.SubjectsUtil;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.commands.DeleteSubCommand;
+import tutorhelper.logic.commands.RedoCommand;
+import tutorhelper.logic.commands.UndoCommand;
+import tutorhelper.model.Model;
+import tutorhelper.model.student.Student;
+import tutorhelper.model.subject.Subject;
+import tutorhelper.model.util.SubjectsUtil;
 
 public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
 
