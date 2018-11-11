@@ -123,8 +123,8 @@ public class ArgumentTokenizerTest {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
         assertPreamblePresent(argMultimap, "SomePreambleString");
         assertArgumentPresent(argMultimap, pSlash, "pSlash subjectName -t");
-        assertArgumentPresent(argMultimap, dashT, "dashT-Value ");
-        assertArgumentPresent(argMultimap, hatQ, "", "^Q -t another dashT subjectName ");
+        assertArgumentPresent(argMultimap, dashT, "dashT-Value");
+        assertArgumentPresent(argMultimap, hatQ, "^Q -t another dashT subjectName");
     }
 
     @Test

@@ -53,7 +53,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getValue(PREFIX_SUBJECT).get());
             TuitionTiming tuitionTiming = ParserUtil.parseTuitionTiming(
                     argMultimap.getValue(PREFIX_DAY_AND_TIME).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
+            Set<Tag> tagList = new HashSet<>() ;
+            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+                tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
+            }
             Student student = new Student(name, phone, email, address, subjects, tuitionTiming, tagList);
             return new AddCommand(student);
 
