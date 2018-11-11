@@ -13,8 +13,8 @@ public class EarningsCommandParser implements Parser<EarningsCommand> {
     private int month;
     private int year;
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EarningsCommand
+     * and returns an EarningsCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EarningsCommand parse(String args) throws ParseException {

@@ -29,6 +29,7 @@ allow users to easily manage the subjects.
 ** Allow students to have multiple subjects
 ** Converts subjects to enumeration for easier management of code
 ** Data writing into storage of subject and its syllabus
+** Re-implementation of BrowserPanel into its current fxml implementation
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=susterdrifter
 * *Other contributions*:
@@ -46,8 +47,6 @@ allow users to easily manage the subjects.
 ** Community:
 *** Review other PRs
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-** Tools:
-*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
 
 == Contributions to the User Guide
 
