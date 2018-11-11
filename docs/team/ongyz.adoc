@@ -37,13 +37,11 @@ It is a Java sample application intended for Tutors who would like to organise t
 *** Create max capacity of payment entries tracked (Pull request https://github.com[#73])
 *** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#126], https://github.com[#141])
 ** Documentation:
-*** Added section for editsyll and editing using paid in the User Guide
-*** Added section for editsyll and editing using paid in the Developer Guide
+*** Added section for editsyll and editing using paid in the User Guide (Pull requests https://github.com[#156])
+*** Added section for editsyll and editing using paid in the Developer Guide (Pull requests https://github.com[#95], https://github.com[#129])
 ** Community:
 *** Reviewed other PRs
 *** Reported bugs and suggestions for other teams in the class
-** Tools:
-*** Integrated a third party library (TravisCI) to the project (https://github.com[#42])
 
 == Contributions to the User Guide
 
