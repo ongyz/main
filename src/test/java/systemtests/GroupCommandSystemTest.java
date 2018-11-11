@@ -1,15 +1,15 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorhelper.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.GroupCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.tuitiontiming.TuitionTimingContainsKeywordsPredicate;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.logic.commands.GroupCommand;
+import tutorhelper.logic.commands.UndoCommand;
+import tutorhelper.model.Model;
+import tutorhelper.model.tuitiontiming.TuitionTimingContainsKeywordsPredicate;
 
 public class GroupCommandSystemTest extends TutorHelperSystemTest {
     private static final String MESSAGE_INVALID_GROUP_COMMAND_FORMAT =
