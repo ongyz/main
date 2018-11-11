@@ -1,27 +1,27 @@
-package seedu.address.logic.parser;
+package tutorhelper.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
+import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditSyllCommand;
-import seedu.address.model.subject.Syllabus;
+import tutorhelper.logic.commands.EditSyllCommand;
+import tutorhelper.model.subject.Syllabus;
+import tutorhelper.commons.core.Messages;
 
 public class EditSyllCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE);
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE);
 
     private EditSyllCommandParser parser = new EditSyllCommandParser();
 

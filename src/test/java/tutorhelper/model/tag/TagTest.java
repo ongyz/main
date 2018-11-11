@@ -1,8 +1,8 @@
-package seedu.address.model.tag;
+package tutorhelper.model.tag;
 
 import org.junit.Test;
 
-import seedu.address.testutil.Assert;
+import tutorhelper.testutil.Assert;
 
 public class TagTest {
 

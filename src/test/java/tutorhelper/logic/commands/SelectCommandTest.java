@@ -1,27 +1,27 @@
-package seedu.address.logic.commands;
+package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import org.junit.Rule;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.ui.testutil.EventsCollectorRule;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.commons.events.ui.JumpToListRequestEvent;
+import tutorhelper.logic.CommandHistory;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.UserPrefs;
+import tutorhelper.ui.testutil.EventsCollectorRule;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.

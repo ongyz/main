@@ -1,31 +1,29 @@
-package seedu.address.logic.commands;
+package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static tutorhelper.testutil.TypicalStudents.ALICE;
+import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.TutorHelper;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Payment;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.CommandHistory;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.TutorHelper;
+import tutorhelper.model.UserPrefs;
+import tutorhelper.model.student.Payment;
+import tutorhelper.model.student.Student;
+import tutorhelper.testutil.StudentBuilder;
 
 public class PayCommandTest {
 
@@ -87,7 +85,7 @@ public class PayCommandTest {
         model.updateStudentInternalField(model.getFilteredStudentList().get(0), existingStudent);
         expectedModel.commitTutorHelper();
 
-        assertCommandSuccess(editPayCommand, model, commandHistory, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPayCommand, model, commandHistory, expectedMessage, expectedModel);
 
     }
 
@@ -108,7 +106,7 @@ public class PayCommandTest {
         expectedModel.updateStudent(studentOriginal, expectedStudent);
         expectedModel.commitTutorHelper();
 
-        assertCommandSuccess(payCommand, model, commandHistory, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(payCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     /**
@@ -118,7 +116,7 @@ public class PayCommandTest {
     private void assertExecutionFailure(Index index, String expectedMessage) {
         Payment payment = new Payment(index, 200, 9, 2020);
         PayCommand payCommand = new PayCommand(payment);
-        assertCommandFailure(payCommand, model, commandHistory, expectedMessage);
+        CommandTestUtil.assertCommandFailure(payCommand, model, commandHistory, expectedMessage);
     }
 
     @Test

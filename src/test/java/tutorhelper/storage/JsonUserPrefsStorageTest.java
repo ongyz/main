@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package tutorhelper.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.UserPrefs;
+import tutorhelper.commons.exceptions.DataConversionException;
+import tutorhelper.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 

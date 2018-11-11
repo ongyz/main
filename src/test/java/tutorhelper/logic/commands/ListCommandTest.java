@@ -1,17 +1,17 @@
-package seedu.address.logic.commands;
+package tutorhelper.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import tutorhelper.logic.CommandHistory;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code ListCommand}.

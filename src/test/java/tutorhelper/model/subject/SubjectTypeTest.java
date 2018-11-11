@@ -1,11 +1,11 @@
-package seedu.address.model.subject;
+package tutorhelper.model.subject;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
-import seedu.address.testutil.Assert;
+import tutorhelper.testutil.Assert;
 
 public class SubjectTypeTest {
 

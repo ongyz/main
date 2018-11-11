@@ -1,11 +1,11 @@
-package seedu.address.model.tuitiontiming;
+package tutorhelper.model.tuitiontiming;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.testutil.Assert;
+import tutorhelper.testutil.Assert;
 
 public class TuitionTimingTest {
 

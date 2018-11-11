@@ -1,14 +1,14 @@
-package seedu.address.storage;
+package tutorhelper.storage;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.PayCommand;
-import seedu.address.model.student.Payment;
-import seedu.address.testutil.Assert;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.commons.exceptions.IllegalValueException;
+import tutorhelper.logic.commands.PayCommand;
+import tutorhelper.model.student.Payment;
+import tutorhelper.testutil.Assert;
 
 public class XmlAdaptedPayTest {
 

@@ -1,20 +1,20 @@
-package seedu.address.logic.commands;
+package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
-import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
+import static tutorhelper.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_SYLLABUS;
+import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,17 +25,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Student;
-import seedu.address.model.subject.Subject;
-import seedu.address.model.subject.Syllabus;
-import seedu.address.model.util.SubjectsUtil;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.CommandHistory;
+import tutorhelper.logic.commands.exceptions.CommandException;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.UserPrefs;
+import tutorhelper.model.student.Student;
+import tutorhelper.model.subject.Subject;
+import tutorhelper.model.subject.Syllabus;
+import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

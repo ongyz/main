@@ -1,4 +1,4 @@
-package seedu.address.ui.testutil;
+package tutorhelper.ui.testutil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.junit.runners.model.Statement;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
+import tutorhelper.commons.core.EventsCenter;
+import tutorhelper.commons.events.BaseEvent;
 
 /**
  * Sets up an {@code EventsCollector} and tears it down after each test.

@@ -1,9 +1,11 @@
-package seedu.address.logic.parser;
+package tutorhelper.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.parser.exceptions.ParseException;
+import org.junit.Assert;
+
+import tutorhelper.logic.commands.Command;
+import tutorhelper.logic.parser.exceptions.ParseException;
 
 /**
  * Contains helper methods for testing command parsers.
@@ -32,7 +34,7 @@ public class CommandParserTestUtil {
             parser.parse(userInput);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
-            assertEquals(expectedMessage, pe.getMessage());
+            Assert.assertEquals(expectedMessage, pe.getMessage());
         }
     }
 }

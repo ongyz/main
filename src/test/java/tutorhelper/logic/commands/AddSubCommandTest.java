@@ -1,14 +1,13 @@
-package seedu.address.logic.commands;
+package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandFailure;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,15 +18,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Student;
-import seedu.address.model.subject.Subject;
-import seedu.address.model.util.SubjectsUtil;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.CommandHistory;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.UserPrefs;
+import tutorhelper.model.student.Student;
+import tutorhelper.model.subject.Subject;
+import tutorhelper.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -61,7 +60,7 @@ public class AddSubCommandTest {
         Student updatedStudent = simulateAddSubCommand(studentTarget, subjectTest);
 
         expectedModel.updateStudent(studentTarget, updatedStudent);
-        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(addSubCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -133,7 +132,7 @@ public class AddSubCommandTest {
 
         // undo -> reverts TutorHelper back to previous state and filtered student list to show all students
         expectedModel.undoTutorHelper();
-        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first student deleted again

@@ -1,13 +1,13 @@
-package seedu.address.logic.parser;
+package tutorhelper.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.DeleteCommand;
+import tutorhelper.logic.commands.DeleteCommand;
+import tutorhelper.commons.core.Messages;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -27,6 +27,6 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }

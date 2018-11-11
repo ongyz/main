@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package tutorhelper.commons.util;
 
 import static org.junit.Assert.assertNotNull;
 

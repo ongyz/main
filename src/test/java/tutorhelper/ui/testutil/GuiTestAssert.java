@@ -1,4 +1,4 @@
-package seedu.address.ui.testutil;
+package tutorhelper.ui.testutil;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StudentCardHandle;
 import guitests.guihandles.StudentListPanelHandle;
-import seedu.address.model.student.Student;
+import tutorhelper.model.student.Student;
 
 /**
  * A set of assertion methods useful for writing GUI tests.

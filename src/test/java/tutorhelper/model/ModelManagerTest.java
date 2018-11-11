@@ -1,10 +1,9 @@
-package seedu.address.model;
+package tutorhelper.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.BENSON;
+import static tutorhelper.testutil.TypicalStudents.ALICE;
+import static tutorhelper.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -13,8 +12,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.testutil.TutorHelperBuilder;
+import tutorhelper.model.student.NameContainsKeywordsPredicate;
+import tutorhelper.testutil.TutorHelperBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -74,7 +73,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(tutorHelper, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        modelManager.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();

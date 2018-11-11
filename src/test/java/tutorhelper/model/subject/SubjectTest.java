@@ -1,4 +1,4 @@
-package seedu.address.model.subject;
+package tutorhelper.model.subject;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -9,9 +9,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.testutil.Assert;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.commands.exceptions.CommandException;
+import tutorhelper.testutil.Assert;
 
 public class SubjectTest {
 

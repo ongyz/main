@@ -1,14 +1,14 @@
-package seedu.address.logic.commands;
+package tutorhelper.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelperWithPayments;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelperWithPayments;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import tutorhelper.logic.CommandHistory;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.UserPrefs;
 
 public class EarningsCommandTest {
 

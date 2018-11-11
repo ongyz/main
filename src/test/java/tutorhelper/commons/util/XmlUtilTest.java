@@ -1,7 +1,6 @@
-package seedu.address.commons.util;
+package tutorhelper.commons.util;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.storage.XmlAdaptedPay.setUpTestPaymentValid;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -16,16 +15,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.TutorHelper;
-import seedu.address.model.subject.Subject;
-import seedu.address.storage.XmlAdaptedPay;
-import seedu.address.storage.XmlAdaptedStudent;
-import seedu.address.storage.XmlAdaptedSubject;
-import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableTutorHelper;
-import seedu.address.testutil.StudentBuilder;
-import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TutorHelperBuilder;
+import tutorhelper.model.TutorHelper;
+import tutorhelper.model.subject.Subject;
+import tutorhelper.storage.XmlAdaptedPay;
+import tutorhelper.storage.XmlAdaptedStudent;
+import tutorhelper.storage.XmlAdaptedSubject;
+import tutorhelper.storage.XmlAdaptedTag;
+import tutorhelper.storage.XmlSerializableTutorHelper;
+import tutorhelper.testutil.StudentBuilder;
+import tutorhelper.testutil.TestUtil;
+import tutorhelper.testutil.TutorHelperBuilder;
 
 public class XmlUtilTest {
 
@@ -48,7 +47,7 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedSubject> VALID_SUBJECTS =
             Collections.singletonList(new XmlAdaptedSubject(Subject.makeSubject("Mathematics")));
-    private static final List<XmlAdaptedPay> VALID_PAYMENT = setUpTestPaymentValid();
+    private static final List<XmlAdaptedPay> VALID_PAYMENT = XmlAdaptedPay.setUpTestPaymentValid();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

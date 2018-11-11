@@ -1,12 +1,12 @@
-package seedu.address.model.tuitiontiming;
+package tutorhelper.model.tuitiontiming;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
+import tutorhelper.model.student.Student;
+import tutorhelper.testutil.StudentBuilder;
 
 public class TuitionTimingContainsKeywordsPredicateTest {
 

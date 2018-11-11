@@ -1,13 +1,10 @@
-package seedu.address.model.student;
+package tutorhelper.model.student;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEAK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.BOB;
+import static tutorhelper.testutil.TypicalStudents.ALICE;
+import static tutorhelper.testutil.TypicalStudents.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,9 +14,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.student.exceptions.DuplicateStudentException;
-import seedu.address.model.student.exceptions.StudentNotFoundException;
-import seedu.address.testutil.StudentBuilder;
+import tutorhelper.model.student.exceptions.DuplicateStudentException;
+import tutorhelper.model.student.exceptions.StudentNotFoundException;
+import tutorhelper.testutil.StudentBuilder;
+import tutorhelper.logic.commands.CommandTestUtil;
 
 public class UniqueStudentListTest {
     @Rule
@@ -47,8 +45,8 @@ public class UniqueStudentListTest {
     @Test
     public void contains_studentWithSameIdentityFieldsInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withTuitionTiming(VALID_TUITION_TIMING_BOB)
-                .withTags(VALID_TAG_WEAK).build();
+        Student editedAlice = new StudentBuilder(ALICE).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_BOB)
+                .withTags(CommandTestUtil.VALID_TAG_WEAK).build();
         assertTrue(uniqueStudentList.contains(editedAlice));
     }
 
@@ -95,7 +93,7 @@ public class UniqueStudentListTest {
     @Test
     public void setStudent_editedStudentHasSameIdentity_success() {
         uniqueStudentList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_WEAK)
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(CommandTestUtil.VALID_ADDRESS_BOB).withTags(CommandTestUtil.VALID_TAG_WEAK)
                 .build();
         uniqueStudentList.setStudent(ALICE, editedAlice);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();

@@ -1,21 +1,21 @@
-package seedu.address.logic;
+package tutorhelper.logic;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import tutorhelper.logic.commands.CommandResult;
+import tutorhelper.logic.commands.HistoryCommand;
+import tutorhelper.logic.commands.ListCommand;
+import tutorhelper.logic.commands.exceptions.CommandException;
+import tutorhelper.logic.parser.exceptions.ParseException;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.UserPrefs;
+import tutorhelper.commons.core.Messages;
 
 
 public class LogicManagerTest {
@@ -28,14 +28,14 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, Messages.MESSAGE_UNKNOWN_COMMAND);
         assertHistoryCorrect(invalidCommand);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         assertHistoryCorrect(deleteCommand);
     }
 
@@ -101,7 +101,7 @@ public class LogicManagerTest {
             assertEquals(expectedMessage, result.feedbackToUser);
         } catch (CommandException | ParseException e) {
             assertEquals(expectedException, e.getClass());
-            assertEquals(expectedMessage, e.getMessage());
+            Assert.assertEquals(expectedMessage, e.getMessage());
         }
 
         assertEquals(expectedModel, model);

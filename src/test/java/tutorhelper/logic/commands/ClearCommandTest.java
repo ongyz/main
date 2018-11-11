@@ -1,15 +1,15 @@
-package seedu.address.logic.commands;
+package tutorhelper.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.getTypicalTutorHelper;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorhelper.testutil.TypicalStudents.getTypicalTutorHelper;
 
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.TutorHelper;
-import seedu.address.model.UserPrefs;
+import tutorhelper.logic.CommandHistory;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
+import tutorhelper.model.TutorHelper;
+import tutorhelper.model.UserPrefs;
 
 public class ClearCommandTest {
 
