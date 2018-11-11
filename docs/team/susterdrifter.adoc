@@ -25,11 +25,11 @@ allow users to easily manage the subjects.
 
 * *Minor enhancement*:
 
-** Add syllabus into TutorHelper
-** Allow students to have multiple subjects
-** Converts subjects to enumeration for easier management of code
-** Data writing into storage of subject and its syllabus
-** Re-implementation of BrowserPanel into its current fxml implementation
+** Add syllabus into TutorHelper (Pull request https://github.com[#7])
+** Allow students to have multiple subjects  (Pull request https://github.com[#35])
+** Converts subjects to enumeration for easier management of code (Pull request https://github.com[#65])
+** Data writing into storage of subject and its syllabus (Pull request https://github.com[#46])
+** Re-implementation of BrowserPanel into its current fxml implementation (Pull request https://github.com[#226])
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=susterdrifter
 * *Other contributions*:
@@ -37,16 +37,16 @@ allow users to easily manage the subjects.
 ** Project management:
 *** Assign issues to group members and labels on Github
 ** Enhancements to existing features:
-*** Allow students to have multiple subjects
-*** Updated the GUI formatting as well as its styling
-*** Wrote additional tests for features added: addsyll, deletesyll, copysub, mark, subjects and syllabus
+*** Allow students to have multiple subjects (Pull request https://github.com[#35])
+*** Updated the GUI formatting as well as its styling (Pull request https://github.com[#192])
+*** Wrote additional tests for features added: addsyll, deletesyll, copysub, mark, subjects and syllabus (Pull requests https://github.com[#151], https://github.com[#142], https://github.com[#128], https://github.com[#120])
 ** Documentation:
-*** Added section about valid inputs for name, email, and subjects in the User Guide
-*** Added sections for addsyll, deletesyll, copsub, mark in the User Guide
-*** Added section for copysub in the Developer Guide
+*** Added section about valid inputs for name, email, and subjects in the User Guide (Pull request https://github.com[#197])
+*** Added sections for addsyll, deletesyll, copysub, mark in the User Guide
+*** Added section for copysub in the Developer Guide (Pull request https://github.com[#91])
 ** Community:
 *** Review other PRs
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for other teams in the class
 
 == Contributions to the User Guide
 
