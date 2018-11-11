@@ -137,7 +137,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withSubjects("Mathematics", "Physics")
                 .withSyllabus(Index.fromOneBased(1), "Calculus II")
                 .withSyllabus(Index.fromOneBased(1), "Statistics I")
-                .withPayments("4 500 8 2018")
+                .withPayments("4 100 8 2018")
                 .withTags("friends")
                 .build();
 
@@ -260,7 +260,11 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
         Student original = expectedModel.getFilteredStudentList().get(toEdit.getZeroBased());
         expectedModel.updateStudent(original, editedStudent);
         String expectedResultMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedStudent);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardChanged();
+        assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
 
