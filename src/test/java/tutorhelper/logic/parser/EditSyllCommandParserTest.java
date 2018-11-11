@@ -14,9 +14,9 @@ import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
 
 import org.junit.Test;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.EditSyllCommand;
 import tutorhelper.model.subject.Syllabus;
-import tutorhelper.commons.core.Messages;
 
 public class EditSyllCommandParserTest {
 

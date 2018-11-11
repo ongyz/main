@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import systemtests.ModelHelper;
 import tutorhelper.commons.core.Config;
 import tutorhelper.commons.core.GuiSettings;
 import tutorhelper.commons.exceptions.DataConversionException;
@@ -19,7 +20,6 @@ import tutorhelper.model.UserPrefs;
 import tutorhelper.storage.UserPrefsStorage;
 import tutorhelper.storage.XmlSerializableTutorHelper;
 import tutorhelper.testutil.TestUtil;
-import systemtests.ModelHelper;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for

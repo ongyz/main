@@ -35,15 +35,15 @@ import static tutorhelper.testutil.TypicalStudents.BOB;
 
 import org.junit.Test;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.AddCommand;
 import tutorhelper.model.student.Address;
-import tutorhelper.model.student.Student;
-import tutorhelper.model.tag.Tag;
-import tutorhelper.testutil.StudentBuilder;
-import tutorhelper.commons.core.Messages;
 import tutorhelper.model.student.Email;
 import tutorhelper.model.student.Name;
 import tutorhelper.model.student.Phone;
+import tutorhelper.model.student.Student;
+import tutorhelper.model.tag.Tag;
+import tutorhelper.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

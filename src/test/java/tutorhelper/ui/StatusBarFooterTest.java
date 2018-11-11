@@ -2,6 +2,7 @@ package tutorhelper.ui;
 
 import static org.junit.Assert.assertEquals;
 import static tutorhelper.testutil.EventsUtil.postNow;
+import static tutorhelper.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +19,6 @@ import org.junit.Test;
 import guitests.guihandles.StatusBarFooterHandle;
 import tutorhelper.commons.events.model.TutorHelperChangedEvent;
 import tutorhelper.model.TutorHelper;
-import tutorhelper.ui.StatusBarFooter;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 
@@ -55,7 +55,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
     @Test
     public void display() {
         // initial state
-        assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), StatusBarFooter.SYNC_STATUS_INITIAL);
+        assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), SYNC_STATUS_INITIAL);
 
         // after TutorHelper is updated
         postNow(EVENT_STUB);

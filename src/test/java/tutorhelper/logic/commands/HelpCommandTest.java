@@ -1,6 +1,7 @@
 package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class HelpCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandTestUtil.assertCommandSuccess(new HelpCommand(), model, commandHistory, HelpCommand.SHOWING_HELP_MESSAGE, expectedModel);
+        assertCommandSuccess(new HelpCommand(), model, commandHistory, HelpCommand.SHOWING_HELP_MESSAGE, expectedModel);
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ShowHelpRequestEvent);
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }

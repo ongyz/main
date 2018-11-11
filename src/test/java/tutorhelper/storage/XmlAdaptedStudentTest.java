@@ -1,6 +1,7 @@
 package tutorhelper.storage;
 
 import static org.junit.Assert.assertEquals;
+import static tutorhelper.storage.XmlAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
 import static tutorhelper.testutil.TypicalStudents.BENSON;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class XmlAdaptedStudentTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         XmlAdaptedStudent student = new XmlAdaptedStudent(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SUBJECTS, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = String.format(XmlAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
@@ -81,7 +82,7 @@ public class XmlAdaptedStudentTest {
     public void toModelType_nullPhone_throwsIllegalValueException() {
         XmlAdaptedStudent student = new XmlAdaptedStudent(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SUBJECTS, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = String.format(XmlAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
@@ -97,7 +98,7 @@ public class XmlAdaptedStudentTest {
     public void toModelType_nullEmail_throwsIllegalValueException() {
         XmlAdaptedStudent student = new XmlAdaptedStudent(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
                 VALID_SUBJECTS, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = String.format(XmlAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
@@ -113,7 +114,7 @@ public class XmlAdaptedStudentTest {
     public void toModelType_nullAddress_throwsIllegalValueException() {
         XmlAdaptedStudent student = new XmlAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
                 VALID_SUBJECTS, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = String.format(XmlAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
@@ -148,7 +149,7 @@ public class XmlAdaptedStudentTest {
     public void toModelType_nullSubject_throwsIllegalValueException() {
         XmlAdaptedStudent student = new XmlAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 null, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
-        String expectedMessage = String.format(XmlAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 

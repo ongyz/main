@@ -7,6 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.CommandResult;
 import tutorhelper.logic.commands.HistoryCommand;
 import tutorhelper.logic.commands.ListCommand;
@@ -15,7 +16,6 @@ import tutorhelper.logic.parser.exceptions.ParseException;
 import tutorhelper.model.Model;
 import tutorhelper.model.ModelManager;
 import tutorhelper.model.UserPrefs;
-import tutorhelper.commons.core.Messages;
 
 
 public class LogicManagerTest {

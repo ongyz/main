@@ -1,7 +1,6 @@
 package tutorhelper.ui;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static tutorhelper.testutil.EventsUtil.postNow;
 import static tutorhelper.testutil.TypicalStudents.ALICE;

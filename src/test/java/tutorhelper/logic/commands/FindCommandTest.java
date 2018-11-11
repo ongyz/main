@@ -14,12 +14,12 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.model.Model;
 import tutorhelper.model.ModelManager;
 import tutorhelper.model.UserPrefs;
 import tutorhelper.model.student.NameContainsKeywordsPredicate;
-import tutorhelper.commons.core.Messages;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

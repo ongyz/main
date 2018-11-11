@@ -1,5 +1,50 @@
 package tutorhelper.testutil;
 
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_ADDRESS_ALCYONE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_ADDRESS_BILLY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_ADDRESS_CABBAGE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_ADDRESS_CATHY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_ADDRESS_DAISY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_EMAIL_ALCYONE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_EMAIL_BILLY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_EMAIL_CABBAGE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_EMAIL_CATHY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_EMAIL_DAISY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_NAME_ALCYONE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_NAME_BILLY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_NAME_CABBAGE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_NAME_CATHY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_NAME_DAISY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_ALCYONE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_BILLY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_CABBAGE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_CATHY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_DAISY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_ALCYONE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_BILLY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_CABBAGE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_CATHY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_DAISY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TAG_EXAM;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TAG_WEAK;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_ALCYONE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BILLY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_CABBAGE;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_CATHY;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_DAISY;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +52,6 @@ import java.util.List;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.model.TutorHelper;
 import tutorhelper.model.student.Student;
-import tutorhelper.logic.commands.CommandTestUtil;
 
 /**
  * A utility class containing a list of {@code Student} objects to be used in tests.
@@ -62,37 +106,37 @@ public class TypicalStudents {
             .withSubjects("Physics").withTuitionTiming("Wednesday 6:00pm").build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}
-    public static final Student AMY = new StudentBuilder().withName(CommandTestUtil.VALID_NAME_AMY).withPhone(CommandTestUtil.VALID_PHONE_AMY)
-            .withEmail(CommandTestUtil.VALID_EMAIL_AMY).withAddress(CommandTestUtil.VALID_ADDRESS_AMY)
-            .withSubjects(CommandTestUtil.VALID_SUBJECT_AMY).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_AMY)
-            .withTags(CommandTestUtil.VALID_TAG_EXAM).build();
-    public static final Student BOB = new StudentBuilder().withName(CommandTestUtil.VALID_NAME_BOB).withPhone(CommandTestUtil.VALID_PHONE_BOB)
-            .withEmail(CommandTestUtil.VALID_EMAIL_BOB).withAddress(CommandTestUtil.VALID_ADDRESS_BOB)
-            .withSubjects(CommandTestUtil.VALID_SUBJECT_BOB).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_BOB)
-            .withTags(CommandTestUtil.VALID_TAG_WEAK, CommandTestUtil.VALID_TAG_EXAM).build();
-    public static final Student CATHY = new StudentBuilder().withName(CommandTestUtil.VALID_NAME_CATHY).withPhone(CommandTestUtil.VALID_PHONE_CATHY)
-            .withEmail(CommandTestUtil.VALID_EMAIL_CATHY).withAddress(CommandTestUtil.VALID_ADDRESS_CATHY)
-            .withSubjects(CommandTestUtil.VALID_SUBJECT_CATHY).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_CATHY)
-            .withTags(CommandTestUtil.VALID_TAG_EXAM).build();
+    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withSubjects(VALID_SUBJECT_AMY).withTuitionTiming(VALID_TUITION_TIMING_AMY)
+            .withTags(VALID_TAG_EXAM).build();
+    public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withSubjects(VALID_SUBJECT_BOB).withTuitionTiming(VALID_TUITION_TIMING_BOB)
+            .withTags(VALID_TAG_WEAK, VALID_TAG_EXAM).build();
+    public static final Student CATHY = new StudentBuilder().withName(VALID_NAME_CATHY).withPhone(VALID_PHONE_CATHY)
+            .withEmail(VALID_EMAIL_CATHY).withAddress(VALID_ADDRESS_CATHY)
+            .withSubjects(VALID_SUBJECT_CATHY).withTuitionTiming(VALID_TUITION_TIMING_CATHY)
+            .withTags(VALID_TAG_EXAM).build();
 
     //For Payments
-    public static final Student ALCYONE = new StudentBuilder().withName(CommandTestUtil.VALID_NAME_ALCYONE)
-            .withPhone(CommandTestUtil.VALID_PHONE_ALCYONE).withEmail(CommandTestUtil.VALID_EMAIL_ALCYONE).withAddress(CommandTestUtil.VALID_ADDRESS_ALCYONE)
-            .withSubjects(CommandTestUtil.VALID_SUBJECT_ALCYONE).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_ALCYONE)
-            .withTags(CommandTestUtil.VALID_TAG_EXAM).withPayments("1 200 2 2018").build();
-    public static final Student BILLY = new StudentBuilder().withName(CommandTestUtil.VALID_NAME_BILLY).withPhone(CommandTestUtil.VALID_PHONE_BILLY)
-            .withEmail(CommandTestUtil.VALID_EMAIL_BILLY).withAddress(CommandTestUtil.VALID_ADDRESS_BILLY)
-            .withSubjects(CommandTestUtil.VALID_SUBJECT_BILLY).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_BILLY)
+    public static final Student ALCYONE = new StudentBuilder().withName(VALID_NAME_ALCYONE)
+            .withPhone(VALID_PHONE_ALCYONE).withEmail(VALID_EMAIL_ALCYONE).withAddress(VALID_ADDRESS_ALCYONE)
+            .withSubjects(VALID_SUBJECT_ALCYONE).withTuitionTiming(VALID_TUITION_TIMING_ALCYONE)
+            .withTags(VALID_TAG_EXAM).withPayments("1 200 2 2018").build();
+    public static final Student BILLY = new StudentBuilder().withName(VALID_NAME_BILLY).withPhone(VALID_PHONE_BILLY)
+            .withEmail(VALID_EMAIL_BILLY).withAddress(VALID_ADDRESS_BILLY)
+            .withSubjects(VALID_SUBJECT_BILLY).withTuitionTiming(VALID_TUITION_TIMING_BILLY)
             .withPayments("2 200 2 2018").build();
-    public static final Student CABBAGE = new StudentBuilder().withName(CommandTestUtil.VALID_NAME_CABBAGE)
-            .withPhone(CommandTestUtil.VALID_PHONE_CABBAGE).withEmail(CommandTestUtil.VALID_EMAIL_CABBAGE).withAddress(CommandTestUtil.VALID_ADDRESS_CABBAGE)
-            .withSubjects(CommandTestUtil.VALID_SUBJECT_CABBAGE).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_CABBAGE)
-            .withTags(CommandTestUtil.VALID_TAG_EXAM)
+    public static final Student CABBAGE = new StudentBuilder().withName(VALID_NAME_CABBAGE)
+            .withPhone(VALID_PHONE_CABBAGE).withEmail(VALID_EMAIL_CABBAGE).withAddress(VALID_ADDRESS_CABBAGE)
+            .withSubjects(VALID_SUBJECT_CABBAGE).withTuitionTiming(VALID_TUITION_TIMING_CABBAGE)
+            .withTags(VALID_TAG_EXAM)
             .withPayments("3 300 3 2018").build();
-    public static final Student DAISY = new StudentBuilder().withName(CommandTestUtil.VALID_NAME_DAISY).withPhone(CommandTestUtil.VALID_PHONE_DAISY)
-            .withEmail(CommandTestUtil.VALID_EMAIL_DAISY).withAddress(CommandTestUtil.VALID_ADDRESS_DAISY)
-            .withSubjects(CommandTestUtil.VALID_SUBJECT_DAISY).withTuitionTiming(CommandTestUtil.VALID_TUITION_TIMING_DAISY)
-            .withTags(CommandTestUtil.VALID_TAG_EXAM)
+    public static final Student DAISY = new StudentBuilder().withName(VALID_NAME_DAISY).withPhone(VALID_PHONE_DAISY)
+            .withEmail(VALID_EMAIL_DAISY).withAddress(VALID_ADDRESS_DAISY)
+            .withSubjects(VALID_SUBJECT_DAISY).withTuitionTiming(VALID_TUITION_TIMING_DAISY)
+            .withTags(VALID_TAG_EXAM)
             .withPayments("4 400 3 2018").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

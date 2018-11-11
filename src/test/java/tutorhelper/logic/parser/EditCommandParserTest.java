@@ -32,15 +32,16 @@ import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
 
 import org.junit.Test;
 
+import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.EditCommand;
+import tutorhelper.logic.commands.EditCommand.EditStudentDescriptor;
 import tutorhelper.model.student.Address;
 import tutorhelper.model.student.Email;
 import tutorhelper.model.student.Name;
 import tutorhelper.model.student.Phone;
 import tutorhelper.model.tag.Tag;
 import tutorhelper.testutil.EditStudentDescriptorBuilder;
-import tutorhelper.commons.core.Messages;
 
 public class EditCommandParserTest {
 
@@ -135,7 +136,7 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_STUDENT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

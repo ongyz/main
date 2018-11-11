@@ -2,6 +2,14 @@ package tutorhelper.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_DAY_AND_TIME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_NAME;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_PHONE;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SYLLABUS;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,12 +18,12 @@ import java.util.List;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.CommandHistory;
 import tutorhelper.logic.commands.exceptions.CommandException;
+import tutorhelper.logic.parser.CliSyntax;
 import tutorhelper.model.Model;
 import tutorhelper.model.TutorHelper;
 import tutorhelper.model.student.NameContainsKeywordsPredicate;
 import tutorhelper.model.student.Student;
 import tutorhelper.testutil.EditStudentDescriptorBuilder;
-import tutorhelper.logic.parser.CliSyntax;
 
 /**
  * Contains helper methods for testing commands.
@@ -73,32 +81,32 @@ public class CommandTestUtil {
     public static final String VALID_SYLLABUS_KINETICS = "Kinetics";
     public static final String VALID_SYLLABUS_ORGANIC = "Organic Chemistry";
 
-    public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String SUBJECT_DESC_AMY = " " + CliSyntax.PREFIX_SUBJECT + VALID_SUBJECT_AMY;
-    public static final String SUBJECT_DESC_BOB = " " + CliSyntax.PREFIX_SUBJECT + VALID_SUBJECT_BOB;
-    public static final String TUITION_TIMING_DESC_AMY = " " + CliSyntax.PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_AMY;
-    public static final String TUITION_TIMING_DESC_BOB = " " + CliSyntax.PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_BOB;
-    public static final String TAG_DESC_EXAM = " " + CliSyntax.PREFIX_TAG + VALID_TAG_EXAM;
-    public static final String TAG_DESC_WEAK = " " + CliSyntax.PREFIX_TAG + VALID_TAG_WEAK;
-    public static final String TAG_DESC_WEAK_EXAM = " " + CliSyntax.PREFIX_TAG + VALID_TAG_WEAK + ", " + VALID_TAG_EXAM;
-    public static final String SYLLABUS_DESC_DIFFERENTIATION = CliSyntax.PREFIX_SYLLABUS + VALID_SYLLABUS_DIFFERENTIATION;
-    public static final String SYLLABUS_DESC_INTEGRATION = CliSyntax.PREFIX_SYLLABUS + DUPLICATE_SYLLABUS;
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
+    public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
+    public static final String TUITION_TIMING_DESC_AMY = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_AMY;
+    public static final String TUITION_TIMING_DESC_BOB = " " + PREFIX_DAY_AND_TIME + VALID_TUITION_TIMING_BOB;
+    public static final String TAG_DESC_EXAM = " " + PREFIX_TAG + VALID_TAG_EXAM;
+    public static final String TAG_DESC_WEAK = " " + PREFIX_TAG + VALID_TAG_WEAK;
+    public static final String TAG_DESC_WEAK_EXAM = " " + PREFIX_TAG + VALID_TAG_WEAK + ", " + VALID_TAG_EXAM;
+    public static final String SYLLABUS_DESC_DIFFERENTIATION = PREFIX_SYLLABUS + VALID_SYLLABUS_DIFFERENTIATION;
+    public static final String SYLLABUS_DESC_INTEGRATION = PREFIX_SYLLABUS + DUPLICATE_SYLLABUS;
 
-    public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_SUBJECT_DESC = " " + CliSyntax.PREFIX_SUBJECT; //empty string not allowed for subjects
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT; //empty string not allowed for subjects
     public static final String INVALID_TUITION_TIMING_DESC = " "
-            + CliSyntax.PREFIX_DAY_AND_TIME + "Monday 12pm"; // time needs to be in standard 12hr timing
-    public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+            + PREFIX_DAY_AND_TIME + "Monday 12pm"; // time needs to be in standard 12hr timing
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

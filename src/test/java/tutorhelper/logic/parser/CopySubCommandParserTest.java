@@ -11,8 +11,8 @@ import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_SUBJECT;
 
 import org.junit.Test;
 
-import tutorhelper.logic.commands.CopySubCommand;
 import tutorhelper.commons.core.Messages;
+import tutorhelper.logic.commands.CopySubCommand;
 
 public class CopySubCommandParserTest {
     private CopySubCommandParser parser = new CopySubCommandParser();

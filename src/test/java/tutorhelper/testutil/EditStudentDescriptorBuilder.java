@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import tutorhelper.logic.commands.EditCommand;
 import tutorhelper.model.student.Address;
 import tutorhelper.model.student.Email;
 import tutorhelper.model.student.Name;
@@ -16,7 +17,6 @@ import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.model.tag.Tag;
 import tutorhelper.model.tuitiontiming.TuitionTiming;
-import tutorhelper.logic.commands.EditCommand;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.

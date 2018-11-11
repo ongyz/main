@@ -13,8 +13,8 @@ import static tutorhelper.testutil.TypicalIndexes.INDEX_THIRD_SYLLABUS;
 
 import org.junit.Test;
 
-import tutorhelper.logic.commands.MarkCommand;
 import tutorhelper.commons.core.Messages;
+import tutorhelper.logic.commands.MarkCommand;
 
 public class MarkCommandParserTest {
     private MarkCommandParser parser = new MarkCommandParser();
