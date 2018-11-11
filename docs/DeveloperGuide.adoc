@@ -587,11 +587,6 @@ If set, the name will be displayed near the top of the page.
 Setting this will add a "View on GitHub" link in the navigation bar.
 |_not set_
 
-|`site-seedu`
-|Define this attribute if the project is an official SE-EDU project.
-This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.
-|_not set_
-
 |===
 
 [[Docs-PerFileDocSettings]]
@@ -612,9 +607,8 @@ Attributes left unset in `.adoc` files will use their *default value*, if any.
 |`site-section`
 |Site section that the document belongs to.
 This will cause the associated item in the navigation bar to be highlighted.
-One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
+One of: `UserGuide`, `DeveloperGuide`, `AboutUs`, `ContactUs`
 
-_{asterisk} Official SE-EDU projects only_
 |_not set_
 
 |`no-site-header`
@@ -635,7 +629,6 @@ These template files are written in a mixture of https://www.ruby-lang.org[Ruby]
 ====
 Modifying the template files in link:{repoURL}/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
 You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
-The SE-EDU team does not provide support for modified template files.
 ====
 
 [[Testing]]
@@ -726,12 +719,12 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Current: +
 
-* `Tutors use reminder applications to keep track of lessons`
-* `Tutors use physical diaries or notepads to keep track of current lesson progress`
+* `Tutors use reminder applications to keep track of lessons.`
+* `Tutors use physical diaries or notepads to keep track of current lesson progress.`
 
 Value Proposition:
 
-* `Tutors have a platform where they can keep track of all their students' details, their progress and the syllabus they intend to cover.`
+* `Tutors have a platform where they can keep track of all their students' details, their progress across different subjects and the syllabus topics they intend to cover.`
 
 [appendix]
 == User Stories
@@ -914,9 +907,6 @@ Value Proposition:
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
-
 [[subject]] Subject::
 A branch of knowledge studied by the student
 
@@ -1043,7 +1033,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect addsub commands to try: 'addsub', 'addsub 2', 'addsub 1 Physics', 'áddsub Physics' +
    Expected: Invalid command format. addsub command message usage is shown.
 
-== Delete subject command
+=== Delete subject command
 . Deleting subject from existing student
 
 .. Prerequisite: Tutorhelper is not empty
@@ -1076,7 +1066,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect copysub commands to try: 'copysub', 'copysub 1', 'copysub 1 1' +
    Expected: Invalid command format. copysub command message usage is shown.
 
-== Add syllabus command
+=== Add syllabus command
 . Adds a new syllabus topic for a specified student and subject
 
 .. Prerequisite: Tutorhelper must not be empty
@@ -1091,7 +1081,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect addsyll commands to try: 'addsyll', 'addsyll 1', 'addsyll 1 1', 'addsyll 1 1 sy/' +
    Expected: Invalid command format. addsyll command message usage is shown.
 
-== Delete syllabus command
+=== Delete syllabus command
 . Deletes a syllabus from an existing student
 
 .. Prerequisite: Tutorhelper must not be empty
@@ -1106,7 +1096,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect deletesyll commands to try: 'deletesyll', 'deletesyll 1', 'deletesyll 1 1' +
    Expected: Invalid command format. deletesyll command message usage is shown.
 
-== Edit syllabus command
+=== Edit syllabus command
 . Edits a syllabus from an existing student
 
 .. Prerequisite: Tutorhelper must not be empty
