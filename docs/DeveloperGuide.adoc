@@ -727,6 +727,7 @@ Value Proposition:
 * `Tutors have a platform where they can keep track of all their students' details, their progress across different subjects and the syllabus topics they intend to cover.`
 
 [appendix]
+// tag::userstories[]
 == User Stories
 
 . As a busy tutor, I want to be able to manage my students' schedules individually, so that I can plan my time properly.
@@ -734,8 +735,10 @@ Value Proposition:
 . As a tutor, I want to know my students' individual progress so that I know what topics I need to cover for the next tuition session.
 . As a tutor, I want to keep track of my students' payments.
 . As a tutor, I want to be able to edit teaching data such as editing my syllabus to keep up with changes in school's curriculum or updating payments made by students.
+// end::userstories[]
 
 [appendix]
+// tag::userstories[]
 == Use Cases
 
 1. Add Student
@@ -891,6 +894,7 @@ Value Proposition:
       2d. System find same syllabus entry already exists in subject.
         2d1. System displays error message telling tutor that syllabus already exist.
         2d2. Repeat step 1.
+// end::userstories[]
 
 [appendix]
 == Non Functional Requirements
