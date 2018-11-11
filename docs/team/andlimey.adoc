@@ -51,9 +51,9 @@ It is a Java sample application intended for Tutors who would like to organise t
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=validinputs]
-
 include::../UserGuide.adoc[tag=group]
+
+include::../UserGuide.adoc[tag=validinputs]
 
 == Contributions to the Developer Guide
 
@@ -61,8 +61,8 @@ include::../UserGuide.adoc[tag=group]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+include::../DeveloperGuide.adoc[tag=group]
+
 include::../DeveloperGuide.adoc[tag=userstories]
 
 include::../DeveloperGuide.adoc[tag=usecases]
-
-include::../DeveloperGuide.adoc[tag=group]
