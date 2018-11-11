@@ -46,15 +46,8 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
          * command with leading spaces and trailing spaces -> success
          */
         Model expectedModel = getModel();
-        String command = "     " + AddSyllCommand.COMMAND_WORD + "      "
-                + INDEX_FIRST_STUDENT.getOneBased() + " "
-                + INDEX_FIRST_SUBJECT.getOneBased() + " "
-                + PREFIX_SYLLABUS + "AddSyllCommandSystemTest       ";
         Syllabus syllabusTest = Syllabus.makeSyllabus("AddSyllCommandSystemTest");
-        Student newStudent = addSyllStudent(
-                expectedModel, INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, syllabusTest);
-        String expectedResultMessage = String.format(MESSAGE_ADDSYLL_SUCCESS, newStudent);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        assertCommandSuccess(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, syllabusTest);
 
         /* Case: append first subject the last student in the list -> success */
         Model modelBeforeAppendLast = getModel();
@@ -62,8 +55,8 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
         assertCommandSuccess(lastStudentIndex, INDEX_FIRST_SUBJECT, syllabusTest);
 
         /* Case: undo command the last student in the list -> first student subject reverted */
-        command = UndoCommand.COMMAND_WORD;
-        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        String command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeAppendLast, expectedResultMessage);
 
         /* Case: redo command the last student in the list -> first student subject restored again */
@@ -166,14 +159,16 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
      */
     private void assertCommandSuccess(Index sourceStudentIndex, Index subjectIndex, Syllabus syllabus) {
         Model expectedModel = getModel();
+        Student studentTarget = expectedModel.getFilteredStudentList().get(sourceStudentIndex.getZeroBased());
         String command = AddSyllCommand.COMMAND_WORD
                 + " " + sourceStudentIndex.getOneBased()
                 + " " + subjectIndex.getOneBased()
                 + " " + PREFIX_SYLLABUS + syllabus.syllabus;
         Student newStudent = addSyllStudent(
                 expectedModel, sourceStudentIndex, subjectIndex, syllabus);
+        expectedModel.updateStudentInternalField(studentTarget, newStudent);
         String expectedResultMessage = String.format(MESSAGE_ADDSYLL_SUCCESS, newStudent);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
     }
 
     /**
@@ -193,6 +188,34 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
+    }
+
+    /**
+     * Executes {@code command} and in addition,<br>
+     * 1. Asserts that the command box displays an empty string.<br>
+     * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
+     * 3. Asserts that the browser url and selected card update accordingly depending on the card at
+     * {@code expectedSelectedCardIndex}.<br>
+     * 4. Asserts that the status bar's sync status changes.<br>
+     * 5. Asserts that the command box has the default style class.<br>
+     * Verifications 1 and 2 are performed by
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see TutorHelperSystemTest#assertSelectedCardChanged(Index)
+     */
+    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
+                                      Index expectedSelectedCardIndex) {
+        executeCommand(command);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertCommandBoxShowsDefaultStyle();
+
+        if (expectedSelectedCardIndex != null) {
+            assertSelectedCardChanged(expectedSelectedCardIndex);
+        } else {
+            assertSelectedCardChanged();
+        }
         assertStatusBarUnchangedExceptSyncStatus();
     }
 

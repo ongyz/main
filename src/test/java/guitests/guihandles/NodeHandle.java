@@ -32,6 +32,7 @@ public abstract class NodeHandle<T extends Node> {
      */
     protected <Q extends Node> Q getChildNode(String query) {
         Optional<Q> node = guiRobot.from(rootNode).lookup(query).tryQuery();
+
         return node.orElseThrow(NodeNotFoundException::new);
     }
 

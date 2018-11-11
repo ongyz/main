@@ -69,7 +69,11 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
         Student studentToEdit = getModel().getFilteredStudentList().get(index.getZeroBased());
         editedStudent = new StudentBuilder(ALICE).replaceSyllabus(indexSubject, indexSyll,
                 DUPLICATE_SYLLABUS).build();
-        assertCommandSuccess(command, index, editedStudent);
+        Model expectedModel = getModel();
+        expectedModel.updateStudent(expectedModel.getFilteredStudentList().get(index.getZeroBased()), editedStudent);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        assertCommandSuccess(command, expectedModel,
+                String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, editedStudent));
 
         /* Case: filtered student list, edit index within bounds of TutorHelper but out of bounds of student list
          * -> rejected
@@ -146,7 +150,12 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
-        assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
+        executeCommand(command);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertCommandBoxShowsDefaultStyle();
+        assertSelectedCardUnchanged();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**
@@ -172,7 +181,7 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
         if (expectedSelectedCardIndex != null) {
             assertSelectedCardChanged(expectedSelectedCardIndex);
         } else {
-            assertSelectedCardUnchanged();
+            assertSelectedCardChanged();
         }
         assertStatusBarUnchangedExceptSyncStatus();
     }
