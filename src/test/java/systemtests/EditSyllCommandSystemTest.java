@@ -72,7 +72,8 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
         Model expectedModel = getModel();
         expectedModel.updateStudent(expectedModel.getFilteredStudentList().get(index.getZeroBased()), editedStudent);
         expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        assertCommandSuccess(command, expectedModel, String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, editedStudent));
+        assertCommandSuccess(command, expectedModel,
+                String.format(EditSyllCommand.MESSAGE_EDITSYLL_SUCCESS, editedStudent));
 
         /* Case: filtered student list, edit index within bounds of TutorHelper but out of bounds of student list
          * -> rejected

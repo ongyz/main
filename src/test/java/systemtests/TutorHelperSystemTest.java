@@ -27,7 +27,6 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.StudentCardHandle;
 import guitests.guihandles.StudentListPanelHandle;
-import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;

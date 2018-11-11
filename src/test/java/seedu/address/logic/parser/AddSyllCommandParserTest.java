@@ -9,13 +9,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SUBJECT;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddSyllCommand;
 import seedu.address.model.subject.Syllabus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddSyllCommandParserTest {
 
