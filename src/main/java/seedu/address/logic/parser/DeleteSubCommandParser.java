@@ -13,7 +13,7 @@ import seedu.address.logic.commands.DeleteSubCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses user arguments and creates a new DeleteSubCommand object.
+ * Parses input arguments and creates a new DeleteSubCommand object.
  */
 public class DeleteSubCommandParser implements Parser<DeleteSubCommand> {
 

@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.subject.Syllabus;
 
 /**
- * Parses input arguments and creates a new AddSyllCommand object
+ * Parses input arguments and creates a new EditSyllCommand object
  */
 public class EditSyllCommandParser implements Parser<EditSyllCommand> {
     /**
