@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents the subject name of Subjects.

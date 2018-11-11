@@ -20,14 +20,13 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TUITION_TIMING_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TUITION_TIMING_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.BOB;
 import static seedu.address.testutil.TypicalStudents.CATHY;
@@ -102,8 +101,8 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: add a student with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + TUITION_TIMING_DESC_BOB + SUBJECT_DESC_BOB + NAME_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+        command = AddCommand.COMMAND_WORD + PHONE_DESC_BOB + ADDRESS_DESC_BOB + TUITION_TIMING_DESC_BOB
+                + SUBJECT_DESC_BOB + NAME_DESC_BOB + TAG_DESC_HUSBAND_FRIEND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a student, missing tags -> added */
@@ -143,7 +142,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different tags -> rejected */
-        command = StudentUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = StudentUtil.getAddCommand(HOON) + "friends";
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: missing name -> rejected */
