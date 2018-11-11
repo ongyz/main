@@ -10,7 +10,7 @@ import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tuitiontiming.TuitionTiming;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the TutorHelper level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class TutorHelper implements ReadOnlyTutorHelper {
