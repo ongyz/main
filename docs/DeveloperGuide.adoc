@@ -272,7 +272,7 @@ Only 12-hr timings are valid.
 The following sequence diagram shows how the group operation works for day parameter and time parameter:
 
 image::GroupSequenceDiagramDay.png[width="650"]
-image::GroupSequenceDiagramTime.png[width="650]
+image::GroupSequenceDiagramTime.png[width="650"]
 // end::group[]
 // tag::payment[]
 
@@ -880,9 +880,9 @@ Value Proposition:
 
 . The system should respond in two seconds.
 . The system should be understandable to a novice in working with computers.
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+. Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 [appendix]
 == Glossary
