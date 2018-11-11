@@ -46,7 +46,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withTuitionTiming("Tuesday 8:00pm")
                 .withSubjects("Mathematics")
                 .withSyllabus(Index.fromOneBased(1), "Integration")
-                .withTags("friends")
+                .withTags("exam")
                 .withPayments("1 400 8 2018")
                 .build();
 
@@ -96,7 +96,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withTuitionTiming("Tuesday 8:00pm")
                 .withSubjects("Mathematics")
                 .withSyllabus(Index.fromOneBased(1), "Integration")
-                .withTags("friends")
+                .withTags("exam")
                 .withPayments("1 500 8 2018")
                 .build();
 
@@ -119,7 +119,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withSyllabus(Index.fromOneBased(1), "Calculus II")
                 .withSyllabus(Index.fromOneBased(1), "Statistics I")
                 .withPayments("4 400 8 2018")
-                .withTags("friends")
+                .withTags("exam")
                 .build();
         assertCommandSuccess(command, toPay, paidStudent);
 
@@ -138,7 +138,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withSyllabus(Index.fromOneBased(1), "Calculus II")
                 .withSyllabus(Index.fromOneBased(1), "Statistics I")
                 .withPayments("4 100 8 2018")
-                .withTags("friends")
+                .withTags("exam")
                 .build();
 
         assertEditPayCommandSuccess(command, index, editedStudent);

@@ -86,7 +86,7 @@ public class SubjectTest {
         // invalid subject
         assertFalse(SubjectType.isValidSubjectName("-")); // one character
         assertFalse(SubjectType.isValidSubjectName("Book")); // non valid Subject name
-        assertFalse(SubjectType.isValidSubjectName("mat")); // less than required length
+        assertFalse(SubjectType.isValidSubjectName("ma")); // less than required length
 
         // valid subject
         assertTrue(SubjectType.isValidSubjectName("Mathematics")); // full name

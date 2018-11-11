@@ -10,7 +10,7 @@
         <subjects subjectName="Mathematics" completionRate="0.0">
             <subjectContent state="false">Integration</subjectContent>
         </subjects>
-        <tagged>friends</tagged>
+        <tagged>exam</tagged>
     </students>
     <students>
         <name>Benson Meier</name>
@@ -23,7 +23,7 @@
             <subjectContent state="false">Organic Chemistry</subjectContent>
         </subjects>
         <tagged>owesMoney</tagged>
-        <tagged>friends</tagged>
+        <tagged>smart</tagged>
         <payments>
             <amount>200</amount>
             <year>2018</year>
@@ -60,7 +60,7 @@
         </subjects>
         <subjects subjectName="Physics" completionRate="0.0">
         </subjects>
-        <tagged>friends</tagged>
+        <tagged>exam</tagged>
     </students>
     <students>
         <name>Elle Meyer</name>
