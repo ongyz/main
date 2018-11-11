@@ -157,7 +157,7 @@ public class AddSyllCommandTest {
     public void execute_invalidSyllabusExceedLength_throwsCommandException() {
         thrown.expect(IllegalArgumentException.class);
         List<Syllabus> syllabusTest = new ArrayList<>();
-        syllabusTest.add(Syllabus.makeSyllabus("Thisisasyllabusthatexceedsfifteencharactersanditshouldfail"));
+        syllabusTest.add(Syllabus.makeSyllabus("Thisisasyllabusthatexceedsthirtycharactersanditshouldfail"));
         new AddSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, syllabusTest);
     }
 

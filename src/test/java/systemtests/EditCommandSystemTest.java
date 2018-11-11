@@ -21,7 +21,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEAK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -64,7 +64,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         Index index = INDEX_FIRST_STUDENT;
         String command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB + " "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + " " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Student editedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_HUSBAND).withSubjects(VALID_SUBJECT_AMY)
+        Student editedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_WEAK).withSubjects(VALID_SUBJECT_AMY)
                 .withSyllabus(INDEX_FIRST_SUBJECT, DUPLICATE_SYLLABUS).build();
         assertCommandSuccess(command, index, editedStudent);
 

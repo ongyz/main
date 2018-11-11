@@ -142,7 +142,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different tags -> rejected */
-        command = StudentUtil.getAddCommand(HOON) + "friends";
+        command = StudentUtil.getAddCommand(HOON) + "exam";
         assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: missing name -> rejected */

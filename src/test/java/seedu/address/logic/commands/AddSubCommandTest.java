@@ -31,7 +31,7 @@ import seedu.address.model.util.SubjectsUtil;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * AddSubCommand.
+ * {@code AddSubCommand}.
  */
 public class AddSubCommandTest {
 
