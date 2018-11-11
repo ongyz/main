@@ -42,15 +42,7 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: mark the first student in the list, command with leading spaces and trailing spaces -> marked */
         Model expectedModel = getModel();
-        String command = "     " + MarkCommand.COMMAND_WORD + "      "
-                + INDEX_FIRST_STUDENT.getOneBased() + " "
-                + INDEX_FIRST_SUBJECT.getOneBased() + " "
-                + INDEX_FIRST_SYLLABUS.getOneBased() + "       ";
-
-        Student markedStudent = markStudent(expectedModel, INDEX_FIRST_STUDENT,
-                INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
-        String expectedResultMessage = String.format(MESSAGE_MARK_SUCCESS, markedStudent);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        assertCommandSuccess(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         /* Case: mark the last student in the list -> marked */
         Model modelBeforeMarkingLast = getModel();
@@ -58,8 +50,8 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
         assertCommandSuccess(lastStudentIndex, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS);
 
         /* Case: undo marking the last student in the list -> last student restored */
-        command = UndoCommand.COMMAND_WORD;
-        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        String command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeMarkingLast, expectedResultMessage);
 
         /* Case: redo marking the last student in the list -> last student marked again */
@@ -157,7 +149,7 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
         String expectedResultMessage = String.format(MESSAGE_MARK_SUCCESS, markedStudent);
         assertCommandSuccess(MarkCommand.COMMAND_WORD
                 + " " + studentIndex.getOneBased() + " " + subjectIndex.getOneBased()
-                + " " + syllabusIndex.getOneBased(), expectedModel, expectedResultMessage);
+                + " " + syllabusIndex.getOneBased(), expectedModel, expectedResultMessage, null);
     }
 
     /**
@@ -177,6 +169,34 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
+    }
+
+    /**
+     * Executes {@code command} and in addition,<br>
+     * 1. Asserts that the command box displays an empty string.<br>
+     * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
+     * 3. Asserts that the browser url and selected card update accordingly depending on the card at
+     * {@code expectedSelectedCardIndex}.<br>
+     * 4. Asserts that the status bar's sync status changes.<br>
+     * 5. Asserts that the command box has the default style class.<br>
+     * Verifications 1 and 2 are performed by
+     * {@code TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see TutorHelperSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see TutorHelperSystemTest#assertSelectedCardChanged(Index)
+     */
+    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
+                                      Index expectedSelectedCardIndex) {
+        executeCommand(command);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertCommandBoxShowsDefaultStyle();
+
+        if (expectedSelectedCardIndex != null) {
+            assertSelectedCardChanged(expectedSelectedCardIndex);
+        } else {
+            assertSelectedCardChanged();
+        }
         assertStatusBarUnchangedExceptSyncStatus();
     }
 

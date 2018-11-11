@@ -18,16 +18,12 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CABBAGE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_KINETICS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_ORGANIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_MEIER;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -95,10 +91,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         index = INDEX_SECOND_STUDENT;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
-        editedStudent = new StudentBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withTags(
-                VALID_TAG_HUSBAND).withSubjects(VALID_SUBJECT_CABBAGE).withTuitionTiming(VALID_TUITION_TIMING_MEIER)
-                .withSyllabus(INDEX_FIRST_SUBJECT, VALID_SYLLABUS_KINETICS, VALID_SYLLABUS_ORGANIC).build();
-        assertCommandSuccess(command, index, editedStudent);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_STUDENT;
@@ -191,13 +184,13 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         index = INDEX_FIRST_STUDENT;
         assertFalse(getModel().getFilteredStudentList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND_FRIEND;
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: edit a student with new values same as another student's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(command, MESSAGE_DUPLICATE_STUDENT);
 
 
     }

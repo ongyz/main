@@ -73,7 +73,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
         toPay = model.getFilteredStudentList().get(6);
 
         paidStudent = new StudentBuilder().withName("George Best")
-                .withPhone("9482442")
+                .withPhone("94824420")
                 .withEmail("anna@example.com")
                 .withAddress("4th street")
                 .withTuitionTiming("Friday 5:00pm")
@@ -137,7 +137,7 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
                 .withSubjects("Mathematics", "Physics")
                 .withSyllabus(Index.fromOneBased(1), "Calculus II")
                 .withSyllabus(Index.fromOneBased(1), "Statistics I")
-                .withPayments("4 500 8 2018")
+                .withPayments("4 100 8 2018")
                 .withTags("friends")
                 .build();
 
@@ -260,7 +260,11 @@ public class PayCommandSystemTest extends TutorHelperSystemTest {
         Student original = expectedModel.getFilteredStudentList().get(toEdit.getZeroBased());
         expectedModel.updateStudent(original, editedStudent);
         String expectedResultMessage = String.format(PayCommand.MESSAGE_EDITPAYMENT_SUCCESS, editedStudent);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardChanged();
+        assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
 

@@ -69,12 +69,11 @@ public enum SubjectType {
     /**
      * Returns true if a given string is a valid subject.
      */
-    public static boolean isValidSubjectName(String test) {
+    public static boolean isValidSubjectName(String test) throws IllegalArgumentException {
         requireNonNull(test);
         return SubjectType.stream()
                 .anyMatch(subjectEnum -> StringUtil.isSubstringMatchFromIndexZero(subjectEnum.toString(), test));
     }
-
     @Override
     public String toString() {
         return stringRepresentation;

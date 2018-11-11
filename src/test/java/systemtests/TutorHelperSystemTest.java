@@ -27,7 +27,6 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import guitests.guihandles.StudentCardHandle;
 import guitests.guihandles.StudentListPanelHandle;
-import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
@@ -211,6 +210,7 @@ public abstract class TutorHelperSystemTest {
      * @see StudentListPanelHandle#isSelectedStudentCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
+        System.out.println(getStudentListPanel().getSelectedCardIndex());
         getStudentListPanel().navigateToCard(getStudentListPanel().getSelectedCardIndex());
         StudentCardHandle selectedCard = getStudentListPanel().getHandleToSelectedCard();
 
@@ -225,6 +225,16 @@ public abstract class TutorHelperSystemTest {
         assertTrue(expectedSelectedStudent.isSameStudent(actualSelectedStudent));
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getStudentListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     * Asserts that the browser's url and the selected card in the student list panel remain unchanged.
+     * @see BrowserPanelHandle#isStudentChanged()
+     * @see StudentListPanelHandle#isSelectedStudentCardChanged()
+     */
+    protected void assertSelectedCardChanged() {
+        assertTrue(getBrowserPanel().isStudentChanged());
+        assertFalse(getStudentListPanel().isSelectedStudentCardChanged());
     }
 
     /**
