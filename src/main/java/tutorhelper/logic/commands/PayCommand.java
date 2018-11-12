@@ -61,7 +61,7 @@ public class PayCommand extends Command {
         editEntry = findPaymentToUpdate(pay, newPayment);
 
         if (!editEntry) {
-            if (pay.size() > MAX_PAYMENTS_DISPLAYED) {
+            if (pay.size() >= MAX_PAYMENTS_DISPLAYED) {
                 pay.remove(0);
             }
             pay = updatePayment(studentTarget.getPayments(), newPayment);
