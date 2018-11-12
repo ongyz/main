@@ -138,6 +138,22 @@ public class BrowserPanel extends UiPart<Region> {
                         new Label("(" + currentIndex.getOneBased() + ") " + subject.get(i).toString()));
             }
 
+            final StringBuilder log = new StringBuilder();
+            log.append(
+                    "LOADED STUDENT\n\nName: " + student.getName().fullName
+                    + "\n\nAddress: " + student.getAddress().value
+                    + "\n\nEmail: " + student.getEmail().value
+                    + "\n\nPhone: " + student.getPhone().value
+                    + "\n\nTuition Timing: " + student.getTuitionTiming().value
+                    + "\n\nSubjects:\n");
+            student.getSubjects().forEach(subject -> log
+                            .append(" " + subject.getSubjectName() + "\n")
+                            .append("  " + subject.getSubjectContent() + "\n"));
+            log.append("\nTags: " + student.getTags().toString()
+                    + "\n\nPayments:\n");
+            student.getPayments().forEach(payment -> log.append(payment.toString()).append("\n"));
+
+            logger.info(log.toString());
         } else {
             // Student is null, remove all the text.
             nameLabel.setText("");
