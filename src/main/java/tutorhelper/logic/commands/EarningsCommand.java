@@ -33,8 +33,7 @@ public class EarningsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-
+    public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
@@ -64,7 +63,7 @@ public class EarningsCommand extends Command {
 
         // state check
         EarningsCommand e = (EarningsCommand) other;
-        return month == ((EarningsCommand) other).month
-                && year == ((EarningsCommand) other).year;
+        return month == e.month
+                && year == e.year;
     }
 }

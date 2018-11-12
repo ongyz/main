@@ -1,11 +1,13 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorhelper.logic.commands.AddSubCommand.MESSAGE_ADDSUB_SUCCESS;
 import static tutorhelper.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TestUtil.getLastIndex;
 import static tutorhelper.testutil.TestUtil.getStudent;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -18,7 +20,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.AddSubCommand;
 import tutorhelper.logic.commands.RedoCommand;
@@ -26,14 +27,13 @@ import tutorhelper.logic.commands.UndoCommand;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 public class AddSubCommandSystemTest extends TutorHelperSystemTest {
 
     public static final String ADDSUB_TEST_SUBJECT = "Physics";
 
     private static final String MESSAGE_INVALID_ADDSUB_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSubCommand.MESSAGE_USAGE);
 
     @Test
     public void addsub() {
@@ -127,7 +127,7 @@ public class AddSubCommandSystemTest extends TutorHelperSystemTest {
 
         Set<Subject> newSubjects = new HashSet<>(targetSubjects);
 
-        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        Student studentUpdated = createStudentWithNewSubjects(studentTarget, newSubjects);
         model.updateStudent(studentTarget, studentUpdated);
         return studentUpdated;
     }

@@ -2,6 +2,7 @@ package tutorhelper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class AddSubCommandParser implements Parser<AddSubCommand> {
      */
     public AddSubCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_SUBJECT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT);
 
         Index studentIndex;
         List<Index> indexList;
@@ -44,12 +45,12 @@ public class AddSubCommandParser implements Parser<AddSubCommand> {
 
         studentIndex = getStudentIndex(indexList);
 
-        if (!argMultimap.getValue(CliSyntax.PREFIX_SUBJECT).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddSubCommand.MESSAGE_USAGE));
         }
 
-        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(CliSyntax.PREFIX_SUBJECT).get());
+        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         return new AddSubCommand(studentIndex, subject);
     }
 

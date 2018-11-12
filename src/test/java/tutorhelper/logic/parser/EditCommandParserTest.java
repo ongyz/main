@@ -25,6 +25,7 @@ import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static tutorhelper.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static tutorhelper.logic.commands.CommandTestUtil.VALID_TAG_EXAM;
 import static tutorhelper.logic.commands.CommandTestUtil.VALID_TAG_WEAK;
+import static tutorhelper.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorhelper.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -45,7 +46,7 @@ import tutorhelper.testutil.EditStudentDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + CliSyntax.PREFIX_TAG;
+    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);

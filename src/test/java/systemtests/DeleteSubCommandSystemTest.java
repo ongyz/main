@@ -1,6 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -19,7 +20,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.DeleteSubCommand;
 import tutorhelper.logic.commands.RedoCommand;
@@ -32,7 +32,7 @@ import tutorhelper.model.util.SubjectsUtil;
 public class DeleteSubCommandSystemTest extends TutorHelperSystemTest {
 
     private static final String MESSAGE_INVALID_DELETESUB_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteSubCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSubCommand.MESSAGE_USAGE);
 
     @Test
     public void deletesub() {

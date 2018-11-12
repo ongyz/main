@@ -1,10 +1,15 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SUBJECT_INDEX;
 import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorhelper.logic.commands.CopySubCommand.MESSAGE_COPYSUB_SUCCESS;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
+import static tutorhelper.model.util.SubjectsUtil.findSubjectIndex;
+import static tutorhelper.model.util.SubjectsUtil.hasSubject;
 import static tutorhelper.testutil.TestUtil.getLastIndex;
 import static tutorhelper.testutil.TestUtil.getMidIndex;
 import static tutorhelper.testutil.TestUtil.getStudent;
@@ -21,7 +26,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.CopySubCommand;
 import tutorhelper.logic.commands.RedoCommand;
@@ -30,12 +34,11 @@ import tutorhelper.logic.commands.exceptions.CommandException;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 public class CopySubCommandSystemTest extends TutorHelperSystemTest {
 
     private static final String MESSAGE_INVALID_COPYSUB_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopySubCommand.MESSAGE_USAGE);
 
     @Test
     public void copysub() throws CommandException {
@@ -102,7 +105,7 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
         command = CopySubCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased()
                 + " " + invalidIndex
                 + " " + INDEX_SECOND_STUDENT.getOneBased();
-        assertCommandFailure(command, Messages.MESSAGE_INVALID_SUBJECT_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_SUBJECT_INDEX);
 
         /* ------------------------------- Performing invalid copySub operation ---------------------------------- */
 
@@ -145,8 +148,8 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
         Subject selectedSubject = sourceSubjects.get(subjectIndex.getZeroBased());
         Set<Subject> updatedSubjects;
 
-        if (SubjectsUtil.hasSubject(studentTarget, selectedSubject.getSubjectType())) {
-            Index index = SubjectsUtil.findSubjectIndex(studentTarget, selectedSubject.getSubjectType()).get();
+        if (hasSubject(studentTarget, selectedSubject.getSubjectType())) {
+            Index index = findSubjectIndex(studentTarget, selectedSubject.getSubjectType()).get();
             Subject updatedSubject = targetSubjects.get(index.getZeroBased())
                     .append(selectedSubject.getSubjectContent());
             targetSubjects.set(index.getZeroBased(), updatedSubject);
@@ -157,7 +160,7 @@ public class CopySubCommandSystemTest extends TutorHelperSystemTest {
         }
 
         Set<Subject> newSubjects = new HashSet<>(updatedSubjects);
-        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        Student studentUpdated = createStudentWithNewSubjects(studentTarget, newSubjects);
         model.updateStudent(studentTarget, studentUpdated);
         return studentUpdated;
     }

@@ -1,13 +1,14 @@
 package tutorhelper.logic;
 
 import static org.junit.Assert.assertEquals;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.CommandResult;
 import tutorhelper.logic.commands.HistoryCommand;
 import tutorhelper.logic.commands.ListCommand;
@@ -28,14 +29,14 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
         assertHistoryCorrect(invalidCommand);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         assertHistoryCorrect(deleteCommand);
     }
 

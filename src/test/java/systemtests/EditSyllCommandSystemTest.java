@@ -1,6 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
 import static tutorhelper.logic.commands.CommandTestUtil.SYLLABUS_DESC_DIFFERENTIATION;
 import static tutorhelper.logic.commands.CommandTestUtil.SYLLABUS_DESC_INTEGRATION;
@@ -15,7 +16,6 @@ import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_ALICE;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.EditSyllCommand;
 import tutorhelper.logic.commands.RedoCommand;
@@ -82,34 +82,34 @@ public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
         int invalidIndex = getModel().getTutorHelper().getStudentList().size();
         assertCommandFailure(EditSyllCommand.COMMAND_WORD + " " + invalidIndex + " "
                 + INDEX_FIRST_SUBJECT.getOneBased() + " " + INDEX_FIRST_SYLLABUS + " " + SYLLABUS_DESC_DIFFERENTIATION,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
 
         /* --------------------------------- Performing invalid edit operation -------------------------------------- */
 
         /* Case: invalid index (0) -> rejected */
         assertCommandFailure(EditSyllCommand.COMMAND_WORD + " 0" + " " + INDEX_FIRST_SYLLABUS.getOneBased()
-                + " " + SYLLABUS_DESC_DIFFERENTIATION, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                + " " + SYLLABUS_DESC_DIFFERENTIATION, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditSyllCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (-1) -> rejected */
         assertCommandFailure(EditSyllCommand.COMMAND_WORD + " -1" + " " + INDEX_FIRST_SYLLABUS.getOneBased()
-                + " " + SYLLABUS_DESC_DIFFERENTIATION, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                + " " + SYLLABUS_DESC_DIFFERENTIATION, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditSyllCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredStudentList().size() + 1;
         assertCommandFailure(EditSyllCommand.COMMAND_WORD + " " + invalidIndex + " "
                 + INDEX_FIRST_SYLLABUS.getOneBased() + " " + SYLLABUS_DESC_DIFFERENTIATION,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
 
         /* Case: missing index -> rejected */
         assertCommandFailure(EditSyllCommand.COMMAND_WORD + " " + SYLLABUS_DESC_DIFFERENTIATION,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
 
         /* Case: missing syllabus field -> rejected */
         assertCommandFailure(EditSyllCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                 + INDEX_FIRST_SUBJECT.getOneBased() + " " + INDEX_FIRST_SYLLABUS.getOneBased(),
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSyllCommand.MESSAGE_USAGE));
 
         /* Case: duplicate syllabus field -> rejected */
         assertCommandFailure(EditSyllCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "

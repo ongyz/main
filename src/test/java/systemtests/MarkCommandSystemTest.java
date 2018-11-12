@@ -1,10 +1,12 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorhelper.logic.commands.MarkCommand.MESSAGE_MARK_SUCCESS;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TestUtil.getLastIndex;
 import static tutorhelper.testutil.TestUtil.getMidIndex;
 import static tutorhelper.testutil.TestUtil.getStudent;
@@ -20,7 +22,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.MarkCommand;
 import tutorhelper.logic.commands.RedoCommand;
@@ -29,12 +30,11 @@ import tutorhelper.logic.commands.exceptions.CommandException;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 public class MarkCommandSystemTest extends TutorHelperSystemTest {
 
     private static final String MESSAGE_INVALID_MARK_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE);
 
     @Test
     public void mark() throws CommandException {
@@ -121,7 +121,7 @@ public class MarkCommandSystemTest extends TutorHelperSystemTest {
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
-        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        Student studentUpdated = createStudentWithNewSubjects(studentTarget, newSubjects);
 
         model.updateStudent(studentTarget, studentUpdated);
         return studentUpdated;
