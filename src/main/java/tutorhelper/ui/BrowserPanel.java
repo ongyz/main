@@ -123,7 +123,6 @@ public class BrowserPanel extends UiPart<Region> {
             student.getSubjects().forEach(subject -> subjectsShort.getChildren().add(
                     new Label(subject.getSubjectName())));
             student.getTags().forEach(tag -> tagsShort.getChildren().add(new Label(tag.tagName)));
-
             student.getPayments().forEach(amount -> paymentAmount.getChildren().add(
                     new Label(String.valueOf(amount.getAmount()))));
             student.getPayments().forEach(amount -> paymentMonth.getChildren().add(
