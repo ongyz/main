@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import tutorhelper.commons.exceptions.IllegalValueException;
 import tutorhelper.model.ReadOnlyTutorHelper;
 import tutorhelper.model.TutorHelper;
+import tutorhelper.model.student.Payment;
 import tutorhelper.model.student.Student;
 
 /**
@@ -19,6 +20,7 @@ import tutorhelper.model.student.Student;
 public class XmlSerializableTutorHelper {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    private static final int MAX_PAYMENTS_DISPLAYED = 5;
 
     @XmlElement
     private List<XmlAdaptedStudent> students;
@@ -51,6 +53,10 @@ public class XmlSerializableTutorHelper {
             Student student = p.toModelType();
             if (tutorHelper.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
+            }
+            List<Payment> pay = student.getPayments();
+            while (pay.size() > MAX_PAYMENTS_DISPLAYED) {
+                pay.remove(0);
             }
             tutorHelper.addStudent(student);
         }
