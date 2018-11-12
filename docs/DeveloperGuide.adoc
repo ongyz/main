@@ -872,8 +872,8 @@ Value Proposition:
         2d2. Repeat step 1.
 // end::usecases[]
 
-// tag::nfr[]
 [appendix]
+// tag::nfr[]
 == Non Functional Requirements
 
 . The system should respond in two seconds.
