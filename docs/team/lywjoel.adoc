@@ -42,7 +42,7 @@ TutorHelper is a Java application intended for tutors who would like to organise
 *** Re-ordered sections of User Guide for consistency (Pull Request https://github.com/CS2103-AY1819S1-W13-4/main/pull/159/commits/85ef6a6cbc7b33f0bdc21542a98caaf1ab59b687[#159])
 ** Community:
 *** Reviewed other PRs
-*** Fixed code style violations for team
+*** Fixed code style violations for team (Pull Requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/72[#72], https://github.com/CS2103-AY1819S1-W13-4/main/pull/87/commits/456aa20a08c5b5656e7d7de84345e3bce956d9a8[#87], https://github.com/CS2103-AY1819S1-W13-4/main/pull/96[#96], https://github.com/CS2103-AY1819S1-W13-4/main/pull/117[#117], https://github.com/CS2103-AY1819S1-W13-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-W13-4/main/pull/125[#125], https://github.com/CS2103-AY1819S1-W13-4/main/pull/127[#127], https://github.com/CS2103-AY1819S1-W13-4/main/pull/132[#132], https://github.com/CS2103-AY1819S1-W13-4/main/pull/139[#139], https://github.com/CS2103-AY1819S1-W13-4/main/pull/211[#211], https://github.com/CS2103-AY1819S1-W13-4/main/pull/241[#241])
 *** Reported bugs and gave suggestions to other teams in the class
 
 == Contributions to the User Guide
