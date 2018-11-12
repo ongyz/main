@@ -867,7 +867,7 @@ Value Proposition:
       2c. System does not find any syllabus entry at specified index.
         2c1. System displays error message telling tutor that index is invalid.
         2c2. Repeat step 1.
-      2d. System find same syllabus entry already exists in subject.
+      2d. System finds same syllabus entry already exists in subject.
         2d1. System displays error message telling tutor that syllabus already exist.
         2d2. Repeat step 1.
 // end::usecases[]
@@ -902,7 +902,7 @@ Given below are instructions to test the app manually.
 
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
-
+Commands existing in AddressBook Level 4 are omitted.
 
 === Launch and Shutdown
 
@@ -917,24 +917,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
-
-=== Deleting a Student
-
-. Deleting a student while all students are listed
-
-.. Prerequisites: List all students using the `list` command. Multiple students in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
-
-=== Saving Data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 === Grouping Students
 . Grouping by day or time while all persons are listed.
@@ -1019,7 +1001,7 @@ These instructions only provide a starting point for testers to work on; testers
 === Deleting a Subject
 . Deleting subject from existing student
 
-.. Prerequisite: Tutorhelper is not empty.
+.. Prerequisite: TutorHelper is not empty.
 .. Test case: 'deletesub 1 1' +
    Expected: Deleted subject from student: Display student's details.
 .. Test case: 'deletesub 1 X' (X is an invalid subject index) +
@@ -1029,11 +1011,10 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect deletesub commands to try: 'deletesub', 'deletesub 1' +
    Expected: Invalid command format. deletesub command message usage is shown.
 
-
 === Copying a Subject
 . Copying a subject from one student profile to another student.
 
-.. Prerequisites: Tutorhelper is not empty.
+.. Prerequisites: TutorHelper is not empty.
 .. Test case: 'copysub 1 1 2' +
    Expected: Copied syllabus to Student: Display student's details.
 .. Test case: 'copysub 1 X 2' (X is an invalid subject index of the source student) +
@@ -1052,7 +1033,7 @@ These instructions only provide a starting point for testers to work on; testers
 === Adding a Syllabus Topic
 . Adds a new syllabus topic for a specified student and subject
 
-.. Prerequisite: Tutorhelper must not be empty.
+.. Prerequisite: TutorHelper must not be empty.
 .. Test case: 'addsyll 1 1 sy/Integration' +
    Expected: Added syllabus to Student: Display destination student's details
 .. Test case: 'addsyll X 1 sy/Integration' (X is an invalid student index) +
@@ -1067,7 +1048,7 @@ These instructions only provide a starting point for testers to work on; testers
 === Deleting a Syllabus Topic
 . Deletes a syllabus from an existing student
 
-.. Prerequisite: Tutorhelper must not be empty.
+.. Prerequisite: TutorHelper must not be empty.
 .. Test case: 'deletesyll 1 1 1' +
    Expected: Removed selected syllabus from Student: Display student's details.
 .. Test case: 'deletesyll X 1 1' (X is an invalid student index) +
@@ -1082,7 +1063,7 @@ These instructions only provide a starting point for testers to work on; testers
 === Editing a Syllabus Topic
 . Edits a syllabus from an existing student
 
-.. Prerequisite: Tutorhelper must not be empty.
+.. Prerequisite: TutorHelper must not be empty.
 .. Test case: 'editsyll 1 1 1 sy/Integration' +
    Expected: Edited syllabus to Student: Display student's details.
 .. Test case: 'editsyll X 1 1 sy/Integration' (X is an invalid student index) +
@@ -1099,7 +1080,7 @@ These instructions only provide a starting point for testers to work on; testers
 === Marking a Syllabus Topic
 . Toggles the state of a specified syllabus topic for a specified student and subject.
 
-.. Prerequisite: Tutorhelper must not be empty.
+.. Prerequisite: TutorHelper must not be empty.
 .. Test case: 'mark 1 1 1' +
    Expected: Changed selected syllabus from Student: Display student's details
 .. Test case: 'mark X 1 1 ' (X is an invalid student index) +
