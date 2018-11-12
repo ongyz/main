@@ -146,7 +146,9 @@ public class BrowserPanel extends UiPart<Region> {
                     + "\n\nPhone: " + student.getPhone().value
                     + "\n\nTuition Timing: " + student.getTuitionTiming().value
                     + "\n\nSubjects:\n");
-            student.getSubjects().forEach(subject -> log.append(" " + subject.getSubjectName() + "\n").append("  " + subject.getSubjectContent() + "\n"));
+            student.getSubjects().forEach(subject -> log
+                            .append(" " + subject.getSubjectName() + "\n")
+                            .append("  " + subject.getSubjectContent() + "\n"));
             log.append("\nTags: " + student.getTags().toString()
                     + "\n\nPayments:\n");
             student.getPayments().forEach(payment -> log.append(payment.toString()).append("\n"));
