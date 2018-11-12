@@ -5,7 +5,6 @@ import static tutorhelper.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.logic.commands.GroupCommand;
 import tutorhelper.logic.commands.UndoCommand;
 import tutorhelper.model.Model;
@@ -26,7 +25,7 @@ public class GroupCommandSystemTest extends TutorHelperSystemTest {
         //Groups by day
         String validDayCommand = command + "Monday ";
         expectedModel.updateFilteredStudentList(new TuitionTimingContainsKeywordsPredicate("Monday"));
-        String expectedResultMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
+        String expectedResultMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW,
                 expectedModel.getFilteredStudentList().size());
         assertCommandSuccess(validDayCommand, true, false, expectedModel, expectedResultMessage);
         //Undo sorting by time
@@ -36,7 +35,7 @@ public class GroupCommandSystemTest extends TutorHelperSystemTest {
         //Groups by time
         String validTimeCommand = command + "5:00pm ";
         expectedModel.updateFilteredStudentList(new TuitionTimingContainsKeywordsPredicate("5:00pm"));
-        expectedResultMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
+        expectedResultMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW,
                 expectedModel.getFilteredStudentList().size());
         assertCommandSuccess(validTimeCommand, false, true, expectedModel, expectedResultMessage);
         //Undo sorting by day

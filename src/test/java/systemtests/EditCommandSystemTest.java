@@ -2,6 +2,8 @@ package systemtests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static tutorhelper.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
@@ -35,7 +37,6 @@ import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.EditCommand;
 import tutorhelper.logic.commands.RedoCommand;
@@ -117,7 +118,7 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
         showStudentsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getTutorHelper().getStudentList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* -------------------- Performing edit operation while a student card is selected -------------------------- */
 
@@ -139,20 +140,20 @@ public class EditCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: invalid index (0) -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " 0" + NAME_DESC_BOB,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (-1) -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " -1" + NAME_DESC_BOB,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredStudentList().size() + 1;
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         /* Case: missing index -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + NAME_DESC_BOB,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased(),

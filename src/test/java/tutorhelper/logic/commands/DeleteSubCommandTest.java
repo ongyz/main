@@ -40,16 +40,17 @@ public class DeleteSubCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validIndexesUnfilteredList_success() {
-        Student studentTarget = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
+    public void execute_validArgumentsUnfilteredList_success() {
+        // Deletes first Subject from third student
+        Student student = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
 
-        String expectedMessage = String.format(DeleteSubCommand.MESSAGE_DELETESUB_SUCCESS, studentTarget);
+        String expectedMessage = String.format(DeleteSubCommand.MESSAGE_DELETESUB_SUCCESS, student);
         ModelManager expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
-        Student newStudent = simulateDeleteSubCommand(studentTarget, INDEX_FIRST_SUBJECT);
+        Student newStudent = simulateDeleteSubCommand(student, INDEX_FIRST_SUBJECT);
 
-        expectedModel.updateStudent(studentTarget, newStudent);
+        expectedModel.updateStudent(student, newStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(deleteSubCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -57,6 +58,7 @@ public class DeleteSubCommandTest {
 
     @Test
     public void execute_invalidStudentIndexUnfilteredList_throwsCommandException() {
+        // Command fails as student index is out of bounds
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT);
 
@@ -64,22 +66,24 @@ public class DeleteSubCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexSubjectUnfilteredList_throwsCommandException() {
-        Student studentTarget = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(studentTarget.getSubjects().size() + 1);
+    public void execute_invalidSubjectIndexUnfilteredList_throwsCommandException() {
+        // Command fails as Subject index is out of bounds
+        Student student = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
+        Index outOfBoundIndex = Index.fromOneBased(student.getSubjects().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_THIRD_STUDENT, outOfBoundIndex);
 
         assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
-    public void execute_validIndexesFilteredList_success() {
-        Student studentTarget = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
+    public void execute_validArgumentsFilteredList_success() {
+        // Deletes first Subject from third student
+        Student student = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
 
-        String expectedMessage = String.format(DeleteSubCommand.MESSAGE_DELETESUB_SUCCESS, studentTarget);
-        Student updatedStudent = simulateDeleteSubCommand(studentTarget, INDEX_FIRST_SUBJECT);
-        expectedModel.updateStudent(studentTarget, updatedStudent);
+        String expectedMessage = String.format(DeleteSubCommand.MESSAGE_DELETESUB_SUCCESS, student);
+        Student updatedStudent = simulateDeleteSubCommand(student, INDEX_FIRST_SUBJECT);
+        expectedModel.updateStudent(student, updatedStudent);
         expectedModel.commitTutorHelper();
 
         assertCommandSuccess(deleteSubCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -87,6 +91,7 @@ public class DeleteSubCommandTest {
 
     @Test
     public void execute_invalidStudentIndexFilteredList_throwsCommandException() {
+        // Command fails as student index is out of bounds
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT);
 
@@ -96,31 +101,32 @@ public class DeleteSubCommandTest {
 
     @Test
     public void execute_invalidSubjectIndexFilteredList_throwsCommandException() {
-        Student studentTarget = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(studentTarget.getSubjects().size() + 1);
+        // Command fails as Subject index is out of bounds
+        Student student = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
+        Index outOfBoundIndex = Index.fromOneBased(student.getSubjects().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_THIRD_STUDENT, outOfBoundIndex);
 
         assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_SUBJECT_INDEX);
     }
 
     @Test
-    public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Student studentTarget = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
+    public void executeUndoRedo_validArgumentsUnfilteredList_success() throws Exception {
+        Student student = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased());
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
         Model expectedModel = new ModelManager(model.getTutorHelper(), new UserPrefs());
 
-        Student newStudent = simulateDeleteSubCommand(studentTarget, INDEX_FIRST_SUBJECT);
-        expectedModel.updateStudent(studentTarget, newStudent);
+        Student newStudent = simulateDeleteSubCommand(student, INDEX_FIRST_SUBJECT);
+        expectedModel.updateStudent(student, newStudent);
         expectedModel.commitTutorHelper();
 
-        // DeleteSub -> first student subject is erased
+        // DeleteSubCommand: Deletes first Subject from third student
         deleteSubCommand.execute(model, commandHistory);
 
-        // undo -> reverts TutorHelper back to previous state and filtered student list to show all students
+        // UndoCommand: Reverts TutorHelper back to previous state and removes filter from student list
         expectedModel.undoTutorHelper();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first student deleted again
+        // RedoCommand: Deletes first Subject to third student again
         expectedModel.redoTutorHelper();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -130,34 +136,12 @@ public class DeleteSubCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteSubCommand deleteSubCommand = new DeleteSubCommand(outOfBoundIndex, INDEX_FIRST_SUBJECT);
 
-        // execution failed -> TutorHelper state not added into model
+        // Throws new CommandException
         assertCommandFailure(deleteSubCommand, model, commandHistory, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
-        // single TutorHelper state in model -> undoCommand and redoCommand fail
+        // Only one TutorHelper state in model, UndoCommand and RedoCommand fails
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
-    }
-
-    @Test
-    public void equals() {
-        DeleteSubCommand deleteSubCommand1 = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
-        DeleteSubCommand deleteSubCommand2 = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_SECOND_SUBJECT);
-
-        // same object -> returns true
-        assertEquals(deleteSubCommand1, deleteSubCommand1);
-
-        // same values -> returns true
-        DeleteSubCommand deleteSubCommand1Copy = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
-        assertEquals(deleteSubCommand1, deleteSubCommand1Copy);
-
-        // different types -> returns false
-        assertNotEquals(deleteSubCommand1, 1);
-
-        // null -> returns false
-        assertNotEquals(deleteSubCommand1, null);
-
-        // different command -> returns false
-        assertNotEquals(deleteSubCommand1, deleteSubCommand2);
     }
 
     @Test
@@ -169,16 +153,38 @@ public class DeleteSubCommandTest {
                         model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased())));
     }
 
+    @Test
+    public void equals() {
+        DeleteSubCommand deleteSubCommand1 = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
+        DeleteSubCommand deleteSubCommand2 = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_SECOND_SUBJECT);
+
+        // Same Object: Equal
+        assertEquals(deleteSubCommand1, deleteSubCommand1);
+
+        // Same Values: Equal
+        DeleteSubCommand deleteSubCommand1Copy = new DeleteSubCommand(INDEX_THIRD_STUDENT, INDEX_FIRST_SUBJECT);
+        assertEquals(deleteSubCommand1, deleteSubCommand1Copy);
+
+        // Different Types: Not Equal
+        assertNotEquals(deleteSubCommand1, 1);
+
+        // One Null Argument: Not Equal
+        assertNotEquals(deleteSubCommand1, null);
+
+        // Different Command: Not Equal
+        assertNotEquals(deleteSubCommand1, deleteSubCommand2);
+    }
+
     /**
      * Simulates and returns a new {@code Student} created by DeleteSubCommand.
      */
-    private Student simulateDeleteSubCommand(Student studentTarget, Index subjectIndex) {
-        List<Subject> subjects = new ArrayList<>(studentTarget.getSubjects());
+    private Student simulateDeleteSubCommand(Student student, Index subjectIndex) {
+        List<Subject> subjects = new ArrayList<>(student.getSubjects());
         subjects.remove(subjectIndex.getZeroBased());
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
 
-        return createStudentWithNewSubjects(studentTarget, newSubjects);
+        return createStudentWithNewSubjects(student, newSubjects);
     }
 
 }

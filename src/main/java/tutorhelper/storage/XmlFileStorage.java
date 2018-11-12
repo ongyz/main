@@ -29,8 +29,8 @@ public class XmlFileStorage {
     /**
      * Returns TutorHelper in the file or an empty TutorHelper
      */
-    public static XmlSerializableTutorHelper loadDataFromSaveFile(Path file) throws DataConversionException,
-                                                                            FileNotFoundException {
+    public static XmlSerializableTutorHelper loadDataFromSaveFile(Path file)
+            throws DataConversionException, FileNotFoundException {
         try {
             return getDataFromFile(file, XmlSerializableTutorHelper.class);
         } catch (JAXBException e) {

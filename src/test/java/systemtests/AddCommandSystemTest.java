@@ -1,6 +1,7 @@
 package systemtests;
 
 import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorhelper.logic.commands.AddCommand.MESSAGE_DUPLICATE_STUDENT;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tutorhelper.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -36,7 +37,6 @@ import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import tutorhelper.commons.core.Messages;
 import tutorhelper.commons.core.index.Index;
 import tutorhelper.logic.commands.AddCommand;
 import tutorhelper.logic.commands.RedoCommand;
@@ -177,7 +177,7 @@ public class AddCommandSystemTest extends TutorHelperSystemTest {
 
         /* Case: invalid keyword -> rejected */
         command = "adds " + StudentUtil.getStudentDetails(toAdd);
-        assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
