@@ -34,7 +34,7 @@ public class PayCommand extends Command {
     public static final String MESSAGE_EDIT_PAYMENT_SUCCESS = "Payment for this student has been edited: %1$s";
 
     private static final int MIN_VALUE = -1;
-    private static final int MAX_PAYMENTS_DISPLAYED = 4;
+    private static final int MAX_PAYMENTS_DISPLAYED = 5;
 
     private Index targetIndex;
     private Payment newPayment;
@@ -61,7 +61,7 @@ public class PayCommand extends Command {
         editEntry = findPaymentToUpdate(pay, newPayment);
 
         if (!editEntry) {
-            if (pay.size() > MAX_PAYMENTS_DISPLAYED) {
+            if (pay.size() >= MAX_PAYMENTS_DISPLAYED) {
                 pay.remove(0);
             }
             pay = updatePayment(studentTarget.getPayments(), newPayment);
