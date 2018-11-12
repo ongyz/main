@@ -875,6 +875,7 @@ Value Proposition:
         2d2. Repeat step 1.
 // end::usecases[]
 
+// tag::nfr[]
 [appendix]
 == Non Functional Requirements
 
@@ -883,6 +884,7 @@ Value Proposition:
 . Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 . Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 . A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+// end::nfr[]
 
 [appendix]
 == Glossary
