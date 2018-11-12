@@ -17,7 +17,6 @@ public class Syllabus {
      * becomes a valid input. Syllabus should not be longer than 30 characters.
      */
     public static final String SYLLABUS_VALIDATION_REGEX = "[^\\s].*";
-    public static final int SYLLABUS_VALIDATION_MAX_LENGTH = 30;
 
     public final String syllabus;
 
@@ -53,8 +52,7 @@ public class Syllabus {
 
         if (test.contains("/")) {
            return false;
-        }
-        else {
+        } else {
             return test.matches(SYLLABUS_VALIDATION_REGEX);
         }
     }
