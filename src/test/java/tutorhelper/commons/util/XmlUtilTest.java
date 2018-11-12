@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import tutorhelper.commons.core.index.Index;
 import tutorhelper.model.TutorHelper;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.storage.XmlAdaptedPay;
@@ -47,7 +48,8 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedSubject> VALID_SUBJECTS =
             Collections.singletonList(new XmlAdaptedSubject(Subject.makeSubject("Mathematics")));
-    private static final List<XmlAdaptedPay> VALID_PAYMENT = XmlAdaptedPay.setUpTestPaymentValid();
+    private static final List<XmlAdaptedPay> VALID_PAYMENT =
+            Collections.singletonList(new XmlAdaptedPay(Index.fromZeroBased(1), "200", "2", "2018"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
