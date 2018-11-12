@@ -4,7 +4,8 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: TutorHelper
-The purpose of this portfolio is to document my role in and contributions to the project TutorHelper.
+
+This project portfolio consists of the contributions i have made to TutorHelper.
 
 == Overview
 
@@ -15,9 +16,7 @@ Grouping +
 Payment +
 Earnings +
 Add/Edit/Delete/Mark Syllabus +
-Add/Delete/Copy Subject.
-
-This project portfolio consists of the contributions i have made to TutorHelper.
+Add/Delete/Copy Subject
 
 == Summary of contributions
 This section lists the major and minor enhancements I have contributed to building TutorHelper, as well as miscellaneous contributions in other aspects of this project.
