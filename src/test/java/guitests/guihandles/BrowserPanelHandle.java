@@ -8,9 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
+import tutorhelper.commons.core.LogsCenter;
+import tutorhelper.model.student.Student;
+import tutorhelper.testutil.StudentBuilder;
 
 /**
  * A handler for the {@code BrowserPanel} of the UI.

@@ -1,28 +1,28 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
-import static seedu.address.logic.commands.CommandTestUtil.SYLLABUS_DESC_DIFFERENTIATION;
-import static seedu.address.logic.commands.CommandTestUtil.SYLLABUS_DESC_INTEGRATION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
-import static seedu.address.logic.commands.EditSyllCommand.MESSAGE_DUPLICATE_SYLLABUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_ALICE;
+import static tutorhelper.logic.commands.CommandTestUtil.DUPLICATE_SYLLABUS;
+import static tutorhelper.logic.commands.CommandTestUtil.SYLLABUS_DESC_DIFFERENTIATION;
+import static tutorhelper.logic.commands.CommandTestUtil.SYLLABUS_DESC_INTEGRATION;
+import static tutorhelper.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
+import static tutorhelper.logic.commands.EditSyllCommand.MESSAGE_DUPLICATE_SYLLABUS;
+import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
+import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SYLLABUS;
+import static tutorhelper.testutil.TypicalStudents.ALICE;
+import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_ALICE;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditSyllCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.StudentBuilder;
+import tutorhelper.commons.core.Messages;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.commands.EditSyllCommand;
+import tutorhelper.logic.commands.RedoCommand;
+import tutorhelper.logic.commands.UndoCommand;
+import tutorhelper.model.Model;
+import tutorhelper.model.student.Student;
+import tutorhelper.testutil.StudentBuilder;
 
 public class EditSyllCommandSystemTest extends TutorHelperSystemTest {
 
