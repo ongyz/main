@@ -12,6 +12,10 @@ import static tutorhelper.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static tutorhelper.logic.commands.CommandTestUtil.VALID_SYLLABUS_DIFFERENTIATION;
 import static tutorhelper.logic.commands.CommandTestUtil.VALID_TAG_EXAM;
 import static tutorhelper.logic.commands.CommandTestUtil.VALID_TUITION_TIMING_AMY;
+import static tutorhelper.model.util.SubjectsUtil.copySubjectFrom;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
+import static tutorhelper.model.util.SubjectsUtil.findSubjectIndex;
+import static tutorhelper.model.util.SubjectsUtil.hasSubject;
 import static tutorhelper.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 
 import java.util.ArrayList;
@@ -47,7 +51,7 @@ public class SubjectsUtilTest {
 
     @Test
     public void execute_copySubject() {
-        Subject copiedSubject = SubjectsUtil.copySubjectFrom(sourceAmy, INDEX_FIRST_SUBJECT);
+        Subject copiedSubject = copySubjectFrom(sourceAmy, INDEX_FIRST_SUBJECT);
         Subject trueSubject = new ArrayList<>(sourceAmy.getSubjects()).get(INDEX_FIRST_SUBJECT.getZeroBased());
 
         // Equivalent under equals() method
@@ -59,21 +63,21 @@ public class SubjectsUtilTest {
 
     @Test
     public void execute_hasSubject_returnsBoolean() {
-        assertTrue(SubjectsUtil.hasSubject(sourceAmy, SubjectType.Mathematics));
-        assertFalse(SubjectsUtil.hasSubject(sourceAmy, SubjectType.Biology));
-        assertFalse(SubjectsUtil.hasSubject(sourceAmy, SubjectType.History));
-        assertFalse(SubjectsUtil.hasSubject(sourceAmy, SubjectType.Chemistry));
+        assertTrue(hasSubject(sourceAmy, SubjectType.Mathematics));
+        assertFalse(hasSubject(sourceAmy, SubjectType.Biology));
+        assertFalse(hasSubject(sourceAmy, SubjectType.History));
+        assertFalse(hasSubject(sourceAmy, SubjectType.Chemistry));
     }
 
     @Test
     public void execute_findSubjectIndex_returnOptionalWithValuePresent() {
-        Optional<Index> index = SubjectsUtil.findSubjectIndex(sourceAmy, SubjectType.Mathematics);
+        Optional<Index> index = findSubjectIndex(sourceAmy, SubjectType.Mathematics);
         assertEquals(index.get(), INDEX_FIRST_SUBJECT);
     }
 
     @Test
     public void execute_findSubjectIndex_returnEmptyOptional() {
-        Optional<Index> index = SubjectsUtil.findSubjectIndex(sourceAmy, SubjectType.Chemistry);
+        Optional<Index> index = findSubjectIndex(sourceAmy, SubjectType.Chemistry);
         thrown.expect(NoSuchElementException.class);
         index.get();
     }
@@ -82,7 +86,7 @@ public class SubjectsUtilTest {
     public void execute_createStudentWithNewSubjects() {
         List<Subject> subjects = new ArrayList<>(sourceAmy.getSubjects());
         subjects.add(Subject.makeSubject("Chemistry"));
-        Student newStudent = SubjectsUtil.createStudentWithNewSubjects(sourceAmy, new HashSet<>(subjects));
+        Student newStudent = createStudentWithNewSubjects(sourceAmy, new HashSet<>(subjects));
 
         // Equivalent under isSameStudent()
         assertTrue(newStudent.isSameStudent(sourceAmy));

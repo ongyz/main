@@ -7,6 +7,7 @@ import static tutorhelper.commons.core.Messages.MESSAGE_INVALID_SYLLABUS_INDEX;
 import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorhelper.logic.commands.DeleteSyllCommand.MESSAGE_DELETESYLL_SUCCESS;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TestUtil.getLastIndex;
 import static tutorhelper.testutil.TestUtil.getMidIndex;
 import static tutorhelper.testutil.TestUtil.getStudent;
@@ -31,7 +32,6 @@ import tutorhelper.logic.commands.exceptions.CommandException;
 import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
-import tutorhelper.model.util.SubjectsUtil;
 
 public class DeleteSyllCommandSystemTest extends TutorHelperSystemTest {
 
@@ -151,7 +151,7 @@ public class DeleteSyllCommandSystemTest extends TutorHelperSystemTest {
         subjects.set(subjectIndex.getZeroBased(), updatedSubject);
 
         Set<Subject> newSubjects = new HashSet<>(subjects);
-        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        Student studentUpdated = createStudentWithNewSubjects(studentTarget, newSubjects);
 
         model.updateStudent(studentTarget, studentUpdated);
         return studentUpdated;

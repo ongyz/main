@@ -21,8 +21,8 @@ It is a Java sample application intended for Tutors who would like to organise t
 
 * *Minor enhancement*:
 
-** Add Subject and TuitionTiming into TutorHelper (Pull request https://github.com[#11])
-** Updating of test cases for new changes (Pull requests https://github.com[#67], https://github.com[#75], https://github.com[#97], https://github.com[#122])
+** Add Subject and TuitionTiming into TutorHelper (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/11[#11])
+** Updating of test cases for new changes (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/67[#67], https://github.com/CS2103-AY1819S1-W13-4/main/pull/75[#75], https://github.com/CS2103-AY1819S1-W13-4/main/pull/97[#97], https://github.com/CS2103-AY1819S1-W13-4/main/pull/122[#122])
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=andlimey
 
@@ -31,15 +31,15 @@ It is a Java sample application intended for Tutors who would like to organise t
 ** Project management:
 *** Created issues for the different milestones and labelled them according to the severity and priority on Github.
 ** Enhancements to existing features:
-*** Refined the regex for name, phone and tuition timing (Pull request https://github.com[#193])
-*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#136], https://github.com[#144], https://github.com[#152])
+*** Refined the regex for name, phone and tuition timing (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/193[#193])
+*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/136[#136], https://github.com/CS2103-AY1819S1-W13-4/main/pull/144[#144], https://github.com/CS2103-AY1819S1-W13-4/main/pull/152[#152])
 ** Documentation:
-*** Added team members' images in AboutUs (Pull request https://github.com[#3])
-*** Edited `Valid Inputs` section in the User Guide (Pull request https://github.com[#204])
-*** Added section for group in the User Guide (Pull request https://github.com[#155])
+*** Added team members' images in AboutUs (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/33[#3])
+*** Edited `Valid Inputs` section in the User Guide (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/204[#204])
+*** Added section for group in the User Guide (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/155[#155])
 *** Edited `User Stories` and `Use Cases` in Developer Guide
-*** Added section for group in the Developer Guide (Pull request https://github.com[#68])
-*** Updated diagrams and images to be in TutorHelper context (Pull request https://github.com[#227])
+*** Added section for group in the Developer Guide (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/68[#68])
+*** Updated diagrams and images to be in TutorHelper context (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/227[#227])
 ** Community:
 *** Reviewed other PRs
 *** Reported bugs and suggestions for other teams in the class

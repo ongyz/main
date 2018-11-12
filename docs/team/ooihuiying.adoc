@@ -27,7 +27,7 @@ It is a Java sample application intended for Tutors who would like to organise t
 
 * *Minor enhancement*:
 
-** Add Payment into TutorHelper (Pull request https://github.com[#12])
+** Add Payment into TutorHelper (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/12[#12])
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=ooihuiying
 
@@ -36,8 +36,8 @@ It is a Java sample application intended for Tutors who would like to organise t
 ** Project management:
 *** Created issues for the different milestones and labelled them according to the severity and priority on Github.
 ** Enhancements to existing features:
-*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#138])
-*** Did refactoring of addressbook to tutorHelper (Pull requests https://github.com[#143])
+*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/138[#138])
+*** Did refactoring of addressbook to tutorHelper (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/143[#143])
 ** Documentation:
 *** Added section for payment and earnings in the User Guide
 *** Added section for payment and earnings in the Developer Guide
@@ -64,8 +64,6 @@ include::../UserGuide.adoc[tag=earnings]
 |===
 
 include::../DeveloperGuide.adoc[tag=userstories]
-
-include::../DeveloperGuide.adoc[tag=usecases]
 
 include::../DeveloperGuide.adoc[tag=payment]
 

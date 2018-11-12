@@ -163,10 +163,10 @@ public class EditSyllCommandTest {
     }
 
     @Test
-    public void execute_invalidSyllabusExceedLength_throwsCommandException() {
+    public void execute_invalidSyllabusInvalidChar_throwsCommandException() {
         thrown.expect(IllegalArgumentException.class);
         new EditSyllCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_SUBJECT, INDEX_FIRST_SYLLABUS,
-                Syllabus.makeSyllabus("Thisisasyllabusthatexceedsthirtycharactersanditshouldfail"));
+                Syllabus.makeSyllabus("Integration sy/Differentiation"));
     }
 
     @Test

@@ -88,15 +88,6 @@ public class XmlAdaptedPay {
                 Integer.valueOf(month), Integer.valueOf(year));
     }
 
-    /**
-     * Creates a list of {@code XmlAdaptedPay} for testing.
-     * @return list of {@code XmlAdaptedPay}.
-     */
-    public static List<XmlAdaptedPay> setUpTestPaymentValid() {
-        XmlAdaptedPay validPayment = new XmlAdaptedPay(Index.fromZeroBased(1), "200", "2", "2018");
-        return Collections.singletonList(validPayment);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

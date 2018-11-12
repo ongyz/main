@@ -6,6 +6,7 @@ import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorhelper.logic.commands.AddSyllCommand.MESSAGE_ADDSYLL_SUCCESS;
 import static tutorhelper.logic.parser.CliSyntax.PREFIX_SYLLABUS;
 import static tutorhelper.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutorhelper.model.util.SubjectsUtil.createStudentWithNewSubjects;
 import static tutorhelper.testutil.TestUtil.getLastIndex;
 import static tutorhelper.testutil.TestUtil.getMidIndex;
 import static tutorhelper.testutil.TestUtil.getStudent;
@@ -29,7 +30,6 @@ import tutorhelper.model.Model;
 import tutorhelper.model.student.Student;
 import tutorhelper.model.subject.Subject;
 import tutorhelper.model.subject.Syllabus;
-import tutorhelper.model.util.SubjectsUtil;
 
 public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
 
@@ -141,7 +141,7 @@ public class AddSyllCommandSystemTest extends TutorHelperSystemTest {
         targetSubjects.set(subjectIndex.getZeroBased(), updatedSubject);
         Set<Subject> newSubjects = new HashSet<>(targetSubjects);
 
-        Student studentUpdated = SubjectsUtil.createStudentWithNewSubjects(studentTarget, newSubjects);
+        Student studentUpdated = createStudentWithNewSubjects(studentTarget, newSubjects);
         model.updateStudent(studentTarget, studentUpdated);
         return studentUpdated;
     }
