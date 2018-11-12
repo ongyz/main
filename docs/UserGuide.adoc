@@ -34,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Mathematics d/Monday, 12:00pm` : adds a student named `John Doe` to the TutorHelper.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Mathematics d/Monday 12:00pm` : adds a student named `John Doe` to the TutorHelper.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -320,6 +320,7 @@ Format: `paid STUDENT_INDEX AMOUNT MONTH YEAR`
 If a payment entry already exists, the amount will replace the existing payment record.
 The maximum payment amount allowable is 10 000 each time.
 Only positive integers are accepted as payment amount.
+Only the 5 latest payments will be shown each time.
 ====
 
 ****
@@ -332,7 +333,7 @@ Only positive integers are accepted as payment amount.
 Examples:
 
 * `paid 1 200 01 2018` +
-Records a payment of $200 made for January 2018, or adds $200 to the payment made for January 2018 if a payment entry already exists.
+Records a payment of $200 made for January 2018, or overwrites the existing payment entry for January 2018.
 // end::payment[]
 
 // tag::earnings[]
@@ -356,13 +357,12 @@ Displays earnings made for January 2018.
 === Add Subject : `addsub`
 
 Adds a new subject to a specified student. Refer to valid subject inputs under 3. Feature. +
-Format: `addsub STUDENT_INDEX s/SUBJECT, [MORE SUBJECTS...]`
+Format: `addsub STUDENT_INDEX s/SUBJECT`
 
 [NOTE]
 ====
 * Adding a subject that already exists for the student will throw an error.
-* Adding subject of the same type in a single input will throw an error. +
-e.g `addsub 1 1 s/Chemistry s/Chemistry` is not permitted.
+* Only one subject can be added to a student per command.
 ====
 
 ****
@@ -574,7 +574,7 @@ e.g.`select 2`
 e.g. `paid 1 200 08 2018`
 * *Display Earnings* : `earnings MONTH YEAR` +
 e.g. `earnings 01 2018`
-* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT, [MORE SUBJECTS...]` +
+* *Add Subject* : `addsub STUDENT_INDEX s/SUBJECT` +
 e.g. `addsub 1 s/Physics`
 * *Remove Subject* : `deletesub STUDENT_INDEX SUBJECT_INDEX` +
 e.g. `deletesub 1 2`

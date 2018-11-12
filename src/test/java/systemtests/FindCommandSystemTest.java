@@ -1,25 +1,25 @@
 package systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalStudents.BENSON;
-import static seedu.address.testutil.TypicalStudents.CARL;
-import static seedu.address.testutil.TypicalStudents.DANIEL;
-import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static tutorhelper.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
+import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorhelper.testutil.TypicalStudents.BENSON;
+import static tutorhelper.testutil.TypicalStudents.CARL;
+import static tutorhelper.testutil.TypicalStudents.DANIEL;
+import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.commands.DeleteCommand;
+import tutorhelper.logic.commands.FindCommand;
+import tutorhelper.logic.commands.RedoCommand;
+import tutorhelper.logic.commands.UndoCommand;
+import tutorhelper.model.Model;
+import tutorhelper.model.tag.Tag;
 
 public class FindCommandSystemTest extends TutorHelperSystemTest {
 
