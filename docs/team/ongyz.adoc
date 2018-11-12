@@ -25,7 +25,7 @@ It is a Java sample application intended for Tutors who would like to organise t
 * *Minor enhancement*:
 
 ** Updating of test cases for new changes
-** XmlClasses for data writing into xml files for storage (Pull request https://github.com[#14])
+** XmlClasses for data writing into xml files for storage (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/14[#14])
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=ongyz
 
@@ -34,11 +34,12 @@ It is a Java sample application intended for Tutors who would like to organise t
 ** Project management:
 *** Created issues for the different milestones and labelled them according to the severity and priority on Github.
 ** Enhancements to existing features:
-*** Create max capacity of payment entries tracked (Pull request https://github.com[#73])
-*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com[#126], https://github.com[#141])
+*** Create max capacity of payment entries tracked (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/73[#73])
+*** Update existing tests for changes in existing commands (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/141[#141], https://github.com/CS2103-AY1819S1-W13-4/main/pull/149[#149], https://github.com/CS2103-AY1819S1-W13-4/main/pull/220[#220], https://github.com/CS2103-AY1819S1-W13-4/main/pull/243[#243])
+*** Wrote additional tests for new features added to increase code coverage (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/126[#126], https://github.com/CS2103-AY1819S1-W13-4/main/pull/141[#141])
 ** Documentation:
-*** Added section for editsyll and editing using paid in the User Guide (Pull requests https://github.com[#156])
-*** Added section for editsyll and editing using paid in the Developer Guide (Pull requests https://github.com[#95], https://github.com[#129])
+*** Added section for editsyll and editing using paid in the User Guide (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/156[#156])
+*** Added section for editsyll and editing using paid in the Developer Guide (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/95[#95], https://github.com/CS2103-AY1819S1-W13-4/main/pull/129[#129])
 ** Community:
 *** Reviewed other PRs
 *** Reported bugs and suggestions for other teams in the class
