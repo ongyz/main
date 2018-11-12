@@ -270,6 +270,7 @@ The following sequence diagram shows how the group operation works for day param
 
 image::GroupSequenceDiagramDay.png[width="650"]
 image::GroupSequenceDiagramTime.png[width="650"]
+
 // end::group[]
 // tag::payment[]
 
@@ -307,6 +308,7 @@ The maximum amount of payment that can be made each time is $10 000.
 The diagram below illustrates the sequence diagram.
 
 image:PaymentSequenceDiagram.png[width="800"]
+
 // end::payment[]
 
 // tag::editpaid[]
@@ -346,6 +348,7 @@ The maximum amount of payment that can be made each time is $10 000.
 The diagram below illustrates the sequence diagram.
 
 image:EditPaymentSequenceDiagram.png[width="800"]
+
 // end::editpaid[]
 
 // tag::earnings[]
@@ -376,6 +379,7 @@ The diagram below illustrates the sequence diagram.
 Default value for earnings of an unrecorded month and year will be $0.
 
 image:EarningsSequenceDiagram.png[width="800"]
+
 // end::earnings[]
 
 // tag::copysub[]
@@ -412,6 +416,7 @@ Step 5. The system will locate the _fourth_ student from the student list, and m
 The process is described with sequence diagram below:
 
 image::CopySubSequenceDiagrams.png[width="650"]
+
 // end::copysub[]
 
 // tag::adddelsub[]
@@ -460,6 +465,7 @@ image::AddSubSequenceDiagram.png[width="650"]
 The following sequence diagram shows how the `deletesub` operation works:
 
 image::DeleteSubSequenceDiagram.png[width="650"]
+
 // end::adddelsub[]
 
 // tag::editsyll[]
@@ -489,6 +495,7 @@ The TutorHelper has to have at least 1 student as a precondition for `editsyll`.
 The diagram below shows how the `editsyll` operation works:
 
 image:EditSyllSequenceDiagram.png[width="800"]
+
 // end::editsyll[]
 
 === Logging
@@ -713,6 +720,7 @@ Value Proposition:
 . As a tutor, I want to keep track of my students' payments so that i know who to collect fees from.
 . As a tutor, I want to keep track of my monthly earnings so that i can manage my financial accounts.
 . As a tutor, I want to be able to edit teaching data such as editing my syllabus to keep up with changes in school's curriculum or updating payments made by students.
+
 // end::userstories[]
 
 [appendix]
@@ -870,6 +878,7 @@ Value Proposition:
       2d. System finds same syllabus entry already exists in subject.
         2d1. System displays error message telling tutor that syllabus already exist.
         2d2. Repeat step 1.
+
 // end::usecases[]
 
 [appendix]
@@ -881,6 +890,7 @@ Value Proposition:
 . Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 . Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 . A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
 // end::nfr[]
 
 [appendix]
