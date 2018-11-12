@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import seedu.address.model.Model;
-import seedu.address.model.student.Student;
+import tutorhelper.model.Model;
+import tutorhelper.model.student.Student;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.

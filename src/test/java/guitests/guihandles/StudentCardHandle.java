@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.student.Student;
+import tutorhelper.model.student.Student;
 
 /**
  * Provides a handle to a student card in the student list panel.

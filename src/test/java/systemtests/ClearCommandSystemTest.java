@@ -1,16 +1,16 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static tutorhelper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorhelper.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import tutorhelper.commons.core.index.Index;
+import tutorhelper.logic.commands.ClearCommand;
+import tutorhelper.logic.commands.RedoCommand;
+import tutorhelper.logic.commands.UndoCommand;
+import tutorhelper.model.Model;
+import tutorhelper.model.ModelManager;
 
 public class ClearCommandSystemTest extends TutorHelperSystemTest {
 
